@@ -1,0 +1,155 @@
+@media (prefers-color-scheme: light) {
+    $telegram-theme-color: #5eb7f7;
+    $sidebar-bg-color: #293b4c;
+    $sidebar-width: 65px;
+    $sidebar-zoom: 1.2;
+
+    // 主题配色
+    .q-theme-tokens-light {
+        //--brand_standard: #0099ffff;
+    }
+
+    .sidebar,
+    .sidebar-nav {
+        background-color: $sidebar-bg-color !important;
+        width: $sidebar-width !important;
+        // 头像
+        & .user-avatar-container {
+            zoom: $sidebar-zoom;
+        }
+
+        & .icon.icon-online.avatar__status {
+            zoom: $sidebar-zoom;
+            right: 2px !important;
+        }
+
+        // 按钮
+        & .nav-item {
+            height: $sidebar-width !important;
+            width: 100% !important;
+        }
+
+        // 按钮蒙版
+        & .tab-item-mask {
+            border-radius: unset !important;
+            height: $sidebar-width !important;
+            width: $sidebar-width !important;
+
+            &:has( ~ .svg-highlight) {
+                background-color: #17212b !important;
+                opacity: unset !important;
+                z-index: 3;
+            }
+        }
+
+        // icon
+        & .tab-item-img {
+            zoom: $sidebar-zoom;
+            // icon 颜色
+            & svg > path {
+                --icon_primary: #8c9dae !important;
+            }
+
+            & .tab-item-img-mask {
+                background-color: $telegram-theme-color;
+            }
+        }
+
+        // 新消息提示
+        & .q-badge-sub {
+            left: 55% !important;
+            top: 15% !important;
+            zoom: $sidebar-zoom;
+            border: 1px #17212b solid !important;
+
+            &.q-badge-num i {
+                padding: 1px;
+            }
+
+            &.q-badge__red {
+                // 提示颜色
+                --feedback_error: #5eb7f7;
+            }
+        }
+
+        // 左下角功能按钮
+        & .sidebar__lower {
+            //--hover-color: $telegram-theme-color !important;
+            & i.q-icon {
+                & svg > path,
+                & svg > rect {
+                    stroke: #8c9dae !important;
+                }
+            }
+        }
+    }
+
+    .tab-container {
+        //background-color: transparent !important;
+
+        // 联系人列表
+        .recent-contact {
+            background-color: white;
+
+            // 可调宽度
+            width: 300px;
+            flex-basis: 300px;
+
+            // 取消置顶色
+            --overlay_top: none;
+            // hover色
+            --overlay_hover: #f1f1f1;
+            // 选中对话色
+            --global-brand_standard: #41a1d9;
+
+            & .recent-contact-list {
+                & .list-item__content {
+                    padding: 12px 10px !important;
+
+                    & .list-item__avatar {
+                        zoom: 1.3;
+                    }
+
+                    & .list-item__info {
+                        & .list-item__title {
+                            font-size: .9em !important;
+                            font-weight: 600 !important;
+
+                            // 去除会员红名
+                            & .main-info.text-ellipsis.vip-name {
+                                --svip_red: black;
+                            }
+                            // 时间
+                            & .secondary-info {
+                                font-size: 1em !important;
+                            }
+                        }
+
+                        & .list-item__summary {
+                            font-size: .9em !important;
+                            margin-top: 8px !important;
+                        }
+
+                        & .summary-bubble {
+                            & .q-badge-sub.q-badge-num {
+                                --feedback_error: #41a1d9;
+                                padding: 2px 5px !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 我的手机和群助手
+            & .avatar.avatar-sys {
+                &::before {
+                    background-color: $telegram-theme-color !important;
+                }
+
+                & .q-icon {
+                    z-index: 1;
+                }
+            }
+        }
+    }
+}
