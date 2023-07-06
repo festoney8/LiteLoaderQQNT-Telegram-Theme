@@ -1,0 +1,19 @@
+{
+    "manifest_version": 1,
+    "type": "theme",
+    "name": "QQNT仿Telegram主题",
+    "slug": "diy_theme",
+    "description": "QQNT仿Telegram主题",
+    "version": "0.0.1",
+    "author": [
+        {
+            "name": "festoney8",
+            "link": "https://github.com/festoney8"
+        }
+    ],
+    "injects": {
+        "renderer": "./renderer.js",
+        "main": "./main.js",
+        "preload": "./preload.js"
+    }
+}
