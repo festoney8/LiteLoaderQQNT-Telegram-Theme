@@ -178,6 +178,20 @@
     .aio.aio-independent {
         & .chat-header {
             background: white !important;
+
+            & .chat-header__title {
+                font-size: 1.05em;
+                font-weight: 500 !important;
+                // vip红名去除
+                & .text-ellipsis.vip-name {
+                    color: black !important;
+                }
+            }
+
+            // 工具
+            & .func-bar .q-icon {
+                --icon_primary: #999999;
+            }
         }
 
         // 对话
@@ -199,10 +213,10 @@
                 color: white !important;
 
                 background: rgba(0, 0, 0, 0.17) !important;
-                padding: 6px 15px 6px 15px;
+                padding: 6px 12px 6px 12px;
                 border-radius: 100px !important;
 
-                font-size: 14px !important;
+                font-size: 15px !important;
                 letter-spacing: 1px;
             }
 
@@ -216,6 +230,115 @@
                     & .avatar-span {
                     }
                 }
+            }
+        }
+
+        // 功能栏
+        & .shortcuts {
+
+        }
+
+        & .chat-input-area {
+            // 工具栏
+            & .shortcuts {
+                zoom: .95;
+                margin-bottom: 10px;
+
+                // 隐藏效果
+                & .func-bar {
+                    opacity: 0.2;
+                    transition: opacity 0.15s;
+                }
+                &:hover .func-bar {
+                    opacity: 1;
+                    transition: opacity 0.15s;
+                }
+            }
+
+            // 编辑框
+            & .msg-input {
+                & .qq-editor .ck-content {
+                    padding: 2px 20px 2px 20px !important;
+                    margin-right: 40px;
+                }
+
+                & .ck-content {
+                    font-size: 17px !important;
+                    // 文字输入框 placeholder
+                    & .ck-placeholder:before {
+                        --qq-editor-placeholder: "Write a message...";
+                        color: rgba(0, 0, 0, 0.3) !important;
+                    }
+                }
+
+                // 用途未知
+                & .loadmore-placeholder {
+                    height: 0 !important;
+                }
+            }
+
+            // 发送和关闭按钮
+            & .operation {
+                height: unset !important;
+                padding: unset !important;
+
+                & .close {
+                    // 移除独立窗口关闭按钮
+                    display: none !important;
+                }
+
+                & .send-btn-wrap {
+                    // 移除发送方式按钮
+                    & .send-setting__wrapper {
+                        display: none !important;
+                    }
+
+                    // 固定发送按钮位置, 更换按钮图像, 仿telegram按钮
+                    color: transparent !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    position: absolute !important;
+                    bottom: 15px;
+                    right: 15px;
+                    background-color: unset !important;
+                    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
+                    background-repeat: no-repeat;
+                    padding: 10px !important;
+
+                    &:hover {
+
+                    }
+
+                    &:has(.send--disabled) {
+                        opacity: .3 !important;
+                    }
+
+                    & .send {
+                        width: inherit !important;
+                        height: inherit !important;
+                        position: absolute !important;
+                        bottom: 15px !important;
+                        right: 15px !important;
+                        padding: unset !important;
+
+                        & .send-msg {
+                            padding: unset !important;
+                            color: transparent !important;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    & .divider {
+                        display: none !important;
+                    }
+                }
+            }
+
+            // 转发操作按钮
+            & .forward-ops .op-icon {
+                height: unset !important;
+                margin: unset !important;
             }
         }
     }

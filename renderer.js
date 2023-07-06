@@ -18,8 +18,7 @@ async function onLoad() {
 
     // 信息列表宽度调节 重写事件调宽宽度
     let counter = 0;
-    // 检测是否为独立聊天窗
-    let isIndep = false;
+    let isIndep = false; // 检测是否为独立聊天窗
     const checkAioInterval = setInterval(() => {
         const aio = document.querySelector(".aio");
         const aioIndependent = document.querySelector(".aio.aio-independent");
@@ -92,9 +91,9 @@ async function onLoad() {
             const resizeHandler = oldResizeHandler.cloneNode(true);
             oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
 
-            // 调大默认长度, 重写事件
-            chatInputArea.style.height = "150px";
-            chatInputArea.style.flexBasis = "100px";
+            // 高度调低, 重写事件
+            chatInputArea.style.height = "90px";
+            chatInputArea.style.minHeight = "80px";
 
             let isResizing = false;
             let startY = 0;
@@ -127,7 +126,6 @@ async function onLoad() {
             }
         }
     }, 100);
-
 }
 
 export {
