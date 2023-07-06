@@ -87,18 +87,18 @@
   .recent-contact .recent-contact-list .list-item__content .list-item__avatar {
     zoom: 1.3;
   }
-  .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title {
-    font-size: 0.93em !important;
+  #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title {
+    font-size: 0.95em !important;
     font-weight: 600 !important;
   }
-  .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .main-info.text-ellipsis.vip-name {
+  #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .main-info.text-ellipsis.vip-name {
     --svip_red: black;
   }
-  .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .secondary-info {
+  #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .secondary-info {
     font-size: 0.95em !important;
   }
-  .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__summary {
-    font-size: 0.9em !important;
+  #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__summary {
+    font-size: 0.95em !important;
     margin-top: 8px !important;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble {
@@ -132,6 +132,19 @@
     background-position-y: center;
     background-size: cover;
     background-attachment: fixed;
+  }
+  .aio main.chat-msg-area .message__timestamp, .aio main.chat-msg-area .gray-tip-content,
+  .aio.aio-independent main.chat-msg-area .message__timestamp,
+  .aio.aio-independent main.chat-msg-area .gray-tip-content {
+    width: fit-content;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    color: white !important;
+    background: rgba(0, 0, 0, 0.17) !important;
+    padding: 6px 15px 6px 15px;
+    border-radius: 100px !important;
+    font-size: 14px !important;
+    letter-spacing: 1px;
   }
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {

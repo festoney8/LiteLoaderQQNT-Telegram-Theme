@@ -119,8 +119,9 @@
                 }
 
                 & .list-item__info {
-                    & .list-item__title {
-                        font-size: .93em !important;
+                    // 强制覆盖
+                    #app & .list-item__title {
+                        font-size: .95em !important;
                         font-weight: 600 !important;
 
                         // 去除会员红名
@@ -134,8 +135,8 @@
                         }
                     }
 
-                    & .list-item__summary {
-                        font-size: .9em !important;
+                    #app & .list-item__summary {
+                        font-size: .95em !important;
                         margin-top: 8px !important;
                     }
 
@@ -188,6 +189,22 @@
             background-position-y: center;
             background-size: cover;
             background-attachment: fixed;
+
+            // 群聊时间 撤回通知
+            & .message__timestamp,
+            & .gray-tip-content {
+                width: fit-content;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                color: white !important;
+
+                background: rgba(0, 0, 0, 0.17) !important;
+                padding: 6px 15px 6px 15px;
+                border-radius: 100px !important;
+
+                font-size: 14px !important;
+                letter-spacing: 1px;
+            }
 
             // 对话气泡
             & .message {
