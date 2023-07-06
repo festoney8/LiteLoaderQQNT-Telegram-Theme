@@ -4,11 +4,22 @@
     $sidebar-width: 65px;
     $sidebar-zoom: 1.2;
 
-    // 主题配色
-    .q-theme-tokens-light {
-        //--brand_standard: #0099ffff;
+    :root {
+        --chatarea-wallpaper: unset;
+        --telegram-chatarea-bg-color: #bcbcbc;
+        --bg_grey_standard: white;
     }
 
+    // 全局颜色
+    .tab-container {
+        background-color: unset !important;
+    }
+    // 独立聊天窗口 全局背景色 (影响输入区域颜色)
+    .container:has(.aio-independent) {
+        --bg_grey_standard: white;
+    }
+
+    // 左边栏
     .sidebar,
     .sidebar-nav {
         background-color: $sidebar-bg-color !important;
@@ -84,70 +95,109 @@
         }
     }
 
-    .tab-container {
-        //background-color: transparent !important;
+    // 联系人列表
+    .recent-contact {
+        background-color: white;
 
-        // 联系人列表
-        .recent-contact {
-            background-color: white;
+        // 可调宽度
+        width: 300px;
+        flex-basis: 300px;
 
-            // 可调宽度
-            width: 300px;
-            flex-basis: 300px;
+        // 取消置顶色
+        --overlay_top: none;
+        // hover色
+        --overlay_hover: #f1f1f1;
+        // 选中对话色
+        --global-brand_standard: #41a1d9;
 
-            // 取消置顶色
-            --overlay_top: none;
-            // hover色
-            --overlay_hover: #f1f1f1;
-            // 选中对话色
-            --global-brand_standard: #41a1d9;
+        & .recent-contact-list {
+            & .list-item__content {
+                padding: 12px 10px !important;
 
-            & .recent-contact-list {
-                & .list-item__content {
-                    padding: 12px 10px !important;
+                & .list-item__avatar {
+                    zoom: 1.3;
+                }
 
-                    & .list-item__avatar {
-                        zoom: 1.3;
+                & .list-item__info {
+                    & .list-item__title {
+                        font-size: .93em !important;
+                        font-weight: 600 !important;
+
+                        // 去除会员红名
+                        & .main-info.text-ellipsis.vip-name {
+                            --svip_red: black;
+                        }
+
+                        // 时间
+                        & .secondary-info {
+                            font-size: .95em !important;
+                        }
                     }
 
-                    & .list-item__info {
-                        & .list-item__title {
-                            font-size: .9em !important;
-                            font-weight: 600 !important;
+                    & .list-item__summary {
+                        font-size: .9em !important;
+                        margin-top: 8px !important;
+                    }
 
-                            // 去除会员红名
-                            & .main-info.text-ellipsis.vip-name {
-                                --svip_red: black;
-                            }
-                            // 时间
-                            & .secondary-info {
-                                font-size: 1em !important;
-                            }
+                    // 未读消息
+                    & .summary-bubble {
+                        zoom: 1.3;
+
+                        & .q-icon {
+                            --icon_secondary_02: #bbbbbb;
                         }
 
-                        & .list-item__summary {
-                            font-size: .9em !important;
-                            margin-top: 8px !important;
+                        & .q-badge-sub.q-badge-num {
+                            --feedback_error: #41a1d9;
+                            padding: 3px 5px !important;
                         }
 
-                        & .summary-bubble {
-                            & .q-badge-sub.q-badge-num {
-                                --feedback_error: #41a1d9;
-                                padding: 2px 5px !important;
-                            }
+                        & .q-badge-sub.q-badge__grey {
+                            background-color: #bbbbbb !important;
                         }
                     }
                 }
             }
+        }
 
-            // 我的手机和群助手
-            & .avatar.avatar-sys {
-                &::before {
-                    background-color: $telegram-theme-color !important;
-                }
+        // 我的手机和群助手
+        & .avatar.avatar-sys {
+            &::before {
+                background-color: $telegram-theme-color !important;
+            }
 
-                & .q-icon {
-                    z-index: 1;
+            & .q-icon {
+                z-index: 1;
+            }
+        }
+    }
+
+    // 聊天区域
+    .aio,
+    .aio.aio-independent {
+        & .chat-header {
+            background: white !important;
+        }
+
+        // 对话
+        & main.chat-msg-area {
+            // 设定telegram背景图 or telegram背景色
+            background-image: var(--chatarea-wallpaper) !important;
+            background-color: var(--telegram-chatarea-bg-color) !important;
+            background-position-x: center;
+            background-position-y: center;
+            background-size: cover;
+            background-attachment: fixed;
+
+            // 对话气泡
+            & .message {
+                padding-bottom: 4px !important;
+                // grid display
+                & .message-container {
+
+                    // 头像
+                    & .avatar-span {
+                    }
                 }
             }
         }
