@@ -140,6 +140,9 @@ async function onLoad() {
             const container = document.querySelector('.container');
             const containerHeight = parseFloat(getComputedStyle(container).height);
             const observer = new MutationObserver((list) => {
+                // 存在bug
+                // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
+                // 导致初次贴入图片后editor高度不变，过一阵子才发生变化，或接着输入文字后高度才发生变化
                 if (!hasGetInitHeight) {
                     initHeight = editor.scrollHeight;
                     hasGetInitHeight = true;
@@ -148,7 +151,7 @@ async function onLoad() {
                     lastScrollHeight = initHeight;
                     isFirstTime = false;
                 }
-                console.log(chatInputArea.style.height, editor.scrollHeight, lastScrollHeight, initHeight);
+                console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
                 console.log(parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight);
                 // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
                 const newHeight = parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight;

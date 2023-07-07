@@ -253,7 +253,7 @@
                 // 隐藏效果
                 & .func-bar {
                     opacity: 0.2;
-                    transition: opacity 0.2s;
+                    transition: opacity 0.5s;
 
                     &:hover {
                         opacity: 1;
@@ -269,7 +269,7 @@
                         // 去除高度, 高度只保留一行, 避免干扰计算自动高度scrollHeight
                         min-height: unset !important;
                         // 行高和字号
-                        font-size: 1.25em !important;
+                        font-size: 17px !important;
                         padding: 2px 20px 2px 20px !important;
                         margin-right: 50px;
                         // 文字输入框 placeholder

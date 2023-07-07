@@ -173,7 +173,7 @@
   .aio .chat-input-area .shortcuts .func-bar,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar {
     opacity: 0.2;
-    transition: opacity 0.2s;
+    transition: opacity 0.5s;
   }
   .aio .chat-input-area .shortcuts .func-bar:hover,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar:hover {
@@ -183,7 +183,7 @@
   .aio .chat-input-area .msg-input .qq-editor .ck-content,
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content {
     min-height: unset !important;
-    font-size: 1.25em !important;
+    font-size: 17px !important;
     padding: 2px 20px 2px 20px !important;
     margin-right: 50px;
   }
