@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @media (prefers-color-scheme: light) {
   :root {
     --chatarea-wallpaper: unset;
@@ -80,6 +81,10 @@
     --overlay_top: none;
     --overlay_hover: #f1f1f1;
     --global-brand_standard: #41a1d9;
+  }
+  .recent-contact .network-tip {
+    font-size: 18px;
+    font-weight: bold;
   }
   #app .recent-contact .recent-contact-list .list-item__content {
     padding: 12px 14px !important;
@@ -164,9 +169,45 @@
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 4px !important;
+    /* grid display 重排
+
+        默认Right Grid:
+        "checkbox nickname  nickname  nickname . avatar"
+        "checkbox .         status    content  . avatar"
+        "checkbox tips      tips      tips     . avatar"
+        调整后Right grid:
+        "checkbox status nickname content . avatar"
+        "checkbox status tips     tips    . tips"
+
+        默认Grid(left)
+        "checkbox avatar . nickname nickname nickname"
+        "checkbox avatar . content  status  ."
+        "checkbox avatar . tips     tips    tips"
+        调整后
+        "checkbox avatar . nickname content status"
+        "checkbox avatar . tips     tips    tips"
+     */
   }
-  .aio main.chat-msg-area .message .message-container .avatar-span,
-  .aio.aio-independent main.chat-msg-area .message .message-container .avatar-span {
+  .aio main.chat-msg-area .message .message-container:not(.message-container--align-right),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--align-right) {
+    grid-template-areas: "checkbox avatar . nickname content status" "checkbox avatar . tips     tips    tips" !important;
+    grid-template-columns: auto auto auto auto auto;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--align-right,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--align-right {
+    grid-template-areas: "checkbox status content nickname . avatar" "checkbox tips   tips    tips     . avatar" !important;
+    grid-template-columns: auto auto auto auto auto;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--align-right .user-name,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--align-right .user-name {
+    display: none;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--align-right span.avatar-span,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--align-right span.avatar-span {
+    display: none;
+  }
+  .aio main.chat-msg-area .message .message-container span.avatar-span,
+  .aio.aio-independent main.chat-msg-area .message .message-container span.avatar-span {
     zoom: 1.1;
   }
   .aio main.chat-msg-area .message .message-container .user-name,
@@ -186,7 +227,7 @@
   .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--others:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
   .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--others:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
     background-color: white !important;
-    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
   }
   .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self,
   .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self {
@@ -195,7 +236,7 @@
   .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
   .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
     background-color: #effdde !important;
-    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
   .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--self,
   .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--self {
@@ -209,6 +250,11 @@
   .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .message-content,
   .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .message-content {
     font-size: 16px !important;
+  }
+  .aio main.chat-msg-area .message .message-container .content-status,
+  .aio.aio-independent main.chat-msg-area .message .message-container .content-status {
+    padding: unset !important;
+    zoom: 1.5;
   }
   .aio .chat-input-area .shortcuts,
   .aio.aio-independent .chat-input-area .shortcuts {
@@ -253,15 +299,16 @@
   .aio .chat-input-area .operation .send-btn-wrap,
   .aio.aio-independent .chat-input-area .operation .send-btn-wrap {
     color: transparent !important;
-    width: 32px !important;
-    height: 32px !important;
+    width: 50px !important;
+    height: 50px !important;
     position: absolute !important;
-    bottom: 16px;
-    right: 16px;
+    bottom: 8px;
+    right: 8px;
     background-color: unset !important;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
     background-repeat: no-repeat;
-    padding: 10px !important;
+    background-position: center;
+    background-size: 50%;
   }
   .aio .chat-input-area .operation .send-btn-wrap .send-setting__wrapper,
   .aio.aio-independent .chat-input-area .operation .send-btn-wrap .send-setting__wrapper {
@@ -273,19 +320,16 @@
   }
   .aio .chat-input-area .operation .send-btn-wrap .send,
   .aio.aio-independent .chat-input-area .operation .send-btn-wrap .send {
+    padding: inherit !important;
     width: inherit !important;
     height: inherit !important;
-    position: absolute !important;
-    bottom: 15px !important;
-    right: 15px !important;
-    padding: unset !important;
   }
   .aio .chat-input-area .operation .send-btn-wrap .send .send-msg,
   .aio.aio-independent .chat-input-area .operation .send-btn-wrap .send .send-msg {
-    padding: unset !important;
     color: transparent !important;
-    width: 100%;
-    height: 100%;
+    padding: inherit !important;
+    width: inherit !important;
+    height: inherit !important;
   }
   .aio .chat-input-area .operation .send-btn-wrap .divider,
   .aio.aio-independent .chat-input-area .operation .send-btn-wrap .divider {

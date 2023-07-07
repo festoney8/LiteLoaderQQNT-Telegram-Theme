@@ -110,6 +110,12 @@
         // 选中对话色
         --global-brand_standard: #41a1d9;
 
+        // 顶部搜索栏下网络提示
+        & .network-tip {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         & .recent-contact-list {
             // 强制覆盖
             #app & .list-item__content {
@@ -231,11 +237,53 @@
             & .message {
                 padding-bottom: 4px !important;
 
-                // grid display
+                /* grid display 重排
+
+                    默认Right Grid:
+                    "checkbox nickname  nickname  nickname . avatar"
+                    "checkbox .         status    content  . avatar"
+                    "checkbox tips      tips      tips     . avatar"
+                    调整后Right grid:
+                    "checkbox status nickname content . avatar"
+                    "checkbox status tips     tips    . tips"
+
+                    默认Grid(left)
+                    "checkbox avatar . nickname nickname nickname"
+                    "checkbox avatar . content  status  ."
+                    "checkbox avatar . tips     tips    tips"
+                    调整后
+                    "checkbox avatar . nickname content status"
+                    "checkbox avatar . tips     tips    tips"
+                 */
                 & .message-container {
+                    // 他人发送的消息
+                    // Grid default
+                    &:not(.message-container--align-right) {
+                        grid-template-areas: "checkbox avatar . nickname content status"
+                                             "checkbox avatar . tips     tips    tips" !important;
+                        grid-template-columns: auto auto auto auto auto;
+                    }
+
+                    // 自己发送的消息
+                    // Grid right (自己的nickname avatar默认隐藏)
+                    &.message-container--align-right {
+                        grid-template-areas: "checkbox status content nickname . avatar"
+                                             "checkbox tips   tips    tips     . avatar" !important;
+                        grid-template-columns: auto auto auto auto auto;
+
+                        // username隐藏
+                        & .user-name {
+                            display: none;
+                        }
+
+                        // avatar隐藏
+                        & span.avatar-span {
+                            display: none;
+                        }
+                    }
 
                     // 头像
-                    & .avatar-span {
+                    & span.avatar-span {
                         zoom: 1.1;
                     }
 
@@ -263,8 +311,8 @@
                             &.container--others {
                                 &:not(:has(.image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
                                     background-color: white !important;
-                                    // 左上角小角度
-                                    border-top-left-radius: 8px;
+                                    // 左下角小角度
+                                    border-bottom-left-radius: 8px;
                                 }
                             }
 
@@ -273,8 +321,8 @@
                                 // 表情包除外
                                 &:not(:has(.image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
                                     background-color: #effdde !important;
-                                    // 右上角小角度
-                                    border-top-right-radius: 8px;
+                                    // 右下角小角度
+                                    border-bottom-right-radius: 8px;
                                 }
 
                                 color: black !important;
@@ -312,7 +360,18 @@
                             }
                         }
                     }
+
+                    // 信息状态, 发送失败的小红点
+                    & .content-status {
+                        padding: unset !important;
+                        zoom: 1.5;
+                    }
                 }
+            }
+
+            // 底部 新消息箭头
+            & .q-notification.chat-msg-area__tip--bottom {
+
             }
         }
 
@@ -377,15 +436,18 @@
 
                     // 固定发送按钮位置, 更换按钮图像, 仿telegram按钮
                     color: transparent !important;
-                    width: 32px !important;
-                    height: 32px !important;
+                    width: 50px !important;
+                    height: 50px !important;
                     position: absolute !important;
-                    bottom: 16px;
-                    right: 16px;
-                    background-color: unset !important;
-                    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
-                    background-repeat: no-repeat;
-                    padding: 10px !important;
+                    bottom: 8px;
+                    right: 8px;
+                    background: {
+                        color: unset !important;
+                        image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
+                        repeat: no-repeat;
+                        position: center;
+                        size: 50%;
+                    }
 
                     &:hover {
 
@@ -396,18 +458,14 @@
                     }
 
                     & .send {
+                        padding: inherit !important;
                         width: inherit !important;
                         height: inherit !important;
-                        position: absolute !important;
-                        bottom: 15px !important;
-                        right: 15px !important;
-                        padding: unset !important;
-
                         & .send-msg {
-                            padding: unset !important;
                             color: transparent !important;
-                            width: 100%;
-                            height: 100%;
+                            padding: inherit !important;
+                            width: inherit !important;
+                            height: inherit !important;
                         }
                     }
 
