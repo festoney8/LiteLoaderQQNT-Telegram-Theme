@@ -111,11 +111,16 @@
         --global-brand_standard: #41a1d9;
 
         & .recent-contact-list {
-            & .list-item__content {
-                padding: 12px 10px !important;
+            // 强制覆盖
+            #app & .list-item__content {
+                padding: 12px 14px !important;
+            }
 
-                & .list-item__avatar {
-                    zoom: 1.3;
+            & .list-item__content {
+                // 强制覆盖
+                #app & .list-item__avatar .avatar {
+                    height: calc(var(--avatar_size_3) * 1.3) !important;
+                    width: calc(var(--avatar_size_3) * 1.3) !important;
                 }
 
                 & .list-item__info {
@@ -136,7 +141,7 @@
                     }
 
                     #app & .list-item__summary {
-                        font-size: .95em !important;
+                        font-size: .93em !important;
                         margin-top: 8px !important;
                     }
 
@@ -247,11 +252,12 @@
                 // 隐藏效果
                 & .func-bar {
                     opacity: 0.2;
-                    transition: opacity 0.15s;
+                    transition: opacity 0.1s;
                 }
+
                 &:hover .func-bar {
                     opacity: 1;
-                    transition: opacity 0.15s;
+                    transition: opacity 0.1s;
                 }
             }
 

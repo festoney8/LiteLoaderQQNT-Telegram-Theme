@@ -81,11 +81,12 @@
     --overlay_hover: #f1f1f1;
     --global-brand_standard: #41a1d9;
   }
-  .recent-contact .recent-contact-list .list-item__content {
-    padding: 12px 10px !important;
+  #app .recent-contact .recent-contact-list .list-item__content {
+    padding: 12px 14px !important;
   }
-  .recent-contact .recent-contact-list .list-item__content .list-item__avatar {
-    zoom: 1.3;
+  #app .recent-contact .recent-contact-list .list-item__content .list-item__avatar .avatar {
+    height: calc(var(--avatar_size_3) * 1.3) !important;
+    width: calc(var(--avatar_size_3) * 1.3) !important;
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title {
     font-size: 0.95em !important;
@@ -98,7 +99,7 @@
     font-size: 0.95em !important;
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__summary {
-    font-size: 0.95em !important;
+    font-size: 0.93em !important;
     margin-top: 8px !important;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble {
@@ -171,12 +172,12 @@
   .aio .chat-input-area .shortcuts .func-bar,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar {
     opacity: 0.2;
-    transition: opacity 0.15s;
+    transition: opacity 0.1s;
   }
   .aio .chat-input-area .shortcuts:hover .func-bar,
   .aio.aio-independent .chat-input-area .shortcuts:hover .func-bar {
     opacity: 1;
-    transition: opacity 0.15s;
+    transition: opacity 0.1s;
   }
   .aio .chat-input-area .msg-input .qq-editor .ck-content,
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content {
