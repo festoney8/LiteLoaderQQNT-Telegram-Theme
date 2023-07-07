@@ -247,13 +247,14 @@
         & .chat-input-area {
             // 工具栏
             & .shortcuts {
-                zoom: .95;
+                zoom: .9;
                 margin-bottom: 10px;
 
                 // 隐藏效果
                 & .func-bar {
                     opacity: 0.2;
                     transition: opacity 0.2s;
+
                     &:hover {
                         opacity: 1;
                         transition: opacity 0.1s;
@@ -263,17 +264,19 @@
 
             // 编辑框
             & .msg-input {
-                & .qq-editor .ck-content {
-                    padding: 2px 20px 2px 20px !important;
-                    margin-right: 40px;
-                }
-
-                & .ck-content {
-                    font-size: 17px !important;
-                    // 文字输入框 placeholder
-                    & .ck-placeholder:before {
-                        --qq-editor-placeholder: "Write a message...";
-                        color: rgba(0, 0, 0, 0.3) !important;
+                & .qq-editor {
+                    & .ck-content {
+                        // 去除高度, 高度只保留一行, 避免干扰计算自动高度scrollHeight
+                        min-height: unset !important;
+                        // 行高和字号
+                        font-size: 1.25em !important;
+                        padding: 2px 20px 2px 20px !important;
+                        margin-right: 50px;
+                        // 文字输入框 placeholder
+                        & .ck-placeholder:before {
+                            --qq-editor-placeholder: "Write a message...";
+                            color: rgba(0, 0, 0, 0.3) !important;
+                        }
                     }
                 }
 

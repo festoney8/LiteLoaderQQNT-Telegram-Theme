@@ -167,7 +167,7 @@
   }
   .aio .chat-input-area .shortcuts,
   .aio.aio-independent .chat-input-area .shortcuts {
-    zoom: 0.95;
+    zoom: 0.9;
     margin-bottom: 10px;
   }
   .aio .chat-input-area .shortcuts .func-bar,
@@ -182,15 +182,13 @@
   }
   .aio .chat-input-area .msg-input .qq-editor .ck-content,
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content {
+    min-height: unset !important;
+    font-size: 1.25em !important;
     padding: 2px 20px 2px 20px !important;
-    margin-right: 40px;
+    margin-right: 50px;
   }
-  .aio .chat-input-area .msg-input .ck-content,
-  .aio.aio-independent .chat-input-area .msg-input .ck-content {
-    font-size: 17px !important;
-  }
-  .aio .chat-input-area .msg-input .ck-content .ck-placeholder:before,
-  .aio.aio-independent .chat-input-area .msg-input .ck-content .ck-placeholder:before {
+  .aio .chat-input-area .msg-input .qq-editor .ck-content .ck-placeholder:before,
+  .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content .ck-placeholder:before {
     --qq-editor-placeholder: "Write a message...";
     color: rgba(0, 0, 0, 0.3) !important;
   }

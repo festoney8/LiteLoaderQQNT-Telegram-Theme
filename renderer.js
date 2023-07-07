@@ -29,7 +29,7 @@ async function onLoad() {
             clearInterval(checkAioInterval);
         } else {
             counter++;
-            if (counter >= 5) {
+            if (counter >= 20) {
                 clearInterval(checkAioInterval);
             }
         }
@@ -74,7 +74,7 @@ async function onLoad() {
                 clearInterval(checkContactHandlerInterval);
             } else {
                 counter++;
-                if (counter >= 20) {
+                if (counter >= 30) {
                     clearInterval(checkContactHandlerInterval);
                 }
             }
@@ -128,12 +128,43 @@ async function onLoad() {
     }, 100);
 
     // 输入区域高度自适应
-    const autoResize = () => {
-        const inputBox = document.getElementById('input-box');
-        inputBox.style.height = 'auto';
-        inputBox.style.height = inputBox.scrollHeight + 'px';
+    const chatInputArea = document.querySelector('.chat-input-area');
+    if (chatInputArea) {
+        const editor = document.querySelector('.ck.ck-content')
+        if (editor) {
+            // 监听DOM树
+            let initHeight = 0;
+            let hasGetInitHeight = false;
+            let lastScrollHeight = editor.scrollHeight;
+            let isFirstTime = true;
+            const container = document.querySelector('.container');
+            const containerHeight = parseFloat(getComputedStyle(container).height);
+            const observer = new MutationObserver((list) => {
+                if (!hasGetInitHeight) {
+                    initHeight = editor.scrollHeight;
+                    hasGetInitHeight = true;
+                }
+                if (isFirstTime) {
+                    lastScrollHeight = initHeight;
+                    isFirstTime = false;
+                }
+                console.log(chatInputArea.style.height, editor.scrollHeight, lastScrollHeight, initHeight);
+                console.log(parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight);
+                // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
+                const newHeight = parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight;
+                if (newHeight <= initHeight) {
+                    chatInputArea.style.height = initHeight + 'px';
+                } else if (newHeight < containerHeight / 2) {
+                    chatInputArea.style.height = newHeight + 'px';
+                } else {
+                    chatInputArea.style.height = (containerHeight / 2) + 'px';
+                }
+                lastScrollHeight = editor.scrollHeight;
+            });
+            const config = {attributes: true, childList: true, subtree: true};
+            observer.observe(editor, config);
+        }
     }
-
 }
 
 export {
