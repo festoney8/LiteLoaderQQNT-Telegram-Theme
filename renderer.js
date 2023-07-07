@@ -4,6 +4,16 @@ function log(...args) {
     console.log.apply(console, newArgs);
 }
 
+function debounce(fn, time) {
+    let timer = null;
+    return function (...args) {
+        timer && clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(this, args);
+        }, time);
+    }
+}
+
 // css导入
 async function addStyle() {
     const element = document.createElement("style");
@@ -150,8 +160,8 @@ function autoEditorHeight() {
                         lastScrollHeight = initHeight;
                         isFirstTime = false;
                     }
-                    console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
-                    console.log(parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight);
+                    // console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
+                    // console.log(parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight);
                     // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
                     const newHeight = parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight;
                     if (newHeight <= initHeight) {
@@ -178,9 +188,41 @@ function autoEditorHeight() {
     }, 100);
 }
 
+// 消息列表监听(滚动页面or新消息)
+function watchMsgList() {
+    let counter = 0;
+    const debouncedAdjustMsgListStyle = debounce(adjustMsgListStyle, 200);
+    const checkMsgListInterval = setInterval(() => {
+        const msgListRoot = document.getElementById('ml-root');
+        if (msgListRoot) {
+            const msgList = msgListRoot.querySelector('div.ml-list.list');
+            if (msgList) {
+                // 监听消息列表变化
+                const observer = new MutationObserver((list) => {
+                    debouncedAdjustMsgListStyle(msgList);
+                });
+                const config = {childList: true};
+                observer.observe(msgList, config);
+                clearInterval(checkMsgListInterval);
+            }
+        } else {
+            counter++;
+            if (counter >= 50) {
+                clearInterval(checkMsgListInterval);
+                log("checkMsgListInterval Timeout")
+            }
+        }
+    }, 100);
+}
+
+// 消息列表CSS样式telegram化
+function adjustMsgListStyle() {
+    console.log(new Date(), new Date().getMilliseconds())
+}
+
 async function onLoad() {
     log(window.location.hash);
-    
+
     try {
         await addStyle();
         log("addStyle success")
@@ -202,6 +244,11 @@ async function onLoad() {
             log("updateWallpaper success")
         } catch (error) {
             log("updateWallpaper error", error)
+        }
+        try {
+            watchMsgList();
+        } catch (error) {
+            log("watchMsgList error", error)
         }
         try {
             adjustEditorHeight();
