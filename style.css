@@ -87,6 +87,7 @@
   #app .recent-contact .recent-contact-list .list-item__content .list-item__avatar .avatar {
     height: calc(var(--avatar_size_3) * 1.3) !important;
     width: calc(var(--avatar_size_3) * 1.3) !important;
+    margin-right: 8px;
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title {
     font-size: 0.95em !important;
@@ -172,10 +173,10 @@
   .aio .chat-input-area .shortcuts .func-bar,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar {
     opacity: 0.2;
-    transition: opacity 0.1s;
+    transition: opacity 0.2s;
   }
-  .aio .chat-input-area .shortcuts:hover .func-bar,
-  .aio.aio-independent .chat-input-area .shortcuts:hover .func-bar {
+  .aio .chat-input-area .shortcuts .func-bar:hover,
+  .aio.aio-independent .chat-input-area .shortcuts .func-bar:hover {
     opacity: 1;
     transition: opacity 0.1s;
   }

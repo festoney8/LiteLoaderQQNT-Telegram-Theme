@@ -46,7 +46,7 @@ async function onLoad() {
 
                 // 调大默认长度, 重写事件
                 recentContact.style.width = "300px";
-                recentContact.style.flexBasis = "84px";
+                recentContact.style.flexBasis = "80px";
 
                 let isResizing = false;
                 let startX = 0;

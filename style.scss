@@ -121,6 +121,7 @@
                 #app & .list-item__avatar .avatar {
                     height: calc(var(--avatar_size_3) * 1.3) !important;
                     width: calc(var(--avatar_size_3) * 1.3) !important;
+                    margin-right: 8px;
                 }
 
                 & .list-item__info {
@@ -252,12 +253,11 @@
                 // 隐藏效果
                 & .func-bar {
                     opacity: 0.2;
-                    transition: opacity 0.1s;
-                }
-
-                &:hover .func-bar {
-                    opacity: 1;
-                    transition: opacity 0.1s;
+                    transition: opacity 0.2s;
+                    &:hover {
+                        opacity: 1;
+                        transition: opacity 0.1s;
+                    }
                 }
             }
 
