@@ -165,6 +165,51 @@
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 4px !important;
   }
+  .aio main.chat-msg-area .message .message-container .avatar-span,
+  .aio.aio-independent main.chat-msg-area .message .message-container .avatar-span {
+    zoom: 1.1;
+  }
+  .aio main.chat-msg-area .message .message-container .user-name,
+  .aio.aio-independent main.chat-msg-area .message .message-container .user-name {
+    color: purple !important;
+    font-weight: bold;
+    font-size: 14px !important;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
+    padding: 10px 12px;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
+    border-radius: 20px;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--others:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--others:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
+    background-color: white !important;
+    border-top-left-radius: 8px;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self,
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self {
+    color: black !important;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container.container--self:not(:has(.image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
+    background-color: #effdde !important;
+    border-top-right-radius: 8px;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--self,
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--self {
+    --overlay_hover_brand: #00000030;
+    color: black !important;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--others,
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .reply-element.reply-element--others {
+    color: black !important;
+  }
+  .aio main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .message-content,
+  .aio.aio-independent main.chat-msg-area .message .message-container .message-content__wrapper .msg-content-container .message-content {
+    font-size: 16px !important;
+  }
   .aio .chat-input-area .shortcuts,
   .aio.aio-independent .chat-input-area .shortcuts {
     zoom: 0.9;
@@ -173,7 +218,7 @@
   .aio .chat-input-area .shortcuts .func-bar,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar {
     opacity: 0.2;
-    transition: opacity 0.5s;
+    transition: opacity 1s;
   }
   .aio .chat-input-area .shortcuts .func-bar:hover,
   .aio.aio-independent .chat-input-area .shortcuts .func-bar:hover {

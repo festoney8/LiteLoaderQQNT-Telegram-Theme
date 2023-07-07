@@ -182,6 +182,7 @@
     // 聊天区域
     .aio,
     .aio.aio-independent {
+        // 顶栏
         & .chat-header {
             background: white !important;
 
@@ -200,7 +201,7 @@
             }
         }
 
-        // 对话
+        // 对话框
         & main.chat-msg-area {
             // 设定telegram背景图 or telegram背景色
             background-image: var(--chatarea-wallpaper) !important;
@@ -229,21 +230,93 @@
             // 对话气泡
             & .message {
                 padding-bottom: 4px !important;
+
                 // grid display
                 & .message-container {
 
                     // 头像
                     & .avatar-span {
+                        zoom: 1.1;
+                    }
+
+                    // 用户名
+                    & .user-name {
+                        color: purple !important;
+                        font-weight: bold;
+                        font-size: 14px !important;
+                    }
+
+                    // 文字泡
+                    & .message-content__wrapper {
+                        & .msg-content-container {
+                            // padding 图片, 表情包, canvas小程序, 文件除外
+                            &:not(:has(.image.pic-element, .image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
+                                padding: 10px 12px;
+                            }
+
+                            // 气泡形状 表情包, canvas小程序, 文件除外
+                            &:not(:has(.image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
+                                border-radius: 20px;
+                            }
+
+                            // others
+                            &.container--others {
+                                &:not(:has(.image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
+                                    background-color: white !important;
+                                    // 左上角小角度
+                                    border-top-left-radius: 8px;
+                                }
+                            }
+
+                            // self
+                            &.container--self {
+                                // 表情包除外
+                                &:not(:has(.image.market-face-element, [id^="canvas-container"], .normal-file.file-element)) {
+                                    background-color: #effdde !important;
+                                    // 右上角小角度
+                                    border-top-right-radius: 8px;
+                                }
+
+                                color: black !important;
+                            }
+
+                            // 回复引用
+                            & .reply-element {
+                                &.reply-element--self {
+                                    --overlay_hover_brand: #00000030;
+                                    color: black !important;
+                                }
+
+                                &.reply-element--others {
+                                    color: black !important;
+                                }
+                            }
+
+                            // inner text
+                            & .message-content {
+                                font-size: 16px !important;
+                                // 普通文字
+                                & .text-normal {
+
+                                }
+
+                                // at @用户名
+                                & .text-element--at {
+
+                                }
+
+                                // url
+                                & .text-link {
+
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        // 功能栏
-        & .shortcuts {
-
-        }
-
+        // 输入
         & .chat-input-area {
             // 工具栏
             & .shortcuts {
@@ -253,7 +326,7 @@
                 // 隐藏效果
                 & .func-bar {
                     opacity: 0.2;
-                    transition: opacity 0.5s;
+                    transition: opacity 1s;
 
                     &:hover {
                         opacity: 1;

@@ -1,22 +1,32 @@
-async function onLoad() {
+function log(...args) {
+    const nowTime = new Date().toLocaleTimeString();
+    const newArgs = [`[QQNT Telegram Theme] ${nowTime}:`, ...args];
+    console.log.apply(console, newArgs);
+}
+
+// css导入
+async function addStyle() {
     const element = document.createElement("style");
     document.head.appendChild(element);
 
     telegram_theme.updateStyle((event, message) => {
         element.textContent = message;
     });
+}
 
-    telegram_theme.rendererReady();
-
-    // 更新聊天窗口背景图片
+// 更新聊天窗口背景图片
+async function updateWallpaper() {
     await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
         const root = document.documentElement;
         root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
     }).catch((err) => {
+        log(err)
         alert(err);
     });
+}
 
-    // 信息列表宽度调节 重写事件调宽宽度
+// 信息列表宽度调节 重写事件调宽宽度
+function adjustContactWidth() {
     let counter = 0;
     let isIndep = false; // 检测是否为独立聊天窗
     const checkAioInterval = setInterval(() => {
@@ -29,8 +39,9 @@ async function onLoad() {
             clearInterval(checkAioInterval);
         } else {
             counter++;
-            if (counter >= 20) {
+            if (counter >= 50) {
                 clearInterval(checkAioInterval);
+                log("checkAioInterval Timeout")
             }
         }
     }, 100);
@@ -74,15 +85,18 @@ async function onLoad() {
                 clearInterval(checkContactHandlerInterval);
             } else {
                 counter++;
-                if (counter >= 30) {
+                if (counter >= 50) {
                     clearInterval(checkContactHandlerInterval);
+                    log("checkContactHandlerInterval Timeout")
                 }
             }
         }, 100);
     }
+}
 
-    // 输入框高度调节 重写事件
-    counter = 0;
+// 输入框高度调节 重写事件
+function adjustEditorHeight() {
+    let counter = 0;
     const checkInputHandlerInterval = setInterval(() => {
         const chatInputArea = document.querySelector('.chat-input-area');
         const oldResizeHandler = document.querySelector('.chat-input-area .resize-handler');
@@ -121,13 +135,16 @@ async function onLoad() {
             clearInterval(checkInputHandlerInterval);
         } else {
             counter++;
-            if (counter >= 10) {
+            if (counter >= 50) {
                 clearInterval(checkInputHandlerInterval);
+                log("checkInputHandlerInterval Timeout")
             }
         }
     }, 100);
+}
 
-    // 输入区域高度自适应
+// 输入区域高度自适应
+function autoEditorHeight() {
     const chatInputArea = document.querySelector('.chat-input-area');
     if (chatInputArea) {
         const editor = document.querySelector('.ck.ck-content')
@@ -168,6 +185,43 @@ async function onLoad() {
             observer.observe(editor, config);
         }
     }
+}
+
+async function onLoad() {
+    console.log(window.location.href);
+
+    try {
+        await addStyle();
+        log("addStyle success")
+    } catch (error) {
+        log("addStyle error", error)
+    }
+    try {
+        await updateWallpaper();
+        log("updateWallpaper success")
+    } catch (error) {
+        log("updateWallpaper error", error)
+    }
+    try {
+        adjustContactWidth();
+        log("adjustContactWidth success")
+    } catch (error) {
+        log("adjustContactWidth error", error)
+    }
+    try {
+        adjustEditorHeight();
+        log("adjustEditorHeight success")
+    } catch (error) {
+        log("adjustEditorHeight error", error)
+    }
+    try {
+        autoEditorHeight();
+        log("autoEditorHeight success")
+    } catch (error) {
+        log("autoEditorHeight error", error)
+    }
+
+    telegram_theme.rendererReady();
 }
 
 export {
