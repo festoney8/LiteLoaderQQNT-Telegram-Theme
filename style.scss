@@ -301,11 +301,11 @@
 
                     // 固定发送按钮位置, 更换按钮图像, 仿telegram按钮
                     color: transparent !important;
-                    width: 30px !important;
-                    height: 30px !important;
+                    width: 32px !important;
+                    height: 32px !important;
                     position: absolute !important;
-                    bottom: 15px;
-                    right: 15px;
+                    bottom: 16px;
+                    right: 16px;
                     background-color: unset !important;
                     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
                     background-repeat: no-repeat;

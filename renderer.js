@@ -92,8 +92,8 @@ async function onLoad() {
             oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
 
             // 高度调低, 重写事件
-            chatInputArea.style.height = "90px";
-            chatInputArea.style.minHeight = "80px";
+            chatInputArea.style.height = "85px";
+            chatInputArea.style.minHeight = "85px";
 
             let isResizing = false;
             let startY = 0;
@@ -126,6 +126,14 @@ async function onLoad() {
             }
         }
     }, 100);
+
+    // 输入区域高度自适应
+    const autoResize = () => {
+        const inputBox = document.getElementById('input-box');
+        inputBox.style.height = 'auto';
+        inputBox.style.height = inputBox.scrollHeight + 'px';
+    }
+
 }
 
 export {
