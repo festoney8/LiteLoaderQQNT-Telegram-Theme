@@ -38,50 +38,70 @@ async function updateWallpaper() {
 // 信息列表宽度调节 重写事件调宽宽度 不在独立聊天窗运行
 function adjustContactWidth() {
     let counter = 0;
-    const checkContactHandlerInterval = setInterval(() => {
-        const recentContact = document.querySelector('.recent-contact');
-        const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
-        if (oldResizeHandler && recentContact) {
-            // 移除默认事件
-            const resizeHandler = oldResizeHandler.cloneNode(true);
-            oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
-
-            // 调大默认长度, 重写事件
-            recentContact.style.width = "300px";
-            recentContact.style.flexBasis = "80px";
-
-            let isResizing = false;
-            let startX = 0;
-            let startWidth = 0;
-
-            resizeHandler.addEventListener('mousedown', (event) => {
-                isResizing = true;
-                startX = event.clientX;
-                startWidth = parseFloat(getComputedStyle(recentContact).width);
-            });
-
-            document.addEventListener('mousemove', (event) => {
-                if (!isResizing) return;
-
-                const width = startWidth + event.clientX - startX;
-                recentContact.style.width = width + 'px';
-            });
-
-            document.addEventListener('mouseup', (event) => {
-                if (!isResizing) return;
-
-                isResizing = false;
-            });
-
-            clearInterval(checkContactHandlerInterval);
+    let isIndep = false; // 检测是否为独立聊天窗
+    const checkAioInterval = setInterval(() => {
+        const aio = document.querySelector(".aio");
+        const aioIndependent = document.querySelector(".aio.aio-independent");
+        if (aio) {
+            if (aioIndependent) {
+                isIndep = true;
+            }
+            clearInterval(checkAioInterval);
         } else {
             counter++;
             if (counter >= 50) {
-                clearInterval(checkContactHandlerInterval);
-                log("checkContactHandlerInterval Timeout")
+                clearInterval(checkAioInterval);
+                log("checkAioInterval Timeout")
             }
         }
     }, 100);
+    if (!isIndep) {
+        counter = 0;
+        const checkContactHandlerInterval = setInterval(() => {
+            const recentContact = document.querySelector('.recent-contact');
+            const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
+            if (oldResizeHandler && recentContact) {
+                // 移除默认事件
+                const resizeHandler = oldResizeHandler.cloneNode(true);
+                oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
+
+                // 调大默认长度, 重写事件
+                recentContact.style.width = "300px";
+                recentContact.style.flexBasis = "80px";
+
+                let isResizing = false;
+                let startX = 0;
+                let startWidth = 0;
+
+                resizeHandler.addEventListener('mousedown', (event) => {
+                    isResizing = true;
+                    startX = event.clientX;
+                    startWidth = parseFloat(getComputedStyle(recentContact).width);
+                });
+
+                document.addEventListener('mousemove', (event) => {
+                    if (!isResizing) return;
+
+                    const width = startWidth + event.clientX - startX;
+                    recentContact.style.width = width + 'px';
+                });
+
+                document.addEventListener('mouseup', (event) => {
+                    if (!isResizing) return;
+
+                    isResizing = false;
+                });
+
+                clearInterval(checkContactHandlerInterval);
+            } else {
+                counter++;
+                if (counter >= 50) {
+                    clearInterval(checkContactHandlerInterval);
+                    log("checkContactHandlerInterval Timeout")
+                }
+            }
+        }, 100);
+    }
 }
 
 // 输入框高度调节 重写事件
@@ -154,6 +174,7 @@ function autoEditorHeight() {
                     // 导致初次贴入图片后editor高度不变，过一阵子才发生变化，或接着输入文字后高度才发生变化
                     if (!hasGetInitHeight) {
                         initHeight = editor.scrollHeight;
+                        // initHeight = editor.style.lineHeight;
                         hasGetInitHeight = true;
                     }
                     if (isFirstTime) {
@@ -221,47 +242,40 @@ function adjustMsgListStyle() {
 }
 
 async function onLoad() {
-    log(window.location.hash);
-
     try {
         await addStyle();
         log("addStyle success")
     } catch (error) {
         log("addStyle error", error)
     }
-    if (window.location.hash === "#/main/message" || window.location.hash.startsWith("#/chat/")) {
-        if (window.location.hash === "#/main/message") {
-            try {
-                adjustContactWidth();
-                log("adjustContactWidth success")
-            } catch (error) {
-                log("adjustContactWidth error", error)
-            }
-        }
-
-        try {
-            await updateWallpaper();
-            log("updateWallpaper success")
-        } catch (error) {
-            log("updateWallpaper error", error)
-        }
-        try {
-            watchMsgList();
-        } catch (error) {
-            log("watchMsgList error", error)
-        }
-        try {
-            adjustEditorHeight();
-            log("adjustEditorHeight success")
-        } catch (error) {
-            log("adjustEditorHeight error", error)
-        }
-        try {
-            autoEditorHeight();
-            log("autoEditorHeight success")
-        } catch (error) {
-            log("autoEditorHeight error", error)
-        }
+    try {
+        adjustContactWidth();
+        log("adjustContactWidth success")
+    } catch (error) {
+        log("adjustContactWidth error", error)
+    }
+    try {
+        await updateWallpaper();
+        log("updateWallpaper success")
+    } catch (error) {
+        log("updateWallpaper error", error)
+    }
+    try {
+        watchMsgList();
+    } catch (error) {
+        log("watchMsgList error", error)
+    }
+    try {
+        adjustEditorHeight();
+        log("adjustEditorHeight success")
+    } catch (error) {
+        log("adjustEditorHeight error", error)
+    }
+    try {
+        autoEditorHeight();
+        log("autoEditorHeight success")
+    } catch (error) {
+        log("autoEditorHeight error", error)
     }
 
     telegram_theme.rendererReady();

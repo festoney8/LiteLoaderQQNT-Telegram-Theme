@@ -1,9 +1,9 @@
 {
     "manifest_version": 1,
     "type": "theme",
-    "name": "QQNT仿Telegram主题",
+    "name": "QQNT仿Telegram风格主题",
     "slug": "diy_theme",
-    "description": "QQNT仿Telegram主题",
+    "description": "高仿Telegram的QQNT主题",
     "version": "0.0.1",
     "author": [
         {
