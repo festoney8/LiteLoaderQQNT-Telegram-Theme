@@ -204,13 +204,12 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container {
     position: relative;
     color: black !important;
+    background-color: #effdde !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
-    padding: 10px 30px 10px 15px !important;
-    border-radius: 20px;
-    background-color: #effdde !important;
-    border-bottom-right-radius: 8px;
+    padding: 10px 15px 10px 15px !important;
+    border-radius: 20px 20px 8px 20px;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self {
@@ -259,20 +258,29 @@
     font-size: 12px !important;
     font-weight: bold;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element))::after,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element))::after {
-    content: "";
+  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after {
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= '%235fbe67' /></svg>");
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 21px;
-    height: 21px;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjUuMTQ2MjEgMjUuMjA0OSAxMDIuOSA1OC41MyI+CiAgPHBhdGggZD0iTSA1MS45NSA0Ni4xNSBDIDQxLjggNTcuNzUgMzIuMyA2OC42NSAzMC44NSA3MC40IGwgLTIuNjUgMy4xIGwgLTkuMSAtOC44NSBDIDkuNiA1NS4zNSAxMCA1NCA1LjE1IDYwLjQgYyAtMC4zIDEuNjUgMTcuMyAyMC42NSAyMS4wNSAyMi43IGMgMi45IDEuNTUgNC4yNSAwLjI1IDI3IC0yNS43NSBjIDE4LjggLTIzLjM1IDI1LjggLTI3LjM1IDIxLjggLTMwLjM1IGMgLTMuOTUgLTQuNDUgLTUgLTAuOSAtMjMgMTkgeiBtIDQ5LjU1IC0yMC40IGMgLTAuNTUgMC40IC0xMC4yIDExLjIgLTIxLjM1IDI0IEMgNTguMSA3NC45IDU5LjIgNzMuOSA1Ni43NSA3MSBDIDUzLjkgNjcuNyA0OSA2OSA0OSA3MyBjIDAgMi4zNSA5LjU1IDExLjQgMTEuMzUgMTAuNyBjIDIgLTAuNzUgNDcuNjUgLTUyLjggNDcuNjUgLTU0LjMgYyAwIC0yLjk1IC00LjI1IC01LjMgLTYuNSAtMy42NSB6IiBmaWxsPSIjNWZiZTY3Ii8+Cjwvc3ZnPg==");
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: center;
+    width: 20px;
+    height: 15px;
     transform: rotate(3deg);
     margin-right: 5px;
+    margin-bottom: 5px;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:has(.image.pic-element):hover::after,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:has(.image.pic-element):hover::after {
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= 'white' /></svg>");
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 15px;
+    transform: rotate(3deg);
+    margin-right: 5px;
+    margin-bottom: 5px;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container::before,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container::before {
