@@ -6,6 +6,7 @@
     --sidebar-width: 65px;
     --sidebar-zoom: 1.2;
     --sidebar-icon-color: #8c9dae;
+    --sidebar-unread-bubble-color: red;
     --recent-contact-bg-color: white;
     --recent-contact-selected-bg-color: #41a1d9;
     --recent-contact-unread-bubble-important-color: red;
@@ -13,12 +14,14 @@
     --chatarea-color-1: #effdde;
     --chatarea-color-2: #5fbe67;
     --chatarea-wallpaper: unset;
-    --chatarea-bg-color: #bcbcbc;
+    --chatarea-bg-color: white;
     --chatarea-link-color: #168ad0;
     --chatarea-bubble-color-others: white;
     --chatarea-bubble-color-self: #effdde;
     --chatarea-text-color-self: black;
     --chatarea-text-color-others: black;
+    --chatarea-username-color: white;
+    --chatarea-header-color: white;
     --telegram-theme-color: #5eb7f7;
   }
   .tab-container {
@@ -83,7 +86,7 @@
   }
   .sidebar .q-badge-sub.q-badge__red,
   .sidebar-nav .q-badge-sub.q-badge__red {
-    --feedback_error: var(--telegram-theme-color);
+    --feedback_error: var(--sidebar-unread-bubble-color);
   }
   .sidebar .sidebar__lower i.q-icon svg > path, .sidebar .sidebar__lower i.q-icon svg > rect,
   .sidebar-nav .sidebar__lower i.q-icon svg > path,
@@ -161,7 +164,7 @@
   }
   .aio .chat-header,
   .aio.aio-independent .chat-header {
-    background: white !important;
+    background: var(--chatarea-header-color) !important;
   }
   .aio .chat-header .chat-header__title,
   .aio.aio-independent .chat-header .chat-header__title {
@@ -184,6 +187,7 @@
     background-position-y: center;
     background-size: cover;
     background-attachment: fixed;
+    transition: background 5s ease !important;
   }
   .aio main.chat-msg-area .message__timestamp, .aio main.chat-msg-area .gray-tip-content,
   .aio.aio-independent main.chat-msg-area .message__timestamp,
@@ -243,7 +247,7 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name {
-    color: white !important;
+    color: var(--chatarea-username-color) !important;
     font-weight: bold;
     font-size: 14px !important;
     margin-bottom: 2px;
@@ -267,6 +271,8 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 40vh;
     max-width: 40vw;
+    min-width: fit-content(20%);
+    min-height: fit-content(20%);
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
@@ -390,6 +396,8 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 40vh;
     max-width: 40vw;
+    min-width: fit-content(20%);
+    min-height: fit-content(20%);
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,

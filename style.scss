@@ -8,6 +8,7 @@
         --sidebar-width: 65px;
         --sidebar-zoom: 1.2;
         --sidebar-icon-color: #8c9dae;
+        --sidebar-unread-bubble-color: red;
 
         --recent-contact-bg-color: white;
         --recent-contact-selected-bg-color: #41a1d9;
@@ -17,12 +18,14 @@
         --chatarea-color-1: #effdde;
         --chatarea-color-2: #5fbe67;
         --chatarea-wallpaper: unset;
-        --chatarea-bg-color: #bcbcbc;
+        --chatarea-bg-color: white;
         --chatarea-link-color: #168ad0;
         --chatarea-bubble-color-others: white;
         --chatarea-bubble-color-self: #effdde;
         --chatarea-text-color-self: black;
         --chatarea-text-color-others: black;
+        --chatarea-username-color: white;
+        --chatarea-header-color: white;
 
         --telegram-theme-color: #5eb7f7;
 
@@ -98,7 +101,7 @@
 
             &.q-badge__red {
                 // 提示颜色
-                --feedback_error: var(--telegram-theme-color);
+                --feedback_error: var(--sidebar-unread-bubble-color);
             }
         }
 
@@ -230,7 +233,7 @@
     .aio.aio-independent {
         // 顶栏
         & .chat-header {
-            background: white !important;
+            background: var(--chatarea-header-color) !important;
 
             & .chat-header__title {
                 font-size: 1.05em;
@@ -258,6 +261,7 @@
                 size: cover;
                 attachment: fixed;
             }
+            transition: background 5s ease !important;
 
             // 群聊时间 撤回通知
             & .message__timestamp,
@@ -306,6 +310,8 @@
                             & img {
                                 max-height: 40vh;
                                 max-width: 40vw;
+                                min-width: fit-content(20%);
+                                min-height: fit-content(20%);
                                 object-fit: contain;
                             }
                         }
@@ -418,7 +424,7 @@
 
                         // 用户名
                         & .user-name {
-                            color: white !important;
+                            color: var(--chatarea-username-color) !important;
                             font-weight: bold;
                             font-size: 14px !important;
                             //padding-left: 18px;
