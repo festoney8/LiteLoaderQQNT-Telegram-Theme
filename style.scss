@@ -1,14 +1,27 @@
 @media (prefers-color-scheme: light) {
-    $telegram-theme-color: #5eb7f7;
-    $sidebar-bg-color: #293b4c;
-    $sidebar-width: 60px;
-    $sidebar-zoom: 1.2;
 
 
     :root {
-        --chatarea-wallpaper: unset;
-        --telegram-chatarea-bg-color: #bcbcbc;
-        --bg_grey_standard: white;
+        --sidebar-bg-color: #293b4c;
+        --sidebar-width: 65px;
+        --sidebar-zoom: 1.2;
+        --sidebar-icon-color: #8c9dae;
+
+        --recent-contact-bg-color: white;
+        --recent-contact-selected-bg-color: #41a1d9;
+        --recent-contact-unread-num-color: #41a1d9;
+        --vip-name-color: black;
+
+        --telegram-chat-color-1: #effdde;
+        --telegram-chat-color-2: #5fbe67;
+        --telegram-chat-link-color: #168ad0;
+        --telegram-chat-bg-color-others: white;
+        --telegram-chat-bg-color-self: #effdde;
+        --telegram-chat-wallpaper: unset;
+        --telegram-chat-bg-color: #bcbcbc;
+
+        --telegram-theme-color: #5eb7f7;
+
     }
 
     // 全局颜色
@@ -24,29 +37,29 @@
     // 左边栏
     .sidebar,
     .sidebar-nav {
-        background-color: $sidebar-bg-color !important;
-        width: $sidebar-width !important;
+        background-color: var(--sidebar-bg-color) !important;
+        width: var(--sidebar-width) !important;
         // 头像
         & .user-avatar-container {
-            zoom: $sidebar-zoom;
+            zoom: var(--sidebar-zoom);
         }
 
         & .icon.icon-online.avatar__status {
-            zoom: $sidebar-zoom;
+            zoom: var(--sidebar-zoom);
             right: 2px !important;
         }
 
         // 按钮
         & .nav-item {
-            height: $sidebar-width !important;
+            height: var(--sidebar-width) !important;
             width: 100% !important;
         }
 
         // 按钮蒙版
         & .tab-item-mask {
             border-radius: unset !important;
-            height: $sidebar-width !important;
-            width: $sidebar-width !important;
+            height: var(--sidebar-width) !important;
+            width: var(--sidebar-width) !important;
 
             &:has( ~ .svg-highlight) {
                 background-color: #17212b !important;
@@ -57,14 +70,14 @@
 
         // icon
         & .tab-item-img {
-            zoom: $sidebar-zoom;
-            // icon 颜色
+            zoom: var(--sidebar-zoom);
+            // icon 边缘颜色
             & svg > path {
-                --icon_primary: #8c9dae !important;
+                --icon_primary: var(--sidebar-icon-color) !important;
             }
 
             & .tab-item-img-mask {
-                background-color: $telegram-theme-color;
+                background-color: var(--telegram-theme-color);
             }
         }
 
@@ -72,7 +85,7 @@
         & .q-badge-sub {
             left: 55% !important;
             top: 15% !important;
-            zoom: $sidebar-zoom;
+            zoom: var(--sidebar-zoom);
             border: 1px #17212b solid !important;
 
             &.q-badge-num i {
@@ -81,7 +94,7 @@
 
             &.q-badge__red {
                 // 提示颜色
-                --feedback_error: #5eb7f7;
+                --feedback_error: var(--telegram-theme-color);
             }
         }
 
@@ -90,7 +103,7 @@
             & i.q-icon {
                 & svg > path,
                 & svg > rect {
-                    stroke: #8c9dae !important;
+                    stroke: var(--sidebar-icon-color) !important;
                 }
             }
         }
@@ -98,7 +111,7 @@
 
     // 联系人列表
     .recent-contact {
-        background-color: white;
+        background-color: var(--recent-contact-bg-color);
 
         // 可调宽度
         width: 300px;
@@ -110,7 +123,7 @@
         // hover色
         --overlay_hover: #f1f1f1;
         // 选中对话色
-        --global-brand_standard: #41a1d9;
+        --global-brand_standard: var(--recent-contact-selected-bg-color);
 
         // 顶部搜索栏下网络提示
         & .network-tip {
@@ -163,7 +176,7 @@
                         }
 
                         & .q-badge-sub.q-badge-num {
-                            --feedback_error: #41a1d9;
+                            --feedback_error: var(--recent-contact-unread-num-color);
                             padding: 3px 5px !important;
                         }
 
@@ -178,7 +191,7 @@
         // 我的手机和群助手
         & .avatar.avatar-sys {
             &::before {
-                background-color: $telegram-theme-color !important;
+                background-color: var(--telegram-theme-color) !important;
             }
 
             & .q-icon {
@@ -199,7 +212,7 @@
                 font-weight: 500 !important;
                 // vip红名去除
                 & .text-ellipsis.vip-name {
-                    color: black !important;
+                    color: var(--vip-name-color) !important;
                 }
             }
 
@@ -213,8 +226,8 @@
         & main.chat-msg-area {
             // 设定telegram背景图 or telegram背景色
             background: {
-                image: var(--chatarea-wallpaper) !important;
-                color: var(--telegram-chatarea-bg-color) !important;
+                image: var(--telegram-chat-wallpaper) !important;
+                color: var(--telegram-chat-bg-color) !important;
                 position-x: center;
                 position-y: center;
                 size: cover;
@@ -274,13 +287,13 @@
 
                         // 回复引用
                         & .reply-element {
-                            --overlay_hover_brand: rgb(94, 184, 84);
+                            --overlay_hover_brand: var(--telegram-chat-color-2);
                             margin-top: 4px;
                             font-weight: bold;
-                            color: rgb(94, 184, 84) !important;
+                            color: var(--telegram-chat-color-2) !important;
 
                             & .reply-title {
-                                color: rgb(94, 184, 84) !important;
+                                color: var(--telegram-chat-color-2) !important;
                                 opacity: unset !important;
                                 zoom: 1.1;
                             }
@@ -308,13 +321,13 @@
 
                             // at @用户名
                             & .text-element--at {
-                                color: rgb(94, 184, 84) !important;
+                                color: var(--telegram-chat-color-2) !important;
                                 //font-weight: 600;
                             }
 
                             // url
                             & .text-link {
-                                color: rgb(64, 167, 227) !important;
+                                color: var(--telegram-chat-link-color) !important;
                             }
                         }
 
@@ -324,19 +337,19 @@
                             --bubble_host: white;
 
                             & .ptt-element__button {
-                                background-color: #5fbe67 !important;
+                                background-color: var(--telegram-chat-color-1) !important;
                             }
 
                             & .ptt-element__progress {
                                 & .ptt-element__progress-item {
-                                    background-color: #5fbe67 !important;
+                                    background-color: var(--telegram-chat-color-1) !important;
                                 }
                             }
 
                             & .ptt-element__duration span {
                                 font-size: 12px !important;
                                 font-weight: bold;
-                                color: #5fbe67 !important;
+                                color: var(--telegram-chat-color-1) !important;
                             }
                         }
 
@@ -398,7 +411,7 @@
                                 @include samePartCSS();
 
                                 &:not(:has(.market-face-element)) {
-                                    background-color: white !important;
+                                    background-color: var(--telegram-chat-bg-color-others) !important;
                                 }
 
                                 // 包含文字内容或语音, 不含图片/表情的气泡
@@ -474,7 +487,7 @@
                                 @include samePartCSS();
 
                                 &:not(:has(.market-face-element)) {
-                                    background-color: #effdde !important;
+                                    background-color: var(--telegram-chat-bg-color-self) !important;
                                 }
 
                                 // 包含文字内容或语音, 不含图片/大表情的气泡
@@ -516,7 +529,7 @@
                                 &:not(:has(.image.pic-element, .image.market-face-element, [id^="canvas-container"], .normal-file.file-element)):hover {
                                     &::after {
                                         // fill color URL编码
-                                        content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= '%235fbe67' /></svg>");
+                                        content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= '%2300000050' /></svg>");
                                         @include svgIconCss();
                                     }
                                 }
@@ -619,10 +632,6 @@
                         repeat: no-repeat;
                         position: center;
                         size: 50%;
-                    }
-
-                    &:hover {
-
                     }
 
                     &:has(.send--disabled) {
