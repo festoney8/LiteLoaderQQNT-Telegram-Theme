@@ -132,6 +132,11 @@
         }
 
         & .recent-contact-list {
+            & .list-item__container {
+                // 给未读消息气泡做定位
+                position: relative;
+            }
+
             // 强制覆盖
             #app & .list-item__content {
                 padding: 12px 14px !important;
@@ -146,6 +151,9 @@
                 }
 
                 & .list-item__info {
+                    // 去除position, 用于气泡定位
+                    position: unset !important;
+
                     // 强制覆盖
                     #app & .list-item__title {
                         font-size: .95em !important;
@@ -169,6 +177,15 @@
 
                     // 未读消息
                     & .summary-bubble {
+                        &:not(:has(.q-icon)) {
+                            // 仿telegram, 气泡随宽度调节变化, 宽度最小时覆盖头像
+                            // relative是list-item__container, 不是list-item__info
+                            position: absolute;
+                            right: 4px;
+                            bottom: 10px;
+                            z-index: 100;
+                        }
+
                         zoom: 1.3;
 
                         & .q-icon {
@@ -254,7 +271,7 @@
             // 对话气泡
             & .message {
                 padding-bottom: 0 !important;
-                margin: 0 0 6px 0;
+                margin: 0 0 8px 0;
 
                 /* Grid display 重排
                     默认Right Grid:
@@ -280,7 +297,7 @@
 
                             & img {
                                 max-height: 50vh;
-                                max-width: 50vw;
+                                max-width: 40vw;
                                 object-fit: contain;
                             }
                         }
@@ -337,19 +354,19 @@
                             --bubble_host: white;
 
                             & .ptt-element__button {
-                                background-color: var(--telegram-chat-color-1) !important;
+                                background-color: var(--telegram-chat-color-2) !important;
                             }
 
                             & .ptt-element__progress {
                                 & .ptt-element__progress-item {
-                                    background-color: var(--telegram-chat-color-1) !important;
+                                    background-color: var(--telegram-chat-color-2) !important;
                                 }
                             }
 
                             & .ptt-element__duration span {
                                 font-size: 12px !important;
                                 font-weight: bold;
-                                color: var(--telegram-chat-color-1) !important;
+                                color: var(--telegram-chat-color-2) !important;
                             }
                         }
 
@@ -396,6 +413,8 @@
                             color: white !important;
                             font-weight: bold;
                             font-size: 14px !important;
+                            //padding-left: 18px;
+                            margin-bottom: 4px;
 
                             & .text-ellipsis {
                                 text-shadow: 0 0 5px rgba(0, 0, 0, .5);
@@ -405,6 +424,7 @@
 
                         // 文字泡(content)
                         & .message-content__wrapper {
+
                             & .msg-content-container {
                                 color: black !important;
 
@@ -420,14 +440,14 @@
                                 &:is(.ptt-message) {
                                     padding: 8px 16px 8px 16px !important;
                                     // 左下角小角度, 左上角适应nickname
-                                    border-radius: 8px 20px 20px 8px;
+                                    border-radius: 20px 20px 20px 8px;
                                 }
 
                                 // 图文混合气泡, 图图混合气泡
                                 &:has(.pic-element:nth-child(n+2)),
                                 &:has(.text-element):has(.pic-element) {
                                     padding: 0 !important;
-                                    border-radius: 8px 20px 20px 8px;
+                                    border-radius: 20px 20px 20px 8px;
 
                                     & .text-element {
                                         display: inline-block;
@@ -441,16 +461,16 @@
                             }
                         }
 
-                        // 文字泡 私聊情况 角度还原
-                        & :not(.user-name) + .message-content__wrapper {
-                            &:has(.text-element):not(:has(.pic-element)),
-                            &:has(.face-element),
-                            &:is(.ptt-message),
-                            &:has(.pic-element:nth-child(n+2)),
-                            &:has(.text-element):has(.pic-element) {
-                                border-radius: 20px 20px 20px 8px;
-                            }
-                        }
+                        //// 文字泡 私聊情况 角度还原
+                        //& :not(.user-name) + .message-content__wrapper {
+                        //    &:has(.text-element):not(:has(.pic-element)),
+                        //    &:has(.face-element),
+                        //    &:is(.ptt-message),
+                        //    &:has(.pic-element:nth-child(n+2)),
+                        //    &:has(.text-element):has(.pic-element) {
+                        //        border-radius: 20px 20px 20px 8px;
+                        //    }
+                        //}
 
 
                         // 信息状态, 下载按钮

@@ -100,6 +100,9 @@
     font-size: 18px;
     font-weight: bold;
   }
+  .recent-contact .recent-contact-list .list-item__container {
+    position: relative;
+  }
   #app .recent-contact .recent-contact-list .list-item__content {
     padding: 12px 14px !important;
   }
@@ -107,6 +110,9 @@
     height: calc(var(--avatar_size_3) * 1.3) !important;
     width: calc(var(--avatar_size_3) * 1.3) !important;
     margin-right: 8px;
+  }
+  .recent-contact .recent-contact-list .list-item__content .list-item__info {
+    position: unset !important;
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title {
     font-size: 0.95em !important;
@@ -124,6 +130,12 @@
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble {
     zoom: 1.3;
+  }
+  .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) {
+    position: absolute;
+    right: 4px;
+    bottom: 10px;
+    z-index: 100;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-icon {
     --icon_secondary_02: #bbbbbb;
@@ -184,7 +196,7 @@
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 0 !important;
-    margin: 0 0 6px 0;
+    margin: 0 0 8px 0;
     /* Grid display 重排
         默认Right Grid:
         "checkbox nickname  nickname  nickname . avatar"
@@ -228,6 +240,7 @@
     color: white !important;
     font-weight: bold;
     font-size: 14px !important;
+    margin-bottom: 4px;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis {
@@ -247,7 +260,7 @@
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 50vh;
-    max-width: 50vw;
+    max-width: 40vw;
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
@@ -293,17 +306,17 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
-    background-color: var(--telegram-chat-color-1) !important;
+    background-color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
-    background-color: var(--telegram-chat-color-1) !important;
+    background-color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
     font-size: 12px !important;
     font-weight: bold;
-    color: var(--telegram-chat-color-1) !important;
+    color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
@@ -318,13 +331,13 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.face-element),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:is(.ptt-message) {
     padding: 8px 16px 8px 16px !important;
-    border-radius: 8px 20px 20px 8px;
+    border-radius: 20px 20px 20px 8px;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) {
     padding: 0 !important;
-    border-radius: 8px 20px 20px 8px;
+    border-radius: 20px 20px 20px 8px;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element, .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .text-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element,
@@ -336,14 +349,6 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
-  }
-  .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.face-element), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:is(.ptt-message), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.pic-element:nth-child(n+2)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):has(.pic-element),
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):not(:has(.pic-element)),
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.face-element),
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:is(.ptt-message),
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.pic-element:nth-child(n+2)),
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):has(.pic-element) {
-    border-radius: 20px 20px 20px 8px;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
@@ -378,7 +383,7 @@
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 50vh;
-    max-width: 50vw;
+    max-width: 40vw;
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
@@ -424,17 +429,17 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
-    background-color: var(--telegram-chat-color-1) !important;
+    background-color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
-    background-color: var(--telegram-chat-color-1) !important;
+    background-color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
     font-size: 12px !important;
     font-weight: bold;
-    color: var(--telegram-chat-color-1) !important;
+    color: var(--telegram-chat-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
