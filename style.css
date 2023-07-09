@@ -218,7 +218,7 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     overflow: unset !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container,
