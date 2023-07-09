@@ -281,6 +281,11 @@
                 letter-spacing: 1px;
             }
 
+            // 对话列表的最后一个对话
+            & .ml-list .ml-item:nth-child(1) {
+                margin-bottom: 8px;
+            }
+
             // 对话气泡
             & .message {
                 padding-bottom: 0 !important;

@@ -201,6 +201,10 @@
     font-size: 15px !important;
     letter-spacing: 1px;
   }
+  .aio main.chat-msg-area .ml-list .ml-item:nth-child(1),
+  .aio.aio-independent main.chat-msg-area .ml-list .ml-item:nth-child(1) {
+    margin-bottom: 8px;
+  }
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 0 !important;
