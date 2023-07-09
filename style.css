@@ -186,7 +186,6 @@
     background-position-y: center;
     background-size: cover;
     background-attachment: fixed;
-    transition: background 5s ease !important;
   }
   .aio main.chat-msg-area .message__timestamp, .aio main.chat-msg-area .gray-tip-content,
   .aio.aio-independent main.chat-msg-area .message__timestamp,
@@ -270,8 +269,6 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 40vh;
     max-width: 40vw;
-    min-width: fit-content(20%);
-    min-height: fit-content(20%);
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
@@ -395,8 +392,6 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
     max-height: 40vh;
     max-width: 40vw;
-    min-width: fit-content(20%);
-    min-height: fit-content(20%);
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,

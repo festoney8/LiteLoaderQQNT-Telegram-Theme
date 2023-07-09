@@ -263,7 +263,6 @@
                 size: cover;
                 attachment: fixed;
             }
-            transition: background 5s ease !important;
 
             // 群聊时间 撤回通知
             & .message__timestamp,
@@ -312,8 +311,6 @@
                             & img {
                                 max-height: 40vh;
                                 max-width: 40vw;
-                                min-width: fit-content(20%);
-                                min-height: fit-content(20%);
                                 object-fit: contain;
                             }
                         }
@@ -345,6 +342,12 @@
 
                             // 文本消息
                             & .text-element {
+                            }
+
+                            // 图片消息
+                            & .pic-element {
+                                & img {
+                                }
                             }
 
                             // 普通文字
