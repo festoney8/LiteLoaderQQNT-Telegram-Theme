@@ -7,7 +7,7 @@
     --sidebar-icon-color: #8c9dae;
     --recent-contact-bg-color: white;
     --recent-contact-selected-bg-color: #41a1d9;
-    --recent-contact-unread-num-color: #41a1d9;
+    --recent-contact-unread-bubble-important-color: #41a1d9;
     --vip-name-color: black;
     --telegram-chat-color-1: #effdde;
     --telegram-chat-color-2: #5fbe67;
@@ -137,11 +137,14 @@
     bottom: 10px;
     z-index: 100;
   }
+  .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) sub {
+    border: 1px white solid;
+  }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-icon {
     --icon_secondary_02: #bbbbbb;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-badge-sub.q-badge-num {
-    --feedback_error: var(--recent-contact-unread-num-color);
+    --feedback_error: var(--recent-contact-unread-bubble-important-color);
     padding: 3px 5px !important;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-badge-sub.q-badge__grey {
