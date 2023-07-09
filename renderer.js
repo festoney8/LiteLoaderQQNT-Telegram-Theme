@@ -168,23 +168,45 @@ function autoEditorHeight() {
                 let isFirstTime = true;
                 const container = document.querySelector('.container');
                 const containerHeight = parseFloat(getComputedStyle(container).height);
-                const observer = new MutationObserver((list) => {
-                    // 存在bug
-                    // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
-                    // 导致初次贴入图片后editor高度不变，过一阵子才发生变化，或接着输入文字后高度才发生变化
+                const observer = new MutationObserver(async function (mutationsList, observer) {
                     if (!hasGetInitHeight) {
                         initHeight = editor.scrollHeight;
-                        // initHeight = editor.style.lineHeight;
                         hasGetInitHeight = true;
                     }
                     if (isFirstTime) {
                         lastScrollHeight = initHeight;
                         isFirstTime = false;
                     }
-                    // console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
-                    // console.log(parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight);
+                    // 检测editor高度, 检测时阻断
+                    // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
+                    // 导致初次贴入图片后editor高度不变，过一阵子才发生变化
+                    let temp = initHeight;
+                    let curr = temp;
+
+                    function delay(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    async function checkScrollHeight() {
+                        if (curr <= temp) {
+                            let innerCounter = 0;
+                            while (innerCounter < 20 && curr <= temp) {
+                                await delay(100);
+                                curr = editor.scrollHeight;
+                                innerCounter++;
+                            }
+                        }
+                    }
+
+                    // 只在editor出现文件or图片时检测, 文字输入height变化是实时的无需延迟
+                    const imgMsg = document.querySelector('.ck.ck-content msg-img, .ck.ck-content msg-file');
+                    if (curr <= initHeight && imgMsg) {
+                        await checkScrollHeight();
+                    }
+
+                    console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
                     // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
-                    const newHeight = parseFloat(getComputedStyle(chatInputArea).height) + editor.scrollHeight - lastScrollHeight;
+                    let newHeight = parseFloat(getComputedStyle(chatInputArea).height) + curr - lastScrollHeight;
                     if (newHeight <= initHeight) {
                         chatInputArea.style.height = initHeight + 'px';
                     } else if (newHeight < containerHeight / 2) {
@@ -194,7 +216,7 @@ function autoEditorHeight() {
                     }
                     lastScrollHeight = editor.scrollHeight;
                 });
-                const config = {attributes: true, childList: true, subtree: true};
+                const config = {childList: true, subtree: true};
                 observer.observe(editor, config);
 
                 clearInterval(checkChatInputAreaInterval);
@@ -209,39 +231,38 @@ function autoEditorHeight() {
     }, 100);
 }
 
-// 消息列表监听(滚动页面or新消息)
-function watchMsgList() {
-    let counter = 0;
-    const debouncedAdjustMsgListStyle = debounce(adjustMsgListStyle, 200);
-    const checkMsgListInterval = setInterval(() => {
-        const msgListRoot = document.getElementById('ml-root');
-        if (msgListRoot) {
-            const msgList = msgListRoot.querySelector('div.ml-list.list');
-            if (msgList) {
-                // 监听消息列表变化
-                const observer = new MutationObserver((list) => {
-                    debouncedAdjustMsgListStyle(msgList);
-                });
-                const config = {childList: true};
-                observer.observe(msgList, config);
-                clearInterval(checkMsgListInterval);
-            }
-        } else {
-            counter++;
-            if (counter >= 50) {
-                clearInterval(checkMsgListInterval);
-                log("checkMsgListInterval Timeout")
-            }
-        }
-    }, 100);
-}
+// // 消息列表监听(滚动页面or新消息)
+// function watchMsgList() {
+//     let counter = 0;
+//     // const debouncedAdjustMsgListStyle = debounce(adjustMsgListStyle, 200);
+//     const checkMsgListInterval = setInterval(() => {
+//         const msgListRoot = document.getElementById('ml-root');
+//         if (msgListRoot) {
+//             const nodeList = document.querySelector('div.ml-list.list');
+//             if (nodeList) {
+//                 // 监听消息列表变化
+//                 const observer = new MutationObserver((list) => {
+//                 });
+//                 const config = {attributes: true, childList: true, subtree: true};
+//                 observer.observe(nodeList, config);
+//                 clearInterval(checkMsgListInterval);
+//             }
+//         } else {
+//             counter++;
+//             if (counter >= 50) {
+//                 clearInterval(checkMsgListInterval);
+//                 log("checkMsgListInterval Timeout")
+//             }
+//         }
+//     }, 100);
+// }
 
-// 消息列表CSS样式telegram化
-function adjustMsgListStyle() {
-    console.log(new Date(), new Date().getMilliseconds())
-}
+// function adjustMsgListStyle() {
+//     console.log(new Date(), new Date().getMilliseconds())
+// }
 
 async function onLoad() {
+    log(window.location.pathname, window.location.href)
     try {
         await addStyle();
         log("addStyle success")
