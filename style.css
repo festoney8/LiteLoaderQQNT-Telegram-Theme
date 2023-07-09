@@ -14,7 +14,7 @@
   .sidebar,
   .sidebar-nav {
     background-color: #293b4c !important;
-    width: 65px !important;
+    width: 60px !important;
   }
   .sidebar .user-avatar-container,
   .sidebar-nav .user-avatar-container {
@@ -27,14 +27,14 @@
   }
   .sidebar .nav-item,
   .sidebar-nav .nav-item {
-    height: 65px !important;
+    height: 60px !important;
     width: 100% !important;
   }
   .sidebar .tab-item-mask,
   .sidebar-nav .tab-item-mask {
     border-radius: unset !important;
-    height: 65px !important;
-    width: 65px !important;
+    height: 60px !important;
+    width: 60px !important;
   }
   .sidebar .tab-item-mask:has(~ .svg-highlight),
   .sidebar-nav .tab-item-mask:has(~ .svg-highlight) {
@@ -160,8 +160,7 @@
     width: fit-content;
     margin-left: auto !important;
     margin-right: auto !important;
-    margin-top: 5px !important;
-    margin-top: 5px !important;
+    margin-top: 15px !important;
     color: white !important;
     background: rgba(0, 0, 0, 0.17) !important;
     padding: 6px 12px 6px 12px;
@@ -172,8 +171,7 @@
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 0 !important;
-    margin-top: 1px;
-    margin-bottom: 1px;
+    margin: 0 0 6px 0;
     /* Grid display 重排
         默认Right Grid:
         "checkbox nickname  nickname  nickname . avatar"
@@ -187,10 +185,163 @@
         "checkbox avatar . tips     tips    tips"
      */
   }
+  .aio main.chat-msg-area .message .message-container,
+  .aio.aio-independent main.chat-msg-area .message .message-container {
+    padding: 0 20px 6px 20px;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) {
+    grid-template-areas: "checkbox avatar nickname status" "checkbox avatar content  status" "checkbox avatar tips     tips" !important;
+    grid-template-columns: auto auto minmax(0, 70%) 1fr !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span {
+    align-self: end;
+    margin-right: 10px;
+    position: sticky;
+    bottom: 0;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span:has(+ :not(.user-name)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span:has(+ :not(.user-name)) {
+    display: none !important;
+  }
+  #app .aio main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span .message-container__avatar,
+  #app .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span .message-container__avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name {
+    color: white !important;
+    font-weight: bold;
+    font-size: 14px !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: unset !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container {
+    color: black !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
+    margin: unset !important;
+    width: inherit !important;
+    height: inherit !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
+    max-height: 50vh;
+    max-width: 50vw;
+    object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
+    --overlay_hover_brand: rgb(94, 184, 84);
+    margin-top: 4px;
+    font-weight: bold;
+    color: rgb(94, 184, 84) !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-title,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-title {
+    color: rgb(94, 184, 84) !important;
+    opacity: unset !important;
+    zoom: 1.1;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content {
+    color: gray !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content {
+    font-size: 16px !important;
+    flex-direction: column !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal {
+    color: black !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-element--at,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-element--at {
+    color: rgb(94, 184, 84) !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-link,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-link {
+    color: rgb(64, 167, 227) !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element {
+    zoom: 1.2;
+    --bubble_host: white;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
+    background-color: #5fbe67 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
+    background-color: #5fbe67 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
+    font-size: 12px !important;
+    font-weight: bold;
+    color: #5fbe67 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
+    overflow: hidden !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:not(:has(.market-face-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:not(:has(.market-face-element)) {
+    background-color: white !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.face-element), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:is(.ptt-message),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.face-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:is(.ptt-message) {
+    padding: 8px 16px 8px 16px !important;
+    border-radius: 8px 20px 20px 8px;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) {
+    padding: 0 !important;
+    border-radius: 8px 20px 20px 8px;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element, .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .text-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .text-element {
+    display: inline-block;
+    margin: 6px 16px 6px 16px !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element, .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
+    border-radius: 0;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.face-element), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:is(.ptt-message), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.pic-element:nth-child(n+2)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):has(.pic-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):not(:has(.pic-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.face-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:is(.ptt-message),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.pic-element:nth-child(n+2)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) :not(.user-name) + .message-content__wrapper:has(.text-element):has(.pic-element) {
+    border-radius: 20px 20px 20px 8px;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
+    padding: unset !important;
+    zoom: 1.5;
+    margin-left: 5px;
+  }
   .aio main.chat-msg-area .message .message-container.message-container--self,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self {
     grid-template-areas: "checkbox status content nickname . avatar" "checkbox tips   tips    tips     . avatar" !important;
-    grid-template-columns: auto minmax(20%, 1fr) auto 0 0 !important;
+    grid-template-columns: auto minmax(30%, 1fr) auto 0 0 !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .user-name,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .user-name {
@@ -200,96 +351,137 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self span.avatar-span {
     display: none;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container {
     position: relative;
     color: black !important;
-    background-color: #effdde !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)),
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)) {
-    padding: 10px 15px 10px 15px !important;
-    border-radius: 20px 20px 8px 20px;
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
+    margin: unset !important;
+    width: inherit !important;
+    height: inherit !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self {
-    font-weight: bold;
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
+    max-height: 50vh;
+    max-width: 50vw;
+    object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
     --overlay_hover_brand: rgb(94, 184, 84);
-    color: rgb(94, 184, 84) !important;
     margin-top: 4px;
+    font-weight: bold;
+    color: rgb(94, 184, 84) !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self .reply-title,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self .reply-title {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-title,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-title {
     color: rgb(94, 184, 84) !important;
     opacity: unset !important;
     zoom: 1.1;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self .reply-content,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .reply-element.reply-element--self .reply-content {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content {
     color: gray !important;
     font-size: 14px !important;
     font-weight: 500 !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content {
     font-size: 16px !important;
+    flex-direction: column !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-normal,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-normal {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal {
     color: black !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-element--at,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-element--at {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-element--at,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-element--at {
     color: rgb(94, 184, 84) !important;
-    font-weight: 600;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-link,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .message-content .text-link {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-link,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-link {
     color: rgb(64, 167, 227) !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .ptt-element,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .ptt-element {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element {
     zoom: 1.2;
-    --on_brand_primary: rgb(95, 190, 103);
     --bubble_host: white;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container .ptt-element .ptt-element__duration span,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container .ptt-element .ptt-element__duration span {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
+    background-color: #5fbe67 !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
+    background-color: #5fbe67 !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
     font-size: 12px !important;
     font-weight: bold;
+    color: #5fbe67 !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
+    overflow: hidden !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.market-face-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.market-face-element)) {
+    background-color: #effdde !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.face-element), .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:is(.ptt-message),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.face-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:is(.ptt-message) {
+    padding: 8px 16px 8px 16px !important;
+    border-radius: 20px 20px 8px 20px;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)), .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) {
+    padding: 0 !important;
+    border-radius: 20px 20px 8px 20px;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element, .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .text-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .text-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .text-element {
+    display: inline-block;
+    margin: 6px 16px 6px 16px !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element, .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
+    border-radius: 0;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.image.pic-element, .image.market-face-element, [id^=canvas-container], .normal-file.file-element)):hover::after {
     content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= '%235fbe67' /></svg>");
     position: absolute;
     bottom: 0;
     right: 0;
     width: 20px;
     height: 15px;
-    transform: rotate(3deg);
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-right: 4px;
+    margin-bottom: 4px;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container:has(.image.pic-element):hover::after,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container:has(.image.pic-element):hover::after {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.image.pic-element):hover::after,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.image.pic-element):hover::after {
     content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox=' 5.14621 25.2049 102.9 58.53 '> <path d= 'M 51.95 46.15 C 41.8 57.75 32.3 68.65 30.85 70.4 l -2.65 3.1 l -9.1 -8.85 C 9.6 55.35 10 54 5.15 60.4 c -0.3 1.65 17.3 20.65 21.05 22.7 c 2.9 1.55 4.25 0.25 27 -25.75 c 18.8 -23.35 25.8 -27.35 21.8 -30.35 c -3.95 -4.45 -5 -0.9 -23 19 z m 49.55 -20.4 c -0.55 0.4 -10.2 11.2 -21.35 24 C 58.1 74.9 59.2 73.9 56.75 71 C 53.9 67.7 49 69 49 73 c 0 2.35 9.55 11.4 11.35 10.7 c 2 -0.75 47.65 -52.8 47.65 -54.3 c 0 -2.95 -4.25 -5.3 -6.5 -3.65 z' fill= 'white' /></svg>");
     position: absolute;
     bottom: 0;
     right: 0;
     width: 20px;
     height: 15px;
-    transform: rotate(3deg);
-    margin-right: 5px;
-    margin-bottom: 5px;
-  }
-  .aio main.chat-msg-area .message .message-container.message-container--self .msg-content-container::before,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .msg-content-container::before {
-    width: 100% !important;
+    margin-right: 4px;
+    margin-bottom: 4px;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .content-status {
     padding: unset !important;
     zoom: 1.5;
+    margin-right: 5px;
   }
   .aio .chat-input-area .shortcuts,
   .aio.aio-independent .chat-input-area .shortcuts {
