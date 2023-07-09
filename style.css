@@ -1,21 +1,24 @@
 @charset "UTF-8";
 @media (prefers-color-scheme: light) {
   :root {
+    --vip-name-color: black;
     --sidebar-bg-color: #293b4c;
     --sidebar-width: 65px;
     --sidebar-zoom: 1.2;
     --sidebar-icon-color: #8c9dae;
     --recent-contact-bg-color: white;
     --recent-contact-selected-bg-color: #41a1d9;
-    --recent-contact-unread-bubble-important-color: #41a1d9;
-    --vip-name-color: black;
-    --telegram-chat-color-1: #effdde;
-    --telegram-chat-color-2: #5fbe67;
-    --telegram-chat-link-color: #168ad0;
-    --telegram-chat-bg-color-others: white;
-    --telegram-chat-bg-color-self: #effdde;
-    --telegram-chat-wallpaper: unset;
-    --telegram-chat-bg-color: #bcbcbc;
+    --recent-contact-unread-bubble-important-color: red;
+    --recent-contact-unread-bubble-normal-color: #5eb7f7;
+    --chatarea-color-1: #effdde;
+    --chatarea-color-2: #5fbe67;
+    --chatarea-wallpaper: unset;
+    --chatarea-bg-color: #bcbcbc;
+    --chatarea-link-color: #168ad0;
+    --chatarea-bubble-color-others: white;
+    --chatarea-bubble-color-self: #effdde;
+    --chatarea-text-color-self: black;
+    --chatarea-text-color-others: black;
     --telegram-theme-color: #5eb7f7;
   }
   .tab-container {
@@ -119,7 +122,7 @@
     font-weight: 600 !important;
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .main-info.text-ellipsis.vip-name {
-    --svip_red: black;
+    --svip_red: var(--vip-name-color);
   }
   #app .recent-contact .recent-contact-list .list-item__content .list-item__info .list-item__title .secondary-info {
     font-size: 0.95em !important;
@@ -133,12 +136,12 @@
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) {
     position: absolute;
-    right: 4px;
+    right: 6px;
     bottom: 10px;
     z-index: 100;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) sub {
-    border: 1px white solid;
+    border: 1.5px white solid;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-icon {
     --icon_secondary_02: #bbbbbb;
@@ -148,7 +151,7 @@
     padding: 3px 5px !important;
   }
   .recent-contact .recent-contact-list .list-item__content .list-item__info .summary-bubble .q-badge-sub.q-badge__grey {
-    background-color: #bbbbbb !important;
+    background-color: var(--recent-contact-unread-bubble-normal-color) !important;
   }
   .recent-contact .avatar.avatar-sys::before {
     background-color: var(--telegram-theme-color) !important;
@@ -175,8 +178,8 @@
   }
   .aio main.chat-msg-area,
   .aio.aio-independent main.chat-msg-area {
-    background-image: var(--telegram-chat-wallpaper) !important;
-    background-color: var(--telegram-chat-bg-color) !important;
+    background-image: var(--chatarea-wallpaper) !important;
+    background-color: var(--chatarea-bg-color) !important;
     background-position-x: center;
     background-position-y: center;
     background-size: cover;
@@ -243,7 +246,7 @@
     color: white !important;
     font-weight: bold;
     font-size: 14px !important;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name .text-ellipsis {
@@ -262,20 +265,20 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
-    max-height: 50vh;
+    max-height: 40vh;
     max-width: 40vw;
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
-    --overlay_hover_brand: var(--telegram-chat-color-2);
+    --overlay_hover_brand: var(--chatarea-color-2);
     margin-top: 4px;
     font-weight: bold;
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-title,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-title {
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
     opacity: unset !important;
     zoom: 1.1;
   }
@@ -292,15 +295,15 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal {
-    color: black !important;
+    color: var(--chatarea-text-color-others) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-element--at,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-element--at {
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-link,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-link {
-    color: var(--telegram-chat-link-color) !important;
+    color: var(--chatarea-link-color) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element {
@@ -309,17 +312,17 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
-    background-color: var(--telegram-chat-color-2) !important;
+    background-color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
-    background-color: var(--telegram-chat-color-2) !important;
+    background-color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
     font-size: 12px !important;
     font-weight: bold;
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
@@ -327,7 +330,7 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:not(:has(.market-face-element)),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:not(:has(.market-face-element)) {
-    background-color: var(--telegram-chat-bg-color-others) !important;
+    background-color: var(--chatarea-bubble-color-others) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.face-element), .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:is(.ptt-message),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)),
@@ -385,20 +388,20 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
-    max-height: 50vh;
+    max-height: 40vh;
     max-width: 40vw;
     object-fit: contain;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
-    --overlay_hover_brand: var(--telegram-chat-color-2);
+    --overlay_hover_brand: var(--chatarea-color-2);
     margin-top: 4px;
     font-weight: bold;
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-title,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-title {
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
     opacity: unset !important;
     zoom: 1.1;
   }
@@ -415,15 +418,15 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal {
-    color: black !important;
+    color: var(--chatarea-text-color-self) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-element--at,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-element--at {
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-link,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-link {
-    color: var(--telegram-chat-link-color) !important;
+    color: var(--chatarea-link-color) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element {
@@ -432,17 +435,17 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__button {
-    background-color: var(--telegram-chat-color-2) !important;
+    background-color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__progress .ptt-element__progress-item {
-    background-color: var(--telegram-chat-color-2) !important;
+    background-color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .ptt-element .ptt-element__duration span {
     font-size: 12px !important;
     font-weight: bold;
-    color: var(--telegram-chat-color-2) !important;
+    color: var(--chatarea-color-2) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
@@ -450,7 +453,7 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.market-face-element)),
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:not(:has(.market-face-element)) {
-    background-color: var(--telegram-chat-bg-color-self) !important;
+    background-color: var(--chatarea-bubble-color-self) !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)), .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.face-element), .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:is(.ptt-message),
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):not(:has(.pic-element)),

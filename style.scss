@@ -2,6 +2,8 @@
 
 
     :root {
+        --vip-name-color: black;
+
         --sidebar-bg-color: #293b4c;
         --sidebar-width: 65px;
         --sidebar-zoom: 1.2;
@@ -9,16 +11,18 @@
 
         --recent-contact-bg-color: white;
         --recent-contact-selected-bg-color: #41a1d9;
-        --recent-contact-unread-bubble-important-color: #41a1d9;
-        --vip-name-color: black;
+        --recent-contact-unread-bubble-important-color: red;
+        --recent-contact-unread-bubble-normal-color: #5eb7f7;
 
-        --telegram-chat-color-1: #effdde;
-        --telegram-chat-color-2: #5fbe67;
-        --telegram-chat-link-color: #168ad0;
-        --telegram-chat-bg-color-others: white;
-        --telegram-chat-bg-color-self: #effdde;
-        --telegram-chat-wallpaper: unset;
-        --telegram-chat-bg-color: #bcbcbc;
+        --chatarea-color-1: #effdde;
+        --chatarea-color-2: #5fbe67;
+        --chatarea-wallpaper: unset;
+        --chatarea-bg-color: #bcbcbc;
+        --chatarea-link-color: #168ad0;
+        --chatarea-bubble-color-others: white;
+        --chatarea-bubble-color-self: #effdde;
+        --chatarea-text-color-self: black;
+        --chatarea-text-color-others: black;
 
         --telegram-theme-color: #5eb7f7;
 
@@ -161,7 +165,7 @@
 
                         // 去除会员红名
                         & .main-info.text-ellipsis.vip-name {
-                            --svip_red: black;
+                            --svip_red: var(--vip-name-color);
                         }
 
                         // 时间
@@ -181,12 +185,12 @@
                             // 仿telegram, 气泡随宽度调节变化, 宽度最小时覆盖头像
                             // relative是list-item__container, 不是list-item__info
                             position: absolute;
-                            right: 4px;
+                            right: 6px;
                             bottom: 10px;
                             z-index: 100;
 
                             & sub {
-                                border: 1px white solid;
+                                border: 1.5px white solid;
                             }
                         }
 
@@ -202,7 +206,7 @@
                         }
 
                         & .q-badge-sub.q-badge__grey {
-                            background-color: #bbbbbb !important;
+                            background-color: var(--recent-contact-unread-bubble-normal-color) !important;
                         }
                     }
                 }
@@ -247,8 +251,8 @@
         & main.chat-msg-area {
             // 设定telegram背景图 or telegram背景色
             background: {
-                image: var(--telegram-chat-wallpaper) !important;
-                color: var(--telegram-chat-bg-color) !important;
+                image: var(--chatarea-wallpaper) !important;
+                color: var(--chatarea-bg-color) !important;
                 position-x: center;
                 position-y: center;
                 size: cover;
@@ -292,7 +296,7 @@
                 & .message-container {
                     padding: 0 20px 6px 20px;
 
-                    @mixin samePartCSS() {
+                    @mixin samePartCSS($textColor) {
                         // 图片
                         & .pic-element {
                             margin: unset !important;
@@ -300,7 +304,7 @@
                             height: inherit !important;
 
                             & img {
-                                max-height: 50vh;
+                                max-height: 40vh;
                                 max-width: 40vw;
                                 object-fit: contain;
                             }
@@ -308,13 +312,13 @@
 
                         // 回复引用
                         & .reply-element {
-                            --overlay_hover_brand: var(--telegram-chat-color-2);
+                            --overlay_hover_brand: var(--chatarea-color-2);
                             margin-top: 4px;
                             font-weight: bold;
-                            color: var(--telegram-chat-color-2) !important;
+                            color: var(--chatarea-color-2) !important;
 
                             & .reply-title {
-                                color: var(--telegram-chat-color-2) !important;
+                                color: var(--chatarea-color-2) !important;
                                 opacity: unset !important;
                                 zoom: 1.1;
                             }
@@ -337,18 +341,18 @@
 
                             // 普通文字
                             & .text-normal {
-                                color: black !important;
+                                color: $textColor !important;
                             }
 
                             // at @用户名
                             & .text-element--at {
-                                color: var(--telegram-chat-color-2) !important;
+                                color: var(--chatarea-color-2) !important;
                                 //font-weight: 600;
                             }
 
                             // url
                             & .text-link {
-                                color: var(--telegram-chat-link-color) !important;
+                                color: var(--chatarea-link-color) !important;
                             }
                         }
 
@@ -358,19 +362,19 @@
                             --bubble_host: white;
 
                             & .ptt-element__button {
-                                background-color: var(--telegram-chat-color-2) !important;
+                                background-color: var(--chatarea-color-2) !important;
                             }
 
                             & .ptt-element__progress {
                                 & .ptt-element__progress-item {
-                                    background-color: var(--telegram-chat-color-2) !important;
+                                    background-color: var(--chatarea-color-2) !important;
                                 }
                             }
 
                             & .ptt-element__duration span {
                                 font-size: 12px !important;
                                 font-weight: bold;
-                                color: var(--telegram-chat-color-2) !important;
+                                color: var(--chatarea-color-2) !important;
                             }
                         }
 
@@ -418,7 +422,7 @@
                             font-weight: bold;
                             font-size: 14px !important;
                             //padding-left: 18px;
-                            margin-bottom: 4px;
+                            margin-bottom: 2px;
 
                             & .text-ellipsis {
                                 text-shadow: 0 0 5px rgba(0, 0, 0, .5);
@@ -432,10 +436,10 @@
                             & .msg-content-container {
                                 color: black !important;
 
-                                @include samePartCSS();
+                                @include samePartCSS(var(--chatarea-text-color-others));
 
                                 &:not(:has(.market-face-element)) {
-                                    background-color: var(--telegram-chat-bg-color-others) !important;
+                                    background-color: var(--chatarea-bubble-color-others) !important;
                                 }
 
                                 // 包含文字内容或语音, 不含图片/表情的气泡
@@ -508,10 +512,10 @@
                                 position: relative;
                                 color: black !important;
 
-                                @include samePartCSS();
+                                @include samePartCSS(var(--chatarea-text-color-self));
 
                                 &:not(:has(.market-face-element)) {
-                                    background-color: var(--telegram-chat-bg-color-self) !important;
+                                    background-color: var(--chatarea-bubble-color-self) !important;
                                 }
 
                                 // 包含文字内容或语音, 不含图片/大表情的气泡
