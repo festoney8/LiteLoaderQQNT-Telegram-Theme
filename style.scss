@@ -105,7 +105,7 @@
 
     // 独立聊天窗口 全局背景色 (影响输入区域颜色)
     .container:has(.aio-independent) {
-        --bg_grey_standard: white;
+        --bg_grey_standard: var(--chatarea-bg-color);
     }
 
     // 左边栏
@@ -305,12 +305,15 @@
 
         // 我的手机和群助手
         & .avatar.avatar-sys {
+            --brand_standard: transparent;
+
             &::before {
                 background-color: var(--recent-contact-sys-avatar-color) !important;
             }
 
             & .q-icon {
                 z-index: 1;
+                zoom: 1.3;
             }
         }
     }
@@ -335,6 +338,11 @@
             & .func-bar .q-icon {
                 --icon_primary: #999999;
             }
+        }
+
+        // 左边deliver
+        & .group-panel {
+            border-left: unset !important;
         }
 
         // 对话框
@@ -428,10 +436,11 @@
                             font-size: 14px !important;
                             //padding-left: 18px;
                             margin-bottom: 2px;
+                            overflow: visible !important;
 
                             & .text-ellipsis {
-                                text-shadow: 0 0 5px var(--chatarea-username-shadow-color);
-                                overflow: unset !important;
+                                text-shadow: 0 0 var(--chatarea-username-text-shadow-blur) var(--chatarea-username-text-shadow-color);
+                                overflow: visible !important;
                             }
                         }
 
@@ -583,7 +592,6 @@
                             margin-right: 5px;
                         }
                     }
-
                 }
             }
 
@@ -594,9 +602,9 @@
             }
         }
 
-        // 输入
+        // 输入栏
         & .chat-input-area {
-            background-color: var(--chatarea-editor-bg-color);
+            background-color: var(--chatarea-editor-bg-color) !important;
 
             // 工具栏
             & .shortcuts {
@@ -613,6 +621,11 @@
                         transition: opacity 0.1s;
                     }
                 }
+            }
+
+            // 表情列表
+            & .sticker-panel {
+                background-color: var(--chatarea-sticker-panel-bg-color) !important;
             }
 
             // 编辑框
@@ -713,6 +726,11 @@
                 }
             }
         }
+
+        // 输入栏边框 不给独立模式添加
+        &:not(.aio-independent) .chat-input-area {
+            border-left: 1px rgba(0, 0, 0, 0.1) solid;
+        }
     }
 }
 
@@ -731,7 +749,7 @@
         --recent-contact-header-bg-color: white;
         --recent-contact-header-search-bg-color: #f1f1f1;
         --recent-contact-hover-bg-color: #f1f1f1;
-        --recent-contact-sys-avatar-color: #30a3e6;
+        --recent-contact-sys-avatar-color: #5fbe67;
         --recent-contact-selected-bg-color: #41a1d9;
         --recent-contact-unread-bubble-important-color: red;
         --recent-contact-unread-bubble-normal-color: #bbbbbb;
@@ -740,9 +758,10 @@
         --chatarea-reply-title-text-color: #5fbe67;
         --chatarea-reply-content-text-color: grey;
         --chatarea-wallpaper: unset;
-        --chatarea-bg-color: white;
+        --chatarea-bg-color: #7ec4ea;
         --chatarea-username-color: white;
-        --chatarea-username-shadow-color: #0000000F;
+        --chatarea-username-text-shadow-color: #0000006F;
+        --chatarea-username-text-shadow-blur: 3px;
         --chatarea-header-color: white;
         --chatarea-bubble-color-others: white;
         --chatarea-bubble-color-self: #effdde;
@@ -758,6 +777,7 @@
         --chatarea-editor-bg-color: white;
         --chatarea-editor-text-color: black;
         --chatarea-editor-placeholder-text-color: #999999ff;
+        --chatarea-sticker-panel-bg-color: white;
     }
     @include globalCSS();
 }
@@ -781,7 +801,7 @@
         --recent-contact-hover-bg-color: #202b36;
         --recent-contact-sys-avatar-color: #3e546a;
         --recent-contact-unread-bubble-important-color: red;
-        --recent-contact-unread-bubble-normal-color: #5eb7f7;
+        --recent-contact-unread-bubble-normal-color: #3e546a;
         --recent-contact-unread-bubble-border-color: transparent;
 
         --chatarea-reply-title-text-color: #89ca78;
@@ -789,7 +809,8 @@
         --chatarea-wallpaper: unset;
         --chatarea-bg-color: #0e1621;
         --chatarea-username-color: #faa357;
-        --chatarea-username-shadow-color: transparent;
+        --chatarea-username-text-shadow-color: transparent;
+        --chatarea-username-text-shadow-blur: 0;
         --chatarea-header-color: #17212b;
         --chatarea-bubble-color-others: #182533;
         --chatarea-bubble-color-self: #2b5278;
@@ -805,6 +826,7 @@
         --chatarea-editor-bg-color: #17212b;
         --chatarea-editor-text-color: white;
         --chatarea-editor-placeholder-text-color: #4f5b5e;
+        --chatarea-sticker-panel-bg-color: #17212b;
     }
     @include globalCSS();
 }
