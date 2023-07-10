@@ -33,7 +33,7 @@ async function updateWallpaper() {
     } else {
         await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
             const root = document.documentElement;
-            root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
+            root.style.setProperty("--chatarea-wallpaper", `url("file://${imageAbsPath}")`);
         }).catch((err) => {
             log(err)
             alert(err);
