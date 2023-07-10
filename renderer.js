@@ -26,13 +26,19 @@ async function addStyle() {
 
 // 更新聊天窗口背景图片
 async function updateWallpaper() {
-    await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
+    // 判断主题
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         const root = document.documentElement;
-        root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
-    }).catch((err) => {
-        log(err)
-        alert(err);
-    });
+        root.style.setProperty("--chatarea-wallpaper", `unset`);
+    } else {
+        await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
+            const root = document.documentElement;
+            root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
+        }).catch((err) => {
+            log(err)
+            alert(err);
+        });
+    }
 }
 
 // 信息列表宽度调节 重写ResizeHandler事件调宽宽度
