@@ -28,106 +28,42 @@ async function addStyle() {
 async function updateWallpaper() {
     await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
         const root = document.documentElement;
-        // root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
+        root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
     }).catch((err) => {
         log(err)
         alert(err);
     });
 }
 
-// 信息列表宽度调节 重写事件调宽宽度 不在独立聊天窗运行
+// 信息列表宽度调节 重写事件调宽宽度
 function adjustContactWidth() {
-    let counter = 0;
-    const checkAioInterval = setInterval(() => {
-        // 检测是否为独立聊天窗
-        const aioIndependent = document.querySelector(".aio.aio-independent");
-        if (aioIndependent) {
-            let innerCounter = 0;
-            const checkContactHandlerInterval = setInterval(() => {
-                const recentContact = document.querySelector('.recent-contact');
-                const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
-                if (oldResizeHandler && recentContact) {
-                    // 移除默认事件
-                    const resizeHandler = oldResizeHandler.cloneNode(true);
-                    oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
-
-                    // 调大默认长度, 重写事件
-                    recentContact.style.width = "300px";
-                    recentContact.style.flexBasis = "80px";
-
-                    let isResizing = false;
-                    let startX = 0;
-                    let startWidth = 0;
-
-                    resizeHandler.addEventListener('mousedown', (event) => {
-                        isResizing = true;
-                        startX = event.clientX;
-                        startWidth = parseFloat(getComputedStyle(recentContact).width);
-                    });
-
-                    document.addEventListener('mousemove', (event) => {
-                        if (!isResizing) return;
-
-                        const width = startWidth + event.clientX - startX;
-                        recentContact.style.width = width + 'px';
-                    });
-
-                    document.addEventListener('mouseup', (event) => {
-                        if (!isResizing) return;
-
-                        isResizing = false;
-                    });
-
-                    clearInterval(checkContactHandlerInterval);
-                } else {
-                    innerCounter++;
-                    if (innerCounter >= 50) {
-                        clearInterval(checkContactHandlerInterval);
-                        log("checkContactHandlerInterval Timeout")
-                    }
-                }
-            }, 100);
-            clearInterval(checkAioInterval);
-        } else {
-            counter++;
-            if (counter >= 50) {
-                clearInterval(checkAioInterval);
-                log("checkAioInterval Timeout")
-            }
-        }
-    }, 100);
-}
-
-// 输入框高度调节 重写事件
-function adjustEditorHeight() {
-    let counter = 0;
-    const checkInputHandlerInterval = setInterval(() => {
-        const chatInputArea = document.querySelector('.chat-input-area');
-        const oldResizeHandler = document.querySelector('.chat-input-area .resize-handler');
-        if (oldResizeHandler && chatInputArea) {
+    const recentContact = document.querySelector(".recent-contact");
+    if (recentContact) {
+        const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
+        if (oldResizeHandler && recentContact) {
             // 移除默认事件
             const resizeHandler = oldResizeHandler.cloneNode(true);
             oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
 
-            // 高度调低, 重写事件
-            chatInputArea.style.height = "85px";
-            chatInputArea.style.minHeight = "85px";
+            // 调大默认长度, 重写事件
+            recentContact.style.width = "300px";
+            recentContact.style.flexBasis = "80px";
 
             let isResizing = false;
-            let startY = 0;
-            let startHeight = 0;
+            let startX = 0;
+            let startWidth = 0;
 
             resizeHandler.addEventListener('mousedown', (event) => {
                 isResizing = true;
-                startY = event.clientY;
-                startHeight = parseFloat(getComputedStyle(chatInputArea).height);
+                startX = event.clientX;
+                startWidth = parseFloat(getComputedStyle(recentContact).width);
             });
 
             document.addEventListener('mousemove', (event) => {
                 if (!isResizing) return;
 
-                const height = startHeight - event.clientY + startY;
-                chatInputArea.style.height = height + 'px';
+                const width = startWidth + event.clientX - startX;
+                recentContact.style.width = width + 'px';
             });
 
             document.addEventListener('mouseup', (event) => {
@@ -135,16 +71,46 @@ function adjustEditorHeight() {
 
                 isResizing = false;
             });
-
-            clearInterval(checkInputHandlerInterval);
-        } else {
-            counter++;
-            if (counter >= 50) {
-                clearInterval(checkInputHandlerInterval);
-                log("checkInputHandlerInterval Timeout")
-            }
         }
-    }, 100);
+    }
+}
+
+// 输入框高度调节 重写事件
+function adjustEditorHeight() {
+    const chatInputArea = document.querySelector('.chat-input-area');
+    const oldResizeHandler = document.querySelector('.chat-input-area .resize-handler');
+    if (oldResizeHandler && chatInputArea) {
+        // 移除默认事件
+        const resizeHandler = oldResizeHandler.cloneNode(true);
+        oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
+
+        // 高度调低, 重写事件
+        chatInputArea.style.height = "85px";
+        chatInputArea.style.minHeight = "85px";
+
+        let isResizing = false;
+        let startY = 0;
+        let startHeight = 0;
+
+        resizeHandler.addEventListener('mousedown', (event) => {
+            isResizing = true;
+            startY = event.clientY;
+            startHeight = parseFloat(getComputedStyle(chatInputArea).height);
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!isResizing) return;
+
+            const height = startHeight - event.clientY + startY;
+            chatInputArea.style.height = height + 'px';
+        });
+
+        document.addEventListener('mouseup', (event) => {
+            if (!isResizing) return;
+
+            isResizing = false;
+        });
+    }
 }
 
 // 输入区域高度自适应
@@ -225,19 +191,33 @@ function autoEditorHeight() {
     }, 100);
 }
 
+function observeElement(selector, callback, callbackEnable = true, interval = 100, timeout = 5000) {
+    let elapsedTime = 0;
+    const timer = setInterval(function () {
+        const element = document.querySelector(selector);
+        if (element) {
+            if (callbackEnable) {
+                callback();
+            }
+            clearInterval(timer);
+        }
+
+        elapsedTime += interval;
+        if (elapsedTime >= timeout) {
+            clearInterval(timer);
+            log('超时', selector, "未出现");
+        }
+    }, interval);
+}
+
 async function onLoad() {
     log(window.location.pathname, window.location.href)
+
     try {
         await addStyle();
         log("addStyle success")
     } catch (error) {
         log("addStyle error", error)
-    }
-    try {
-        adjustContactWidth();
-        log("adjustContactWidth success")
-    } catch (error) {
-        log("adjustContactWidth error", error)
     }
     try {
         await updateWallpaper();
@@ -246,13 +226,19 @@ async function onLoad() {
         log("updateWallpaper error", error)
     }
     try {
-        adjustEditorHeight();
+        observeElement(".recent-contact", adjustContactWidth)
+        log("adjustContactWidth success")
+    } catch (error) {
+        log("adjustContactWidth error", error)
+    }
+    try {
+        observeElement(".chat-input-area", adjustEditorHeight)
         log("adjustEditorHeight success")
     } catch (error) {
         log("adjustEditorHeight error", error)
     }
     try {
-        autoEditorHeight();
+        observeElement(".chat-input-area", autoEditorHeight)
         log("autoEditorHeight success")
     } catch (error) {
         log("autoEditorHeight error", error)
