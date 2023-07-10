@@ -554,6 +554,11 @@
     --qq-editor-placeholder: "Write a message...";
     color: var(--chatarea-editor-placeholder-text-color) !important;
   }
+  .aio .chat-input-area .msg-input .qq-editor .editor-el__pic,
+  .aio.aio-independent .chat-input-area .msg-input .qq-editor .editor-el__pic {
+    max-height: 150px;
+    max-width: 150px;
+  }
   .aio .chat-input-area .msg-input .loadmore-placeholder,
   .aio.aio-independent .chat-input-area .msg-input .loadmore-placeholder {
     height: 0 !important;
@@ -1183,6 +1188,11 @@
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content .ck-placeholder:before {
     --qq-editor-placeholder: "Write a message...";
     color: var(--chatarea-editor-placeholder-text-color) !important;
+  }
+  .aio .chat-input-area .msg-input .qq-editor .editor-el__pic,
+  .aio.aio-independent .chat-input-area .msg-input .qq-editor .editor-el__pic {
+    max-height: 150px;
+    max-width: 150px;
   }
   .aio .chat-input-area .msg-input .loadmore-placeholder,
   .aio.aio-independent .chat-input-area .msg-input .loadmore-placeholder {

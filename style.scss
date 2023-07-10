@@ -648,6 +648,10 @@
                             color: var(--chatarea-editor-placeholder-text-color) !important;
                         }
                     }
+                    & .editor-el__pic {
+                        max-height: 150px;
+                        max-width: 150px;
+                    }
                 }
 
                 // 用途未知
