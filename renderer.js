@@ -28,7 +28,7 @@ async function addStyle() {
 async function updateWallpaper() {
     await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
         const root = document.documentElement;
-        root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
+        // root.style.setProperty("--chatarea-wallpaper", `url("appimg://${encodeURI(imageAbsPath)}")`);
     }).catch((err) => {
         log(err)
         alert(err);
@@ -38,14 +38,55 @@ async function updateWallpaper() {
 // 信息列表宽度调节 重写事件调宽宽度 不在独立聊天窗运行
 function adjustContactWidth() {
     let counter = 0;
-    let isIndep = false; // 检测是否为独立聊天窗
     const checkAioInterval = setInterval(() => {
-        const aio = document.querySelector(".aio");
+        // 检测是否为独立聊天窗
         const aioIndependent = document.querySelector(".aio.aio-independent");
-        if (aio) {
-            if (aioIndependent) {
-                isIndep = true;
-            }
+        if (aioIndependent) {
+            let innerCounter = 0;
+            const checkContactHandlerInterval = setInterval(() => {
+                const recentContact = document.querySelector('.recent-contact');
+                const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
+                if (oldResizeHandler && recentContact) {
+                    // 移除默认事件
+                    const resizeHandler = oldResizeHandler.cloneNode(true);
+                    oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
+
+                    // 调大默认长度, 重写事件
+                    recentContact.style.width = "300px";
+                    recentContact.style.flexBasis = "80px";
+
+                    let isResizing = false;
+                    let startX = 0;
+                    let startWidth = 0;
+
+                    resizeHandler.addEventListener('mousedown', (event) => {
+                        isResizing = true;
+                        startX = event.clientX;
+                        startWidth = parseFloat(getComputedStyle(recentContact).width);
+                    });
+
+                    document.addEventListener('mousemove', (event) => {
+                        if (!isResizing) return;
+
+                        const width = startWidth + event.clientX - startX;
+                        recentContact.style.width = width + 'px';
+                    });
+
+                    document.addEventListener('mouseup', (event) => {
+                        if (!isResizing) return;
+
+                        isResizing = false;
+                    });
+
+                    clearInterval(checkContactHandlerInterval);
+                } else {
+                    innerCounter++;
+                    if (innerCounter >= 50) {
+                        clearInterval(checkContactHandlerInterval);
+                        log("checkContactHandlerInterval Timeout")
+                    }
+                }
+            }, 100);
             clearInterval(checkAioInterval);
         } else {
             counter++;
@@ -55,53 +96,6 @@ function adjustContactWidth() {
             }
         }
     }, 100);
-    if (!isIndep) {
-        counter = 0;
-        const checkContactHandlerInterval = setInterval(() => {
-            const recentContact = document.querySelector('.recent-contact');
-            const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
-            if (oldResizeHandler && recentContact) {
-                // 移除默认事件
-                const resizeHandler = oldResizeHandler.cloneNode(true);
-                oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
-
-                // 调大默认长度, 重写事件
-                recentContact.style.width = "300px";
-                recentContact.style.flexBasis = "80px";
-
-                let isResizing = false;
-                let startX = 0;
-                let startWidth = 0;
-
-                resizeHandler.addEventListener('mousedown', (event) => {
-                    isResizing = true;
-                    startX = event.clientX;
-                    startWidth = parseFloat(getComputedStyle(recentContact).width);
-                });
-
-                document.addEventListener('mousemove', (event) => {
-                    if (!isResizing) return;
-
-                    const width = startWidth + event.clientX - startX;
-                    recentContact.style.width = width + 'px';
-                });
-
-                document.addEventListener('mouseup', (event) => {
-                    if (!isResizing) return;
-
-                    isResizing = false;
-                });
-
-                clearInterval(checkContactHandlerInterval);
-            } else {
-                counter++;
-                if (counter >= 50) {
-                    clearInterval(checkContactHandlerInterval);
-                    log("checkContactHandlerInterval Timeout")
-                }
-            }
-        }, 100);
-    }
 }
 
 // 输入框高度调节 重写事件
@@ -231,36 +225,6 @@ function autoEditorHeight() {
     }, 100);
 }
 
-// // 消息列表监听(滚动页面or新消息)
-// function watchMsgList() {
-//     let counter = 0;
-//     // const debouncedAdjustMsgListStyle = debounce(adjustMsgListStyle, 200);
-//     const checkMsgListInterval = setInterval(() => {
-//         const msgListRoot = document.getElementById('ml-root');
-//         if (msgListRoot) {
-//             const nodeList = document.querySelector('div.ml-list.list');
-//             if (nodeList) {
-//                 // 监听消息列表变化
-//                 const observer = new MutationObserver((list) => {
-//                 });
-//                 const config = {attributes: true, childList: true, subtree: true};
-//                 observer.observe(nodeList, config);
-//                 clearInterval(checkMsgListInterval);
-//             }
-//         } else {
-//             counter++;
-//             if (counter >= 50) {
-//                 clearInterval(checkMsgListInterval);
-//                 log("checkMsgListInterval Timeout")
-//             }
-//         }
-//     }, 100);
-// }
-
-// function adjustMsgListStyle() {
-//     console.log(new Date(), new Date().getMilliseconds())
-// }
-
 async function onLoad() {
     log(window.location.pathname, window.location.href)
     try {
@@ -280,11 +244,6 @@ async function onLoad() {
         log("updateWallpaper success")
     } catch (error) {
         log("updateWallpaper error", error)
-    }
-    try {
-        watchMsgList();
-    } catch (error) {
-        log("watchMsgList error", error)
     }
     try {
         adjustEditorHeight();
