@@ -54,7 +54,7 @@
         // at @用户名
         & .text-element--at {
             color: var(--chatarea-at-element-color) !important;
-            //font-weight: 600;
+            font-weight: 600;
         }
 
         // url
@@ -744,14 +744,19 @@
             border-left: 1px rgba(0, 0, 0, 0.1) solid;
         }
     }
+
+    // 右栏
+    .group-box {
+        background-color: var(--group-box-bg-color) !important;
+    }
 }
 
 @media (prefers-color-scheme: light) {
-    @import url("setting_light.css");
+    @import "setting_light";
     @include globalCSS();
 }
 
 @media (prefers-color-scheme: dark) {
-    @import url("setting_dark.css");
+    @import "setting_dark";
     @include globalCSS();
 }
