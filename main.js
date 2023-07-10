@@ -32,7 +32,7 @@ function getWallpaperPath() {
 
 // 更新样式
 function updateStyle(webContents) {
-    const csspath = path.join(__dirname, "style.css");
+    const csspath = path.join(__dirname, "css", "style.css");
     fs.readFile(csspath, "utf-8", (err, data) => {
         if (err) {
             return;
@@ -44,7 +44,7 @@ function updateStyle(webContents) {
 
 // 监听CSS修改-开发时候用的
 function watchCSSChange(webContents) {
-    const filepath = path.join(__dirname, "style.css");
+    const filepath = path.join(__dirname, "css", "style.css");
     fs.watch(filepath, "utf-8", debounce(() => {
         updateStyle(webContents);
     }, 100));

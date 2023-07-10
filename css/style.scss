@@ -747,11 +747,11 @@
 }
 
 @media (prefers-color-scheme: light) {
-    @import "setting/light.scss";
+    @import url("setting_light.css");
     @include globalCSS();
 }
 
 @media (prefers-color-scheme: dark) {
-    @import "setting/dark.scss";
+    @import url("setting_dark.css");
     @include globalCSS();
 }
