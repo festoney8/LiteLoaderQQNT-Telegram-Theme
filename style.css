@@ -662,8 +662,8 @@
     --chatarea-bubble-color-self: #2b5278;
     --chatarea-text-color-self: white;
     --chatarea-text-color-others: white;
-    --chatarea-link-color: yellow;
-    --chatarea-at-element-color: yellow;
+    --chatarea-link-color: #89ca78;
+    --chatarea-at-element-color: #89ca78;
     --chatarea-pic-element-max-height: 50vh;
     --chatarea-pic-element-max-width: 40vw;
     --chatarea-timestamp-bg-color: #192b36;

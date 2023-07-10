@@ -1,4 +1,4 @@
-@mixin sameChatAreaCSS($textColor) {
+@mixin universalChatAreaCSS($textColor) {
     // 图片
     & .pic-element {
         margin: unset !important;
@@ -445,7 +445,7 @@
                             & .msg-content-container {
                                 color: black !important;
 
-                                @include sameChatAreaCSS(var(--chatarea-text-color-others));
+                                @include universalChatAreaCSS(var(--chatarea-text-color-others));
 
                                 &:not(:has(.market-face-element)) {
                                     background-color: var(--chatarea-bubble-color-others) !important;
@@ -521,7 +521,7 @@
                                 position: relative;
                                 color: black !important;
 
-                                @include sameChatAreaCSS(var(--chatarea-text-color-self));
+                                @include universalChatAreaCSS(var(--chatarea-text-color-self));
 
                                 &:not(:has(.market-face-element)) {
                                     background-color: var(--chatarea-bubble-color-self) !important;
@@ -811,8 +811,8 @@
         --chatarea-bubble-color-self: #2b5278;
         --chatarea-text-color-self: white;
         --chatarea-text-color-others: white;
-        --chatarea-link-color: yellow;
-        --chatarea-at-element-color: yellow;
+        --chatarea-link-color: #89ca78;
+        --chatarea-at-element-color: #89ca78;
         --chatarea-pic-element-max-height: 50vh;
         --chatarea-pic-element-max-width: 40vw;
         --chatarea-timestamp-bg-color: #192b36;
