@@ -18,10 +18,6 @@
         font-weight: bold;
         border-left: 2px solid var(--chatarea-reply-title-text-color) !important;
 
-        //&.reply-element--self,
-        //&.reply-element--others {
-        //}
-
         & .reply-title {
             color: var(--chatarea-reply-title-text-color) !important;
             opacity: unset !important;
@@ -190,14 +186,27 @@
         }
     }
 
+    //// CSS修改会被覆盖, 全部在JS修改
+    //// 双栏宽度限制, 配合JS实现可调宽度
+    //.two-col-layout__aside {
+    //    flex-grow: unset !important;
+    //    flex-shrink: unset !important;
+    //
+    //    width: 300px !important;
+    //    flex-basis: 300px !important;
+    //    max-width: 50vw !important;
+    //    min-width: 80px !important;
+    //}
+    //.two-col-layout__main {
+    //    flex-grow: 1 !important;
+    //    flex-shrink: unset !important;
+    //    min-width: 0 !important;
+    //}
+
+
     // 联系人列表
     .recent-contact {
         background-color: var(--recent-contact-header-bg-color) !important;
-
-        // 可调宽度
-        width: 300px;
-        flex-basis: 300px;
-        max-width: 40vw !important;
 
         // 取消置顶色
         --overlay_top: none;

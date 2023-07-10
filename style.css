@@ -117,9 +117,6 @@
   }
   .recent-contact {
     background-color: var(--recent-contact-header-bg-color) !important;
-    width: 300px;
-    flex-basis: 300px;
-    max-width: 40vw !important;
     --overlay_top: none;
     --overlay_hover: #f1f1f1;
     --global-brand_standard: var(--recent-contact-selected-bg-color);
@@ -750,9 +747,6 @@
   }
   .recent-contact {
     background-color: var(--recent-contact-header-bg-color) !important;
-    width: 300px;
-    flex-basis: 300px;
-    max-width: 40vw !important;
     --overlay_top: none;
     --overlay_hover: #f1f1f1;
     --global-brand_standard: var(--recent-contact-selected-bg-color);
