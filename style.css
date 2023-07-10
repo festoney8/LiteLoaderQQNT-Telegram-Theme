@@ -121,7 +121,10 @@
     --overlay_hover: #f1f1f1;
     --global-brand_standard: var(--recent-contact-selected-bg-color);
   }
-  .recent-contact .main-search .search-input, .recent-contact .contact-adder-btn {
+  .recent-contact .contact-top-bar {
+    overflow: hidden;
+  }
+  .recent-contact .contact-top-bar .main-search .search-input, .recent-contact .contact-top-bar .contact-adder-btn {
     background: var(--recent-contact-header-search-bg-color);
   }
   .recent-contact .network-tip {
@@ -756,7 +759,10 @@
     --overlay_hover: #f1f1f1;
     --global-brand_standard: var(--recent-contact-selected-bg-color);
   }
-  .recent-contact .main-search .search-input, .recent-contact .contact-adder-btn {
+  .recent-contact .contact-top-bar {
+    overflow: hidden;
+  }
+  .recent-contact .contact-top-bar .main-search .search-input, .recent-contact .contact-top-bar .contact-adder-btn {
     background: var(--recent-contact-header-search-bg-color);
   }
   .recent-contact .network-tip {

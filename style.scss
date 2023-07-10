@@ -215,10 +215,13 @@
         // 选中对话色
         --global-brand_standard: var(--recent-contact-selected-bg-color);
 
-        // 搜索框
-        & .main-search .search-input,
-        & .contact-adder-btn {
-            background: var(--recent-contact-header-search-bg-color);
+        & .contact-top-bar {
+            overflow: hidden;
+            // 搜索框
+            & .main-search .search-input,
+            & .contact-adder-btn {
+                background: var(--recent-contact-header-search-bg-color);
+            }
         }
 
         // 顶部搜索栏下网络提示
