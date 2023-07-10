@@ -603,7 +603,7 @@
 
             // 工具栏
             & .shortcuts {
-                //zoom: .9;
+                zoom: .9;
                 margin-bottom: 10px;
 
                 // 隐藏效果
@@ -628,7 +628,7 @@
                 & .qq-editor {
                     & .ck-content {
                         // 去除高度, 高度只保留一行, 避免干扰计算自动高度scrollHeight
-                        min-height: unset !important;
+                        //min-height: unset !important;
                         // 行高和字号
                         font-size: 17px !important;
                         padding: 2px 20px 2px 20px !important;

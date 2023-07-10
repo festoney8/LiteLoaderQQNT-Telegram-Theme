@@ -115,80 +115,66 @@ function adjustEditorHeight() {
 
 // 输入区域高度自适应
 function autoEditorHeight() {
-    let counter = 0;
-    const checkChatInputAreaInterval = setInterval(() => {
-        const chatInputArea = document.querySelector('.chat-input-area');
-        if (chatInputArea) {
-            const editor = document.querySelector('.ck.ck-content')
-            if (editor) {
-                // 监听DOM树
-                let initHeight = 0;
-                let hasGetInitHeight = false;
-                let lastScrollHeight = editor.scrollHeight;
-                let isFirstTime = true;
-                const container = document.querySelector('.container');
-                const containerHeight = parseFloat(getComputedStyle(container).height);
-                const observer = new MutationObserver(async function (mutationsList, observer) {
-                    if (!hasGetInitHeight) {
-                        initHeight = editor.scrollHeight;
-                        hasGetInitHeight = true;
-                    }
-                    if (isFirstTime) {
-                        lastScrollHeight = initHeight;
-                        isFirstTime = false;
-                    }
-                    // 检测editor高度, 检测时阻断
-                    // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
-                    // 导致初次贴入图片后editor高度不变，过一阵子才发生变化
-                    let temp = initHeight;
-                    let curr = temp;
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-                    function delay(ms) {
-                        return new Promise(resolve => setTimeout(resolve, ms));
-                    }
+    const chatInputArea = document.querySelector('.chat-input-area');
 
-                    async function checkScrollHeight() {
-                        if (curr <= temp) {
-                            let innerCounter = 0;
-                            while (innerCounter < 20 && curr <= temp) {
-                                await delay(100);
-                                curr = editor.scrollHeight;
-                                innerCounter++;
-                            }
-                        }
-                    }
+    if (chatInputArea) {
+        const editor = document.querySelector('.chat-input-area .ck.ck-content')
+        const content = editor.querySelector('p')
+        if (editor && content) {
+            // 监听DOM树
+            let chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height);
+            let lastContentHeight = content.scrollHeight;
+            let lastEditorFocusStatus = editor.classList.contains('ck-focused');
+            const observer = new MutationObserver(async function (mutationsList, observer) {
+                // 当文字框首次聚焦时, 更新初始高度(记录用户手动调整后高度)
+                let currEditorFocusStatus = editor.classList.contains('ck-focused');
+                if (!lastEditorFocusStatus && currEditorFocusStatus) {
+                    chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height);
+                    lastEditorFocusStatus = currEditorFocusStatus;
+                }
 
-                    // 只在editor出现文件or图片时检测, 文字输入height变化是实时的无需延迟
-                    const imgMsg = document.querySelector('.ck.ck-content msg-img, .ck.ck-content msg-file');
-                    if (curr <= initHeight && imgMsg) {
-                        await checkScrollHeight();
-                    }
+                // console.log("chatInputAreaInitHeight", chatInputAreaInitHeight)
+                // console.log(content.scrollHeight, content.clientHeight, content.getBoundingClientRect().height)
+                // 检测editor高度, 检测时阻断
+                // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
+                // 导致初次贴入图片后editor高度不变，过一阵子才发生变化
+                let temp = content.scrollHeight;
+                let curr = temp;
 
-                    console.log(getComputedStyle(chatInputArea).height, editor.scrollHeight, lastScrollHeight, initHeight);
-                    // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
-                    let newHeight = parseFloat(getComputedStyle(chatInputArea).height) + curr - lastScrollHeight;
-                    if (newHeight <= initHeight) {
-                        chatInputArea.style.height = initHeight + 'px';
-                    } else if (newHeight < containerHeight / 2) {
-                        chatInputArea.style.height = newHeight + 'px';
-                    } else {
-                        chatInputArea.style.height = (containerHeight / 2) + 'px';
+                async function checkContentHeight() {
+                    let innerCounter = 0;
+                    while (innerCounter < 10 && curr <= temp) {
+                        await delay(10);
+                        curr = content.scrollHeight;
+                        innerCounter++;
                     }
-                    lastScrollHeight = editor.scrollHeight;
-                });
-                const config = {childList: true, subtree: true};
-                observer.observe(editor, config);
+                }
 
-                clearInterval(checkChatInputAreaInterval);
-            }
-        } else {
-            counter++;
-            if (counter >= 50) {
-                clearInterval(checkChatInputAreaInterval);
-                log("checkChatInputAreaInterval Timeout")
-            }
+                // 只在editor出现文件or图片时检测, 文字输入height变化是实时的无需延迟
+                const mediaMsg = content.querySelector('msg-img, msg-file');
+                if (mediaMsg) {
+                    await checkContentHeight();
+                }
+
+                // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
+                let newHeight = parseInt(getComputedStyle(chatInputArea).height) + curr - lastContentHeight;
+                if (newHeight <= chatInputAreaInitHeight) {
+                    chatInputArea.style.height = chatInputAreaInitHeight + 'px';
+                } else if (newHeight < window.innerHeight / 2 && newHeight) {
+                    chatInputArea.style.height = newHeight + 'px';
+                } else {
+                    chatInputArea.style.height = (window.innerHeight / 2) + 'px';
+                }
+                lastContentHeight = content.scrollHeight;
+            });
+            const config = {attributes: true, childList: true, subtree: true};
+            observer.observe(editor, config);
         }
-    }, 100);
+    }
 }
 
 function observeElement(selector, callback, callbackEnable = true, interval = 100, timeout = 5000) {
