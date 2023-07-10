@@ -35,47 +35,58 @@ async function updateWallpaper() {
     });
 }
 
-// 信息列表宽度调节 重写事件调宽宽度
+// 信息列表宽度调节 重写ResizeHandler事件调宽宽度
 function adjustContactWidth() {
-    const recentContact = document.querySelector(".recent-contact");
-    if (recentContact) {
-        const oldResizeHandler = document.querySelector('.recent-contact .resize-handler');
-        if (oldResizeHandler && recentContact) {
-            // 移除默认事件
-            const resizeHandler = oldResizeHandler.cloneNode(true);
-            oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
+    const layoutAside = document.querySelector('.two-col-layout__aside');
+    const layoutMain = document.querySelector('.two-col-layout__main');
+    const oldResizeHandler = document.querySelector('.two-col-layout__aside .resize-handler');
+    if (oldResizeHandler && layoutAside) {
+        // 移除默认事件
+        const resizeHandler = oldResizeHandler.cloneNode(true);
+        oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
+        log('resizeHandler 事件移除完成')
+        // 调大默认长度, 重写事件
+        layoutAside.style.width = "300px";
+        layoutAside.style.flexBasis = "300px";
+        layoutAside.style.maxWidth = "50vw";
+        layoutAside.style.minWidth = "80px";
+        layoutAside.style.flexShrink = "unset";
+        layoutAside.style.flexGrow = "unset";
+        layoutAside.style.removeProperty('--min-width-aside')
+        layoutAside.style.removeProperty('--max-width-aside')
+        layoutAside.style.removeProperty('--drag-width-aside')
+        layoutAside.style.removeProperty('--default-width-aside')
 
-            // 调大默认长度, 重写事件
-            recentContact.style.width = "300px";
-            recentContact.style.flexBasis = "80px";
+        layoutMain.style.setProperty('--min-width-main', '0')
+        layoutMain.style.flexShrink = "unset";
 
-            let isResizing = false;
-            let startX = 0;
-            let startWidth = 0;
+        let isResizing = false;
+        let startX = 0;
+        let startWidth = 0;
 
-            resizeHandler.addEventListener('mousedown', (event) => {
-                isResizing = true;
-                startX = event.clientX;
-                startWidth = parseFloat(getComputedStyle(recentContact).width);
-            });
+        resizeHandler.addEventListener('mousedown', (event) => {
+            isResizing = true;
+            startX = event.clientX;
+            startWidth = parseFloat(getComputedStyle(layoutAside).width);
+        });
 
-            document.addEventListener('mousemove', (event) => {
-                if (!isResizing) return;
+        document.addEventListener('mousemove', (event) => {
+            if (!isResizing) return;
 
-                const width = startWidth + event.clientX - startX;
-                recentContact.style.width = width + 'px';
-            });
+            const width = startWidth + event.clientX - startX;
+            layoutAside.style.flexBasis = width + 'px';
+            layoutAside.style.width = width + 'px';
+        });
 
-            document.addEventListener('mouseup', (event) => {
-                if (!isResizing) return;
+        document.addEventListener('mouseup', (event) => {
+            if (!isResizing) return;
 
-                isResizing = false;
-            });
-        }
+            isResizing = false;
+        });
     }
 }
 
-// 输入框高度调节 重写事件
+// 输入框高度调节 重写ResizeHandler事件
 function adjustEditorHeight() {
     const chatInputArea = document.querySelector('.chat-input-area');
     const oldResizeHandler = document.querySelector('.chat-input-area .resize-handler');
@@ -126,19 +137,22 @@ function autoEditorHeight() {
         const content = editor.querySelector('p')
         if (editor && content) {
             // 监听DOM树
-            let chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height);
+            let lineHeight = parseInt(getComputedStyle(editor).lineHeight);
+            let chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height) - lineHeight;
             let lastContentHeight = content.scrollHeight;
             let lastEditorFocusStatus = editor.classList.contains('ck-focused');
             const observer = new MutationObserver(async function (mutationsList, observer) {
                 // 当文字框首次聚焦时, 更新初始高度(记录用户手动调整后高度)
+                const chatInputArea = document.querySelector('.chat-input-area');
                 let currEditorFocusStatus = editor.classList.contains('ck-focused');
                 if (!lastEditorFocusStatus && currEditorFocusStatus) {
-                    chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height);
+                    chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height) - lineHeight;
+                    console.log("focus chatInputAreaInitHeight", chatInputAreaInitHeight)
                     lastEditorFocusStatus = currEditorFocusStatus;
                 }
 
-                // console.log("chatInputAreaInitHeight", chatInputAreaInitHeight)
-                // console.log(content.scrollHeight, content.clientHeight, content.getBoundingClientRect().height)
+                console.log("chatInputAreaInitHeight", chatInputAreaInitHeight)
+                console.log(content.scrollHeight, content.clientHeight, content.getBoundingClientRect().height)
                 // 检测editor高度, 检测时阻断
                 // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
                 // 导致初次贴入图片后editor高度不变，过一阵子才发生变化
@@ -164,7 +178,7 @@ function autoEditorHeight() {
                 let newHeight = parseInt(getComputedStyle(chatInputArea).height) + curr - lastContentHeight;
                 if (newHeight <= chatInputAreaInitHeight) {
                     chatInputArea.style.height = chatInputAreaInitHeight + 'px';
-                } else if (newHeight < window.innerHeight / 2 && newHeight) {
+                } else if (newHeight < window.innerHeight / 2) {
                     chatInputArea.style.height = newHeight + 'px';
                 } else {
                     chatInputArea.style.height = (window.innerHeight / 2) + 'px';
@@ -212,7 +226,7 @@ async function onLoad() {
         log("updateWallpaper error", error)
     }
     try {
-        observeElement(".recent-contact", adjustContactWidth)
+        observeElement(".two-col-layout__aside", adjustContactWidth)
         log("adjustContactWidth success")
     } catch (error) {
         log("adjustContactWidth error", error)
