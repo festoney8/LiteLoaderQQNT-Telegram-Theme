@@ -73,19 +73,19 @@
         --bubble_host: white;
 
         & .ptt-element__button {
-            background-color: var(--chatarea-color-2) !important;
+            background-color: var(--chatarea-reply-title-text-color) !important;
         }
 
         & .ptt-element__progress {
             & .ptt-element__progress-item {
-                background-color: var(--chatarea-color-2) !important;
+                background-color: var(--chatarea-reply-title-text-color) !important;
             }
         }
 
         & .ptt-element__duration span {
             font-size: 12px !important;
             font-weight: bold;
-            color: var(--chatarea-color-2) !important;
+            color: var(--chatarea-reply-title-text-color) !important;
         }
     }
 
@@ -99,13 +99,20 @@
 
 @mixin globalCSS() {
     // 全局颜色
-    .tab-container {
-        background-color: var(--chatarea-bg-color) !important;
-    }
-
-    // 独立聊天窗口 全局背景色 (影响输入区域颜色)
-    .container:has(.aio-independent) {
-        --bg_grey_standard: var(--chatarea-bg-color);
+    .container {
+        // 设定telegram背景图 or telegram背景色
+        background: {
+            image: var(--chatarea-wallpaper) !important;
+            color: var(--chatarea-bg-color) !important;
+            position-x: center;
+            position-y: center;
+            size: cover;
+            attachment: fixed;
+        }
+        // 独立聊天窗口 全局背景色 (影响输入区域颜色)
+        &:has(.aio-independent) {
+            --bg_grey_standard: var(--chatarea-bg-color);
+        }
     }
 
     // 左边栏
@@ -347,16 +354,6 @@
 
         // 对话框
         & main.chat-msg-area {
-            // 设定telegram背景图 or telegram背景色
-            background: {
-                image: var(--chatarea-wallpaper) !important;
-                color: var(--chatarea-bg-color) !important;
-                position-x: center;
-                position-y: center;
-                size: cover;
-                attachment: fixed;
-            }
-
             // 群聊时间 撤回通知
             & .message__timestamp,
             & .gray-tip-content {
@@ -425,8 +422,6 @@
                             // 底部显示
                             align-self: end;
                             margin-right: 10px;
-                            position: sticky;
-                            bottom: 0;
                         }
 
                         // 用户名
@@ -760,8 +755,8 @@
         --chatarea-wallpaper: unset;
         --chatarea-bg-color: #7ec4ea;
         --chatarea-username-color: white;
-        --chatarea-username-text-shadow-color: #0000006F;
-        --chatarea-username-text-shadow-blur: 3px;
+        --chatarea-username-text-shadow-color: #0000008F;
+        --chatarea-username-text-shadow-blur: 5px;
         --chatarea-header-color: white;
         --chatarea-bubble-color-others: white;
         --chatarea-bubble-color-self: #effdde;
@@ -769,7 +764,7 @@
         --chatarea-text-color-others: black;
         --chatarea-link-color: #168ad0;
         --chatarea-at-element-color: #89ca78;
-        --chatarea-pic-element-max-height: 45vh;
+        --chatarea-pic-element-max-height: 50vh;
         --chatarea-pic-element-max-width: 40vw;
         --chatarea-timestamp-bg-color: #00000033;
         --chatarea-notification-bg-color: white;
@@ -818,7 +813,7 @@
         --chatarea-text-color-others: white;
         --chatarea-link-color: yellow;
         --chatarea-at-element-color: yellow;
-        --chatarea-pic-element-max-height: 45vh;
+        --chatarea-pic-element-max-height: 50vh;
         --chatarea-pic-element-max-width: 40vw;
         --chatarea-timestamp-bg-color: #192b36;
         --chatarea-notification-bg-color: #242f3d;
