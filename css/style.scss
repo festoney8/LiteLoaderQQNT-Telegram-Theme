@@ -391,7 +391,7 @@
             // 对话气泡
             & .message {
                 padding-bottom: 0 !important;
-                margin: 0 0 8px 0;
+                margin: 0 0 var(--chatarea-bubble-margin-bottom) 0;
 
                 /* Grid display 重排
                     默认Right Grid:
@@ -752,11 +752,11 @@
 }
 
 @media (prefers-color-scheme: light) {
-    @import "setting_light";
+    @import "light";
     @include globalCSS();
 }
 
 @media (prefers-color-scheme: dark) {
-    @import "setting_dark";
+    @import "dark";
     @include globalCSS();
 }

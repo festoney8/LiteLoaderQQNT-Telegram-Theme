@@ -22,13 +22,14 @@
   --chatarea-username-color: white;
   --chatarea-username-text-shadow-color: #0000008F;
   --chatarea-username-text-shadow-blur: 5px;
+  --chatarea-bubble-margin-bottom: 8px;
   --chatarea-header-color: white;
   --chatarea-bubble-color-others: white;
   --chatarea-bubble-color-self: #effdde;
   --chatarea-text-color-self: black;
   --chatarea-text-color-others: black;
   --chatarea-link-color: #168ad0;
-  --chatarea-at-element-color: #89ca78;
+  --chatarea-at-element-color: #5fbe67;
   --chatarea-pic-element-max-height: 50vh;
   --chatarea-pic-element-max-width: 40vw;
   --chatarea-timestamp-bg-color: #00000033;
@@ -38,4 +39,5 @@
   --chatarea-editor-text-color: black;
   --chatarea-editor-placeholder-text-color: #999999ff;
   --chatarea-sticker-panel-bg-color: white;
+  --group-box-bg-color: white;
 }

@@ -11,6 +11,7 @@
     --sidebar-unread-bubble-color: red;
     --recent-contact-header-bg-color: white;
     --recent-contact-header-search-bg-color: #f1f1f1;
+    --recent-contact-list-bg-color: white;
     --recent-contact-hover-bg-color: #f1f1f1;
     --recent-contact-sys-avatar-color: #5fbe67;
     --recent-contact-selected-bg-color: #41a1d9;
@@ -24,6 +25,7 @@
     --chatarea-username-color: white;
     --chatarea-username-text-shadow-color: #0000008F;
     --chatarea-username-text-shadow-blur: 5px;
+    --chatarea-bubble-margin-bottom: 8px;
     --chatarea-header-color: white;
     --chatarea-bubble-color-others: white;
     --chatarea-bubble-color-self: #effdde;
@@ -239,7 +241,7 @@
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 0 !important;
-    margin: 0 0 8px 0;
+    margin: 0 0 var(--chatarea-bubble-margin-bottom) 0;
     /* Grid display 重排
         默认Right Grid:
         "checkbox nickname  nickname  nickname . avatar"
@@ -671,6 +673,7 @@
     --chatarea-header-color: #17212b;
     --chatarea-bubble-color-others: #182533;
     --chatarea-bubble-color-self: #2b5278;
+    --chatarea-bubble-margin-bottom: 8px;
     --chatarea-text-color-self: white;
     --chatarea-text-color-others: white;
     --chatarea-link-color: #89ca78;
@@ -883,7 +886,7 @@
   .aio main.chat-msg-area .message,
   .aio.aio-independent main.chat-msg-area .message {
     padding-bottom: 0 !important;
-    margin: 0 0 8px 0;
+    margin: 0 0 var(--chatarea-bubble-margin-bottom) 0;
     /* Grid display 重排
         默认Right Grid:
         "checkbox nickname  nickname  nickname . avatar"
