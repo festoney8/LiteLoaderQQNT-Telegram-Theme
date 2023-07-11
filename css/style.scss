@@ -1,14 +1,18 @@
 @mixin universalChatAreaCSS($textColor) {
     // 图片
     & .pic-element {
-        margin: unset !important;
-        width: inherit !important;
-        height: inherit !important;
 
-        & img {
-            max-height: var(--chatarea-pic-element-max-height);
-            max-width: var(--chatarea-pic-element-max-width);
-            object-fit: contain;
+        // 在图片载入时不生效
+        &:not(:has(.image-loading)) {
+            margin: unset !important;
+            width: inherit !important;
+            height: inherit !important;
+
+            & img {
+                max-height: var(--chatarea-pic-element-max-height);
+                max-width: var(--chatarea-pic-element-max-width);
+                object-fit: contain;
+            }
         }
     }
 
@@ -38,12 +42,6 @@
 
         // 文本消息
         & .text-element {
-        }
-
-        // 图片消息
-        & .pic-element {
-            & img {
-            }
         }
 
         // 普通文字
@@ -415,10 +413,10 @@
                     // Grid default
                     &:not(.message-container--self) {
                         // nickname显示在content上方
-                        grid-template-areas: "checkbox avatar nickname status"
+                        grid-template-areas: "checkbox avatar nickname ."
                                              "checkbox avatar content  status"
                                              "checkbox avatar tips     tips" !important;
-                        grid-template-columns: auto auto minmax(0, 70%) 1fr !important;
+                        grid-template-columns: auto auto auto minmax(30%, 1fr) !important;
 
                         // 头像
                         // 在私聊模式下隐藏对方头像, 私聊模式特征: avatar后无username

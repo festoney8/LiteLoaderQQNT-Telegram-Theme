@@ -263,8 +263,8 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) {
-    grid-template-areas: "checkbox avatar nickname status" "checkbox avatar content  status" "checkbox avatar tips     tips" !important;
-    grid-template-columns: auto auto minmax(0, 70%) 1fr !important;
+    grid-template-areas: "checkbox avatar nickname ." "checkbox avatar content  status" "checkbox avatar tips     tips" !important;
+    grid-template-columns: auto auto auto minmax(30%, 1fr) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span {
@@ -297,14 +297,14 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container {
     color: black !important;
   }
-  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
     width: inherit !important;
     height: inherit !important;
   }
-  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img,
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
@@ -424,14 +424,14 @@
     position: relative;
     color: black !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
     width: inherit !important;
     height: inherit !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
@@ -918,8 +918,8 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) {
-    grid-template-areas: "checkbox avatar nickname status" "checkbox avatar content  status" "checkbox avatar tips     tips" !important;
-    grid-template-columns: auto auto minmax(0, 70%) 1fr !important;
+    grid-template-areas: "checkbox avatar nickname ." "checkbox avatar content  status" "checkbox avatar tips     tips" !important;
+    grid-template-columns: auto auto auto minmax(30%, 1fr) !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .avatar-span {
@@ -952,14 +952,14 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container {
     color: black !important;
   }
-  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
     width: inherit !important;
     height: inherit !important;
   }
-  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img,
-  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element img {
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
@@ -1079,14 +1079,14 @@
     position: relative;
     color: black !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
     width: inherit !important;
     height: inherit !important;
   }
-  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img,
-  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element img {
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
