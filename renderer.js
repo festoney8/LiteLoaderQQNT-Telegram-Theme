@@ -226,6 +226,75 @@ function autoEditorHeight() {
     }
 }
 
+// 仿telegram, 同一个人的消息连起来
+function concatBubble() {
+    const msgList = document.querySelector('#ml-root .ml-list');
+
+    if (msgList) {
+        function compareTwoMessage(lower, upper) {
+            try {
+                // 检查lower是否包含timeStamp, gray-message
+                const timestamp = lower.querySelector(".gray-tip-message,.message__timestamp");
+                if (timestamp) {
+                    return
+                }
+                const avatarLower = lower.querySelector("span.avatar-span");
+                const avatarUpper = upper.querySelector("span.avatar-span");
+                // const usernameNodeLower = lower.querySelector("span.avatar-span");
+                const usernameNodeLower = lower.querySelector("div.user-name");
+                const usernameLower = avatarLower.getAttribute("aria-label");
+                const usernameUpper = avatarUpper.getAttribute("aria-label");
+                const containerLower = lower.querySelector("div.msg-content-container")
+                if (usernameLower === usernameUpper) {
+                    const bubbleLower = lower.querySelector("div.msg-content-container");
+                    // 强制覆盖upper message的margin-bottom
+                    upper.style.setProperty("margin-bottom", "3px", "important");
+                    // upper头像调透明
+                    avatarUpper.style.opacity = "0";
+                    // lower的username 不显示
+                    if (usernameNodeLower && usernameNodeLower.style) {
+                        usernameNodeLower.style.marginBottom = "0";
+                        usernameNodeLower.style.display = "none";
+                    }
+                    // 更新lower的border-radius
+                    if (containerLower && containerLower.classList) {
+                        if (containerLower.classList.contains("container--others")) {
+                            bubbleLower.style.borderTopLeftRadius = "8px";
+                        } else {
+                            bubbleLower.style.borderTopRightRadius = "8px";
+                        }
+                    }
+                }
+            } catch (error) {
+                log("compareMessage Error", error)
+                log("lower", lower)
+                log("upper", upper)
+            }
+        }
+
+        let lastMessageNodeList = Array.from(msgList.querySelectorAll("div.message"));
+
+        const observer = new MutationObserver(async function (mutationsList, observer) {
+            // 比对两轮的msgList
+            let currMessageNodeList = Array.from(msgList.querySelectorAll("div.message"));
+            let lastMessageNodeSet = new Set(lastMessageNodeList);
+            for (let i = 0; i < currMessageNodeList.length; i++) {
+                let currMsg = currMessageNodeList[i];
+                if (!lastMessageNodeSet.has(currMsg)) {
+                    // 新载入的消息
+                    if (i + 1 < currMessageNodeList.length) {
+                        compareTwoMessage(currMessageNodeList[i], currMessageNodeList[i + 1])
+                    }
+                }
+            }
+            lastMessageNodeList = currMessageNodeList;
+        });
+        const config = {childList: true};
+        observer.observe(msgList, config);
+    }
+}
+
+
 function observeElement(selector, callback, callbackEnable = true, interval = 100, timeout = 5000) {
     let elapsedTime = 0;
     const timer = setInterval(function () {
@@ -282,6 +351,11 @@ async function onLoad() {
         log("autoEditorHeight success")
     } catch (error) {
         log("autoEditorHeight error", error)
+    }
+
+    try {
+        observeElement('#ml-root .ml-list', concatBubble);
+    } catch (err) {
     }
     telegram_theme.rendererReady();
 

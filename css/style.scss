@@ -387,13 +387,14 @@
 
             // 对话列表的最后一个对话
             & .ml-list .ml-item:nth-child(1) {
-                margin-bottom: 8px;
+                margin-bottom: unset;
             }
 
             // 对话气泡
             & .message {
                 padding-bottom: 0 !important;
-                margin: 0 0 var(--chatarea-bubble-margin-bottom) 0;
+                margin-top: 0 !important;
+                margin-bottom: var(--chatarea-bubble-margin-bottom) !important;
 
                 /* Grid display 重排
                     默认Right Grid:
@@ -408,7 +409,7 @@
                     "checkbox avatar . tips     tips    tips"
                  */
                 & .message-container {
-                    padding: 0 20px 6px 20px;
+                    padding: 0 20px 0 20px;
 
                     // 他人发送的消息
                     // Grid default
