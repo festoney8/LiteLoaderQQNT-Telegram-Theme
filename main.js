@@ -41,16 +41,20 @@ function getCurrTheme() {
 
 // 初始化设置
 function initSetting(settingPath) {
+    const defaultSettingPath = path.join(__dirname, "setting", "setting.json.example")
     try {
         const folderPath = path.dirname(settingPath);
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, {recursive: true});
         }
         if (!fs.existsSync(settingPath)) {
-            const initialJson = {
-                light: {}, dark: {},
-            };
-            fs.writeFileSync(settingPath, JSON.stringify(initialJson, null, 4));
+            fs.copyFile(defaultSettingPath, settingPath, (err) => {
+                if (err) {
+                    output('setting.json创建失败', err);
+                } else {
+                    output('setting.json创建成功');
+                }
+            });
         }
         return {success: true};
     } catch (error) {
@@ -157,11 +161,15 @@ function onBrowserWindowCreated(window, plugin) {
             // 监听主题切换
             output('开始监听主题');
             nativeTheme.on('updated', () => {
-                if (window.webContents && !window.webContents.isDestroyed()) {
-                    output('监听到主题切换', getCurrTheme())
-                    updateSetting(window.webContents, settingPath);
-                } else {
-                    nativeTheme.off('updated', updateSetting);
+                try {
+                    if (window && window.webContents && !window.webContents.isDestroyed()) {
+                        output('监听到主题切换', getCurrTheme())
+                        updateSetting(window.webContents, settingPath);
+                    } else {
+                        nativeTheme.off('updated', updateSetting);
+                    }
+                } catch (error) {
+                    output(error)
                 }
             });
         }

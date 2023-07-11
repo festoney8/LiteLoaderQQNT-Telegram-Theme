@@ -10,10 +10,6 @@ contextBridge.exposeInMainWorld("telegram_theme", {
         "LiteLoaderQQNT.telegram_theme.updateSetting",
         callback
     ),
-    updateTheme: (callback) => ipcRenderer.on(
-        "LiteLoaderQQNT.telegram_theme.updateTheme",
-        callback
-    ),
     rendererReady: () => ipcRenderer.send(
         "LiteLoaderQQNT.telegram_theme.rendererReady"
     ),
