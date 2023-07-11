@@ -18,6 +18,7 @@
     --recent-contact-unread-bubble-important-color: red;
     --recent-contact-unread-bubble-normal-color: #bbbbbb;
     --recent-contact-unread-bubble-border-color: transparent;
+    --chatarea-forward-msg-bg-color: #effdde;
     --chatarea-reply-title-text-color: #5fbe67;
     --chatarea-reply-content-text-color: grey;
     --chatarea-wallpaper: unset;
@@ -362,6 +363,10 @@
     font-weight: bold;
     color: var(--chatarea-reply-title-text-color) !important;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg {
+    background-color: var(--chatarea-forward-msg-bg-color);
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
     overflow: hidden !important;
@@ -484,6 +489,10 @@
     font-size: 12px !important;
     font-weight: bold;
     color: var(--chatarea-reply-title-text-color) !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg {
+    background-color: var(--chatarea-forward-msg-bg-color);
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
@@ -663,6 +672,7 @@
     --recent-contact-unread-bubble-important-color: red;
     --recent-contact-unread-bubble-normal-color: #3e546a;
     --recent-contact-unread-bubble-border-color: transparent;
+    --chatarea-forward-msg-bg-color: #2b5278;
     --chatarea-reply-title-text-color: #89ca78;
     --chatarea-reply-content-text-color: white;
     --chatarea-wallpaper: unset;
@@ -1007,6 +1017,10 @@
     font-weight: bold;
     color: var(--chatarea-reply-title-text-color) !important;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg {
+    background-color: var(--chatarea-forward-msg-bg-color);
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {
     overflow: hidden !important;
@@ -1129,6 +1143,10 @@
     font-size: 12px !important;
     font-weight: bold;
     color: var(--chatarea-reply-title-text-color) !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg {
+    background-color: var(--chatarea-forward-msg-bg-color);
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .forward-msg .text-ellipsis {

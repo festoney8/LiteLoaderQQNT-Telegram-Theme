@@ -87,6 +87,8 @@
 
     // 转发聊天记录
     & .forward-msg {
+        background-color: var(--chatarea-forward-msg-bg-color);
+
         .text-ellipsis {
             overflow: hidden !important;
         }
