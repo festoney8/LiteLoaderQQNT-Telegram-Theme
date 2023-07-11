@@ -15,14 +15,29 @@ function debounce(fn, time) {
 }
 
 // css导入
-async function addStyle() {
+async function updateCSS() {
     const element = document.createElement("style");
     document.head.appendChild(element);
 
-    telegram_theme.updateStyle((event, message) => {
+    telegram_theme.updateCSS((event, message) => {
+        console.log('renderer updateCSS')
         element.textContent = message;
     });
 }
+
+// setting导入
+async function updateSetting() {
+    const root = document.documentElement;
+    console.log("renderer updateCSS")
+    telegram_theme.updateSetting((event, message) => {
+        console.log('renderer updateSetting');
+        const themeSetting = message;
+        for (const key in themeSetting) {
+            root.style.setProperty(key, themeSetting[key]);
+        }
+    });
+}
+
 
 // 更新聊天窗口背景图片
 async function updateWallpaper() {
@@ -153,12 +168,9 @@ function autoEditorHeight() {
                 let currEditorFocusStatus = editor.classList.contains('ck-focused');
                 if (!lastEditorFocusStatus && currEditorFocusStatus) {
                     chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height) - lineHeight;
-                    console.log("focus chatInputAreaInitHeight", chatInputAreaInitHeight)
                     lastEditorFocusStatus = currEditorFocusStatus;
                 }
 
-                console.log("chatInputAreaInitHeight", chatInputAreaInitHeight)
-                console.log(content.scrollHeight, content.clientHeight, content.getBoundingClientRect().height)
                 // 检测editor高度, 检测时阻断
                 // 向editor中贴入图片, 会触发异步计算图片高度/渲染图片等事件, 此时scrollHeight无法获取最新的值
                 // 导致初次贴入图片后editor高度不变，过一阵子才发生变化
@@ -217,26 +229,31 @@ function observeElement(selector, callback, callbackEnable = true, interval = 10
 }
 
 async function onLoad() {
-    log(window.location.pathname, window.location.href)
+    try {
+        await updateCSS();
+        log("updateCSS success")
+    } catch (error) {
+        log("updateCSS error", error)
+    }
+    try {
+        await updateSetting();
+        log("updateSetting success")
+    } catch (error) {
+        log("updateSetting error", error)
+    }
 
-    try {
-        await addStyle();
-        log("addStyle success")
-    } catch (error) {
-        log("addStyle error", error)
-    }
-    try {
-        await updateWallpaper();
-        log("updateWallpaper success")
-    } catch (error) {
-        log("updateWallpaper error", error)
-    }
-    try {
-        observeElement(".two-col-layout__aside", adjustContactWidth)
-        log("adjustContactWidth success")
-    } catch (error) {
-        log("adjustContactWidth error", error)
-    }
+    // try {
+    //     await updateWallpaper();
+    //     log("updateWallpaper success")
+    // } catch (error) {
+    //     log("updateWallpaper error", error)
+    // }
+    // try {
+    //     observeElement(".two-col-layout__aside", adjustContactWidth)
+    //     log("adjustContactWidth success")
+    // } catch (error) {
+    //     log("adjustContactWidth error", error)
+    // }
     try {
         observeElement(".chat-input-area", adjustEditorHeight)
         log("adjustEditorHeight success")
@@ -249,7 +266,6 @@ async function onLoad() {
     } catch (error) {
         log("autoEditorHeight error", error)
     }
-
     telegram_theme.rendererReady();
 }
 
