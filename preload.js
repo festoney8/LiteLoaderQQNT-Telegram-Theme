@@ -13,7 +13,11 @@ contextBridge.exposeInMainWorld("telegram_theme", {
     rendererReady: () => ipcRenderer.send(
         "LiteLoaderQQNT.telegram_theme.rendererReady"
     ),
-    // getSetting: () => ipcRenderer.invoke(
-    //     "LiteLoaderQQNT.telegram_theme.getSetting",
-    // ),
+    setSetting: (message) => ipcRenderer.send(
+        "LiteLoaderQQNT.telegram_theme.setSetting",
+        message
+    ),
+    getSetting: () => ipcRenderer.invoke(
+        "LiteLoaderQQNT.telegram_theme.getSetting",
+    ),
 });

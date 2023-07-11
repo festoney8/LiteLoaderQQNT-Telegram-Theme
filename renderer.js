@@ -28,9 +28,9 @@ async function updateCSS() {
 // setting导入
 async function updateSetting() {
     const root = document.documentElement;
-    console.log("renderer updateCSS")
+    log("renderer updateCSS")
     telegram_theme.updateSetting((event, message) => {
-        console.log('renderer updateSetting');
+        log('renderer updateSetting');
         const themeSetting = message;
         for (const key in themeSetting) {
             root.style.setProperty(key, themeSetting[key]);
@@ -38,15 +38,32 @@ async function updateSetting() {
     });
 }
 
+async function setSetting(key, value) {
+    const data = {key: value}
+    try {
+        telegram_theme.setSetting(data)
+        log('setSetting success', data);
+    } catch (err) {
+        log('setSetting error', data);
+    }
+}
+
+async function getSetting() {
+    await telegram_theme.getSetting().then((result) => {
+        log('getSetting Promise resolved:', result);
+    }).catch(error => {
+        log('getSetting Promise rejected:', error);
+    })
+}
 
 // 更新聊天窗口背景图片
-async function updateWallpaper() {
+function updateWallpaper() {
     // 判断主题
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         const root = document.documentElement;
         root.style.setProperty("--chatarea-wallpaper", `unset`);
     } else {
-        await telegram_theme.getWallpaperPath().then((imageAbsPath) => {
+        telegram_theme.getWallpaperPath().then((imageAbsPath) => {
             const root = document.documentElement;
             root.style.setProperty("--chatarea-wallpaper", `url("file://${imageAbsPath}")`);
         }).catch((err) => {
@@ -243,7 +260,7 @@ async function onLoad() {
     }
 
     // try {
-    //     await updateWallpaper();
+    //     updateWallpaper();
     //     log("updateWallpaper success")
     // } catch (error) {
     //     log("updateWallpaper error", error)
@@ -267,6 +284,14 @@ async function onLoad() {
         log("autoEditorHeight error", error)
     }
     telegram_theme.rendererReady();
+
+
+    getSetting();
+
+    setSetting("c", "345");
+    setSetting("d", "456");
+    setSetting("e", "567");
+    setSetting("c", "543");
 }
 
 export {

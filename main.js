@@ -2,6 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const {BrowserWindow, ipcMain, nativeTheme} = require("electron");
 
+
+// 全局变量, 在onLoad(plugin)中完成赋值
+let settingPath = "";
+let cssPath = path.join(__dirname, "css", "style.css");
+
+
 function output(...args) {
     console.log("\x1b[32m%s\x1b[0m", "TelegramTheme:", ...args);
 }
@@ -64,7 +70,7 @@ function initSetting(settingPath) {
 
 
 // 获取设置
-function getSetting(settingPath) {
+function getSetting() {
     return new Promise((resolve, reject) => {
         fs.readFile(settingPath, 'utf-8', (err, data) => {
             if (err) {
@@ -72,8 +78,11 @@ function getSetting(settingPath) {
             } else {
                 try {
                     const setting = JSON.parse(data);
-                    resolve(setting);
+                    const currTheme = getCurrTheme();
+                    resolve(setting[currTheme]);
+                    output("getSetting success theme", currTheme);
                 } catch (error) {
+                    output(error);
                     reject(error);
                 }
             }
@@ -81,9 +90,42 @@ function getSetting(settingPath) {
     });
 }
 
-// // 保存设置
-// function setSetting(webContents, settingPath) {
-// }
+// 保存设置, 每次只存一个KV值
+function setSetting(message) {
+    output("setSetting message", message);
+    const currTheme = getCurrTheme();
+    const myKey = Object.keys(message)[0];
+    const value = message[myKey];
+    fs.readFile(settingPath, 'utf8', (err, data) => {
+        if (myKey !== undefined && value !== undefined) {
+            output("setSetting开始设置, 当前主题", currTheme, "新设置", myKey, value);
+        } else {
+            output("setSetting key-value值异常", myKey, value);
+            return;
+        }
+        if (err) {
+            output(err);
+            return;
+        }
+        let settings;
+        try {
+            settings = JSON.parse(data);
+        } catch (err) {
+            output(err);
+            return;
+        }
+        // 设定当前主题下参数
+        settings[currTheme][myKey] = value;
+        const updatedData = JSON.stringify(settings, null, 4);
+        fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
+            if (err) {
+                output(err);
+                return;
+            }
+            output("setSetting修改设定成功", "新设置", myKey, value)
+        });
+    });
+}
 
 // 更新设置，使Setting生效
 function updateSetting(webContents, settingPath) {
@@ -126,13 +168,15 @@ function watchFileChange(webContents, filepath, callback) {
 }
 
 function onLoad(plugin) {
+    // 全局变量赋值
+    settingPath = path.join(plugin.path.data, 'setting.json');
+    cssPath = path.join(__dirname, "css", "style.css");
+
     ipcMain.on("LiteLoaderQQNT.telegram_theme.rendererReady", async (event, message) => {
         const window = BrowserWindow.fromWebContents(event.sender);
-        const cssPath = path.join(__dirname, "css", "style.css");
         updateCSS(window.webContents, cssPath);
         output('onLoad', 'updateCSS', cssPath)
 
-        const settingPath = path.join(plugin.path.data, 'setting.json');
         updateSetting(window.webContents, settingPath);
         output('onLoad', 'updateSetting', settingPath)
     });
@@ -140,11 +184,16 @@ function onLoad(plugin) {
     ipcMain.handle('LiteLoaderQQNT.telegram_theme.getSetting', async (event, message) => {
         return getSetting();
     });
+    ipcMain.on('LiteLoaderQQNT.telegram_theme.setSetting', async (event, message) => {
+        return setSetting(message);
+    });
 }
 
 function onBrowserWindowCreated(window, plugin) {
     // 设置文件初始化
-    const settingPath = path.join(plugin.path.data, 'setting.json');
+    if (settingPath === "") {
+        settingPath = path.join(plugin.path.data, 'setting.json');
+    }
     const status = initSetting(settingPath);
     output("initSetting", status)
 
@@ -152,9 +201,7 @@ function onBrowserWindowCreated(window, plugin) {
         const url = window.webContents.getURL();
         if (url.includes("app://./renderer/index.html")) {
             // 开启文件监听
-            let cssPath = path.join(__dirname, "css", "style.css");
             watchFileChange(window.webContents, cssPath, debounce(updateCSS))
-            output("watchFileChange", cssPath)
             watchFileChange(window.webContents, settingPath, debounce(updateSetting))
             output("watchFileChange", settingPath)
 
@@ -180,9 +227,6 @@ function onBrowserWindowCreated(window, plugin) {
     });
 }
 
-function onThemeChange(window) {
-}
-
 module.exports = {
-    onLoad, onBrowserWindowCreated, onThemeChange
+    onLoad, onBrowserWindowCreated
 }
