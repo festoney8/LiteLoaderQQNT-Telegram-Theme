@@ -23,21 +23,6 @@ function debounce(fn, time = 100) {
     }
 }
 
-// // 获取背景图片
-// function getWallpaperPath() {
-//     const imageAbsPath = path.join(__dirname, './image/wallpaper.png');
-//     const normalPath = path.normalize(imageAbsPath).replace(/\\/g, '/');
-//     return new Promise((resolve, reject) => {
-//         fs.access(normalPath, fs.constants.F_OK, (err) => {
-//             if (err) {
-//                 reject("[Telegram Theme 获取背景图片失败]");
-//             } else {
-//                 resolve(normalPath);
-//             }
-//         });
-//     });
-// }
-
 function getCurrTheme() {
     if (nativeTheme.shouldUseDarkColors) {
         return "dark";
@@ -47,7 +32,7 @@ function getCurrTheme() {
 
 // 初始化设置
 function initSetting(settingPath) {
-    const defaultSettingPath = path.join(__dirname, "setting", "setting.json.example")
+    const defaultSettingPath = path.join(__dirname, "setting.json.example")
     try {
         const folderPath = path.dirname(settingPath);
         if (!fs.existsSync(folderPath)) {
@@ -68,6 +53,32 @@ function initSetting(settingPath) {
     }
 }
 
+// 获取当前主题下壁纸
+function updateWallpaper(webContents) {
+    const currTheme = getCurrTheme();
+    const imageAbsPath = path.join(__dirname, `./image/${currTheme}.jpg`);
+    const normalPath = path.normalize(imageAbsPath).replace(/\\/g, '/');
+    try {
+        webContents.send("LiteLoaderQQNT.telegram_theme.updateWallpaper", normalPath);
+        output('updateWallpaper send imageAbsPath to renderer', normalPath);
+    } catch (err) {
+        output('[Telegram Theme 获取背景图片失败]');
+        output(err);
+    }
+    //
+    // return new Promise((resolve, reject) => {
+    //     fs.readFile(settingPath, "utf-8", (err, data) => {
+    //         if (err) {
+    //             output('[Telegram Theme 获取背景图片失败]');
+    //             reject("err");
+    //         } else {
+    //             webContents.send("LiteLoaderQQNT.telegram_theme.updateWallpaper", normalPath);
+    //             output('updateWallpaper send imageAbsPath to renderer', normalPath);
+    //             resolve();
+    //         }
+    //     });
+    // });
+}
 
 // 获取设置
 function getSetting() {
@@ -107,16 +118,16 @@ function setSetting(message) {
             output(err);
             return;
         }
-        let settings;
+        let setting;
         try {
-            settings = JSON.parse(data);
+            setting = JSON.parse(data);
         } catch (err) {
             output(err);
             return;
         }
         // 设定当前主题下参数
-        settings[currTheme][myKey] = value;
-        const updatedData = JSON.stringify(settings, null, 4);
+        setting[currTheme][myKey] = value;
+        const updatedData = JSON.stringify(setting, null, 4);
         fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
             if (err) {
                 output(err);
@@ -129,34 +140,26 @@ function setSetting(message) {
 
 // 更新设置，使Setting生效
 function updateSetting(webContents, settingPath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(settingPath, "utf-8", (err, data) => {
-            if (err) {
-                output("updateSetting", err);
-                reject(err);
-            } else {
-                const setting = JSON.parse(data);
-                webContents.send("LiteLoaderQQNT.telegram_theme.updateSetting", setting[getCurrTheme()]);
-                output('updateSetting send Json to renderer');
-                resolve();
-            }
-        });
+    fs.readFile(settingPath, "utf-8", (err, data) => {
+        if (err) {
+            output("updateSetting", err);
+        } else {
+            const setting = JSON.parse(data);
+            webContents.send("LiteLoaderQQNT.telegram_theme.updateSetting", setting[getCurrTheme()]);
+            output('updateSetting send Json to renderer');
+        }
     });
 }
 
 // 更新样式，使CSS生效
 function updateCSS(webContents, cssPath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(cssPath, "utf-8", (err, data) => {
-            if (err) {
-                output("updateCSS", err);
-                reject(err);
-            } else {
-                webContents.send("LiteLoaderQQNT.telegram_theme.updateCSS", data);
-                output('updateCSS send CSS to renderer');
-                resolve();
-            }
-        });
+    fs.readFile(cssPath, "utf-8", (err, data) => {
+        if (err) {
+            output("updateCSS", err);
+        } else {
+            webContents.send("LiteLoaderQQNT.telegram_theme.updateCSS", data);
+            output('updateCSS send CSS to renderer');
+        }
     });
 }
 
@@ -174,13 +177,16 @@ function onLoad(plugin) {
 
     ipcMain.on("LiteLoaderQQNT.telegram_theme.rendererReady", async (event, message) => {
         const window = BrowserWindow.fromWebContents(event.sender);
+        // 更新默认CSS
         updateCSS(window.webContents, cssPath);
         output('onLoad', 'updateCSS', cssPath)
-
+        // 设定壁纸
+        updateWallpaper(window.webContents);
+        output('onLoad', 'updateWallpaper')
+        // 用户设置
         updateSetting(window.webContents, settingPath);
         output('onLoad', 'updateSetting', settingPath)
     });
-
     ipcMain.handle('LiteLoaderQQNT.telegram_theme.getSetting', async (event, message) => {
         return getSetting();
     });
@@ -211,9 +217,10 @@ function onBrowserWindowCreated(window, plugin) {
                 try {
                     if (window && window.webContents && !window.webContents.isDestroyed()) {
                         output('监听到主题切换', getCurrTheme())
+                        updateWallpaper(window.webContents);
                         updateSetting(window.webContents, settingPath);
                     } else {
-                        nativeTheme.off('updated', updateSetting);
+                        nativeTheme.off('updated');
                     }
                 } catch (error) {
                     output(error)

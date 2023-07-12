@@ -2,13 +2,17 @@ const {contextBridge, ipcRenderer} = require("electron");
 
 
 contextBridge.exposeInMainWorld("telegram_theme", {
-    updateCSS: (callback) => ipcRenderer.on(
-        "LiteLoaderQQNT.telegram_theme.updateCSS",
-        callback
+    updateWallpaper: (message) => ipcRenderer.on(
+        "LiteLoaderQQNT.telegram_theme.updateWallpaper",
+        message
     ),
-    updateSetting: (callback) => ipcRenderer.on(
+    updateSetting: (message) => ipcRenderer.on(
         "LiteLoaderQQNT.telegram_theme.updateSetting",
-        callback
+        message
+    ),
+    updateCSS: (message) => ipcRenderer.on(
+        "LiteLoaderQQNT.telegram_theme.updateCSS",
+        message
     ),
     rendererReady: () => ipcRenderer.send(
         "LiteLoaderQQNT.telegram_theme.rendererReady"

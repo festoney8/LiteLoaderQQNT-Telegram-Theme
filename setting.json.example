@@ -24,7 +24,7 @@
         "--chatarea-username-color": "white",
         "--chatarea-username-text-shadow-color": "#0000008F",
         "--chatarea-username-text-shadow-blur": "5px",
-        "--chatarea-bubble-margin-bottom": "8px",
+        "--chatarea-bubble-margin-bottom": "16px",
         "--chatarea-header-color": "white",
         "--chatarea-bubble-color-others": "white",
         "--chatarea-bubble-color-self": "#effdde",
@@ -42,7 +42,8 @@
         "--chatarea-editor-placeholder-text-color": "#999999ff",
         "--chatarea-sticker-panel-bg-color": "white",
         "--chatarea-forward-msg-bg-color": "white",
-        "--group-box-bg-color": "white"
+        "--group-box-bg-color": "white",
+        "key": "543"
     },
     "dark": {
         "--vip-name-color": "white",
@@ -70,9 +71,9 @@
         "--chatarea-username-text-shadow-color": "transparent",
         "--chatarea-username-text-shadow-blur": "0",
         "--chatarea-header-color": "#17212b",
-        "--chatarea-bubble-color-others": "#182533",
+        "--chatarea-bubble-color-others": "#2b5278",
         "--chatarea-bubble-color-self": "#2b5278",
-        "--chatarea-bubble-margin-bottom": "8px",
+        "--chatarea-bubble-margin-bottom": "16px",
         "--chatarea-text-color-self": "white",
         "--chatarea-text-color-others": "white",
         "--chatarea-link-color": "#89ca78",

@@ -33,6 +33,13 @@ async function updateSetting() {
         log('renderer updateSetting');
         const themeSetting = message;
         for (const key in themeSetting) {
+            // 检测壁纸, 如用户未设定, 不覆盖默认
+            if (key === "--chatarea-wallpaper") {
+                const blacklist = ["", "unset", "default", "url()", "url(.)", "url(/)", "none"];
+                if (blacklist.includes(themeSetting[key])) {
+                    continue
+                }
+            }
             root.style.setProperty(key, themeSetting[key]);
         }
     });
@@ -57,20 +64,12 @@ async function getSetting() {
 }
 
 // 更新聊天窗口背景图片
-function updateWallpaper() {
-    // 判断主题
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+async function updateWallpaper() {
+    telegram_theme.updateWallpaper((event, imgPath) => {
+        log("updateWallpaper receive", imgPath);
         const root = document.documentElement;
-        root.style.setProperty("--chatarea-wallpaper", `unset`);
-    } else {
-        telegram_theme.getWallpaperPath().then((imageAbsPath) => {
-            const root = document.documentElement;
-            root.style.setProperty("--chatarea-wallpaper", `url("file://${imageAbsPath}")`);
-        }).catch((err) => {
-            log(err)
-            alert(err);
-        });
-    }
+        root.style.setProperty("--chatarea-wallpaper", `url("file://${imgPath}")`);
+    });
 }
 
 // 信息列表宽度调节 重写ResizeHandler事件调宽宽度
@@ -321,19 +320,19 @@ async function onLoad() {
     } catch (error) {
         log("updateCSS error", error)
     }
+    // 先设定背景图, 然后由setting覆盖
+    try {
+        await updateWallpaper();
+        log("updateWallpaper success")
+    } catch (error) {
+        log("updateWallpaper error", error)
+    }
     try {
         await updateSetting();
         log("updateSetting success")
     } catch (error) {
         log("updateSetting error", error)
     }
-
-    // try {
-    //     updateWallpaper();
-    //     log("updateWallpaper success")
-    // } catch (error) {
-    //     log("updateWallpaper error", error)
-    // }
     // try {
     //     observeElement(".two-col-layout__aside", adjustContactWidth)
     //     log("adjustContactWidth success")
@@ -357,8 +356,8 @@ async function onLoad() {
         observeElement('#ml-root .ml-list', concatBubble);
     } catch (err) {
     }
-    telegram_theme.rendererReady();
 
+    telegram_theme.rendererReady();
 
     getSetting();
 
