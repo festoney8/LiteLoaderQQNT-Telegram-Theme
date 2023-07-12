@@ -215,7 +215,7 @@ function onBrowserWindowCreated(window, plugin) {
             // output('开始监听主题');
             nativeTheme.on('updated', () => {
                 try {
-                    if (window && window.webContents && !window.webContents.isDestroyed()) {
+                    if (!window.isDestroyed() && !window.webContents.isDestroyed()) {
                         // output('监听到主题切换', getCurrTheme())
                         updateWallpaper(window.webContents);
                         updateSetting(window.webContents, settingPath);
@@ -230,7 +230,7 @@ function onBrowserWindowCreated(window, plugin) {
     });
     window.on('closed', () => {
         // output('关闭主题监听')
-        nativeTheme.off('updated', updateSetting)
+        nativeTheme.off('updated')
     });
 }
 

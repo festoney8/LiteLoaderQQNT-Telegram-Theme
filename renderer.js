@@ -361,10 +361,10 @@ async function onLoad() {
 
     getSetting();
 
-    setSetting("c", "345");
-    setSetting("d", "456");
-    setSetting("e", "567");
-    setSetting("c", "543");
+    // setSetting("c", "345");
+    // setSetting("d", "456");
+    // setSetting("e", "567");
+    // setSetting("c", "543");
 }
 
 export {
