@@ -220,7 +220,7 @@ function onBrowserWindowCreated(window, plugin) {
                         updateWallpaper(window.webContents);
                         updateSetting(window.webContents, settingPath);
                     } else {
-                        nativeTheme.off('updated');
+                        nativeTheme.off('updated', updateSetting);
                     }
                 } catch (error) {
                     // output(error)
@@ -230,7 +230,7 @@ function onBrowserWindowCreated(window, plugin) {
     });
     window.on('closed', () => {
         // output('关闭主题监听')
-        nativeTheme.off('updated')
+        nativeTheme.off('updated', updateSetting)
     });
 }
 

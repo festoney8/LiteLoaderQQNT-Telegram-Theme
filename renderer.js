@@ -333,12 +333,12 @@ async function onLoad() {
     } catch (error) {
         // log("updateSetting error", error)
     }
-    // try {
-    //     observeElement(".two-col-layout__aside", adjustContactWidth)
-    // //     log("adjustContactWidth success")
-    // } catch (error) {
-    // //     log("adjustContactWidth error", error)
-    // }
+    try {
+        observeElement(".two-col-layout__aside", adjustContactWidth)
+        //     log("adjustContactWidth success")
+    } catch (error) {
+        //     log("adjustContactWidth error", error)
+    }
     try {
         observeElement(".chat-input-area", adjustEditorHeight)
         // log("adjustEditorHeight success")
@@ -351,22 +351,14 @@ async function onLoad() {
     } catch (error) {
         // log("autoEditorHeight error", error)
     }
-
     try {
         observeElement('#ml-root .ml-list', concatBubble);
     } catch (err) {
     }
 
     telegram_theme.rendererReady();
-
-    getSetting();
-
-    // setSetting("c", "345");
-    // setSetting("d", "456");
-    // setSetting("e", "567");
-    // setSetting("c", "543");
 }
 
 export {
-    onLoad,
+    onLoad, onConfigView
 }
