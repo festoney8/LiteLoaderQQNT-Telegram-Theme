@@ -42,7 +42,7 @@
         "--chatarea-editor-placeholder-text-color": "#999999ff",
         "--chatarea-sticker-panel-bg-color": "white",
         "--chatarea-forward-msg-bg-color": "white",
-        "--group-box-bg-color": "white",
+        "--group-box-bg-color": "white"
     },
     "dark": {
         "--vip-name-color": "white",
