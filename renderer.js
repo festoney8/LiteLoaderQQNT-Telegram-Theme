@@ -1,8 +1,8 @@
-// function log(...args) {
-//     const nowTime = new Date().toLocaleTimeString();
-//     const newArgs = [`[QQNT Telegram Theme] ${nowTime}:`, ...args];
-//     console.log.apply(console, newArgs);
-// }
+function log(...args) {
+    const nowTime = new Date().toLocaleTimeString();
+    const newArgs = [`[QQNT Telegram Theme] ${nowTime}:`, ...args];
+    console.log.apply(console, newArgs);
+}
 
 function debounce(fn, time) {
     let timer = null;
