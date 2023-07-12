@@ -360,5 +360,5 @@ async function onLoad() {
 }
 
 export {
-    onLoad, onConfigView
+    onLoad
 }
