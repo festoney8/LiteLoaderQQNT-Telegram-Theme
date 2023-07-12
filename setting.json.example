@@ -43,7 +43,6 @@
         "--chatarea-sticker-panel-bg-color": "white",
         "--chatarea-forward-msg-bg-color": "white",
         "--group-box-bg-color": "white",
-        "key": "543"
     },
     "dark": {
         "--vip-name-color": "white",
