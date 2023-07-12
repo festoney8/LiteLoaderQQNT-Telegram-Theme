@@ -54,7 +54,7 @@
 
 - `"--chatarea-wallpaper": "unset"`
 
-  这是背景图片路径，填写 unset 时默认使用主题自带背景图片。设置自己的图片路径请使用绝对链接，并在前面添加 `file://` 作为协议，如：`chatarea-wallpaper": "file://D:/path/to/image.jpg"`
+  这是背景图片路径，填写 unset 时默认使用主题自带背景图片。设置自己的图片路径请使用绝对链接，并在前面添加 `file://` 作为协议，如：`"chatarea-wallpaper": "file://D:/path/to/image.jpg"`
 
 - `--chatarea-bubble-color-others` 聊天区域对方对话气泡颜色
 
