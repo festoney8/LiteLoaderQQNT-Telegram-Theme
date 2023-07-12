@@ -41,9 +41,7 @@ function initSetting(settingPath) {
         if (!fs.existsSync(settingPath)) {
             fs.copyFile(defaultSettingPath, settingPath, (err) => {
                 if (err) {
-                    // output('setting.json创建失败', err);
-                } else {
-                    // output('setting.json创建成功');
+                    output('setting.json创建失败', err);
                 }
             });
         }
@@ -60,24 +58,10 @@ function updateWallpaper(webContents) {
     const normalPath = path.normalize(imageAbsPath).replace(/\\/g, '/');
     try {
         webContents.send("LiteLoaderQQNT.telegram_theme.updateWallpaper", normalPath);
-        // output('updateWallpaper send imageAbsPath to renderer', normalPath);
     } catch (err) {
-        // output('[Telegram Theme 获取背景图片失败]');
-        // output(err);
+        output('[Telegram Theme 获取背景图片失败]');
+        output(err);
     }
-    //
-    // return new Promise((resolve, reject) => {
-    //     fs.readFile(settingPath, "utf-8", (err, data) => {
-    //         if (err) {
-    // //             output('[Telegram Theme 获取背景图片失败]');
-    //             reject("err");
-    //         } else {
-    //             webContents.send("LiteLoaderQQNT.telegram_theme.updateWallpaper", normalPath);
-    // //             output('updateWallpaper send imageAbsPath to renderer', normalPath);
-    //             resolve();
-    //         }
-    //     });
-    // });
 }
 
 // 获取设置
@@ -91,9 +75,8 @@ function getSetting() {
                     const setting = JSON.parse(data);
                     const currTheme = getCurrTheme();
                     resolve(setting[currTheme]);
-                    // output("getSetting success theme", currTheme);
                 } catch (error) {
-                    // output(error);
+                    output(error);
                     reject(error);
                 }
             }
@@ -108,21 +91,19 @@ function setSetting(message) {
     const myKey = Object.keys(message)[0];
     const value = message[myKey];
     fs.readFile(settingPath, 'utf8', (err, data) => {
-        if (myKey !== undefined && value !== undefined) {
-            // output("setSetting开始设置, 当前主题", currTheme, "新设置", myKey, value);
-        } else {
-            // output("setSetting key-value值异常", myKey, value);
+        if (myKey === undefined || value === undefined) {
+            output("setSetting key-value值异常", myKey, value);
             return;
         }
         if (err) {
-            // output(err);
+            output(err);
             return;
         }
         let setting;
         try {
             setting = JSON.parse(data);
         } catch (err) {
-            // output(err);
+            output(err);
             return;
         }
         // 设定当前主题下参数
@@ -130,10 +111,8 @@ function setSetting(message) {
         const updatedData = JSON.stringify(setting, null, 4);
         fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
             if (err) {
-                // output(err);
-                return;
+                output(err);
             }
-            // output("setSetting修改设定成功", "新设置", myKey, value)
         });
     });
 }
@@ -142,11 +121,10 @@ function setSetting(message) {
 function updateSetting(webContents, settingPath) {
     fs.readFile(settingPath, "utf-8", (err, data) => {
         if (err) {
-            // output("updateSetting", err);
+            output("updateSetting", err);
         } else {
             const setting = JSON.parse(data);
             webContents.send("LiteLoaderQQNT.telegram_theme.updateSetting", setting[getCurrTheme()]);
-            // output('updateSetting send Json to renderer');
         }
     });
 }
@@ -155,10 +133,9 @@ function updateSetting(webContents, settingPath) {
 function updateCSS(webContents, cssPath) {
     fs.readFile(cssPath, "utf-8", (err, data) => {
         if (err) {
-            // output("updateCSS", err);
+            output("updateCSS", err);
         } else {
             webContents.send("LiteLoaderQQNT.telegram_theme.updateCSS", data);
-            // output('updateCSS send CSS to renderer');
         }
     });
 }
@@ -179,13 +156,10 @@ function onLoad(plugin) {
         const window = BrowserWindow.fromWebContents(event.sender);
         // 更新默认CSS
         updateCSS(window.webContents, cssPath);
-        // output('onLoad', 'updateCSS', cssPath)
         // 设定壁纸
         updateWallpaper(window.webContents);
-        // output('onLoad', 'updateWallpaper')
         // 用户设置
         updateSetting(window.webContents, settingPath);
-        // output('onLoad', 'updateSetting', settingPath)
     });
     ipcMain.handle('LiteLoaderQQNT.telegram_theme.getSetting', async (event, message) => {
         return getSetting();
@@ -201,7 +175,6 @@ function onBrowserWindowCreated(window, plugin) {
         settingPath = path.join(plugin.path.data, 'setting.json');
     }
     const status = initSetting(settingPath);
-    // output("initSetting", status)
 
     window.on("ready-to-show", () => {
         const url = window.webContents.getURL();
@@ -209,27 +182,23 @@ function onBrowserWindowCreated(window, plugin) {
             // 开启文件监听
             watchFileChange(window.webContents, cssPath, debounce(updateCSS))
             watchFileChange(window.webContents, settingPath, debounce(updateSetting))
-            // output("watchFileChange", settingPath)
 
             // 监听主题切换
-            // output('开始监听主题');
             nativeTheme.on('updated', () => {
                 try {
                     if (!window.isDestroyed() && !window.webContents.isDestroyed()) {
-                        // output('监听到主题切换', getCurrTheme())
                         updateWallpaper(window.webContents);
                         updateSetting(window.webContents, settingPath);
                     } else {
                         nativeTheme.off('updated', updateSetting);
                     }
                 } catch (error) {
-                    // output(error)
+                    output(error)
                 }
             });
         }
     });
     window.on('closed', () => {
-        // output('关闭主题监听')
         nativeTheme.off('updated', updateSetting)
     });
 }

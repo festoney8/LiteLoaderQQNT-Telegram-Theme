@@ -20,7 +20,6 @@ async function updateCSS() {
     document.head.appendChild(element);
 
     telegram_theme.updateCSS((event, message) => {
-        // console.log('renderer updateCSS')
         element.textContent = message;
     });
 }
@@ -28,9 +27,7 @@ async function updateCSS() {
 // setting导入
 async function updateSetting() {
     const root = document.documentElement;
-    // log("renderer updateCSS")
     telegram_theme.updateSetting((event, message) => {
-        // log('renderer updateSetting');
         const themeSetting = message;
         for (const key in themeSetting) {
             // 检测壁纸, 如用户未设定, 不覆盖默认
@@ -49,24 +46,21 @@ async function setSetting(key, value) {
     const data = {key: value}
     try {
         telegram_theme.setSetting(data)
-        // log('setSetting success', data);
     } catch (err) {
-        // log('setSetting error', data);
+        log('setSetting error', data);
     }
 }
 
 async function getSetting() {
     await telegram_theme.getSetting().then((result) => {
-        // log('getSetting Promise resolved:', result);
     }).catch(error => {
-        // log('getSetting Promise rejected:', error);
+        log('getSetting Promise rejected:', error);
     })
 }
 
 // 更新聊天窗口背景图片
 async function updateWallpaper() {
     telegram_theme.updateWallpaper((event, imgPath) => {
-        // log("updateWallpaper receive", imgPath);
         const root = document.documentElement;
         root.style.setProperty("--chatarea-wallpaper", `url("file://${imgPath}")`);
     });
@@ -81,7 +75,6 @@ function adjustContactWidth() {
         // 移除默认事件
         const resizeHandler = oldResizeHandler.cloneNode(true);
         oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler);
-        // log('resizeHandler 事件移除完成')
         // 调大默认长度, 重写事件
         layoutAside.style.width = "300px";
         layoutAside.style.flexBasis = "300px";
@@ -265,9 +258,9 @@ function concatBubble() {
                     }
                 }
             } catch (error) {
-                // log("compareMessage Error", error)
-                // log("lower", lower)
-                // log("upper", upper)
+                log("compareMessage Error", error)
+                log("lower", lower)
+                log("upper", upper)
             }
         }
 
@@ -308,7 +301,7 @@ function observeElement(selector, callback, callbackEnable = true, interval = 10
         elapsedTime += interval;
         if (elapsedTime >= timeout) {
             clearInterval(timer);
-            // log('超时', selector, "未出现");
+            log('超时', selector, "未出现");
         }
     }, interval);
 }
@@ -316,40 +309,34 @@ function observeElement(selector, callback, callbackEnable = true, interval = 10
 async function onLoad() {
     try {
         await updateCSS();
-        // log("updateCSS success")
     } catch (error) {
-        // log("updateCSS error", error)
+        log("updateCSS error", error)
     }
     // 先设定背景图, 然后由setting覆盖
     try {
         await updateWallpaper();
-        // log("updateWallpaper success")
     } catch (error) {
-        // log("updateWallpaper error", error)
+        log("updateWallpaper error", error)
     }
     try {
         await updateSetting();
-        // log("updateSetting success")
     } catch (error) {
-        // log("updateSetting error", error)
+        log("updateSetting error", error)
     }
     try {
         observeElement(".two-col-layout__aside", adjustContactWidth)
-        //     log("adjustContactWidth success")
     } catch (error) {
-        //     log("adjustContactWidth error", error)
+        log("adjustContactWidth error", error)
     }
     try {
         observeElement(".chat-input-area", adjustEditorHeight)
-        // log("adjustEditorHeight success")
     } catch (error) {
-        // log("adjustEditorHeight error", error)
+        log("adjustEditorHeight error", error)
     }
     try {
         observeElement(".chat-input-area", autoEditorHeight)
-        // log("autoEditorHeight success")
     } catch (error) {
-        // log("autoEditorHeight error", error)
+        log("autoEditorHeight error", error)
     }
     try {
         observeElement('#ml-root .ml-list', concatBubble);
