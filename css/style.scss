@@ -1,18 +1,30 @@
 @mixin universalChatAreaCSS($textColor) {
     // 图片
     & .pic-element {
+        // 宽度变动过渡
+        transition: width 0.1s ease, height 0.1s ease !important;
 
         // 在图片载入时不生效
         &:not(:has(.image-loading)) {
             margin: unset !important;
-            width: inherit !important;
-            height: inherit !important;
+            width: initial !important;
+            height: initial !important;
 
             & img {
                 max-height: var(--chatarea-pic-element-max-height);
                 max-width: var(--chatarea-pic-element-max-width);
                 object-fit: contain;
             }
+        }
+
+        // 非表情图片载入时，放大1.6倍
+        &:not(.pic-element--gif):has(.image-loading) {
+            zoom: 1.6 !important;
+        }
+
+        // 表情载入时，放大2倍
+        &:is(.pic-element--gif):has(.image-loading) {
+            zoom: 2 !important;
         }
     }
 
@@ -488,6 +500,13 @@
                                         border-radius: 0;
                                     }
                                 }
+
+                                // 含图片气泡，限制载入时zoom后大小
+                                &:has(.pic-element) {
+                                    max-height: var(--chatarea-pic-element-max-height);
+                                    max-width: var(--chatarea-pic-element-max-width);
+                                    overflow: hidden;
+                                }
                             }
                         }
 
@@ -606,7 +625,7 @@
             // 顶部底部 新消息提示
             & .q-notification {
                 //&.theme-primary {
-                    //background-color: var(--chatarea-at-element-color);
+                //background-color: var(--chatarea-at-element-color);
                 //}
                 &.theme-default {
                     background-color: var(--chatarea-notification-bg-color);

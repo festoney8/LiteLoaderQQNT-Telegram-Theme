@@ -297,17 +297,29 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container {
     color: black !important;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
+    transition: width 0.1s ease, height 0.1s ease !important;
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
-    width: inherit !important;
-    height: inherit !important;
+    width: initial !important;
+    height: initial !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading) {
+    zoom: 1.6 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading) {
+    zoom: 2 !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
@@ -400,6 +412,12 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element) {
+    max-height: var(--chatarea-pic-element-max-height);
+    max-width: var(--chatarea-pic-element-max-width);
+    overflow: hidden;
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
     padding: unset !important;
@@ -424,17 +442,29 @@
     position: relative;
     color: black !important;
   }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
+    transition: width 0.1s ease, height 0.1s ease !important;
+  }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
-    width: inherit !important;
-    height: inherit !important;
+    width: initial !important;
+    height: initial !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading) {
+    zoom: 1.6 !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading) {
+    zoom: 2 !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
@@ -952,17 +982,29 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container {
     color: black !important;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
+    transition: width 0.1s ease, height 0.1s ease !important;
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
-    width: inherit !important;
-    height: inherit !important;
+    width: initial !important;
+    height: initial !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading) {
+    zoom: 1.6 !important;
+  }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading) {
+    zoom: 2 !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
@@ -1055,6 +1097,12 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
   }
+  .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element),
+  .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element) {
+    max-height: var(--chatarea-pic-element-max-height);
+    max-width: var(--chatarea-pic-element-max-width);
+    overflow: hidden;
+  }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
     padding: unset !important;
@@ -1079,17 +1127,29 @@
     position: relative;
     color: black !important;
   }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
+    transition: width 0.1s ease, height 0.1s ease !important;
+  }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)),
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) {
     margin: unset !important;
-    width: inherit !important;
-    height: inherit !important;
+    width: initial !important;
+    height: initial !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(:has(.image-loading)) img {
     max-height: var(--chatarea-pic-element-max-height);
     max-width: var(--chatarea-pic-element-max-width);
     object-fit: contain;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:not(.pic-element--gif):has(.image-loading) {
+    zoom: 1.6 !important;
+  }
+  .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading),
+  .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element:is(.pic-element--gif):has(.image-loading) {
+    zoom: 2 !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
