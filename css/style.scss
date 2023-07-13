@@ -1,31 +1,24 @@
 @mixin universalChatAreaCSS($textColor) {
     // 图片
     & .pic-element {
-        // 宽度变动过渡
-        transition: width 0.1s ease, height 0.1s ease !important;
+        // 解决聊天记录跳变, 保持流畅度, (大bug变小bug)
+        // 图片缩放倍率不稳定, image-loading和非image-loading时分别判断会造成图片切换闪屏, 聊天记录跳变
+        // 存在bug, pic-element自带内敛样式style="width: xxx; height: xxx", 无法对内联样式实现150%
+        // 使用zoom会被外层影响, 当屏幕过短时, 图文混合的文字泡两侧会出现裁剪
+        // 放大1.5倍, 包含载入时
+        zoom: 1.5;
 
-        // 在图片载入时不生效
-        &:not(:has(.image-loading)) {
-            margin: unset !important;
-            width: initial !important;
-            height: initial !important;
-
-            & img {
-                max-height: var(--chatarea-pic-element-max-height);
-                max-width: var(--chatarea-pic-element-max-width);
-                object-fit: contain;
-            }
-        }
-
-        // 非表情图片载入时，放大1.6倍
-        &:not(.pic-element--gif):has(.image-loading) {
-            zoom: 1.6 !important;
-        }
-
-        // 表情载入时，放大2倍
-        &:is(.pic-element--gif):has(.image-loading) {
-            zoom: 2 !important;
-        }
+        //// 图片载入时
+        //&:not(:has(.image-loading)) {
+        //    margin: unset !important;
+        //    width: initial !important;
+        //    height: initial !important;
+        //}
+        //& img {
+        //    max-height: var(--chatarea-pic-element-max-height);
+        //    max-width: var(--chatarea-pic-element-max-width);
+        //    object-fit: contain;
+        //}
     }
 
     // 回复引用
@@ -428,7 +421,7 @@
                         grid-template-areas: "checkbox avatar nickname ."
                                              "checkbox avatar content  status"
                                              "checkbox avatar tips     tips" !important;
-                        grid-template-columns: auto auto auto minmax(30%, 1fr) !important;
+                        grid-template-columns: auto auto auto minmax(20%, 1fr) !important;
 
                         // 头像
                         // 在私聊模式下隐藏对方头像, 私聊模式特征: avatar后无username
@@ -500,27 +493,8 @@
                                         border-radius: 0;
                                     }
                                 }
-
-                                // 含图片气泡，限制载入时zoom后大小
-                                &:has(.pic-element) {
-                                    max-height: var(--chatarea-pic-element-max-height);
-                                    max-width: var(--chatarea-pic-element-max-width);
-                                    overflow: hidden;
-                                }
                             }
                         }
-
-                        //// 文字泡 私聊情况 角度还原
-                        //& :not(.user-name) + .message-content__wrapper {
-                        //    &:has(.text-element):not(:has(.pic-element)),
-                        //    &:has(.face-element),
-                        //    &:is(.ptt-message),
-                        //    &:has(.pic-element:nth-child(n+2)),
-                        //    &:has(.text-element):has(.pic-element) {
-                        //        border-radius: 20px 20px 20px 8px;
-                        //    }
-                        //}
-
 
                         // 信息状态, 下载按钮
                         & .content-status {
@@ -535,7 +509,7 @@
                     &.message-container--self {
                         grid-template-areas: "checkbox status content nickname . avatar"
                                              "checkbox tips   tips    tips     . avatar" !important;
-                        grid-template-columns: auto minmax(30%, 1fr) auto 0 0 !important;
+                        grid-template-columns: auto minmax(20%, 1fr) auto 0 0 !important;
 
                         // username隐藏
                         & .user-name {
