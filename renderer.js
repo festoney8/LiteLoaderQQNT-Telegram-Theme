@@ -171,6 +171,8 @@ function autoEditorHeight() {
             let chatInputAreaInitHeight = parseInt(getComputedStyle(chatInputArea).height) - lineHeight;
             let lastContentHeight = content.scrollHeight;
             let lastEditorFocusStatus = editor.classList.contains('ck-focused');
+            let containReplyMsg = false;
+            let replyMsgHeight = 0;
             const observer = new MutationObserver(async function (mutationsList, observer) {
                 // 当文字框首次聚焦时, 更新初始高度(记录用户手动调整后高度)
                 const chatInputArea = document.querySelector('.chat-input-area');
@@ -195,10 +197,28 @@ function autoEditorHeight() {
                     }
                 }
 
-                // 只在editor出现文件or图片时检测, 文字输入height变化是实时的无需延迟
-                const mediaMsg = content.querySelector('msg-img, msg-file');
+                // 只在editor出现文件or图片or回复消息时检测, 文字输入height变化是实时的无需延迟
+                const mediaMsg = editor.querySelector('msg-img, msg-file, msg-reply');
                 if (mediaMsg) {
                     await checkContentHeight();
+                }
+                // 借用上面的delay等待replyMsg渲染100ms
+                const replyMsg = editor.querySelector('msg-reply');
+                if (containReplyMsg) {
+                    if (!replyMsg) {
+                        // reply被删除, 恢复高度
+                        containReplyMsg = false;
+                        curr -= replyMsgHeight;
+                    } else {
+                        // reply没变化, 本次高度不计入
+                    }
+                } else {
+                    if (replyMsg) {
+                        // 出现新reply, 计算高度
+                        replyMsgHeight = parseInt(getComputedStyle(replyMsg).height);
+                        containReplyMsg = true;
+                        curr += replyMsgHeight;
+                    }
                 }
 
                 // 检查新高度是否超过50vh或小于初始高度, 调节可变高度
@@ -266,7 +286,7 @@ function concatBubble() {
 
         let lastMessageNodeList = Array.from(msgList.querySelectorAll("div.message"));
 
-        const observer = new MutationObserver(async function (mutationsList, observer) {
+        const observer = new MutationObserver(async function () {
             // 比对两轮的msgList
             let currMessageNodeList = Array.from(msgList.querySelectorAll("div.message"));
             let lastMessageNodeSet = new Set(lastMessageNodeList);
