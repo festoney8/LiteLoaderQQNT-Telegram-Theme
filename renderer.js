@@ -247,9 +247,14 @@ function concatBubble() {
             return new Promise((resolve, reject) => {
                 try {
                     // 检查lower是否包含timeStamp, gray-message
-                    const timestamp = lower.querySelector(".gray-tip-message,.message__timestamp");
-                    if (timestamp) {
-                        return
+                    if (lower.querySelector(".gray-tip-message,.message__timestamp")) {
+                        resolve();
+                        return;
+                    }
+                    // 检查upper和lower是否包含撤回, 检测message-container
+                    if (!lower.querySelector(".message-container") || !upper.querySelector(".message-container")) {
+                        resolve();
+                        return;
                     }
                     const avatarLower = lower.querySelector("span.avatar-span");
                     const avatarUpper = upper.querySelector("span.avatar-span");
@@ -282,9 +287,10 @@ function concatBubble() {
                     resolve();
                 } catch (error) {
                     log("compareMessage Error", error)
-                    // log("lower", lower)
-                    // log("upper", upper)
-                    reject();
+                    // log("lower", lower.innerHTML)
+                    // log("upper", upper.innerHTML)
+                    // 不reject, 避免影响其他任务
+                    resolve();
                 }
             });
         }
@@ -297,17 +303,10 @@ function concatBubble() {
             let lastMessageNodeSet = new Set(lastMessageNodeList);
 
             let tasks = [];
-            let newMsgFlag = false;
             for (let i = 0; i < currMessageNodeList.length - 1; i++) {
                 let currMsg = currMessageNodeList[i];
                 if (!lastMessageNodeSet.has(currMsg)) {
-                    newMsgFlag = true;
                     tasks.push(compareTwoMsg(currMessageNodeList[i], currMessageNodeList[i + 1]));
-                } else {
-                    if (newMsgFlag) {
-                        // 新消息区间结束
-                        break;
-                    }
                 }
             }
             // 提速
