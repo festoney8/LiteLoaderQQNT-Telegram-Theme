@@ -605,8 +605,13 @@
 
             // 顶部底部 新消息提示
             & .q-notification {
-                background-color: var(--chatarea-notification-bg-color);
-                border-color: var(--chatarea-notification-border-color);
+                //&.theme-primary {
+                    //background-color: var(--chatarea-at-element-color);
+                //}
+                &.theme-default {
+                    background-color: var(--chatarea-notification-bg-color);
+                    border-color: var(--chatarea-notification-border-color);
+                }
             }
         }
 

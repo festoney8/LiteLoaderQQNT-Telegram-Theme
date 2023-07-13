@@ -533,8 +533,8 @@
     zoom: 1.5;
     margin-right: 5px;
   }
-  .aio main.chat-msg-area .q-notification,
-  .aio.aio-independent main.chat-msg-area .q-notification {
+  .aio main.chat-msg-area .q-notification.theme-default,
+  .aio.aio-independent main.chat-msg-area .q-notification.theme-default {
     background-color: var(--chatarea-notification-bg-color);
     border-color: var(--chatarea-notification-border-color);
   }
@@ -1188,8 +1188,8 @@
     zoom: 1.5;
     margin-right: 5px;
   }
-  .aio main.chat-msg-area .q-notification,
-  .aio.aio-independent main.chat-msg-area .q-notification {
+  .aio main.chat-msg-area .q-notification.theme-default,
+  .aio.aio-independent main.chat-msg-area .q-notification.theme-default {
     background-color: var(--chatarea-notification-bg-color);
     border-color: var(--chatarea-notification-border-color);
   }
