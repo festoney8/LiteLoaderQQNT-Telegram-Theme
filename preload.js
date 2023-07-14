@@ -27,4 +27,7 @@ contextBridge.exposeInMainWorld("telegram_theme", {
     getSetting: () => ipcRenderer.invoke(
         "LiteLoaderQQNT.telegram_theme.getSetting",
     ),
+    resetSetting: () => ipcRenderer.send(
+        "LiteLoaderQQNT.telegram_theme.resetSetting",
+    ),
 });

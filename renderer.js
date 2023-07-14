@@ -4,7 +4,7 @@ function log(...args) {
     console.log.apply(console, newArgs);
 }
 
-function debounce(fn, time) {
+function debounce(fn, time = 100) {
     let timer = null;
     return function (...args) {
         timer && clearTimeout(timer);
@@ -28,7 +28,7 @@ function parseHexColor(color6Bit) {
     }
     return {
         color: actualColor,
-        opacity: opacity + ""
+        opacity: opacity.toString()
     };
 }
 
@@ -67,8 +67,8 @@ async function updateSetting() {
     });
 }
 
-async function setSetting(key, value) {
-    const data = {key: value}
+async function setSetting(k, v) {
+    const data = {"key": k, "value": v}
     try {
         telegram_theme.setSetting(data)
     } catch (err) {
@@ -83,6 +83,14 @@ async function getSetting() {
     } catch (error) {
         alert("Telegram-Theme 获取设置失败");
         return null;
+    }
+}
+
+async function resetSetting() {
+    try {
+        telegram_theme.resetSetting();
+    } catch (err) {
+        log('恢复默认设置失败', err);
     }
 }
 
@@ -433,7 +441,7 @@ async function onConfigView(view) {
 
     const parser = new DOMParser();
 
-    // 章节创建器, 一组设置的外部wrapper
+    // 章节创建, 外部wrapper
     async function createSection() {
         const componentPath = `file://${pluginPath}/setting_src/section.html`;
         let componentHTML = await (await fetch(componentPath)).text();
@@ -464,7 +472,24 @@ async function onConfigView(view) {
     await view.appendChild(section);
     let sectionEle = view.querySelector("section");
 
-    // 特殊情况, 单独添加image-selector
+    // 特例, 单独添加reset
+    const componentPath = `file://${pluginPath}/setting_src/reset.html`;
+    let c = await (await fetch(componentPath)).text();
+    const doc = parser.parseFromString(c, "text/html");
+    const ele = doc.querySelector(".box");
+    sectionEle.appendChild(ele);
+    const resetButton = view.querySelector("#reset button");
+    resetButton.addEventListener("click", function () {
+        const result = confirm('[Telegram-Theme] 是否恢复全部设置至默认？');
+        if (result) {
+            resetSetting();
+            alert('[Telegram-Theme] 已重置全部设置, 请重新进入QQ设置页');
+        } else {
+            alert('操作已取消');
+        }
+    })
+
+    // 特例, 单独添加image-selector
     const imageSelector = await createComponent("image-selector", "--chatarea-wallpaper", "聊天栏壁纸", "light与dark主题壁纸互不干扰")
     await sectionEle.appendChild(imageSelector)
     const e = view.querySelector("#--chatarea-wallpaper button");
@@ -486,6 +511,10 @@ async function onConfigView(view) {
     let sectionRecentContact = [];
     let sectionChatarea = [];
     let sectionOther = [];
+
+    let colorPickerIds = [];
+    let inputBoxIds = [];
+
     let value, description, type, component;
     for (let k in setting) {
         if (!setting.hasOwnProperty(k)) {
@@ -497,6 +526,11 @@ async function onConfigView(view) {
         component = "color-picker";
         if ("component" in setting[k]) {
             component = setting[k]["component"];
+        }
+        if (component === "color-picker") {
+            colorPickerIds.push(k);
+        } else if (component === "input-box") {
+            inputBoxIds.push(k);
         }
         const ele = await createComponent(
             component,
@@ -526,12 +560,6 @@ async function onConfigView(view) {
         }
     }
 
-    console.log(sectionImportant, sectionImportant.length);
-    console.log(sectionSidebar, sectionSidebar.length);
-    console.log(sectionRecentContact, sectionRecentContact.length);
-    console.log(sectionChatarea, sectionChatarea.length);
-    console.log(sectionOther, sectionOther.length);
-
     // 批量添加, 第2组: type=important
     sectionImportant.forEach(e => {
         sectionEle.appendChild(e);
@@ -556,6 +584,34 @@ async function onConfigView(view) {
     sectionOther.forEach(e => {
         sectionEle.appendChild(e);
     })
+
+
+    // 批量添加监听
+    // color-picker
+    for (let i = 0; i < colorPickerIds.length; i++) {
+        const id = colorPickerIds[i];
+        const inputOpacity = view.querySelector(`#${id} .slider`);
+        const inputColor = view.querySelector(`#${id} .input`);
+        inputColor.addEventListener('input', mixColor);
+        inputOpacity.addEventListener('input', mixColor);
+
+        function mixColor() {
+            const color8bit = convertTo8BitHex(inputColor.value, inputOpacity.value).toString();
+            debounce(setSetting(id, color8bit), 200);
+        }
+    }
+    // input-box
+    for (let i = 0; i < inputBoxIds.length; i++) {
+        const id = inputBoxIds[i];
+        const inputEle = view.querySelector(`#${id} input`);
+        inputEle.addEventListener('input', function (event) {
+            const userInput = event.target.value;
+            const regex = /^\d+(\.\d+)?(px|vw|vh|rem|em|%)?$/;
+            if (regex.test(userInput)) {
+                debounce(setSetting(id, userInput), 200);
+            }
+        });
+    }
 }
 
 export {

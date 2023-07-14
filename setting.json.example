@@ -335,7 +335,7 @@
         "--chatarea-username-color": {
             "value": "#faa357",
             "description": "聊天栏-对方用户名颜色",
-            "type": "chatarea"
+            "type": "important"
         },
         "--chatarea-username-text-shadow-color": {
             "value": "#00000000",
@@ -350,33 +350,33 @@
         },
         "--chatarea-header-color": {
             "value": "#17212b",
-            "description": "聊天栏-气泡之间上下间距",
+            "description": "聊天栏-header背景色",
             "type": "chatarea"
         },
         "--chatarea-bubble-color-others": {
             "value": "#2b5278",
-            "description": "聊天栏-header背景色",
-            "type": "chatarea"
+            "description": "聊天栏-对方气泡背景色",
+            "type": "important"
         },
         "--chatarea-bubble-color-self": {
             "value": "#2b5278",
-            "description": "聊天栏-对方气泡背景色",
+            "description": "聊天栏-自己气泡背景色",
             "type": "important"
         },
         "--chatarea-bubble-margin-bottom": {
             "value": "16px",
-            "description": "聊天栏-自己气泡背景色",
+            "description": "聊天栏-气泡之间上下间距",
             "component": "input-box",
             "type": "important"
         },
         "--chatarea-text-color-self": {
             "value": "#FFFFFF",
-            "description": "聊天栏-对方气泡文字色",
+            "description": "聊天栏-自己气泡文字色",
             "type": "important"
         },
         "--chatarea-text-color-others": {
             "value": "#FFFFFF",
-            "description": "聊天栏-自己气泡文字色",
+            "description": "聊天栏-对方气泡文字色",
             "type": "important"
         },
         "--chatarea-link-color": {
@@ -447,5 +447,5 @@
             "type": "other"
         }
     },
-    "version": "0.5.0"
+    "version": "0.6.0"
 }
