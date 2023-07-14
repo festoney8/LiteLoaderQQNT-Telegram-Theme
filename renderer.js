@@ -415,7 +415,7 @@ async function onConfigView(view) {
         componentHTML = componentHTML.replace(/title-placeholder/g, title);
         componentHTML = componentHTML.replace(/description-placeholder/g, description);
         const doc = parser.parseFromString(componentHTML, "text/html");
-        return doc.querySelector("div");
+        return doc.querySelector("section");
     }
 
     // 添加元素
