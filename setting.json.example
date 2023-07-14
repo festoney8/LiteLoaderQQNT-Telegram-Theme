@@ -147,12 +147,12 @@
         },
         "--chatarea-text-color-self": {
             "value": "#000000",
-            "description": "聊天栏-对方气泡文字色",
+            "description": "聊天栏-自己气泡文字色",
             "type": "important"
         },
         "--chatarea-text-color-others": {
             "value": "#000000",
-            "description": "聊天栏-自己气泡文字色",
+            "description": "聊天栏-对方气泡文字色",
             "type": "important"
         },
         "--chatarea-link-color": {
@@ -447,5 +447,5 @@
             "type": "other"
         }
     },
-    "version": "0.6.0"
+    "version": "0.6.1"
 }
