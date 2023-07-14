@@ -1,49 +1,57 @@
 @charset "UTF-8";
 @media (prefers-color-scheme: light) {
   :root {
-    --vip-name-color: black;
+    --vip-name-color: #000000;
     --sidebar-bg-color: #293b4c;
     --sidebar-selected-bg-color: #17212b;
     --sidebar-width: 65px;
     --sidebar-zoom: 1.2;
     --sidebar-icon-fill-color: #5eb7f7;
     --sidebar-icon-stroke-color: #8c9dae;
-    --sidebar-unread-bubble-color: red;
-    --recent-contact-header-bg-color: white;
+    --sidebar-unread-bubble-color: #FF0000;
+    --recent-contact-header-bg-color: #FFFFFF;
     --recent-contact-header-search-bg-color: #f1f1f1;
-    --recent-contact-list-bg-color: white;
+    --recent-contact-list-bg-color: #FFFFFF;
     --recent-contact-hover-bg-color: #f1f1f1;
     --recent-contact-sys-avatar-color: #5fbe67;
     --recent-contact-selected-bg-color: #41a1d9;
-    --recent-contact-unread-bubble-important-color: red;
+    --recent-contact-unread-bubble-important-color: #FF0000;
     --recent-contact-unread-bubble-normal-color: #bbbbbb;
-    --recent-contact-unread-bubble-border-color: transparent;
+    --recent-contact-unread-bubble-border-color: #00000000;
+    --recent-contact-item-title-font-size: 0.95em;
+    --recent-contact-item-time-font-size: 0.95em;
+    --recent-contact-item-summary-font-size: 0.93em;
     --chatarea-forward-msg-bg-color: #effdde;
+    --chatarea-reply-content-font-size: 14px;
+    --chatarea-editor-font-size: 17px;
+    --chatarea-username-font-size: 14px;
+    --chatarea-text-font-size: 16px;
+    --chatarea-pic-element-zoom: 1.5;
     --chatarea-reply-title-text-color: #5fbe67;
-    --chatarea-reply-content-text-color: grey;
+    --chatarea-reply-content-text-color: #808080;
     --chatarea-wallpaper: unset;
     --chatarea-bg-color: #7ec4ea;
-    --chatarea-username-color: white;
+    --chatarea-username-color: #FFFFFF;
     --chatarea-username-text-shadow-color: #0000008F;
     --chatarea-username-text-shadow-blur: 5px;
     --chatarea-bubble-margin-bottom: 20px;
-    --chatarea-header-color: white;
-    --chatarea-bubble-color-others: white;
+    --chatarea-header-color: #FFFFFF;
+    --chatarea-bubble-color-others: #FFFFFF;
     --chatarea-bubble-color-self: #effdde;
-    --chatarea-text-color-self: black;
-    --chatarea-text-color-others: black;
+    --chatarea-text-color-self: #000000;
+    --chatarea-text-color-others: #000000;
     --chatarea-link-color: #168ad0;
     --chatarea-at-element-color: #5fbe67;
     --chatarea-pic-element-max-height: 50vh;
     --chatarea-pic-element-max-width: 40vw;
     --chatarea-timestamp-bg-color: #00000033;
-    --chatarea-notification-bg-color: white;
-    --chatarea-notification-border-color: white;
-    --chatarea-editor-bg-color: white;
-    --chatarea-editor-text-color: black;
+    --chatarea-notification-bg-color: #FFFFFF;
+    --chatarea-notification-border-color: #FFFFFF;
+    --chatarea-editor-bg-color: #FFFFFF;
+    --chatarea-editor-text-color: #000000;
     --chatarea-editor-placeholder-text-color: #999999ff;
-    --chatarea-sticker-panel-bg-color: white;
-    --group-box-bg-color: white;
+    --chatarea-sticker-panel-bg-color: #FFFFFF;
+    --group-box-bg-color: #FFFFFF;
   }
   .tab-container {
     background-image: var(--chatarea-wallpaper) !important;
@@ -162,17 +170,17 @@
     position: unset !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title {
-    font-size: 0.95em !important;
+    font-size: var(--recent-contact-item-title-font-size) !important;
     font-weight: 600 !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title .main-info.text-ellipsis.vip-name {
     --svip_red: var(--vip-name-color);
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title .secondary-info {
-    font-size: 0.95em !important;
+    font-size: var(--recent-contact-item-time-font-size) !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__summary {
-    font-size: 0.93em !important;
+    font-size: var(--recent-contact-item-summary-font-size) !important;
     margin-top: 8px !important;
   }
   .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) {
@@ -290,7 +298,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name {
     color: var(--chatarea-username-color) !important;
     font-weight: bold;
-    font-size: 14px !important;
+    font-size: var(--chatarea-username-font-size) !important;
     margin-bottom: 2px;
     overflow: visible !important;
   }
@@ -305,7 +313,7 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
-    zoom: 1.5;
+    zoom: var(--chatarea-pic-element-zoom);
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
@@ -322,12 +330,12 @@
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content {
     color: var(--chatarea-reply-content-text-color) !important;
-    font-size: 14px !important;
+    font-size: var(--chatarea-reply-content-font-size) !important;
     font-weight: 500 !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content {
-    font-size: 16px !important;
+    font-size: var(--chatarea-text-font-size) !important;
     flex-direction: column !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal,
@@ -424,7 +432,7 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
-    zoom: 1.5;
+    zoom: var(--chatarea-pic-element-zoom);
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
@@ -441,12 +449,12 @@
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content {
     color: var(--chatarea-reply-content-text-color) !important;
-    font-size: 14px !important;
+    font-size: var(--chatarea-reply-content-font-size) !important;
     font-weight: 500 !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content {
-    font-size: 16px !important;
+    font-size: var(--chatarea-text-font-size) !important;
     flex-direction: column !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal,
@@ -553,7 +561,7 @@
   }
   .aio .chat-input-area .msg-input .qq-editor .ck-content,
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content {
-    font-size: 17px !important;
+    font-size: var(--chatarea-editor-font-size) !important;
     padding: 2px 20px 2px 20px !important;
     margin-right: 50px;
   }
@@ -646,37 +654,45 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --vip-name-color: white;
+    --vip-name-color: #FFFFFF;
     --sidebar-bg-color: #0e1621;
     --sidebar-selected-bg-color: #17212b;
     --sidebar-width: 65px;
     --sidebar-zoom: 1.2;
     --sidebar-icon-fill-color: #5eb5f7;
     --sidebar-icon-stroke-color: #8c9dae;
-    --sidebar-unread-bubble-color: red;
+    --sidebar-unread-bubble-color: #FF0000;
     --recent-contact-header-bg-color: #17212b;
     --recent-contact-header-search-bg-color: #242f3d;
     --recent-contact-list-bg-color: #17212b;
     --recent-contact-selected-bg-color: #2b5278;
     --recent-contact-hover-bg-color: #202b36;
     --recent-contact-sys-avatar-color: #3e546a;
-    --recent-contact-unread-bubble-important-color: red;
+    --recent-contact-unread-bubble-important-color: #FF0000;
     --recent-contact-unread-bubble-normal-color: #3e546a;
-    --recent-contact-unread-bubble-border-color: transparent;
+    --recent-contact-unread-bubble-border-color: #00000000;
+    --recent-contact-item-title-font-size: 0.95em;
+    --recent-contact-item-time-font-size: 0.95em;
+    --recent-contact-item-summary-font-size: 0.93em;
     --chatarea-forward-msg-bg-color: #2b5278;
+    --chatarea-reply-content-font-size: 14px;
+    --chatarea-editor-font-size: 17px;
+    --chatarea-username-font-size: 14px;
+    --chatarea-text-font-size: 16px;
+    --chatarea-pic-element-zoom: 1.5;
     --chatarea-reply-title-text-color: #89ca78;
-    --chatarea-reply-content-text-color: white;
+    --chatarea-reply-content-text-color: #FFFFFF;
     --chatarea-wallpaper: unset;
     --chatarea-bg-color: #0e1621;
     --chatarea-username-color: #faa357;
-    --chatarea-username-text-shadow-color: transparent;
+    --chatarea-username-text-shadow-color: #00000000;
     --chatarea-username-text-shadow-blur: 0;
     --chatarea-header-color: #17212b;
     --chatarea-bubble-color-others: #2b5278;
     --chatarea-bubble-color-self: #2b5278;
     --chatarea-bubble-margin-bottom: 20px;
-    --chatarea-text-color-self: white;
-    --chatarea-text-color-others: white;
+    --chatarea-text-color-self: #FFFFFF;
+    --chatarea-text-color-others: #FFFFFF;
     --chatarea-link-color: #89ca78;
     --chatarea-at-element-color: #89ca78;
     --chatarea-pic-element-max-height: 50vh;
@@ -685,7 +701,7 @@
     --chatarea-notification-bg-color: #242f3d;
     --chatarea-notification-border-color: #3e546a;
     --chatarea-editor-bg-color: #17212b;
-    --chatarea-editor-text-color: white;
+    --chatarea-editor-text-color: #FFFFFF;
     --chatarea-editor-placeholder-text-color: #4f5b5e;
     --chatarea-sticker-panel-bg-color: #17212b;
     --group-box-bg-color: #17212b;
@@ -807,17 +823,17 @@
     position: unset !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title {
-    font-size: 0.95em !important;
+    font-size: var(--recent-contact-item-title-font-size) !important;
     font-weight: 600 !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title .main-info.text-ellipsis.vip-name {
     --svip_red: var(--vip-name-color);
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__title .secondary-info {
-    font-size: 0.95em !important;
+    font-size: var(--recent-contact-item-time-font-size) !important;
   }
   #app .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .list-item__summary {
-    font-size: 0.93em !important;
+    font-size: var(--recent-contact-item-summary-font-size) !important;
     margin-top: 8px !important;
   }
   .recent-contact .recent-contact-list .viewport-list__inner .across-mode.list-item .list-item__content .list-item__info .summary-bubble:not(:has(.q-icon)) {
@@ -935,7 +951,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .user-name {
     color: var(--chatarea-username-color) !important;
     font-weight: bold;
-    font-size: 14px !important;
+    font-size: var(--chatarea-username-font-size) !important;
     margin-bottom: 2px;
     overflow: visible !important;
   }
@@ -950,7 +966,7 @@
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .pic-element {
-    zoom: 1.5;
+    zoom: var(--chatarea-pic-element-zoom);
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element {
@@ -967,12 +983,12 @@
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .reply-element .reply-content {
     color: var(--chatarea-reply-content-text-color) !important;
-    font-size: 14px !important;
+    font-size: var(--chatarea-reply-content-font-size) !important;
     font-weight: 500 !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content {
-    font-size: 16px !important;
+    font-size: var(--chatarea-text-font-size) !important;
     flex-direction: column !important;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container .message-content .text-normal,
@@ -1069,7 +1085,7 @@
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .pic-element {
-    zoom: 1.5;
+    zoom: var(--chatarea-pic-element-zoom);
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element {
@@ -1086,12 +1102,12 @@
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .reply-element .reply-content {
     color: var(--chatarea-reply-content-text-color) !important;
-    font-size: 14px !important;
+    font-size: var(--chatarea-reply-content-font-size) !important;
     font-weight: 500 !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content {
-    font-size: 16px !important;
+    font-size: var(--chatarea-text-font-size) !important;
     flex-direction: column !important;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container .message-content .text-normal,
@@ -1198,7 +1214,7 @@
   }
   .aio .chat-input-area .msg-input .qq-editor .ck-content,
   .aio.aio-independent .chat-input-area .msg-input .qq-editor .ck-content {
-    font-size: 17px !important;
+    font-size: var(--chatarea-editor-font-size) !important;
     padding: 2px 20px 2px 20px !important;
     margin-right: 50px;
   }

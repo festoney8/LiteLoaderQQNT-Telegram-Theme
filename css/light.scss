@@ -1,5 +1,5 @@
 :root {
-    --vip-name-color: black;
+    --vip-name-color: #000000;
 
     --sidebar-bg-color: #293b4c;
     --sidebar-selected-bg-color: #17212b;
@@ -7,43 +7,51 @@
     --sidebar-zoom: 1.2;
     --sidebar-icon-fill-color: #5eb7f7;
     --sidebar-icon-stroke-color: #8c9dae;
-    --sidebar-unread-bubble-color: red;
+    --sidebar-unread-bubble-color: #FF0000;
 
-    --recent-contact-header-bg-color: white;
+    --recent-contact-header-bg-color: #FFFFFF;
     --recent-contact-header-search-bg-color: #f1f1f1;
-    --recent-contact-list-bg-color: white;
+    --recent-contact-list-bg-color: #FFFFFF;
     --recent-contact-hover-bg-color: #f1f1f1;
     --recent-contact-sys-avatar-color: #5fbe67;
     --recent-contact-selected-bg-color: #41a1d9;
-    --recent-contact-unread-bubble-important-color: red;
+    --recent-contact-unread-bubble-important-color: #FF0000;
     --recent-contact-unread-bubble-normal-color: #bbbbbb;
-    --recent-contact-unread-bubble-border-color: transparent;
-    --chatarea-forward-msg-bg-color: #effdde;
+    --recent-contact-unread-bubble-border-color: #00000000;
+    --recent-contact-item-title-font-size: 0.95em;
+    --recent-contact-item-time-font-size: 0.95em;
+    --recent-contact-item-summary-font-size: 0.93em;
 
+    --chatarea-forward-msg-bg-color: #effdde;
+    --chatarea-reply-content-font-size: 14px;
+    --chatarea-editor-font-size: 17px;
+    --chatarea-username-font-size: 14px;
+    --chatarea-text-font-size: 16px;
+    --chatarea-pic-element-zoom: 1.5;
     --chatarea-reply-title-text-color: #5fbe67;
-    --chatarea-reply-content-text-color: grey;
+    --chatarea-reply-content-text-color: #808080;
     --chatarea-wallpaper: unset;
     --chatarea-bg-color: #7ec4ea;
-    --chatarea-username-color: white;
+    --chatarea-username-color: #FFFFFF;
     --chatarea-username-text-shadow-color: #0000008F;
     --chatarea-username-text-shadow-blur: 5px;
     --chatarea-bubble-margin-bottom: 20px;
-    --chatarea-header-color: white;
-    --chatarea-bubble-color-others: white;
+    --chatarea-header-color: #FFFFFF;
+    --chatarea-bubble-color-others: #FFFFFF;
     --chatarea-bubble-color-self: #effdde;
-    --chatarea-text-color-self: black;
-    --chatarea-text-color-others: black;
+    --chatarea-text-color-self: #000000;
+    --chatarea-text-color-others: #000000;
     --chatarea-link-color: #168ad0;
     --chatarea-at-element-color: #5fbe67;
     --chatarea-pic-element-max-height: 50vh;
     --chatarea-pic-element-max-width: 40vw;
     --chatarea-timestamp-bg-color: #00000033;
-    --chatarea-notification-bg-color: white;
-    --chatarea-notification-border-color: white;
-    --chatarea-editor-bg-color: white;
-    --chatarea-editor-text-color: black;
+    --chatarea-notification-bg-color: #FFFFFF;
+    --chatarea-notification-border-color: #FFFFFF;
+    --chatarea-editor-bg-color: #FFFFFF;
+    --chatarea-editor-text-color: #000000;
     --chatarea-editor-placeholder-text-color: #999999ff;
-    --chatarea-sticker-panel-bg-color: white;
+    --chatarea-sticker-panel-bg-color: #FFFFFF;
 
-    --group-box-bg-color: white;
+    --group-box-bg-color: #FFFFFF;
 }

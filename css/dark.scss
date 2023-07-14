@@ -1,5 +1,5 @@
 :root {
-    --vip-name-color: white;
+    --vip-name-color: #FFFFFF;
 
     --sidebar-bg-color: #0e1621;
     --sidebar-selected-bg-color: #17212b;
@@ -7,7 +7,7 @@
     --sidebar-zoom: 1.2;
     --sidebar-icon-fill-color: #5eb5f7;
     --sidebar-icon-stroke-color: #8c9dae;
-    --sidebar-unread-bubble-color: red;
+    --sidebar-unread-bubble-color: #FF0000;
 
     --recent-contact-header-bg-color: #17212b;
     --recent-contact-header-search-bg-color: #242f3d;
@@ -15,24 +15,32 @@
     --recent-contact-selected-bg-color: #2b5278;
     --recent-contact-hover-bg-color: #202b36;
     --recent-contact-sys-avatar-color: #3e546a;
-    --recent-contact-unread-bubble-important-color: red;
+    --recent-contact-unread-bubble-important-color: #FF0000;
     --recent-contact-unread-bubble-normal-color: #3e546a;
-    --recent-contact-unread-bubble-border-color: transparent;
-    --chatarea-forward-msg-bg-color: #2b5278;
+    --recent-contact-unread-bubble-border-color: #00000000;
+    --recent-contact-item-title-font-size: 0.95em;
+    --recent-contact-item-time-font-size: 0.95em;
+    --recent-contact-item-summary-font-size: 0.93em;
 
+    --chatarea-forward-msg-bg-color: #2b5278;
+    --chatarea-reply-content-font-size: 14px;
+    --chatarea-editor-font-size: 17px;
+    --chatarea-username-font-size: 14px;
+    --chatarea-text-font-size: 16px;
+    --chatarea-pic-element-zoom: 1.5;
     --chatarea-reply-title-text-color: #89ca78;
-    --chatarea-reply-content-text-color: white;
+    --chatarea-reply-content-text-color: #FFFFFF;
     --chatarea-wallpaper: unset;
     --chatarea-bg-color: #0e1621;
     --chatarea-username-color: #faa357;
-    --chatarea-username-text-shadow-color: transparent;
+    --chatarea-username-text-shadow-color: #00000000;
     --chatarea-username-text-shadow-blur: 0;
     --chatarea-header-color: #17212b;
     --chatarea-bubble-color-others: #2b5278;
     --chatarea-bubble-color-self: #2b5278;
     --chatarea-bubble-margin-bottom: 20px;
-    --chatarea-text-color-self: white;
-    --chatarea-text-color-others: white;
+    --chatarea-text-color-self: #FFFFFF;
+    --chatarea-text-color-others: #FFFFFF;
     --chatarea-link-color: #89ca78;
     --chatarea-at-element-color: #89ca78;
     --chatarea-pic-element-max-height: 50vh;
@@ -41,7 +49,7 @@
     --chatarea-notification-bg-color: #242f3d;
     --chatarea-notification-border-color: #3e546a;
     --chatarea-editor-bg-color: #17212b;
-    --chatarea-editor-text-color: white;
+    --chatarea-editor-text-color: #FFFFFF;
     --chatarea-editor-placeholder-text-color: #4f5b5e;
     --chatarea-sticker-panel-bg-color: #17212b;
 

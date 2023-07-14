@@ -221,6 +221,54 @@
             "value": "#FFFFFF",
             "description": "群成员列表背景色",
             "type": "other"
+        },
+        "--chatarea-reply-content-font-size": {
+            "value": "14px",
+            "description": "聊天栏-回复引用内容字号",
+            "component": "input-box",
+            "type": "chatarea"
+        },
+        "--chatarea-editor-font-size": {
+            "value": "16px",
+            "description": "聊天栏-编辑器内字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-username-font-size": {
+            "value": "14px",
+            "description": "聊天栏-对方用户名字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-text-font-size": {
+            "value": "16px",
+            "description": "聊天栏-文字气泡字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-pic-element-zoom": {
+            "value": "1.5",
+            "description": "聊天栏-图片消息缩放倍率(过大会造成缩略图裁剪)",
+            "component": "input-box",
+            "type": "chatarea"
+        },
+        "--recent-contact-item-title-font-size": {
+            "value": "0.95em",
+            "description": "列表栏-用户名或群名字号",
+            "component": "input-box",
+            "type": "recent-contact"
+        },
+        "--recent-contact-item-time-font-size": {
+            "value": "0.95em",
+            "description": "列表栏-消息时间字号",
+            "component": "input-box",
+            "type": "recent-contact"
+        },
+        "--recent-contact-item-summary-font-size": {
+            "value": "0.93em",
+            "description": "列表栏-最新消息摘要字号",
+            "component": "input-box",
+            "type": "recent-contact"
         }
     },
     "dark": {
@@ -445,7 +493,55 @@
             "value": "#17212b",
             "description": "群成员列表背景色",
             "type": "other"
+        },
+        "--chatarea-reply-content-font-size": {
+            "value": "14px",
+            "description": "聊天栏-回复引用内容字号",
+            "component": "input-box",
+            "type": "chatarea"
+        },
+        "--chatarea-editor-font-size": {
+            "value": "16px",
+            "description": "聊天栏-编辑器内字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-username-font-size": {
+            "value": "14px",
+            "description": "聊天栏-对方用户名字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-text-font-size": {
+            "value": "16px",
+            "description": "聊天栏-文字气泡字号",
+            "component": "input-box",
+            "type": "important"
+        },
+        "--chatarea-pic-element-zoom": {
+            "value": "1.5",
+            "description": "聊天栏-图片消息缩放倍率(过大会造成缩略图裁剪)",
+            "component": "input-box",
+            "type": "chatarea"
+        },
+        "--recent-contact-item-title-font-size": {
+            "value": "0.95em",
+            "description": "列表栏-用户名或群名字号",
+            "component": "input-box",
+            "type": "recent-contact"
+        },
+        "--recent-contact-item-time-font-size": {
+            "value": "0.95em",
+            "description": "列表栏-消息时间字号",
+            "component": "input-box",
+            "type": "recent-contact"
+        },
+        "--recent-contact-item-summary-font-size": {
+            "value": "0.93em",
+            "description": "列表栏-最新消息摘要字号",
+            "component": "input-box",
+            "type": "recent-contact"
         }
     },
-    "version": "0.6.1"
+    "version": "0.6.2"
 }

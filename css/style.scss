@@ -6,7 +6,7 @@
         // 存在bug, pic-element自带内敛样式style="width: xxx; height: xxx", 无法对内联样式实现150%
         // 使用zoom会被外层影响, 当屏幕过短时, 图文混合的文字泡两侧会出现裁剪
         // 放大1.5倍, 包含载入时
-        zoom: 1.5;
+        zoom: var(--chatarea-pic-element-zoom);
 
         //// 图片载入时
         //&:not(:has(.image-loading)) {
@@ -35,14 +35,14 @@
 
         & .reply-content {
             color: var(--chatarea-reply-content-text-color) !important;
-            font-size: 14px !important;
+            font-size: var(--chatarea-reply-content-font-size) !important;
             font-weight: 500 !important;
         }
     }
 
     // inner text
     & .message-content {
-        font-size: 16px !important;
+        font-size: var(--chatarea-text-font-size) !important;
         flex-direction: column !important;
 
         // 文本消息
@@ -280,7 +280,7 @@
 
                             // 强制覆盖
                             #app & .list-item__title {
-                                font-size: .95em !important;
+                                font-size: var(--recent-contact-item-title-font-size) !important;
                                 font-weight: 600 !important;
 
                                 // 去除会员红名
@@ -290,12 +290,12 @@
 
                                 // 时间
                                 & .secondary-info {
-                                    font-size: .95em !important;
+                                    font-size: var(--recent-contact-item-time-font-size) !important;
                                 }
                             }
 
                             #app & .list-item__summary {
-                                font-size: .93em !important;
+                                font-size: var(--recent-contact-item-summary-font-size) !important;
                                 margin-top: 8px !important;
                             }
 
@@ -455,7 +455,7 @@
                         & .user-name {
                             color: var(--chatarea-username-color) !important;
                             font-weight: bold;
-                            font-size: 14px !important;
+                            font-size: var(--chatarea-username-font-size) !important;
                             //padding-left: 18px;
                             margin-bottom: 2px;
                             overflow: visible !important;
@@ -650,7 +650,7 @@
                         // 去除高度, 高度只保留一行, 避免干扰计算自动高度scrollHeight
                         //min-height: unset !important;
                         // 行高和字号
-                        font-size: 17px !important;
+                        font-size: var(--chatarea-editor-font-size) !important;
                         padding: 2px 20px 2px 20px !important;
                         margin-right: 50px;
                         // 文字输入框 placeholder
