@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const {BrowserWindow, ipcMain, nativeTheme} = require("electron");
+const {BrowserWindow, ipcMain, nativeTheme, dialog} = require("electron");
 
 
 // 全局变量, 在onLoad(plugin)中完成赋值
@@ -8,9 +8,9 @@ let settingPath = "";
 let cssPath = path.join(__dirname, "css", "style.css");
 
 
-function output(...args) {
-    console.log("\x1b[32m%s\x1b[0m", "TelegramTheme:", ...args);
-}
+// function output(...args) {
+//     console.log("\x1b[32m%s\x1b[0m", "TelegramTheme:", ...args);
+// }
 
 // 防抖函数
 function debounce(fn, time = 100) {
@@ -34,14 +34,26 @@ function getCurrTheme() {
 function initSetting(settingPath) {
     const defaultSettingPath = path.join(__dirname, "setting.json.example")
     try {
+        let overwriteFlag = false;
         const folderPath = path.dirname(settingPath);
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, {recursive: true});
         }
         if (!fs.existsSync(settingPath)) {
+            overwriteFlag = true;
+        } else {
+            // 检测版本，判断是否覆盖设置
+            const data = fs.readFileSync(settingPath, 'utf8');
+            const setting = JSON.parse(data);
+            if (!("version" in setting)) {
+                overwriteFlag = true;
+            }
+        }
+        // output("overwriteFlag", overwriteFlag);
+        if (overwriteFlag) {
             fs.copyFile(defaultSettingPath, settingPath, (err) => {
                 if (err) {
-                    output('setting.json创建失败', err);
+                    throw err;
                 }
             });
         }
@@ -59,8 +71,8 @@ function updateWallpaper(webContents) {
     try {
         webContents.send("LiteLoaderQQNT.telegram_theme.updateWallpaper", normalPath);
     } catch (err) {
-        output('[Telegram Theme 获取背景图片失败]');
-        output(err);
+        // output('[Telegram Theme 获取背景图片失败]');
+        // output(err);
     }
 }
 
@@ -76,7 +88,7 @@ function getSetting() {
                     const currTheme = getCurrTheme();
                     resolve(setting[currTheme]);
                 } catch (error) {
-                    output(error);
+                    // output(error);
                     reject(error);
                 }
             }
@@ -86,34 +98,52 @@ function getSetting() {
 
 // 保存设置, 每次只存一个KV值
 function setSetting(message) {
-    // output("setSetting message", message);
+    // // output("setSetting message", message);
     const currTheme = getCurrTheme();
     const myKey = Object.keys(message)[0];
-    const value = message[myKey];
+    const newValue = message[myKey];
     fs.readFile(settingPath, 'utf8', (err, data) => {
-        if (myKey === undefined || value === undefined) {
-            output("setSetting key-value值异常", myKey, value);
+        if (myKey === undefined || newValue === undefined) {
+            // output("setSetting key-value值异常", myKey, newValue);
             return;
         }
         if (err) {
-            output(err);
+            // output(err);
             return;
         }
         let setting;
         try {
             setting = JSON.parse(data);
         } catch (err) {
-            output(err);
+            // output(err);
             return;
         }
         // 设定当前主题下参数
-        setting[currTheme][myKey] = value;
+        setting[currTheme][myKey]["value"] = newValue;
         const updatedData = JSON.stringify(setting, null, 4);
         fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
             if (err) {
-                output(err);
+                // output(err);
             }
         });
+    });
+}
+
+function setWallpaper() {
+    // 接renderer请求打开dialog, 选择图片后调用setSetting
+    dialog.showOpenDialog({
+        properties: ['openFile'],
+        filters: [
+            {name: 'Images', extensions: ['jpg', 'png', 'gif', 'webp']},
+            {name: 'All Files', extensions: ['*']}
+        ]
+    }).then(result => {
+        let filePath = result.filePaths[0];
+        filePath = filePath.replace(/\\/g, "/");
+        // 调用setSetting
+        setSetting({"--chatarea-wallpaper": `url("file://${filePath}")`})
+    }).catch(err => {
+        // output("setWallpaper, error", err)
     });
 }
 
@@ -121,7 +151,7 @@ function setSetting(message) {
 function updateSetting(webContents, settingPath) {
     fs.readFile(settingPath, "utf-8", (err, data) => {
         if (err) {
-            output("updateSetting", err);
+            // output("updateSetting", err);
         } else {
             const setting = JSON.parse(data);
             webContents.send("LiteLoaderQQNT.telegram_theme.updateSetting", setting[getCurrTheme()]);
@@ -133,7 +163,7 @@ function updateSetting(webContents, settingPath) {
 function updateCSS(webContents, cssPath) {
     fs.readFile(cssPath, "utf-8", (err, data) => {
         if (err) {
-            output("updateCSS", err);
+            // output("updateCSS", err);
         } else {
             webContents.send("LiteLoaderQQNT.telegram_theme.updateCSS", data);
         }
@@ -167,6 +197,9 @@ function onLoad(plugin) {
     ipcMain.on('LiteLoaderQQNT.telegram_theme.setSetting', async (event, message) => {
         return setSetting(message);
     });
+    ipcMain.on('LiteLoaderQQNT.telegram_theme.setWallpaper', async (event, message) => {
+        setWallpaper();
+    });
 }
 
 function onBrowserWindowCreated(window, plugin) {
@@ -193,7 +226,7 @@ function onBrowserWindowCreated(window, plugin) {
                         nativeTheme.off('updated', updateSetting);
                     }
                 } catch (error) {
-                    output(error)
+                    // output(error)
                 }
             });
         }

@@ -45,7 +45,7 @@
     --chatarea-sticker-panel-bg-color: white;
     --group-box-bg-color: white;
   }
-  .container {
+  .tab-container {
     background-image: var(--chatarea-wallpaper) !important;
     background-color: var(--chatarea-bg-color) !important;
     background-position-x: center;
@@ -55,6 +55,12 @@
   }
   .container:has(.aio-independent) {
     --bg_grey_standard: var(--chatarea-bg-color);
+    background-image: var(--chatarea-wallpaper) !important;
+    background-color: var(--chatarea-bg-color) !important;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-attachment: fixed;
   }
   .sidebar,
   .sidebar-nav {
@@ -684,7 +690,7 @@
     --chatarea-sticker-panel-bg-color: #17212b;
     --group-box-bg-color: #17212b;
   }
-  .container {
+  .tab-container {
     background-image: var(--chatarea-wallpaper) !important;
     background-color: var(--chatarea-bg-color) !important;
     background-position-x: center;
@@ -694,6 +700,12 @@
   }
   .container:has(.aio-independent) {
     --bg_grey_standard: var(--chatarea-bg-color);
+    background-image: var(--chatarea-wallpaper) !important;
+    background-color: var(--chatarea-bg-color) !important;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-attachment: fixed;
   }
   .sidebar,
   .sidebar-nav {

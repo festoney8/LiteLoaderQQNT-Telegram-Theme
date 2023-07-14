@@ -21,6 +21,9 @@ contextBridge.exposeInMainWorld("telegram_theme", {
         "LiteLoaderQQNT.telegram_theme.setSetting",
         message
     ),
+    setWallpaper: () => ipcRenderer.send(
+        "LiteLoaderQQNT.telegram_theme.setWallpaper",
+    ),
     getSetting: () => ipcRenderer.invoke(
         "LiteLoaderQQNT.telegram_theme.getSetting",
     ),

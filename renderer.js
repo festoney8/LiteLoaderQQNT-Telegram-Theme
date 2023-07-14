@@ -52,10 +52,13 @@ async function setSetting(key, value) {
 }
 
 async function getSetting() {
-    await telegram_theme.getSetting().then((result) => {
-    }).catch(error => {
-        log('getSetting Promise rejected:', error);
-    })
+    try {
+        const result = await telegram_theme.getSetting();
+        return result;
+    } catch (error) {
+        alert("Telegram-Theme 获取设置失败");
+        return null;
+    }
 }
 
 // 更新聊天窗口背景图片
@@ -64,6 +67,10 @@ async function updateWallpaper() {
         const root = document.documentElement;
         root.style.setProperty("--chatarea-wallpaper", `url("file://${imgPath}")`);
     });
+}
+
+async function setWallpaper() {
+    telegram_theme.setWallpaper();
 }
 
 // 信息列表宽度调节 重写ResizeHandler事件调宽宽度
@@ -383,6 +390,45 @@ async function onLoad() {
     telegram_theme.rendererReady();
 }
 
+
+async function onConfigView(view) {
+    let pluginPath;
+    if (typeof LiteLoader !== "undefined") {
+        pluginPath = LiteLoader.plugins.telegram_theme.path.plugin;
+    } else {
+        pluginPath = betterQQNT.plugins.telegram_theme.path.plugin;
+    }
+    pluginPath = pluginPath.replace(/\\/g, "/");
+
+    // 引入外部css
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = `file://${pluginPath}/setting_src/bulma.min.css`;
+    document.head.appendChild(css);
+
+    const parser = new DOMParser();
+
+    async function getComponent(name, id, title, description) {
+        const componentPath = `file://${pluginPath}/setting_src/${name}.html`;
+        let componentHTML = await (await fetch(componentPath)).text();
+        componentHTML = componentHTML.replace(/id-placeholder/g, id);
+        componentHTML = componentHTML.replace(/title-placeholder/g, title);
+        componentHTML = componentHTML.replace(/description-placeholder/g, description);
+        const doc = parser.parseFromString(componentHTML, "text/html");
+        return doc.querySelector("div");
+    }
+
+    // 添加元素
+    const imageSelector = await getComponent("image-selector", "--chatarea-wallpaper", "聊天栏壁纸", "light与dark主题壁纸互不干扰")
+    await view.appendChild(imageSelector)
+
+    // 绑定事件, 调用IPC
+    const e = view.querySelector("#--chatarea-wallpaper button");
+    e.addEventListener("click", function () {
+        setWallpaper();
+    });
+}
+
 export {
-    onLoad
+    onLoad, onConfigView
 }

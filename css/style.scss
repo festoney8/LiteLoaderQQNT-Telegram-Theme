@@ -100,7 +100,8 @@
 
 @mixin globalCSS() {
     // 全局颜色
-    .container {
+    // 不使用container, 避免影响设置界面的container
+    .tab-container {
         // 设定telegram背景图 or telegram背景色
         background: {
             image: var(--chatarea-wallpaper) !important;
@@ -110,9 +111,17 @@
             size: cover;
             attachment: fixed;
         }
-        // 独立聊天窗口 全局背景色 (影响输入区域颜色)
-        &:has(.aio-independent) {
-            --bg_grey_standard: var(--chatarea-bg-color);
+    }
+    // 独立聊天窗口 全局背景色 (影响输入区域颜色)
+    .container:has(.aio-independent) {
+        --bg_grey_standard: var(--chatarea-bg-color);
+        background: {
+            image: var(--chatarea-wallpaper) !important;
+            color: var(--chatarea-bg-color) !important;
+            position-x: center;
+            position-y: center;
+            size: cover;
+            attachment: fixed;
         }
     }
 

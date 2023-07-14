@@ -1,10 +1,10 @@
 {
     "manifest_version": 1,
     "type": "theme",
-    "name": "QQNT仿Telegram风格主题",
+    "name": "仿Telegram风格主题",
     "slug": "telegram_theme",
     "description": "高仿Telegram的QQNT主题",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "author": [
         {
             "name": "festoney8",
