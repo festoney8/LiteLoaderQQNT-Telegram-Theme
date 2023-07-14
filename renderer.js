@@ -29,15 +29,15 @@ async function updateSetting() {
     const root = document.documentElement;
     telegram_theme.updateSetting((event, message) => {
         const themeSetting = message;
-        for (const key in themeSetting) {
+        for (const k in themeSetting) {
             // 检测壁纸, 如用户未设定, 不覆盖默认
-            if (key === "--chatarea-wallpaper") {
+            if (k === "--chatarea-wallpaper") {
                 const blacklist = ["", "unset", "default", "url()", "url(.)", "url(/)", "none"];
-                if (blacklist.includes(themeSetting[key])) {
+                if (blacklist.includes(themeSetting[k]["value"])) {
                     continue
                 }
             }
-            root.style.setProperty(key, themeSetting[key]);
+            root.style.setProperty(k, themeSetting[k]["value"]);
         }
     });
 }
