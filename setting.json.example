@@ -7,189 +7,189 @@
         },
         "--sidebar-bg-color": {
             "value": "#293b4c",
-            "description": "左边栏背景色",
+            "description": "左边栏-背景色",
             "type": "sidebar"
         },
         "--sidebar-selected-bg-color": {
             "value": "#17212b",
-            "description": "左边栏选中项背景色",
+            "description": "左边栏-选中项背景色",
             "type": "sidebar"
         },
         "--sidebar-width": {
             "value": "65px",
-            "description": "左边栏宽度",
+            "description": "左边栏-宽度",
             "component": "input-box",
             "type": "sidebar"
         },
         "--sidebar-zoom": {
             "value": "1.2",
-            "description": "左边栏缩放",
+            "description": "左边栏-缩放",
             "component": "input-box",
             "type": "sidebar"
         },
         "--sidebar-icon-fill-color": {
             "value": "#5eb7f7",
-            "description": "左边栏icon填充色",
+            "description": "左边栏-icon填充色",
             "type": "sidebar"
         },
         "--sidebar-icon-stroke-color": {
             "value": "#8c9dae",
-            "description": "左边栏icon线条色",
+            "description": "左边栏-icon线条色",
             "type": "sidebar"
         },
         "--sidebar-unread-bubble-color": {
             "value": "#FF0000",
-            "description": "左边栏未读提示气泡颜色",
+            "description": "左边栏-未读提示气泡颜色",
             "type": "sidebar"
         },
         "--recent-contact-header-bg-color": {
             "value": "#FFFFFF",
-            "description": "列表栏header背景色",
+            "description": "列表栏-header背景色",
             "type": "recent-contact"
         },
         "--recent-contact-header-search-bg-color": {
             "value": "#f1f1f1",
-            "description": "列表栏搜索框颜色",
+            "description": "列表栏-搜索框颜色",
             "type": "recent-contact"
         },
         "--recent-contact-list-bg-color": {
             "value": "#FFFFFF",
-            "description": "列表栏背景色",
+            "description": "列表栏-背景色",
             "type": "recent-contact"
         },
         "--recent-contact-hover-bg-color": {
             "value": "#f1f1f1",
-            "description": "列表栏hover色",
+            "description": "列表栏-hover色",
             "type": "recent-contact"
         },
         "--recent-contact-sys-avatar-color": {
             "value": "#5fbe67",
-            "description": "列表栏群助手和我的手机头像颜色",
+            "description": "列表栏-群助手和我的手机头像颜色",
             "type": "recent-contact"
         },
         "--recent-contact-selected-bg-color": {
             "value": "#41a1d9",
-            "description": "列表栏选中后颜色",
+            "description": "列表栏-选中后颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-important-color": {
             "value": "#FF0000",
-            "description": "列表栏重要消息提示颜色",
+            "description": "列表栏-重要消息提示颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-normal-color": {
             "value": "#bbbbbb",
-            "description": "列表栏普通消息提示颜色",
+            "description": "列表栏-普通消息提示颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-border-color": {
             "value": "#00000000",
-            "description": "列表栏消息提示边缘颜色",
+            "description": "列表栏-消息提示边缘颜色",
             "type": "recent-contact"
         },
         "--chatarea-reply-title-text-color": {
             "value": "#5fbe67",
-            "description": "聊天栏回复引用消息用户名等颜色",
+            "description": "聊天栏-回复引用消息用户名等颜色",
             "type": "chatarea"
         },
         "--chatarea-reply-content-text-color": {
             "value": "#808080",
-            "description": "聊天栏回复引用消息文字颜色",
+            "description": "聊天栏-回复引用消息文字颜色",
             "type": "chatarea"
         },
         "--chatarea-wallpaper": {
             "value": "unset",
-            "description": "聊天栏壁纸",
+            "description": "聊天栏-壁纸",
             "component": "image-selector",
             "type": "special"
         },
         "--chatarea-bg-color": {
             "value": "#7ec4ea",
-            "description": "聊天栏背景颜色（已失效）",
+            "description": "聊天栏-背景颜色（已失效）",
             "type": "chatarea"
         },
         "--chatarea-username-color": {
             "value": "#FFFFFF",
-            "description": "聊天栏对方用户名颜色",
+            "description": "聊天栏-对方用户名颜色",
             "type": "chatarea"
         },
         "--chatarea-username-text-shadow-color": {
             "value": "#0000008F",
-            "description": "聊天栏对方用户名底部阴影颜色",
+            "description": "聊天栏-对方用户名底部阴影颜色",
             "type": "chatarea"
         },
         "--chatarea-username-text-shadow-blur": {
             "value": "5px",
-            "description": "聊天栏对方用户名底部阴影模糊尺寸",
+            "description": "聊天栏-对方用户名底部阴影模糊尺寸",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-bubble-margin-bottom": {
             "value": "16px",
-            "description": "聊天栏气泡之间上下间距",
+            "description": "聊天栏-气泡之间上下间距",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-header-color": {
             "value": "#FFFFFF",
-            "description": "聊天栏header背景色",
+            "description": "聊天栏-header背景色",
             "type": "chatarea"
         },
         "--chatarea-bubble-color-others": {
             "value": "#FFFFFF",
-            "description": "聊天栏对方气泡背景色",
+            "description": "聊天栏-对方气泡背景色",
             "type": "important"
         },
         "--chatarea-bubble-color-self": {
             "value": "#effdde",
-            "description": "聊天栏自己气泡背景色",
+            "description": "聊天栏-自己气泡背景色",
             "type": "important"
         },
         "--chatarea-text-color-self": {
             "value": "#000000",
-            "description": "聊天栏对方气泡文字色",
+            "description": "聊天栏-对方气泡文字色",
             "type": "important"
         },
         "--chatarea-text-color-others": {
             "value": "#000000",
-            "description": "聊天栏自己气泡文字色",
+            "description": "聊天栏-自己气泡文字色",
             "type": "important"
         },
         "--chatarea-link-color": {
             "value": "#168ad0",
-            "description": "聊天栏URL文字色",
+            "description": "聊天栏-URL文字色",
             "type": "important"
         },
         "--chatarea-at-element-color": {
             "value": "#5fbe67",
-            "description": "聊天栏@user消息文字色",
+            "description": "聊天栏-@user消息文字色",
             "type": "important"
         },
         "--chatarea-pic-element-max-height": {
             "value": "50vh",
-            "description": "聊天栏图片高度限制（已失效）",
+            "description": "聊天栏-图片高度限制（已失效）",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-pic-element-max-width": {
             "value": "40vw",
-            "description": "聊天栏图片宽度限制（已失效）",
+            "description": "聊天栏-图片宽度限制（已失效）",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-timestamp-bg-color": {
             "value": "#00000033",
-            "description": "聊天栏时间、撤回提示背景色",
+            "description": "聊天栏-时间、撤回提示背景色",
             "type": "chatarea"
         },
         "--chatarea-notification-bg-color": {
             "value": "#FFFFFF",
-            "description": "聊天栏notification背景色（新旧消息箭头）",
+            "description": "聊天栏-notification背景色（新旧消息箭头）",
             "type": "chatarea"
         },
         "--chatarea-notification-border-color": {
             "value": "#FFFFFF",
-            "description": "聊天栏notification边缘色",
+            "description": "聊天栏-notification边缘色",
             "type": "chatarea"
         },
         "--chatarea-editor-bg-color": {
@@ -231,189 +231,189 @@
         },
         "--sidebar-bg-color": {
             "value": "#0e1621",
-            "description": "左边栏背景色",
+            "description": "左边栏-背景色",
             "type": "sidebar"
         },
         "--sidebar-selected-bg-color": {
             "value": "#17212b",
-            "description": "左边栏选中项背景色",
+            "description": "左边栏-选中项背景色",
             "type": "sidebar"
         },
         "--sidebar-width": {
             "value": "65px",
-            "description": "左边栏宽度",
+            "description": "左边栏-宽度",
             "component": "input-box",
             "type": "sidebar"
         },
         "--sidebar-zoom": {
             "value": "1.2",
-            "description": "左边栏缩放",
+            "description": "左边栏-缩放",
             "component": "input-box",
             "type": "sidebar"
         },
         "--sidebar-icon-fill-color": {
             "value": "#5eb5f7",
-            "description": "左边栏icon填充色",
+            "description": "左边栏-icon填充色",
             "type": "sidebar"
         },
         "--sidebar-icon-stroke-color": {
             "value": "#8c9dae",
-            "description": "左边栏icon线条色",
+            "description": "左边栏-icon线条色",
             "type": "sidebar"
         },
         "--sidebar-unread-bubble-color": {
             "value": "#FF0000",
-            "description": "左边栏未读提示气泡颜色",
+            "description": "左边栏-未读提示气泡颜色",
             "type": "sidebar"
         },
         "--recent-contact-header-bg-color": {
             "value": "#17212b",
-            "description": "列表栏header背景色",
+            "description": "列表栏-header背景色",
             "type": "recent-contact"
         },
         "--recent-contact-header-search-bg-color": {
             "value": "#242f3d",
-            "description": "列表栏搜索框颜色",
+            "description": "列表栏-搜索框颜色",
             "type": "recent-contact"
         },
         "--recent-contact-list-bg-color": {
             "value": "#17212b",
-            "description": "列表栏背景色",
+            "description": "列表栏-背景色",
             "type": "recent-contact"
         },
         "--recent-contact-hover-bg-color": {
             "value": "#202b36",
-            "description": "列表栏hover色",
+            "description": "列表栏-hover色",
             "type": "recent-contact"
         },
         "--recent-contact-sys-avatar-color": {
             "value": "#3e546a",
-            "description": "列表栏群助手和我的手机头像颜色",
+            "description": "列表栏-群助手和我的手机头像颜色",
             "type": "recent-contact"
         },
         "--recent-contact-selected-bg-color": {
             "value": "#2b5278",
-            "description": "列表栏选中后颜色",
+            "description": "列表栏-选中后颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-important-color": {
             "value": "#FF0000",
-            "description": "列表栏重要消息提示颜色",
+            "description": "列表栏-重要消息提示颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-normal-color": {
             "value": "#3e546a",
-            "description": "列表栏普通消息提示颜色",
+            "description": "列表栏-普通消息提示颜色",
             "type": "recent-contact"
         },
         "--recent-contact-unread-bubble-border-color": {
             "value": "#00000000",
-            "description": "列表栏消息提示边缘颜色",
+            "description": "列表栏-消息提示边缘颜色",
             "type": "recent-contact"
         },
         "--chatarea-reply-title-text-color": {
             "value": "#89ca78",
-            "description": "聊天栏回复引用消息用户名等颜色",
+            "description": "聊天栏-回复引用消息用户名等颜色",
             "type": "chatarea"
         },
         "--chatarea-reply-content-text-color": {
             "value": "#FFFFFF",
-            "description": "聊天栏回复引用消息文字颜色",
+            "description": "聊天栏-回复引用消息文字颜色",
             "type": "chatarea"
         },
         "--chatarea-wallpaper": {
             "value": "unset",
-            "description": "聊天栏壁纸",
+            "description": "聊天栏-壁纸",
             "component": "image-selector",
             "type": "special"
         },
         "--chatarea-bg-color": {
             "value": "#0e1621",
-            "description": "聊天栏背景颜色（已失效）",
+            "description": "聊天栏-背景颜色（已失效）",
             "type": "chatarea"
         },
         "--chatarea-username-color": {
             "value": "#faa357",
-            "description": "聊天栏对方用户名颜色",
+            "description": "聊天栏-对方用户名颜色",
             "type": "chatarea"
         },
         "--chatarea-username-text-shadow-color": {
             "value": "#00000000",
-            "description": "聊天栏对方用户名底部阴影颜色",
+            "description": "聊天栏-对方用户名底部阴影颜色",
             "type": "chatarea"
         },
         "--chatarea-username-text-shadow-blur": {
             "value": "0",
-            "description": "聊天栏对方用户名底部阴影模糊尺寸",
+            "description": "聊天栏-对方用户名底部阴影模糊尺寸",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-header-color": {
             "value": "#17212b",
-            "description": "聊天栏气泡之间上下间距",
+            "description": "聊天栏-气泡之间上下间距",
             "type": "chatarea"
         },
         "--chatarea-bubble-color-others": {
             "value": "#2b5278",
-            "description": "聊天栏header背景色",
+            "description": "聊天栏-header背景色",
             "type": "chatarea"
         },
         "--chatarea-bubble-color-self": {
             "value": "#2b5278",
-            "description": "聊天栏对方气泡背景色",
+            "description": "聊天栏-对方气泡背景色",
             "type": "important"
         },
         "--chatarea-bubble-margin-bottom": {
             "value": "16px",
-            "description": "聊天栏自己气泡背景色",
+            "description": "聊天栏-自己气泡背景色",
             "component": "input-box",
             "type": "important"
         },
         "--chatarea-text-color-self": {
             "value": "#FFFFFF",
-            "description": "聊天栏对方气泡文字色",
+            "description": "聊天栏-对方气泡文字色",
             "type": "important"
         },
         "--chatarea-text-color-others": {
             "value": "#FFFFFF",
-            "description": "聊天栏自己气泡文字色",
+            "description": "聊天栏-自己气泡文字色",
             "type": "important"
         },
         "--chatarea-link-color": {
             "value": "#89ca78",
-            "description": "聊天栏URL文字色",
+            "description": "聊天栏-URL文字色",
             "type": "important"
         },
         "--chatarea-at-element-color": {
             "value": "#89ca78",
-            "description": "聊天栏@user消息文字色",
+            "description": "聊天栏-@user消息文字色",
             "type": "important"
         },
         "--chatarea-pic-element-max-height": {
             "value": "50vh",
-            "description": "聊天栏图片高度限制（已失效）",
+            "description": "聊天栏-图片高度限制（已失效）",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-pic-element-max-width": {
             "value": "40vw",
-            "description": "聊天栏图片宽度限制（已失效）",
+            "description": "聊天栏-图片宽度限制（已失效）",
             "component": "input-box",
             "type": "chatarea"
         },
         "--chatarea-timestamp-bg-color": {
             "value": "#192b36",
-            "description": "聊天栏时间、撤回提示背景色",
+            "description": "聊天栏-时间、撤回提示背景色",
             "type": "chatarea"
         },
         "--chatarea-notification-bg-color": {
             "value": "#242f3d",
-            "description": "聊天栏notification背景色（新旧消息箭头）",
+            "description": "聊天栏-notification背景色（新旧消息箭头）",
             "type": "chatarea"
         },
         "--chatarea-notification-border-color": {
             "value": "#3e546a",
-            "description": "聊天栏notification边缘色",
+            "description": "聊天栏-notification边缘色",
             "type": "chatarea"
         },
         "--chatarea-editor-bg-color": {

@@ -14,6 +14,31 @@ function debounce(fn, time) {
     }
 }
 
+// 十六进制颜色转实际颜色+透明度
+function parseHexColor(color6Bit) {
+    const actualColor = color6Bit.slice(0, 7);
+    let opacity = 1;
+    if (color6Bit.length === 9) {
+        const opacityHex = color6Bit.slice(7);
+        const opacityDecimal = parseInt(opacityHex, 16);
+
+        if (!isNaN(opacityDecimal)) {
+            opacity = opacityDecimal / 255;
+        }
+    }
+    return {
+        color: actualColor,
+        opacity: opacity + ""
+    };
+}
+
+// 6位颜色+透明度转8位颜色
+function convertTo8BitHex(color, opacity) {
+    const opacityHex = Math.round(opacity * 255).toString(16).padStart(2, '0');
+    const hexColor = color.slice(0, 7) + opacityHex;
+    return hexColor;
+}
+
 // css导入
 async function updateCSS() {
     const element = document.createElement("style");
@@ -408,25 +433,129 @@ async function onConfigView(view) {
 
     const parser = new DOMParser();
 
-    async function getComponent(name, id, title, description) {
-        const componentPath = `file://${pluginPath}/setting_src/${name}.html`;
+    // 章节创建器, 一组设置的外部wrapper
+    async function createSection() {
+        const componentPath = `file://${pluginPath}/setting_src/section.html`;
         let componentHTML = await (await fetch(componentPath)).text();
-        componentHTML = componentHTML.replace(/id-placeholder/g, id);
-        componentHTML = componentHTML.replace(/title-placeholder/g, title);
-        componentHTML = componentHTML.replace(/description-placeholder/g, description);
         const doc = parser.parseFromString(componentHTML, "text/html");
         return doc.querySelector("section");
     }
 
-    // 添加元素
-    const imageSelector = await getComponent("image-selector", "--chatarea-wallpaper", "聊天栏壁纸", "light与dark主题壁纸互不干扰")
-    await view.appendChild(imageSelector)
+    // 组件创建器, 根据组件类型创建每行设置
+    async function createComponent(component, id, title, description, value) {
+        const componentPath = `file://${pluginPath}/setting_src/${component}.html`;
+        let c = await (await fetch(componentPath)).text();
+        c = c.replace(/id-placeholder/g, id);
+        c = c.replace(/title-placeholder/g, title);
+        c = c.replace(/description-placeholder/g, description);
 
-    // 绑定事件, 调用IPC
+        if (component === "input-box") {
+            c = c.replace(/text-holder/g, value);
+        } else if (component === "color-picker") {
+            const data = parseHexColor(value);
+            c = c.replace(/color-placeholder/g, data.color);
+            c = c.replace(/opacity-placeholder/g, data.opacity);
+        }
+        const doc = parser.parseFromString(c, "text/html");
+        return doc.querySelector(".box");
+    }
+
+    let section = await createSection();
+    await view.appendChild(section);
+    let sectionEle = view.querySelector("section");
+
+    // 特殊情况, 单独添加image-selector
+    const imageSelector = await createComponent("image-selector", "--chatarea-wallpaper", "聊天栏壁纸", "light与dark主题壁纸互不干扰")
+    await sectionEle.appendChild(imageSelector)
     const e = view.querySelector("#--chatarea-wallpaper button");
     e.addEventListener("click", function () {
         setWallpaper();
     });
+
+
+    // 读设置, 批量创建节点
+    let setting;
+    try {
+        setting = await getSetting();
+    } catch (error) {
+        throw new Error('Telegram-Theme 获取设置失败');
+    }
+
+    let sectionImportant = [];
+    let sectionSidebar = [];
+    let sectionRecentContact = [];
+    let sectionChatarea = [];
+    let sectionOther = [];
+    let value, description, type, component;
+    for (let k in setting) {
+        if (!setting.hasOwnProperty(k)) {
+            continue;
+        }
+        value = setting[k]["value"];
+        description = setting[k]["description"];
+        type = setting[k]["type"];
+        component = "color-picker";
+        if ("component" in setting[k]) {
+            component = setting[k]["component"];
+        }
+        const ele = await createComponent(
+            component,
+            k,
+            // description显示在title比较好
+            description,
+            // id显示在description
+            k,
+            value
+        )
+        switch (type) {
+            case "important":
+                sectionImportant.push(ele);
+                break;
+            case "sidebar":
+                sectionSidebar.push(ele);
+                break;
+            case "recent-contact":
+                sectionRecentContact.push(ele);
+                break;
+            case "chatarea":
+                sectionChatarea.push(ele);
+                break;
+            case "other":
+                sectionOther.push(ele);
+                break;
+        }
+    }
+
+    console.log(sectionImportant, sectionImportant.length);
+    console.log(sectionSidebar, sectionSidebar.length);
+    console.log(sectionRecentContact, sectionRecentContact.length);
+    console.log(sectionChatarea, sectionChatarea.length);
+    console.log(sectionOther, sectionOther.length);
+
+    // 批量添加, 第2组: type=important
+    sectionImportant.forEach(e => {
+        sectionEle.appendChild(e);
+    })
+
+    // 第3组: type=sidebar
+    sectionSidebar.forEach(e => {
+        sectionEle.appendChild(e);
+    })
+
+    // 第4组: type=chatarea
+    sectionChatarea.forEach(e => {
+        sectionEle.appendChild(e);
+    })
+
+    // 第5组: type=recent-contact
+    sectionRecentContact.forEach(e => {
+        sectionEle.appendChild(e);
+    })
+
+    // 第6组: type=other
+    sectionOther.forEach(e => {
+        sectionEle.appendChild(e);
+    })
 }
 
 export {
