@@ -101,7 +101,7 @@
             "value": "unset",
             "description": "聊天栏壁纸",
             "component": "image-selector",
-            "type": "important"
+            "type": "special"
         },
         "--chatarea-bg-color": {
             "value": "#7ec4ea",
@@ -325,7 +325,7 @@
             "value": "unset",
             "description": "聊天栏壁纸",
             "component": "image-selector",
-            "type": "important"
+            "type": "special"
         },
         "--chatarea-bg-color": {
             "value": "#0e1621",
