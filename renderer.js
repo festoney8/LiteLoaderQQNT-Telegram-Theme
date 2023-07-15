@@ -35,8 +35,7 @@ function parseHexColor(color6Bit) {
 // 6位颜色+透明度转8位颜色
 function convertTo8BitHex(color, opacity) {
     const opacityHex = Math.round(opacity * 255).toString(16).padStart(2, '0');
-    const hexColor = color.slice(0, 7) + opacityHex;
-    return hexColor;
+    return color.slice(0, 7) + opacityHex;
 }
 
 // css导入
@@ -78,8 +77,7 @@ async function setSetting(k, v) {
 
 async function getSetting() {
     try {
-        const result = await telegram_theme.getSetting();
-        return result;
+        return await telegram_theme.getSetting();
     } catch (error) {
         alert("Telegram-Theme 获取设置失败");
         return null;
@@ -436,7 +434,8 @@ async function onConfigView(view) {
     // 引入外部css
     const css = document.createElement("link");
     css.rel = "stylesheet";
-    css.href = `file://${pluginPath}/setting_src/bulma.min.css`;
+    // 控制bulma css的作用范围
+    css.href = `file://${pluginPath}/setting_src/telegram.css`;
     document.head.appendChild(css);
 
     const parser = new DOMParser();
