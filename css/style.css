@@ -405,6 +405,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
+    margin: auto;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
@@ -524,6 +525,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
+    margin: auto;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .content-status {
@@ -1058,6 +1060,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
+    margin: auto;
   }
   .aio main.chat-msg-area .message .message-container:not(.message-container--self) .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container:not(.message-container--self) .content-status {
@@ -1177,6 +1180,7 @@
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.pic-element:nth-child(n+2)) .pic-element,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .message-content__wrapper .msg-content-container:has(.text-element):has(.pic-element) .pic-element {
     border-radius: 0;
+    margin: auto;
   }
   .aio main.chat-msg-area .message .message-container.message-container--self .content-status,
   .aio.aio-independent main.chat-msg-area .message .message-container.message-container--self .content-status {
