@@ -4,7 +4,7 @@
     "name": "仿Telegram风格主题",
     "slug": "telegram_theme",
     "description": "高仿Telegram的QQNT主题",
-    "version": "0.6.5",
+    "version": "0.6.6",
     "thumbnail": "./image/icon.png",
     "author": [
         {
@@ -17,8 +17,7 @@
         "branch": "main"
     },
     "platform": [
-        "win32",
-        "darwin"
+        "win32"
     ],
     "injects": {
         "renderer": "./renderer.js",
