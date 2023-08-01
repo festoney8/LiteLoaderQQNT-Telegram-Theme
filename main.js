@@ -139,7 +139,7 @@ function setWallpaper() {
         let filePath = result.filePaths[0];
         filePath = filePath.replace(/\\/g, "/");
         // 调用setSetting
-        setSetting({"key": "--chatarea-wallpaper", "value": `url("file://${filePath}")`})
+        setSetting({"key": "--chatarea-wallpaper", "value": `url("appimg://${filePath}")`})
     }).catch(err => {
         // output("setWallpaper, error", err)
     });

@@ -3,13 +3,16 @@
 [LiteLoaderQQNT](https://github.com/mo-jinran/LiteLoaderQQNT)
 插件，基于 [test-theme](https://github.com/mo-jinran/test-theme) 编写，高仿 Telegram 风格的QQNT主题
 
-## 介绍
+## 注意事项
 
 - 本主题仅为个人使用的娱乐性质主题
 - **不要与其他主题同时启用，会造成样式混乱**
 - 推荐在 **QQ设置 - 默认字号** 下使用主题，以获得最佳体验
-- 测试环境：Win10 + QQNT9.9.0-14619 + LiteLoader0.3.1
-    - 已知 Linux 和 MacOS 下无法使用
+- 已知 Linux 和 MacOS 下无法使用
+
+## v3版本
+
+- v3 版本尝试适配 QQNT9.9.1-15293
 
 ## 功能
 

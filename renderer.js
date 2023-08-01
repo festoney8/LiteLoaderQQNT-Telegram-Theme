@@ -96,7 +96,7 @@ async function resetSetting() {
 async function updateWallpaper() {
     telegram_theme.updateWallpaper((event, imgPath) => {
         const root = document.documentElement;
-        root.style.setProperty("--chatarea-wallpaper", `url("file://${imgPath}")`);
+        root.style.setProperty("--chatarea-wallpaper", `url("appimg://${imgPath}")`);
     });
 }
 
@@ -435,14 +435,14 @@ async function onConfigView(view) {
     const css = document.createElement("link");
     css.rel = "stylesheet";
     // 控制bulma css的作用范围
-    css.href = `file://${pluginPath}/setting_src/telegram.css`;
+    css.href = `llqqnt://local-file/${pluginPath}/setting_src/telegram.css`;
     document.head.appendChild(css);
 
     const parser = new DOMParser();
 
     // 章节创建, 外部wrapper
     async function createSection() {
-        const componentPath = `file://${pluginPath}/setting_src/section.html`;
+        const componentPath = `llqqnt://local-file/${pluginPath}/setting_src/section.html`;
         let componentHTML = await (await fetch(componentPath)).text();
         const doc = parser.parseFromString(componentHTML, "text/html");
         return doc.querySelector("section");
@@ -450,7 +450,7 @@ async function onConfigView(view) {
 
     // 组件创建器, 根据组件类型创建每行设置
     async function createComponent(component, id, title, description, value) {
-        const componentPath = `file://${pluginPath}/setting_src/${component}.html`;
+        const componentPath = `llqqnt://local-file/${pluginPath}/setting_src/${component}.html`;
         let c = await (await fetch(componentPath)).text();
         c = c.replace(/id-placeholder/g, id);
         c = c.replace(/title-placeholder/g, title);
@@ -472,7 +472,7 @@ async function onConfigView(view) {
     let sectionEle = view.querySelector("section");
 
     // 特例, 单独添加reset
-    const componentPath = `file://${pluginPath}/setting_src/reset.html`;
+    const componentPath = `llqqnt://local-file/${pluginPath}/setting_src/reset.html`;
     let c = await (await fetch(componentPath)).text();
     const doc = parser.parseFromString(c, "text/html");
     const ele = doc.querySelector(".box");
