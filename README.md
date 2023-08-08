@@ -3,13 +3,18 @@
 [LiteLoaderQQNT](https://github.com/mo-jinran/LiteLoaderQQNT)
 插件，基于 [test-theme](https://github.com/mo-jinran/test-theme) 编写，高仿 Telegram 风格的QQNT主题
 
-## 介绍
+## 注意事项
 
 - 本主题仅为个人使用的娱乐性质主题
 - **不要与其他主题同时启用，会造成样式混乱**
 - 推荐在 **QQ设置 - 默认字号** 下使用主题，以获得最佳体验
+
+## 版本适配
+
+- main 分支适配到 QQNT 9.9.0-14619
+- QQNT 9.9.1 及以上版本请使用 [**v3分支**](https://github.com/festoney8/LiteLoaderQQNT-Telegram-Theme/tree/v3)
 - 测试环境：Win10 + QQNT9.9.0-14619 + LiteLoader0.3.1
-    - 已知 Linux 和 MacOS 下无法使用
+- 已知 Linux 和 MacOS 下无法使用
 
 ## 功能
 
@@ -33,13 +38,10 @@
 
 ## 已知问题
 
-1. ~~新图片消息预载入时对话气泡大小突变~~ 已修复
+1. 若开启 QQ 后软件因载入卡顿 / 网络不畅等原因引起定时器超时，会出现主题不完全生效的情况，此时可重启 QQ 或在 devtools 内刷新页面解决
 2. 独立窗口模式编辑框不支持自动调高
-3. QQNT老版本（如13720）不支持列表栏缩短
-4. ~~查看聊天记录时因大图载入引起纵向跳变~~ 已修复
-5. ~~快速滚动聊天记录时不流畅~~ 基本修复，仅剩余少量卡顿
-6. Linux 系统下的 QQNT 因版本过低会出现诸多问题，无法正常使用
-7. 自定义设置页在不适配 dark 主题 (放弃适配 ~~又不是不能用~~)
+3. Linux 系统下的 QQNT 因版本过低会出现诸多问题，无法正常使用
+4. 自定义设置页在不适配 dark 主题 (放弃适配)
 
 ## 其他
 
