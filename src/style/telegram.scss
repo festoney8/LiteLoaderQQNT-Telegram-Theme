@@ -637,6 +637,8 @@
         // 转发选项菜单（逐条转发、合并转发等），只在转发时显示
         & ul.forward-ops {
             min-height: 100px;
+            max-width: unset;
+
             // 每个转发选项
             & li {
                 & > button {

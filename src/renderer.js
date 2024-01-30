@@ -1,22 +1,26 @@
-const plugin_path = LiteLoader.plugins["telegram_theme"].path.plugin;
+const pluginPath = LiteLoader.plugins["telegram_theme"].path.plugin
 
-const log = (...args) => console.log('[telegram-theme]', ...args)
-const error = (...args) => console.error('[telegram-theme]', ...args)
-
-
+const log = (...args) => {
+    console.log('[telegram-theme]', ...args)
+    telegram_theme.logToMain(...args)
+}
+const error = (...args) => {
+    console.error('[telegram-theme]', ...args)
+    telegram_theme.errorToMain(...args)
+}
 const waitForEle = (selector, callback, interval = 500) => {
     const timer = setInterval(() => {
         if (document.querySelector(selector)) {
             log(`waitForEle ${selector} EXIST`)
             if (typeof callback === 'function') {
-                callback();
+                callback()
             }
-            clearInterval(timer);
+            clearInterval(timer)
         }
-    }, interval);
+    }, interval)
 }
 
-/** 调节会话列表宽度 */
+// 调节会话列表宽度
 const adjustContactWidth = () => {
     log('run adjustContactWidth')
 
@@ -83,19 +87,19 @@ const adjustContactWidth = () => {
             }, 500)
         }
     } catch (err) {
-        error(err)
+        error(err.toString())
         error('adjustContactWidth error')
     }
 }
 
-/** 仿telegram, 同一个人的消息连起来 */
+// 仿telegram, 同一个人的消息连起来
 const concatBubble = (floatAvatar = true) => {
     const msgList = document.querySelector('#ml-root .ml-list')
 
     // 记录消息数据（用户名、高度、是否断开等）
-    let usernameArr;
-    let heightArr;
-    let breakingArr;
+    let usernameArr
+    let heightArr
+    let breakingArr
 
     if (!msgList) {
         return
@@ -226,24 +230,63 @@ const concatBubble = (floatAvatar = true) => {
                 }
             }).catch()
         } catch (err) {
-            error(err)
+            error(err.toString())
+            error('concatBubble error')
         }
     })
     const config = { childList: true }
     observer.observe(msgList, config)
 }
 
-const main = () => {
+// 获取设置(全部设置)
+const getSetting = async () => {
+    try {
+        return await telegram_theme.getSetting()
+    } catch (err) {
+        error(err.toString())
+        error(`getSetting error`)
+        return null
+    }
+}
+
+// 更新设置(仅一条)
+const setSetting = async (k, v) => {
+    try {
+        await telegram_theme.setSetting(k.toString(), v.toString())
+    } catch (err) {
+        error(err.toString())
+        error(`setSetting error`)
+    }
+}
+
+// 更新html body中全部自定义CSS变量
+const updateAllCSS = async () => {
+    const setting = await getSetting()
+
+}
+// 更新html body中单一的自定义CSS变量
+const updateSingleCSS = async () => {
+    const setting = await getSetting()
+    for (const k in setting) {
+        const v = setting[k]
+        const value = v['value']
+        const description = v['description']
+        const component = v['component']
+        const group = v['group']
+        log(k, value, description, component, group)
+    }
+}
+const main = async () => {
     log('main start')
 
     // 插入主题CSS
     if (!document.head?.querySelector('.telegram-css')) {
-        const link = document.createElement("link");
+        const link = document.createElement("link")
         link.type = 'text/css'
         link.rel = 'stylesheet'
         link.classList.add('telegram-css')
-        link.href = `local:///${plugin_path.replaceAll('\\', '/')}/src/style/telegram.css`
-        document.head.appendChild(link);
+        link.href = `local:///${pluginPath.replaceAll('\\', '/')}/src/style/telegram.css`
+        document.head.appendChild(link)
         log('insert telegram css, OK')
     }
 
@@ -251,13 +294,17 @@ const main = () => {
     waitForEle('.two-col-layout__aside .resize-handler', adjustContactWidth)
     // 拼接气泡
     waitForEle('#ml-root .ml-list', concatBubble)
+
+    await updateSingleCSS()
+
+    // await setSetting('6666', '8888')
 }
 
 try {
     main()
     log('main, OK')
 } catch (err) {
-    error(err)
+    error(err.toString())
     error('main, ERROR')
 }
 

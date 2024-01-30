@@ -1,7 +1,19 @@
-// Electron 主进程 与 渲染进程 交互的桥梁
-const { contextBridge } = require("electron");
+const { contextBridge, ipcRenderer } = require("electron");
 
-// 在window对象下导出只读对象
 contextBridge.exposeInMainWorld("telegram_theme", {
-
-});
+    setSetting: (k, v) => ipcRenderer.send(
+        "LiteLoader.telegram_theme.setSetting",
+        k, v
+    ),
+    getSetting: () => ipcRenderer.invoke(
+        "LiteLoader.telegram_theme.getSetting"
+    ),
+    logToMain: (...args) => ipcRenderer.send(
+        "LiteLoader.telegram_theme.logToMain",
+        ...args
+    ),
+    errorToMain: (...args) => ipcRenderer.send(
+        "LiteLoader.telegram_theme.errorToMain",
+        ...args
+    ),
+})
