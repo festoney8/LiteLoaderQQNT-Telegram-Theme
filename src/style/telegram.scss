@@ -1,0 +1,1096 @@
+// 左边栏
+@mixin sidebar() {
+    // 左边栏
+    .sidebar:not(.wrap) {
+        width: 65px;
+
+        & .sidebar-nav {
+            background-color: #293a4c;
+
+            & .sidebar-wrapper {
+                & .sidebar__upper {
+                    // 头像
+                    & .sidebar__avatar {
+                        // 放大倍率
+                        zoom: 1.25;
+                    }
+
+                    // 中栏按钮
+                    & .sidebar__nav {
+                        & .nav-item {
+                            width: 65px;
+                            height: 65px;
+                            margin: 0;
+
+                            // 选中时
+                            &:has(.svg-highlight) {
+                                background-color: #17212b;
+                            }
+
+                            // 功能按钮
+                            & .sidebar-tooltips {
+                                & .tab-item {
+                                    & .tab-item-mask {
+                                        // 蒙版，控制hover时背景色
+                                        opacity: 0 !important;
+
+                                        &:hover {
+                                            opacity: 0 !important;
+                                            background-color: transparent !important;
+                                        }
+                                    }
+
+                                    & .tab-item-img {
+                                        zoom: 1.2;
+
+                                        &.tab-item-img-highlight {
+                                            & .tab-item-img-mask {
+                                                // 选中时，高亮icon，颜色填充
+                                                background-color: #5eb5f7;
+                                            }
+                                        }
+
+                                        &.tab-item-img-normal {
+                                            & i.q-icon {
+                                                // 未选中时，普通icon，只有线条
+                                                color: #8393a3;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 未读提示泡
+                            & sub.q-badge-sub {
+                                // left: 20px;
+                                // top: 3px;
+                                & i {
+                                    // 未读数字
+                                }
+                            }
+
+                            // 更多按钮
+                            & .more-item {
+                                & .mask {
+                                    // 蒙版，控制hover时颜色
+                                    // background-color: black;
+                                    // opacity: 0.04;
+                                }
+
+                                & i.q-icon {
+                                    // 未选中时，普通icon，只有线条
+                                    color: #8393a3;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 底部按钮
+                & .sidebar__lower {
+                    & .func-menu {
+                        & .func-menu__item_wrap {
+                            // 功能按钮项
+                            & .func-menu__item {
+                                & .icon-item {
+                                    & i.q-icon {
+                                        // 未选中时，普通icon，只有线条
+                                        color: #8393a3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 会话列表
+@mixin contact() {
+    .recent-contact {
+        // 顶部bar
+        & .contact-top-bar {
+            padding: 28px 12px 10px 12px;
+            background-color: white;
+            // 搜索框
+            & .main-search {
+                border-radius: 100px;
+                overflow: hidden;
+
+                & .search {
+                    & .search-input {
+                        & input.q-input__inner {
+                            // 搜索框颜色
+                            background-color: #f1f1f1;
+                            // 选中后border和radius
+                            border: unset;
+                            border-radius: 100px;
+                        }
+                    }
+                }
+            }
+
+            & .contact-adder-btn {
+                // 加号按钮
+                border-radius: 100px;
+                background-color: #f1f1f1;
+            }
+        }
+
+        // 列表区域
+        & .list-toggler {
+            & .recent-contact-list {
+                & .viewport-list {
+                    // 会话列表
+                    & .viewport-list__inner {
+                        // 会话项
+                        & .list-item {
+                            background-color: white;
+                            // 置顶时，默认颜色不同
+                            &.recent-contact-item--top {
+                                & .list-item__container {
+                                    background-color: inherit;
+                                }
+                            }
+
+                            // hover时颜色
+                            &:hover {
+                                background-color: #f1f1f1;
+                            }
+
+                            // 未选中时
+                            &:not(.list-item--selected) {
+                                // 未选中时背景色
+                                // background-color: initial;
+                                & .list-item__container {
+                                    & .list-item__content {
+                                        // 内边距
+                                        padding: 12px 14px !important;
+                                        // 头像
+                                        & .list-item__avatar {
+                                            & .avatar {
+                                                // 头像图片
+                                                height: 52px !important;
+                                                width: 52px !important;
+                                                margin-right: 8px;
+                                            }
+                                        }
+
+                                        // 信息
+                                        & .list-item__info {
+                                            // 去除position, 用于气泡定位
+                                            position: unset !important;
+
+                                            // 标题行
+                                            & .list-item__title {
+                                                font-size: 0.95rem !important;
+                                                font-weight: 600 !important;
+
+                                                // 用户名
+                                                & .main-info {
+                                                    &.vip-name {
+                                                        color: black !important;
+                                                    }
+                                                }
+
+                                                // 最后活动时间
+                                                & .secondary-info {
+                                                    // 时间文字
+                                                    font-size: 0.95rem !important;
+                                                }
+                                            }
+
+                                            // 摘要行
+                                            & .list-item__summary {
+                                                margin-top: 8px !important;
+                                                // 摘要文字
+                                                & .summary-main {
+                                                    font-size: 0.95rem !important;
+                                                    margin-top: 0 !important;
+                                                }
+
+                                                // 未读消息数字气泡
+                                                & .summary-bubble {
+                                                    // 仿telegram, 气泡随宽度调节变化, 宽度最小时覆盖头像
+                                                    &:not(:has(.q-icon)) {
+                                                        // relative是list-item__container
+                                                        position: absolute;
+                                                        right: 8px;
+                                                        bottom: 18px;
+                                                        z-index: 100;
+                                                    }
+
+                                                    // 普通气泡
+                                                    & sub.q-badge__grey {
+                                                        background-color: #bbbbbb !important;
+                                                        padding: 10px 6px !important;
+                                                        font-size: 12px;
+                                                        border-radius: 100px;
+                                                    }
+
+                                                    // 红色气泡
+                                                    & sub.q-badge__red {
+                                                        padding: 10px 6px !important;
+                                                        font-size: 12px;
+                                                        border-radius: 100px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 选中时
+                            &.list-item--selected {
+                                // 选中时背景色
+                                --global-brand_standard: #419fd9;
+
+                                & .list-item__container {
+                                    & .list-item__content {
+                                        // 内边距
+                                        padding: 12px 14px !important;
+                                        // 头像
+                                        & .list-item__avatar {
+                                            & .avatar {
+                                                // 头像图片
+                                                height: 52px !important;
+                                                width: 52px !important;
+                                                margin-right: 8px;
+                                            }
+                                        }
+
+                                        // 信息
+                                        & .list-item__info {
+                                            // 去除position, 用于气泡定位
+                                            position: unset !important;
+
+                                            // 标题行
+                                            & .list-item__title {
+                                                font-size: 0.95rem !important;
+                                                font-weight: 600 !important;
+
+                                                // 用户名
+                                                & .main-info {
+                                                    &.vip-name {
+                                                        color: black !important;
+                                                    }
+                                                }
+
+                                                // 最后活动时间
+                                                & .secondary-info {
+                                                    // 时间文字
+                                                    font-size: 0.95rem !important;
+                                                }
+                                            }
+
+                                            // 摘要行
+                                            & .list-item__summary {
+                                                margin-top: 8px !important;
+                                                // 摘要文字
+                                                & .summary-main {
+                                                    font-size: 0.95rem !important;
+                                                    margin-top: 0 !important;
+                                                }
+
+                                                // 未读消息数字气泡
+                                                & .summary-bubble {
+                                                    // 仿telegram, 气泡随宽度调节变化, 宽度最小时覆盖头像
+                                                    &:not(:has(.q-icon)) {
+                                                        // relative是list-item__container
+                                                        position: absolute;
+                                                        right: 8px;
+                                                        bottom: 18px;
+                                                        z-index: 100;
+                                                    }
+
+                                                    // 普通气泡
+                                                    & sub.q-badge__grey {
+                                                        background-color: #bbbbbb !important;
+                                                        padding: 10px 6px !important;
+                                                        font-size: 12px;
+                                                        border-radius: 100px;
+                                                    }
+
+                                                    // 红色气泡
+                                                    & sub.q-badge__red {
+                                                        padding: 10px 6px !important;
+                                                        font-size: 12px;
+                                                        border-radius: 100px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // 我的手机和群助手，头像
+                        & .avatar.avatar-sys {
+                            --brand_standard: transparent;
+
+                            &::before {
+                                background-color: #5fbe67 !important;
+                            }
+
+                            & .q-icon {
+                                z-index: 1;
+                                zoom: 1.3;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 群助手列表
+            & .group-assistent-list {
+                background-color: white;
+            }
+        }
+    }
+}
+
+// 聊天栏、编辑器、群成员等
+@mixin aio() {
+    // all-in-one，聊天区域，包含独立聊天框
+    .aio {
+        // 顶栏
+        @include panel-header();
+        // 主体
+        & .group-panel {
+            // 聊天栏
+            & .group-chat {
+                @include chat-msg-area();
+                @include chat-input-area();
+            }
+
+            // 右栏 群公告、群成员
+            @include group-box();
+        }
+    }
+}
+
+// 群成员
+@mixin group-box() {
+    // 右栏 群公告、群成员
+    .group-box__container {
+        & .group-box__wrapper {
+            background-color: white;
+            // 群公告、群成员
+            & .group-box {
+                // 群公告
+                & .group-notice {
+                    // 公告标题
+                    & .title {
+                    }
+
+                    // 公告内容
+                    & .content {
+                    }
+                }
+
+                // 群成员
+                & .group-member .group-member__main {
+                    & .group-member-list .viewport-list {
+                        // 成员列表
+                        & .viewport-list__inner {
+                            // 成员
+                            & .group-user .group-user__content {
+                                & .group-user__avatar {
+                                    // 头像
+                                }
+
+                                & .group-user__name {
+                                    // 昵称
+                                }
+
+                                // 标签（群主、管理员）
+                                & .group-user__role {
+                                    &:not(.primary) {
+                                        // 管理员
+                                    }
+
+                                    &.primary {
+                                        // 群主
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 聊天栏header
+@mixin panel-header() {
+    .panel-header {
+        background-color: white !important;
+        // 标题
+        & .panel-header__title {
+            & #chatHeaderContactName {
+                // 群名 or 用户名
+                color: black;
+                font-size: 1.1rem;
+            }
+
+            & #chatHeaderMembersCount {
+                // 群人数
+                font-size: 1.1rem;
+            }
+        }
+
+        // 右栏工具列表
+        & .panel-header__action {
+            & .func-bar {
+                zoom: 0.9;
+            }
+        }
+    }
+}
+
+// 输入区域
+@mixin chat-input-area() {
+    // 输入框，编辑器
+    .chat-input-area {
+        // 动态高度适配
+        overflow: visible;
+        height: fit-content !important;
+        max-height: 50% !important;
+        flex-basis: 56px !important;
+        background-color: white !important;
+        flex-direction: row;
+
+        // 编辑器背景
+        // background-color: white;
+
+        // 聊天工具栏
+        & .chat-func-bar {
+            flex-grow: 0;
+            flex-shrink: 0;
+            align-self: flex-end;
+            width: fit-content;
+            margin: 0 8px;
+            padding: 0;
+
+            flex-direction: row;
+            z-index: 6;
+
+            // 工具和icon
+            & .func-bar {
+                margin: 0;
+
+                & .bar-icon {
+                    width: 42px;
+                    height: 58px;
+                    justify-content: center;
+                    margin: 0;
+                    padding: 0;
+
+                    & i.q-icon {
+                        zoom: 1.2;
+                        color: #9f9f9f;
+                    }
+                }
+            }
+
+            // chat-func-bar被hover时，显示全部
+            &:hover {
+                & .func-bar {
+                    display: flex;
+                }
+            }
+
+            // chat-func-bar没有被hover时，只显示表情
+            &:not(:hover) {
+                & .func-bar:nth-child(1) .bar-icon:not(:nth-child(1)) {
+                    display: none !important;
+                }
+
+                & .func-bar:nth-child(2) {
+                    display: none !important;
+                }
+            }
+
+            // 永远显示表情按钮
+            & .func-bar:nth-child(1) .bar-icon:nth-child(1) {
+                display: flex !important;
+            }
+        }
+
+        // 输入框
+        & .msg-input {
+            flex-grow: 1;
+            flex-shrink: 1;
+
+            // 输入框动态高度
+            height: fit-content;
+            max-height: 100%;
+
+            & .qq-editor {
+                & .ck-editor {
+                    // 输入框动态高度
+                    height: fit-content;
+
+                    & .ck-editor__main {
+                        & .ck-content {
+                            // 文字输入区域，contenteditable div
+                            padding: 18px 56px 18px 0px;
+                            margin: 0;
+                            height: fit-content;
+
+                            // 文字样式
+                            font-size: 17px !important;
+                            line-height: 24px !important;
+
+                            // 文字输入框 placeholder
+                            & .ck-placeholder:before {
+                                --qq-editor-placeholder: "Write a message...";
+                                color: #ccccccff;
+                            }
+
+                            // 编辑器内at用户
+                            & msg-at {
+                                font-size: 17px !important;
+                                line-height: 24px !important;
+                            }
+
+                            // 编辑器内图片
+                            & msg-img {
+                                zoom: 1.5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 输入框操作（关闭、发送）
+        & .operation {
+            margin: 0;
+            padding: 0;
+            height: unset !important;
+            padding: unset !important;
+            width: fit-content;
+            align-self: flex-end;
+
+            // 隐藏关闭
+            & .close {
+                display: none !important;
+            }
+
+            // 发送按钮，魔改
+            & .send-btn-wrap {
+                // 分割线
+                & .divider {
+                    display: none !important;
+                }
+
+                // 发送方式
+                & .send-setting__wrapper {
+                    display: none !important;
+                }
+
+                & > div {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                // 固定发送按钮位置, 更换按钮图像, 仿telegram按钮
+                color: transparent !important;
+                width: 50px !important;
+                height: 50px !important;
+                margin-bottom: 6px;
+                margin-right: 6px;
+                background: {
+                    color: unset !important;
+                    image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMzNiAzNTMgNjExIDY4MCI+CiAgPHBhdGggZD0iTSA0MDMgNzIwIEMgNDA0IDcxOSA3MzAgNzE3IDczMCA3MDAgQyA3MzAgNjgzIDQwNCA2NzQgNDAyIDY3NCBDIDQwNCA2NzQgMzM2IDM1NSAzMzYgMzUzIEMgMzM5IDM1NiA5NDcgNjgxIDk0NyA3MDMgQyA5NDcgNzI4IDM0MyAxMDM1IDM0NiAxMDMzIFoiIGZpbGw9IiM0MGE3ZTMiLz4KPC9zdmc+");
+                    repeat: no-repeat;
+                    position: center;
+                    size: 50%;
+                }
+
+                &:has(.send--disabled) {
+                    opacity: 0.3 !important;
+                }
+
+                & .send {
+                    padding: inherit !important;
+                    width: inherit !important;
+                    height: inherit !important;
+
+                    & .send-msg {
+                        color: transparent !important;
+                        padding: inherit !important;
+                        width: inherit !important;
+                        height: inherit !important;
+                    }
+                }
+            }
+        }
+
+        // 转发选项菜单（逐条转发、合并转发等），只在转发时显示
+        & ul.forward-ops {
+            min-height: 100px;
+            // 每个转发选项
+            & li {
+                & > button {
+                    // 功能按钮
+                    margin-bottom: 0;
+                }
+
+                & > div {
+                    // 功能说明文字
+                    font-size: 1.2em;
+                }
+
+                // 关闭按钮
+                &:last-child {
+                    zoom: 1.75;
+                    margin: 0;
+                }
+            }
+        }
+
+        // 音频输入框
+        & .audio-msg-input {
+            width: 100%;
+
+            & .micro-icon {
+                margin: 20px;
+            }
+
+            & .key-desc {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+// 聊天气泡区域
+@mixin chat-msg-area() {
+    // 聊天列表
+    main.chat-msg-area {
+        // 控制聊天区域背景（不含编辑器，不含header）
+        // background-color: #eee;
+        // background: url();
+
+        // 聊天列表
+        & .ml-area {
+            & .ml-root {
+                & .ml-list {
+                    // 头像吸附
+                    overflow: visible;
+
+                    // 每行聊天项（虚拟滚动列表，消息排列顺序与dom结构不同）
+                    & .ml-item {
+                        & .message {
+                            padding-bottom: 0;
+                            margin-top: 0;
+                            margin-bottom: 20px;
+                            //// 合并信息动画
+                            //transition: margin-bottom 0.2s ease;
+
+                            // 聊天时间，聊天提示（撤回消息、禁言等）
+                            & .message__timestamp,
+                            & .gray-tip-message {
+                                width: fit-content;
+                                margin: 15px auto !important;
+                                color: white !important;
+
+                                background-color: #00000033 !important;
+                                padding: 5px 12px 5px 12px;
+                                border-radius: 100px !important;
+
+                                font-size: 15px !important;
+                                letter-spacing: 1px;
+                            }
+
+                            // 布局：右侧消息、左侧消息
+                            @include message-right-layout();
+                            @include message-left-layout();
+                            // 他人消息、自己消息
+                            @include message-others();
+                            @include message-self();
+                        }
+
+                        // 最后一条消息与editor的边距
+                        &:first-child {
+                            margin-bottom: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 消息向上跳转按钮含文字，暂不修改
+        // 向下跳转按钮
+        & .chat-msg-area__tip--bottom {
+            padding: 0;
+            width: 45px;
+            height: 45px;
+
+            & .icon {
+                zoom: 1.3;
+            }
+        }
+    }
+}
+
+// 右侧消息，布局
+@mixin message-right-layout() {
+    .message-container.message-container--align-right {
+        // 隐藏自己的头像、用户名
+        grid-template-columns: auto 1fr calc(var(--avatar_size_2) + 8px) auto 0 0;
+
+        & .avatar {
+            display: none;
+        }
+
+        & .user-name {
+            display: none;
+        }
+    }
+}
+
+// 左侧消息，布局
+@mixin message-left-layout() {
+    .message-container:not(.message-container--align-right) {
+        // 增大消息泡与头像间隔
+        grid-template-columns: auto var(--avatar_size_2) 20px auto calc(var(--avatar_size_2) + 8px) 1fr;
+
+        // 私聊模式时，隐藏对方头像，默认无用户名
+        &:not(:has(.user-name)) {
+            grid-template-areas:
+                "checkbox . nickname nickname nickname"
+                "checkbox . content status ."
+                "checkbox . tips tips tips";
+            grid-template-columns: auto auto auto calc(var(--avatar_size_2) + 8px) 1fr;
+
+            & .avatar {
+                display: none;
+            }
+        }
+
+        // 发图片时，隐藏用户名
+        &:has(.message-content__wrapper .pic-element) {
+            & .user-name {
+                display: none;
+            }
+        }
+    }
+}
+
+// 他人消息
+@mixin message-others() {
+    .message-container:not(.message-container--self) {
+        padding: 0 20px 0 20px !important;
+
+        // 用户名
+        & .user-name {
+            color: #ffffff !important;
+            font-weight: bold;
+            font-size: 14px !important;
+            margin-bottom: 2px;
+            overflow: visible !important;
+
+            & .text-ellipsis {
+                text-shadow: 0 0 5px #00000066;
+                overflow: visible !important;
+            }
+        }
+
+        // 头像
+        & .avatar-span {
+            // margin-right: 10px;
+
+            &:has(+ :not(.user-name)) {
+                display: none !important;
+            }
+
+            // 强制覆盖大小
+            & .message-container__avatar {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            // 头像置底
+            align-items: flex-end;
+            display: flex;
+            height: 100%;
+            // 绝对定位，用于突破message-container高度限制
+            position: absolute;
+            bottom: 0;
+
+            & .avatar {
+                // 底部吸附
+                position: sticky;
+                bottom: 10px;
+            }
+        }
+
+        // 文字泡
+        & .message-content__wrapper {
+            & .msg-content-container {
+                position: relative;
+                color: black;
+
+                &:not(:has(.market-face-element)) {
+                    background-color: #ffffff !important;
+                }
+
+                // 包含文字内容或语音, 不含图片/大表情的气泡
+                &:has(.text-element):not(:has(.pic-element)),
+                &:has(.face-element),
+                &:is(.ptt-message) {
+                    padding: 8px 16px;
+                    border-radius: 20px 20px 20px 8px;
+                }
+
+                // 图文混合气泡, 图图混合气泡
+                &:has(.pic-element:nth-child(n + 2)),
+                &:has(.text-element):has(.pic-element) {
+                    padding: 0;
+                    border-radius: 20px 20px 20px 8px;
+
+                    & .text-element {
+                        display: inline-block;
+                        margin: 6px 16px;
+                    }
+
+                    & .pic-element {
+                        border-radius: 0;
+                        margin: auto;
+                    }
+                }
+
+                // 图片、动图
+                & .pic-element {
+                    zoom: 1.2;
+                }
+
+                // 回复引用
+                & .reply-element {
+                    margin: 4px;
+                    font-weight: bold;
+                    border-left: 2px solid #5fbe67 !important;
+
+                    & .reply-title {
+                        color: #5fbe67 !important;
+                        opacity: unset;
+                        zoom: 1.1;
+                    }
+
+                    & .reply-content {
+                        color: #808080;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+
+                // 普通消息 文字内容
+                & .message-content {
+                    font-size: 16px;
+                    flex-direction: column;
+
+                    // 文本消息
+                    & .text-element {
+                    }
+
+                    // 普通文字
+                    & .text-normal {
+                        color: black;
+                    }
+
+                    // at @用户名
+                    & .text-element--at {
+                        color: #5fbe67 !important;
+                        font-weight: 600;
+                    }
+
+                    // url
+                    & .text-link {
+                        color: #168ad0;
+                    }
+                }
+
+                // 语音消息
+                & .ptt-element {
+                    zoom: 1.2;
+                    --bubble_host: white;
+
+                    & .ptt-element__button {
+                        background-color: #5fbe67 !important;
+                    }
+
+                    & .ptt-element__progress {
+                        & .ptt-element__progress-item {
+                            background-color: #5fbe67 !important;
+                        }
+                    }
+
+                    & .ptt-element__duration span {
+                        font-size: 12px;
+                        font-weight: bold;
+                        color: #5fbe67;
+                    }
+                }
+
+                // 转发聊天记录
+                & .forward-msg {
+                    background-color: #ffffff !important;
+
+                    & .text-ellipsis {
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 自己消息
+@mixin message-self() {
+    .message-container.message-container--self {
+        padding: 0 20px 0 20px !important;
+
+        // 文字泡
+        & .message-content__wrapper {
+            & .msg-content-container {
+                position: relative;
+                color: black;
+
+                &:not(:has(.market-face-element)) {
+                    background-color: #effdde !important;
+                }
+
+                // 包含文字内容或语音, 不含图片/大表情的气泡
+                &:has(.text-element):not(:has(.pic-element)),
+                &:has(.face-element),
+                &:is(.ptt-message) {
+                    padding: 8px 16px;
+                    border-radius: 20px 20px 8px 20px;
+                }
+
+                // 图文混合气泡, 图图混合气泡
+                &:has(.pic-element:nth-child(n + 2)),
+                &:has(.text-element):has(.pic-element) {
+                    padding: 0;
+                    border-radius: 20px 20px 8px 20px;
+
+                    & .text-element {
+                        display: inline-block;
+                        margin: 6px 16px;
+                    }
+
+                    & .pic-element {
+                        border-radius: 0;
+                        margin: auto;
+                    }
+                }
+
+                // 图片、动图
+                & .pic-element {
+                    zoom: 1.2;
+                }
+
+                // 回复引用
+                & .reply-element {
+                    margin-top: 4px;
+                    font-weight: bold;
+                    border-left: 2px solid #5fbe67;
+
+                    & .reply-title {
+                        color: #5fbe67;
+                        opacity: unset;
+                        zoom: 1.1;
+                    }
+
+                    & .reply-content {
+                        color: #808080;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+
+                // 普通消息 文字内容
+                & .message-content {
+                    font-size: 16px;
+                    flex-direction: column;
+
+                    // 文本消息
+                    & .text-element {
+                    }
+
+                    // 普通文字
+                    & .text-normal {
+                        color: black;
+                    }
+
+                    // at @用户名
+                    & .text-element--at {
+                        color: #5fbe67;
+                        font-weight: 600;
+                    }
+
+                    // url
+                    & .text-link {
+                        color: #168ad0;
+                    }
+                }
+
+                // 语音消息
+                & .ptt-element {
+                    zoom: 1.2;
+                    --bubble_host: white;
+
+                    & .ptt-element__button {
+                        background-color: #5fbe67 !important;
+                    }
+
+                    & .ptt-element__progress {
+                        & .ptt-element__progress-item {
+                            background-color: #5fbe67 !important;
+                        }
+                    }
+
+                    & .ptt-element__duration span {
+                        font-size: 12px;
+                        font-weight: bold;
+                        color: #5fbe67;
+                    }
+                }
+
+                // 转发聊天记录
+                & .forward-msg {
+                    background-color: #effdde !important;
+
+                    & .text-ellipsis {
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 补丁
+@mixin patch() {
+    .tab-container {
+        & .contact-layout::after,
+        & .message-panel::after {
+            opacity: 1 !important;
+        }
+    }
+}
+
+#app {
+    @include sidebar();
+    @include contact();
+    @include aio();
+    @include patch();
+}
