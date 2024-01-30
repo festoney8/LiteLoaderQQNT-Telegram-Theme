@@ -173,7 +173,7 @@ const concatBubble = (floatAvatar = true) => {
     const observer = new MutationObserver(async () => {
         try {
             // 合并消息
-            let concatStart = performance.now()
+            // let concatStart = performance.now()
             let currMsgNodeList = Array.from(msgList.querySelectorAll("div.message"))
             let tasks = []
 
@@ -185,7 +185,7 @@ const concatBubble = (floatAvatar = true) => {
                 tasks.push(compareTwoMsg(currMsgNodeList[i], i, currMsgNodeList[i + 1], i + 1))
             }
             await Promise.allSettled(tasks).then(() => {
-                log(`concatBubble time ${performance.now() - concatStart} ms`)
+                // log(`concatBubble time ${performance.now() - concatStart} ms`)
 
                 if (floatAvatar) {
                     try {
@@ -220,7 +220,7 @@ const concatBubble = (floatAvatar = true) => {
                                 end = i
                             }
                         }
-                        log(`floatAvatar time ${performance.now() - avatarStart} ms`)
+                        // log(`floatAvatar time ${performance.now() - avatarStart} ms`)
                     } catch (errs) {
                     }
                 }
