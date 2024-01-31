@@ -1,0 +1,64 @@
+:root {
+    /* 壁纸和背景色 */
+    --container-image: url("local:///");
+    --container-bg-color: #eeeeee;
+    --container-backdrop-filter: blur(0px);
+
+    /* 聊天栏header */
+    --panel-header-bg-color: #FFFFFF;
+    --panel-header-title-color: #000000;
+
+    /* 聊天栏 */
+    --message-others-username-font-color: #ffffff;
+    --message-others-username-font-size: 14px;
+    --message-others-bg-color: #ffffff;
+    --message-others-font-color: #000000;
+    --message-others-font-size: 16px;
+    /* highlight用于显示@用户、回复消息、语音消息 */
+    --message-others-highlight-color: #5fbe67;
+    --message-others-url-color: #168ad0;
+    --message-others-reply-content-font-color: #808080;
+    --message-others-reply-content-font-size: 14px;
+    --message-others-forward-msg-bg-color: #ffffff;
+
+    --message-self-bg-color: #effdde;
+    --message-self-font-color: #000000;
+    --message-self-font-size: 16px;
+    --message-self-highlight-color: #5fbe67;
+    --message-self-url-color: #168ad0;
+    --message-self-reply-content-font-color: #808080;
+    --message-self-reply-content-font-size: 14px;
+    --message-self-forward-msg-bg-color: #ffffff;
+
+    /* 输入框 */
+    --chat-input-area-bg-color: #FFFFFF;
+    --chat-input-area-font-color: #000000;
+
+    /* 会话列表 */
+    --contact-top-bar-bg-color: #FFFFFF;
+    --contact-search-bg-color: #f1f1f1;
+    --contact-list-item-bg-color: #FFFFFF;
+    --contact-list-item-top-bg-color: #FFFFFF;
+    --contact-list-item-hover-bg-color: #f1f1f1;
+    --contact-list-item-selected-bg-color: #419fd9;
+    --contact-list-item-selected-title-font-color: #ffffff;
+    --contact-list-item-selected-summary-font-color: #ffffff;
+    --contact-list-item-unselected-title-font-color: #000000;
+    --contact-list-item-unselected-summary-font-color: #999999;
+    --contact-list-item-avatar-sys-bg-color: #5fbe67;
+
+    /* 左边栏 */
+    --sidebar-width: 65px;
+    --sidebar-bg-color: #293a4c;
+    --sidebar-avatar-zoom: 1.25;
+    --sidebar-nav-item-zoom: 1.2;
+    --sidebar-nav-item-selected-bg-color: #17212b;
+    --sidebar-nav-item-selected-icon-color: #5eb5f7;
+    --sidebar-nav-item-unselected-icon-color: #8393a3;
+
+    /* 右栏 群公告、群成员 */
+    --group-box-bg-color: #FFFFFF;
+
+    /* 其他 */
+    --vip-name-color: #000000;
+}

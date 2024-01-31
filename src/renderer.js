@@ -8,7 +8,7 @@ const error = (...args) => {
     console.error('[telegram-theme]', ...args)
     telegram_theme.errorToMain(...args)
 }
-const waitForEle = (selector, callback, interval = 500) => {
+const waitForEle = (selector, callback, interval = 1000) => {
     const timer = setInterval(() => {
         if (document.querySelector(selector)) {
             log(`waitForEle ${selector} EXIST`)
@@ -26,7 +26,7 @@ const adjustContactWidth = () => {
 
     try {
         const layoutAside = document.querySelector('.two-col-layout__aside')
-        // const layoutMain = document.querySelector('.two-col-layout__main')
+        const layoutMain = document.querySelector('.two-col-layout__main')
         const oldResizeHandler = document.querySelector('.two-col-layout__aside .resize-handler')
 
         const overrideWidth = () => {
@@ -70,7 +70,7 @@ const adjustContactWidth = () => {
             })
         }
 
-        if (oldResizeHandler && layoutAside) {
+        if (oldResizeHandler && layoutAside && layoutMain) {
             // 等待QQ赋予aside属性
             let count = 0
             const timer = setInterval(() => {
@@ -278,7 +278,6 @@ const updateSingleCSS = async () => {
 }
 const main = async () => {
     log('main start')
-
     // 插入主题CSS
     if (!document.head?.querySelector('.telegram-css')) {
         const link = document.createElement("link")
@@ -295,7 +294,7 @@ const main = async () => {
     // 拼接气泡
     waitForEle('#ml-root .ml-list', concatBubble)
 
-    await updateSingleCSS()
+    // await updateSingleCSS()
 
     // await setSetting('6666', '8888')
 }

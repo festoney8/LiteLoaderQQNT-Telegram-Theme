@@ -2,29 +2,31 @@
 @mixin sidebar() {
     // 左边栏
     .sidebar:not(.wrap) {
-        width: 65px;
+        width: var(--tg-sidebar-width);
+        // 防止被tab-container的backdrop-filter影响
+        z-index: 1;
 
         & .sidebar-nav {
-            background-color: #293a4c;
+            background-color: var(--tg-sidebar-bg-color);
 
             & .sidebar-wrapper {
                 & .sidebar__upper {
                     // 头像
                     & .sidebar__avatar {
                         // 放大倍率
-                        zoom: 1.25;
+                        zoom: var(--tg-sidebar-avatar-zoom);
                     }
 
                     // 中栏按钮
                     & .sidebar__nav {
                         & .nav-item {
-                            width: 65px;
-                            height: 65px;
+                            width: var(--tg-sidebar-width);
+                            height: var(--tg-sidebar-width);
                             margin: 0;
 
                             // 选中时
                             &:has(.svg-highlight) {
-                                background-color: #17212b;
+                                background-color: var(--tg-sidebar-nav-item-selected-bg-color);
                             }
 
                             // 功能按钮
@@ -41,19 +43,19 @@
                                     }
 
                                     & .tab-item-img {
-                                        zoom: 1.2;
+                                        zoom: var(--tg-sidebar-nav-item-zoom);
 
                                         &.tab-item-img-highlight {
                                             & .tab-item-img-mask {
                                                 // 选中时，高亮icon，颜色填充
-                                                background-color: #5eb5f7;
+                                                background-color: var(--tg-sidebar-nav-item-selected-icon-color);
                                             }
                                         }
 
                                         &.tab-item-img-normal {
                                             & i.q-icon {
                                                 // 未选中时，普通icon，只有线条
-                                                color: #8393a3;
+                                                color: var(--tg-sidebar-nav-item-unselected-icon-color);
                                             }
                                         }
                                     }
@@ -71,15 +73,9 @@
 
                             // 更多按钮
                             & .more-item {
-                                // & .mask {
-                                //     // 蒙版，控制hover时颜色
-                                //     // background-color: black;
-                                //     // opacity: 0.04;
-                                // }
-
                                 & i.q-icon {
                                     // 未选中时，普通icon，只有线条
-                                    color: #8393a3;
+                                    color: var(--tg-sidebar-nav-item-unselected-icon-color);
                                 }
                             }
                         }
@@ -95,7 +91,7 @@
                                 & .icon-item {
                                     & i.q-icon {
                                         // 未选中时，普通icon，只有线条
-                                        color: #8393a3;
+                                        color: var(--tg-sidebar-nav-item-unselected-icon-color);
                                     }
                                 }
                             }
@@ -113,7 +109,7 @@
         // 顶部bar
         & .contact-top-bar {
             padding: 28px 12px 10px 12px;
-            background-color: white;
+            background-color: var(--tg-contact-top-bar-bg-color);
             // 搜索框
             & .main-search {
                 border-radius: 100px;
@@ -123,7 +119,7 @@
                     & .search-input {
                         & input.q-input__inner {
                             // 搜索框颜色
-                            background-color: #f1f1f1;
+                            background-color: var(--tg-contact-search-bg-color);
                             // 选中后border和radius
                             border: unset;
                             border-radius: 100px;
@@ -135,7 +131,7 @@
             & .contact-adder-btn {
                 // 加号按钮
                 border-radius: 100px;
-                background-color: #f1f1f1;
+                background-color: var(--tg-contact-search-bg-color);
             }
         }
 
@@ -147,17 +143,17 @@
                     & .viewport-list__inner {
                         // 会话项
                         & .list-item {
-                            background-color: white;
+                            background-color: var(--tg-contact-list-item-bg-color);
                             // 置顶时，默认颜色不同
                             &.recent-contact-item--top {
                                 & .list-item__container {
-                                    background-color: inherit;
+                                    background-color: var(--tg-contact-list-item-top-bg-color);
                                 }
                             }
 
                             // hover时颜色
                             &:hover {
-                                background-color: #f1f1f1;
+                                background-color: var(--tg-contact-list-item-hover-bg-color);
                             }
 
                             // 未选中时
@@ -190,8 +186,9 @@
 
                                                 // 用户名
                                                 & .main-info {
+                                                    color: var(--tg-contact-list-item-unselected-title-font-color);
                                                     &.vip-name {
-                                                        color: black !important;
+                                                        color: var(--tg-vip-name-color) !important;
                                                     }
                                                 }
 
@@ -207,6 +204,7 @@
                                                 margin-top: 8px !important;
                                                 // 摘要文字
                                                 & .summary-main {
+                                                    color: var(--tg-contact-list-item-unselected-summary-font-color);
                                                     font-size: 0.95rem !important;
                                                     margin-top: 0 !important;
                                                 }
@@ -246,7 +244,7 @@
                             // 选中时
                             &.list-item--selected {
                                 // 选中时背景色
-                                --global-brand_standard: #419fd9;
+                                --global-brand_standard: var(--tg-contact-list-item-selected-bg-color);
 
                                 & .list-item__container {
                                     & .list-item__content {
@@ -274,8 +272,9 @@
 
                                                 // 用户名
                                                 & .main-info {
+                                                    color: var(--tg-contact-list-item-selected-title-font-color);
                                                     &.vip-name {
-                                                        color: black !important;
+                                                        color: var(--tg-vip-name-color) !important;
                                                     }
                                                 }
 
@@ -291,6 +290,7 @@
                                                 margin-top: 8px !important;
                                                 // 摘要文字
                                                 & .summary-main {
+                                                    color: var(--tg-contact-list-item-selected-summary-font-color);
                                                     font-size: 0.95rem !important;
                                                     margin-top: 0 !important;
                                                 }
@@ -332,8 +332,8 @@
                         & .avatar.avatar-sys {
                             --brand_standard: transparent;
 
-                            &::before {
-                                background-color: #5fbe67 !important;
+                            &:before {
+                                background-color: var(--tg-contact-list-item-avatar-sys-bg-color) !important;
                             }
 
                             & .q-icon {
@@ -347,7 +347,7 @@
 
             // 群助手列表
             & .group-assistent-list {
-                background-color: white;
+                background-color: var(--tg-contact-list-item-bg-color);
             }
         }
     }
@@ -377,7 +377,7 @@
 @mixin group-box() {
     // 右栏 群公告、群成员
     .group-box__container {
-        background-color: white;
+        background-color: var(--tg-group-box-bg-color);
 
         //& .group-box__wrapper {
         //    background-color: white;
@@ -431,12 +431,12 @@
 // 聊天栏header
 @mixin panel-header() {
     .panel-header {
-        background-color: white !important;
+        background-color: var(--tg-panel-header-bg-color) !important;
         // 标题
         & .panel-header__title {
             & #chatHeaderContactName {
                 // 群名 or 用户名
-                color: black;
+                color: var(--tg-panel-header-title-color);
                 font-size: 1.1rem;
             }
 
@@ -464,11 +464,8 @@
         height: fit-content !important;
         max-height: 50% !important;
         flex-basis: 56px !important;
-        background-color: white !important;
+        background-color: var(--tg-chat-input-area-bg-color) !important;
         flex-direction: row;
-
-        // 编辑器背景
-        // background-color: white;
 
         // 聊天工具栏
         & .chat-func-bar {
@@ -548,6 +545,7 @@
                             // 文字样式
                             font-size: 17px !important;
                             line-height: 24px !important;
+                            color: var(--tg-chat-input-area-font-color) !important;
 
                             // 文字输入框 placeholder
                             & .ck-placeholder:before {
@@ -733,7 +731,7 @@
         // 消息向上跳转按钮含文字，暂不修改
         // 向下跳转按钮
         & .chat-msg-area__tip--bottom {
-            background-color: white;
+            // background-color: white;
             padding: 0;
             width: 45px;
             height: 45px;
@@ -800,9 +798,9 @@
 
         // 用户名
         & .user-name {
-            color: #ffffff !important;
+            color: var(--tg-message-others-username-font-color) !important;
             font-weight: bold;
-            font-size: 14px !important;
+            font-size: var(--tg-message-others-username-font-size) !important;
             margin-bottom: 2px;
             overflow: visible !important;
 
@@ -814,8 +812,6 @@
 
         // 头像
         & .avatar-span {
-            // margin-right: 10px;
-
             &:has(+ :not(.user-name)) {
                 display: none !important;
             }
@@ -848,7 +844,7 @@
                 color: black;
 
                 &:not(:has(.market-face-element)) {
-                    background-color: #ffffff !important;
+                    background-color: var(--tg-message-others-bg-color) !important;
                 }
 
                 // 包含文字内容或语音, 不含图片/大表情的气泡
@@ -881,26 +877,28 @@
                     zoom: 1.2;
                 }
 
-                // 图片最大宽度
+                // 图片最大宽度（好像覆盖不掉）
                 &.mix-message__container.mix-message__container--pic {
+                    --img-max-width: 600px;
                     max-width: 600px !important;
                 }
 
                 // 回复引用
+                // 高亮色与@颜色相同
                 & .reply-element {
                     margin: 4px;
                     font-weight: bold;
-                    border-left: 2px solid #5fbe67 !important;
+                    border-left: 2px solid var(--tg-message-others-highlight-color) !important;
 
                     & .reply-title {
-                        color: #5fbe67 !important;
+                        color: var(--tg-message-others-highlight-color) !important;
                         opacity: unset;
                         zoom: 1.1;
                     }
 
                     & .reply-content {
-                        color: #808080;
-                        font-size: 14px;
+                        color: var(--tg-message-others-reply-content-font-color);
+                        font-size: var(--tg-message-others-reply-content-font-size);
                         font-weight: 500;
                     }
                 }
@@ -910,52 +908,51 @@
                     font-size: 16px;
                     flex-direction: column;
 
-                    // 文本消息
-                    & .text-element {
-                    }
+                    // // 文本消息
+                    // & .text-element {
+                    // }
 
                     // 普通文字
                     & .text-normal {
-                        color: black;
+                        color: var(--tg-message-others-font-color);
                     }
 
                     // at @用户名
                     & .text-element--at {
-                        color: #5fbe67 !important;
+                        color: var(--tg-message-others-highlight-color) !important;
                         font-weight: 600;
                     }
 
                     // url
                     & .text-link {
-                        color: #168ad0;
+                        color: var(--tg-message-others-url-color);
                     }
                 }
 
                 // 语音消息
                 & .ptt-element {
                     zoom: 1.2;
-                    --bubble_host: white;
 
                     & .ptt-element__button {
-                        background-color: #5fbe67 !important;
+                        background-color: var(--tg-message-others-highlight-color) !important;
                     }
 
                     & .ptt-element__progress {
                         & .ptt-element__progress-item {
-                            background-color: #5fbe67 !important;
+                            background-color: var(--tg-message-others-highlight-color) !important;
                         }
                     }
 
                     & .ptt-element__duration span {
                         font-size: 12px;
                         font-weight: bold;
-                        color: #5fbe67;
+                        color: var(--tg-message-others-highlight-color);
                     }
                 }
 
                 // 转发聊天记录
                 & .forward-msg {
-                    background-color: #ffffff !important;
+                    background-color: var(--tg-message-others-forward-msg-bg-color) !important;
 
                     & .text-ellipsis {
                         overflow: hidden;
@@ -964,7 +961,7 @@
             }
 
             &:has(.forward-msg) {
-                background-color: white;
+                background-color: var(--tg-message-others-forward-msg-bg-color);
                 border-radius: 8px;
                 overflow: hidden;
             }
@@ -984,7 +981,7 @@
                 color: black;
 
                 &:not(:has(.market-face-element)) {
-                    background-color: #effdde !important;
+                    background-color: var(--tg-message-self-bg-color) !important;
                 }
 
                 // 包含文字内容或语音, 不含图片/大表情的气泡
@@ -1019,6 +1016,7 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
+                    --img-max-width: 600px;
                     max-width: 600px !important;
                 }
 
@@ -1026,24 +1024,24 @@
                 & .reply-element {
                     margin-top: 4px;
                     font-weight: bold;
-                    border-left: 2px solid #5fbe67;
+                    border-left: 2px solid var(--tg-message-self-highlight-color);
 
                     & .reply-title {
-                        color: #5fbe67;
+                        color: var(--tg-message-self-highlight-color);
                         opacity: unset;
                         zoom: 1.1;
                     }
 
                     & .reply-content {
-                        color: #808080;
-                        font-size: 14px;
+                        color: var(--tg-message-self-reply-content-font-color);
+                        font-size: var(--tg-message-self-reply-content-font-size);
                         font-weight: 500;
                     }
                 }
 
                 // 普通消息 文字内容
                 & .message-content {
-                    font-size: 16px;
+                    font-size: var(--tg-message-self-font-size);
                     flex-direction: column;
 
                     // 文本消息
@@ -1052,46 +1050,45 @@
 
                     // 普通文字
                     & .text-normal {
-                        color: black;
+                        color: var(--tg-message-self-font-color);
                     }
 
                     // at @用户名
                     & .text-element--at {
-                        color: #5fbe67;
+                        color: var(--tg-message-self-highlight-color);
                         font-weight: 600;
                     }
 
                     // url
                     & .text-link {
-                        color: #168ad0;
+                        color: var(--tg-message-self-url-color);
                     }
                 }
 
                 // 语音消息
                 & .ptt-element {
                     zoom: 1.2;
-                    --bubble_host: white;
 
                     & .ptt-element__button {
-                        background-color: #5fbe67 !important;
+                        background-color: var(--tg-message-self-highlight-color) !important;
                     }
 
                     & .ptt-element__progress {
                         & .ptt-element__progress-item {
-                            background-color: #5fbe67 !important;
+                            background-color: var(--tg-message-self-highlight-color) !important;
                         }
                     }
 
                     & .ptt-element__duration span {
                         font-size: 12px;
                         font-weight: bold;
-                        color: #5fbe67;
+                        color: var(--tg-message-self-highlight-color);
                     }
                 }
 
                 // 转发聊天记录
                 & .forward-msg {
-                    background-color: #effdde !important;
+                    background-color: var(--tg-message-self-forward-msg-bg-color) !important;
 
                     & .text-ellipsis {
                         overflow: hidden;
@@ -1100,10 +1097,58 @@
             }
 
             &:has(.forward-msg) {
-                background-color: white;
+                background-color: var(--tg-message-self-forward-msg-bg-color);
                 border-radius: 8px;
                 overflow: hidden;
             }
+        }
+    }
+}
+
+// 壁纸
+@mixin wallpaper() {
+    .tab-container {
+        // 设定telegram背景图 or telegram背景色
+        background: {
+            image: var(--tg-container-image) !important;
+            color: var(--tg-container-bg-color);
+            position-x: center;
+            position-y: center;
+            size: cover;
+            attachment: fixed;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            // 鼠标穿透
+            pointer-events: none;
+            backdrop-filter: var(--tg-container-backdrop-filter);
+        }
+    }
+    // 独立聊天窗口 全局背景色 (影响输入区域颜色)
+    .container:has(.aio-independent) {
+        --bg_grey_standard: var(--tg-container-bg-color);
+        background: {
+            image: var(--tg-container-image) !important;
+            color: var(--tg-container-bg-color);
+            position-x: center;
+            position-y: center;
+            size: cover;
+            attachment: fixed;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            backdrop-filter: var(--tg-container-backdrop-filter);
         }
     }
 }
@@ -1118,9 +1163,24 @@
     }
 }
 
-#app {
-    @include sidebar();
-    @include contact();
-    @include aio();
-    @include patch();
+@media (prefers-color-scheme: light) {
+    @import "light";
+    #app {
+        @include wallpaper();
+        @include sidebar();
+        @include contact();
+        @include aio();
+        @include patch();
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    @import "dark";
+    #app {
+        @include wallpaper();
+        @include sidebar();
+        @include contact();
+        @include aio();
+        @include patch();
+    }
 }
