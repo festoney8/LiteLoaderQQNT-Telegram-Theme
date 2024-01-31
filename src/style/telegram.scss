@@ -733,7 +733,7 @@
             background-color: var(--tg-message-others-bg-color) !important;
             & .content {
                 margin-left: 0;
-                color: var(--text-brand) !important;
+                color: #808080 !important;
             }
         }
         // 向下跳转按钮
@@ -749,7 +749,7 @@
 
             & .content {
                 margin-left: 0;
-                color: var(--text-brand) !important;
+                color: #808080 !important;
             }
         }
     }
@@ -928,7 +928,7 @@
                     // at @用户名
                     & .text-element--at {
                         color: var(--tg-message-others-highlight-color) !important;
-                        font-weight: 600;
+                        // font-weight: 600;
                     }
 
                     // url
@@ -957,14 +957,14 @@
                         color: var(--tg-message-others-highlight-color);
                     }
                 }
+            }
 
-                // 转发聊天记录
-                & .forward-msg {
-                    background-color: var(--tg-message-others-forward-msg-bg-color) !important;
+            // 转发聊天记录
+            & .forward-msg {
+                background-color: var(--tg-message-others-forward-msg-bg-color) !important;
 
-                    & .text-ellipsis {
-                        overflow: hidden;
-                    }
+                & .text-ellipsis {
+                    overflow: hidden;
                 }
             }
 
@@ -973,6 +973,11 @@
                 border-radius: 8px;
                 overflow: hidden;
             }
+        }
+
+        // 状态、下载按钮
+        & .content-status {
+            zoom: 1.5;
         }
     }
 }
@@ -1064,7 +1069,7 @@
                     // at @用户名
                     & .text-element--at {
                         color: var(--tg-message-self-highlight-color);
-                        font-weight: 600;
+                        // font-weight: 600;
                     }
 
                     // url
@@ -1093,14 +1098,14 @@
                         color: var(--tg-message-self-highlight-color);
                     }
                 }
+            }
 
-                // 转发聊天记录
-                & .forward-msg {
-                    background-color: var(--tg-message-self-forward-msg-bg-color) !important;
+            // 转发聊天记录
+            & .forward-msg {
+                background-color: var(--tg-message-self-forward-msg-bg-color) !important;
 
-                    & .text-ellipsis {
-                        overflow: hidden;
-                    }
+                & .text-ellipsis {
+                    overflow: hidden;
                 }
             }
 
@@ -1109,6 +1114,11 @@
                 border-radius: 8px;
                 overflow: hidden;
             }
+        }
+
+        // 状态、下载按钮
+        & .content-status {
+            zoom: 1.5;
         }
     }
 }
@@ -1257,7 +1267,7 @@
         --tg-message-others-font-color: #f5f5f5;
         --tg-message-others-font-size: 16px;
         /* highlight用于显示@用户、回复消息、语音消息 */
-        --tg-message-others-highlight-color: #85de85;
+        --tg-message-others-highlight-color: #faa357;
         --tg-message-others-url-color: #70baf5;
         --tg-message-others-reply-content-font-color: #f5f5f5;
         --tg-message-others-reply-content-font-size: 14px;
