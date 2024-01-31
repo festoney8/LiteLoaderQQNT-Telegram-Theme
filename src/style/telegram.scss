@@ -63,13 +63,9 @@
                             }
 
                             // 未读提示泡
-                            // & sub.q-badge-sub {
-                            //     // left: 20px;
-                            //     // top: 3px;
-                            //     // & i {
-                            //     //     // 未读数字
-                            //     // }
-                            // }
+                            & sub.q-badge-sub {
+                                zoom: 1.15;
+                            }
 
                             // 更多按钮
                             & .more-item {
@@ -222,7 +218,9 @@
 
                                                     // 普通气泡
                                                     & sub.q-badge__grey {
-                                                        background-color: #bbbbbb !important;
+                                                        background-color: var(
+                                                            --tg-contact-list-item-summary-bubble-color
+                                                        ) !important;
                                                         padding: 10px 6px !important;
                                                         font-size: 12px;
                                                         border-radius: 100px;
@@ -308,7 +306,9 @@
 
                                                     // 普通气泡
                                                     & sub.q-badge__grey {
-                                                        background-color: #bbbbbb !important;
+                                                        background-color: var(
+                                                            --tg-contact-list-item-summary-bubble-color
+                                                        ) !important;
                                                         padding: 10px 6px !important;
                                                         font-size: 12px;
                                                         border-radius: 100px;
@@ -550,7 +550,7 @@
                             // 文字输入框 placeholder
                             & .ck-placeholder:before {
                                 --qq-editor-placeholder: "Write a message...";
-                                color: #ccccccff;
+                                color: #cccccc8f;
                             }
 
                             // 编辑器内at用户
@@ -728,10 +728,17 @@
             }
         }
 
-        // 消息向上跳转按钮含文字，暂不修改
+        // 消息向上跳转，含文字，暂不修改样式，背景色与others气泡相同
+        & .chat-msg-area__tip--top-btn {
+            background-color: var(--tg-message-others-bg-color) !important;
+            & .content {
+                margin-left: 0;
+                color: var(--text-brand) !important;
+            }
+        }
         // 向下跳转按钮
         & .chat-msg-area__tip--bottom {
-            // background-color: white;
+            background-color: var(--tg-message-others-bg-color) !important;
             padding: 0;
             width: 45px;
             height: 45px;
@@ -742,6 +749,7 @@
 
             & .content {
                 margin-left: 0;
+                color: var(--text-brand) !important;
             }
         }
     }
@@ -961,7 +969,7 @@
             }
 
             &:has(.forward-msg) {
-                background-color: var(--tg-message-others-forward-msg-bg-color);
+                background-color: var(--tg-message-others-forward-msg-bg-color) !important;
                 border-radius: 8px;
                 overflow: hidden;
             }
@@ -1097,7 +1105,7 @@
             }
 
             &:has(.forward-msg) {
-                background-color: var(--tg-message-self-forward-msg-bg-color);
+                background-color: var(--tg-message-self-forward-msg-bg-color) !important;
                 border-radius: 8px;
                 overflow: hidden;
             }
@@ -1163,8 +1171,148 @@
     }
 }
 
+// 配色light
+@mixin light() {
+    :root {
+        /* 壁纸和背景色 */
+        /* url("local:///E:/path/to/image.png") */
+        --tg-container-image: url("local:///");
+        --tg-container-bg-color: #eeeeee;
+        --tg-container-backdrop-filter: blur(0px);
+
+        /* 聊天栏header */
+        --tg-panel-header-bg-color: #ffffff;
+        --tg-panel-header-title-color: #000000;
+
+        /* 聊天栏 */
+        --tg-message-others-username-font-color: #ffffff;
+        --tg-message-others-username-font-size: 14px;
+        --tg-message-others-bg-color: #ffffff;
+        --tg-message-others-font-color: #000000;
+        --tg-message-others-font-size: 16px;
+        /* highlight用于显示@用户、回复消息、语音消息 */
+        --tg-message-others-highlight-color: #5fbe67;
+        --tg-message-others-url-color: #168ad0;
+        --tg-message-others-reply-content-font-color: #808080;
+        --tg-message-others-reply-content-font-size: 14px;
+        --tg-message-others-forward-msg-bg-color: #ffffff;
+
+        --tg-message-self-bg-color: #effdde;
+        --tg-message-self-font-color: #000000;
+        --tg-message-self-font-size: 16px;
+        --tg-message-self-highlight-color: #5fbe67;
+        --tg-message-self-url-color: #168ad0;
+        --tg-message-self-reply-content-font-color: #808080;
+        --tg-message-self-reply-content-font-size: 14px;
+        --tg-message-self-forward-msg-bg-color: #ffffff;
+
+        /* 输入框 */
+        --tg-chat-input-area-bg-color: #ffffff;
+        --tg-chat-input-area-font-color: #000000;
+
+        /* 会话列表 */
+        --tg-contact-top-bar-bg-color: #ffffff;
+        --tg-contact-search-bg-color: #f1f1f1;
+        --tg-contact-list-item-bg-color: #ffffff;
+        --tg-contact-list-item-top-bg-color: #ffffff;
+        --tg-contact-list-item-hover-bg-color: #f1f1f1;
+        --tg-contact-list-item-selected-bg-color: #419fd9;
+        --tg-contact-list-item-selected-title-font-color: #ffffff;
+        --tg-contact-list-item-selected-summary-font-color: #ffffff;
+        --tg-contact-list-item-unselected-title-font-color: #000000;
+        --tg-contact-list-item-unselected-summary-font-color: #999999;
+        --tg-contact-list-item-summary-bubble-color: #bbbbbb;
+        --tg-contact-list-item-avatar-sys-bg-color: #5fbe67;
+
+        /* 左边栏 */
+        --tg-sidebar-width: 65px;
+        --tg-sidebar-bg-color: #293a4c;
+        --tg-sidebar-avatar-zoom: 1.25;
+        --tg-sidebar-nav-item-zoom: 1.25;
+        --tg-sidebar-nav-item-selected-bg-color: #17212b;
+        --tg-sidebar-nav-item-selected-icon-color: #5eb5f7;
+        --tg-sidebar-nav-item-unselected-icon-color: #8393a3;
+
+        /* 右栏 群公告、群成员 */
+        --tg-group-box-bg-color: #ffffff;
+
+        /* 其他 */
+        --tg-vip-name-color: #000000;
+    }
+}
+
+// 配色dark
+@mixin dark() {
+    :root {
+        /* 壁纸和背景色 */
+        /* url("local:///E:/path/to/image.png") */
+        --tg-container-image: url("local:///");
+        --tg-container-bg-color: #0e1621;
+        --tg-container-backdrop-filter: blur(0px);
+
+        /* 聊天栏 */
+        --tg-message-others-username-font-color: #faa357;
+        --tg-message-others-username-font-size: 14px;
+        --tg-message-others-bg-color: #182533;
+        --tg-message-others-font-color: #f5f5f5;
+        --tg-message-others-font-size: 16px;
+        /* highlight用于显示@用户、回复消息、语音消息 */
+        --tg-message-others-highlight-color: #85de85;
+        --tg-message-others-url-color: #70baf5;
+        --tg-message-others-reply-content-font-color: #f5f5f5;
+        --tg-message-others-reply-content-font-size: 14px;
+        --tg-message-others-forward-msg-bg-color: #182533;
+
+        --tg-message-self-bg-color: #2b5278;
+        --tg-message-self-font-color: #e4ecf2;
+        --tg-message-self-font-size: 16px;
+        --tg-message-self-highlight-color: #e39653;
+        --tg-message-self-url-color: #70baf5;
+        --tg-message-self-reply-content-font-color: #e4ecf2;
+        --tg-message-self-reply-content-font-size: 14px;
+        --tg-message-self-forward-msg-bg-color: #182533;
+
+        /* 输入框 */
+        --tg-chat-input-area-bg-color: #17212b;
+        --tg-chat-input-area-font-color: #ffffff;
+
+        /* 聊天栏header */
+        --tg-panel-header-bg-color: #17212b;
+        --tg-panel-header-title-color: #f5f5f5;
+
+        /* 会话列表 */
+        --tg-contact-top-bar-bg-color: #17212b;
+        --tg-contact-search-bg-color: #242f3d;
+        --tg-contact-list-item-bg-color: #17212b;
+        --tg-contact-list-item-top-bg-color: #17212b;
+        --tg-contact-list-item-hover-bg-color: #202b36;
+        --tg-contact-list-item-selected-bg-color: #2b5278;
+        --tg-contact-list-item-selected-title-font-color: #ffffff;
+        --tg-contact-list-item-selected-summary-font-color: #ffffff;
+        --tg-contact-list-item-unselected-title-font-color: #ffffff;
+        --tg-contact-list-item-unselected-summary-font-color: #999999;
+        --tg-contact-list-item-summary-bubble-color: #3e546a;
+        --tg-contact-list-item-avatar-sys-bg-color: #5eb5f7;
+
+        /* 左边栏 */
+        --tg-sidebar-width: 65px;
+        --tg-sidebar-bg-color: #0e1621;
+        --tg-sidebar-avatar-zoom: 1.25;
+        --tg-sidebar-nav-item-zoom: 1.25;
+        --tg-sidebar-nav-item-selected-bg-color: #25303e;
+        --tg-sidebar-nav-item-selected-icon-color: #5eb5f7;
+        --tg-sidebar-nav-item-unselected-icon-color: #768c9e;
+
+        /* 右栏 群公告、群成员 */
+        --tg-group-box-bg-color: #17212b;
+
+        /* 其他 */
+        --tg-vip-name-color: #ffffff;
+    }
+}
+
 @media (prefers-color-scheme: light) {
-    @import "light";
+    @include light();
     #app {
         @include wallpaper();
         @include sidebar();
@@ -1175,7 +1323,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    @import "dark";
+    @include dark();
     #app {
         @include wallpaper();
         @include sidebar();

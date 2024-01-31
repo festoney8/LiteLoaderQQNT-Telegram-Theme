@@ -3,7 +3,7 @@
     /* url("local:///E:/path/to/image.png") */
     --tg-container-image: url("local:///");
     --tg-container-bg-color: #eeeeee;
-    --tg-container-backdrop-filter: blur(10px);
+    --tg-container-backdrop-filter: blur(0px);
 
     /* 聊天栏header */
     --tg-panel-header-bg-color: #FFFFFF;
