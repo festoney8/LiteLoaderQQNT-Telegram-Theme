@@ -728,9 +728,8 @@
             }
         }
 
-        // 消息向上跳转，含文字，暂不修改样式，背景色与others气泡相同
+        // 消息向上跳转，含文字，暂不修改样式
         & .chat-msg-area__tip--top-btn {
-            background-color: var(--tg-message-others-bg-color) !important;
             & .content {
                 margin-left: 0;
                 color: #808080 !important;
@@ -738,7 +737,6 @@
         }
         // 向下跳转按钮
         & .chat-msg-area__tip--bottom {
-            background-color: var(--tg-message-others-bg-color) !important;
             padding: 0;
             width: 45px;
             height: 45px;
