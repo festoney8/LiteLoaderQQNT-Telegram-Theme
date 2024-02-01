@@ -1,13 +1,32 @@
 const pluginPath = LiteLoader.plugins["telegram_theme"].path.plugin
 
+
+const enableLog = true
+const enableError = true
 const log = (...args) => {
-    console.log('[telegram-theme]', ...args)
-    telegram_theme.logToMain(...args)
+    if (enableLog) {
+        console.log('[telegram-theme]', ...args)
+        telegram_theme.logToMain(...args)
+    }
 }
+
 const error = (...args) => {
-    console.error('[telegram-theme]', ...args)
-    telegram_theme.errorToMain(...args)
+    if (enableError) {
+        console.error('[telegram-theme]', ...args)
+        telegram_theme.errorToMain(...args)
+    }
 }
+
+const debounce = (fn, time = 100) => {
+    let timer = null
+    return (...args) => {
+        timer && clearTimeout(timer)
+        timer = setTimeout(() => {
+            fn.apply(this, args)
+        }, time)
+    }
+}
+
 const waitForEle = (selector, callback, interval = 1000) => {
     const timer = setInterval(() => {
         if (document.querySelector(selector)) {
@@ -18,6 +37,44 @@ const waitForEle = (selector, callback, interval = 1000) => {
             clearInterval(timer)
         }
     }, interval)
+}
+
+class IPC {
+    // 获取设置(全部设置)
+    static async getSetting() {
+        try {
+            return await telegram_theme.getSetting()
+        } catch (err) {
+            error(err.toString())
+            error(`getSetting error`)
+            return null
+        }
+    }
+
+    // 告知main更新设置
+    static setSetting(k, v) {
+        try {
+            telegram_theme.setSetting(k.toString(), v.toString())
+        } catch (err) {
+            error(err.toString())
+            error(`setSetting error`)
+        }
+    }
+
+    static debounceSetSetting = debounce((k, v) => {
+        this.setSetting(k, v)
+    }, 100)
+}
+
+// 更新html body中全部自定义CSS变量
+const updateAllCSS = async () => {
+    const setting = await IPC.getSetting()
+    for (const k in setting) {
+        const v = setting[k]['value']
+        if (v) {
+            document.body.style.setProperty(k, v)
+        }
+    }
 }
 
 // 调节会话列表宽度
@@ -194,7 +251,7 @@ const concatBubble = (floatAvatar = true) => {
                 if (floatAvatar) {
                     try {
                         // 跨消息头像浮动
-                        const avatarStart = performance.now()
+                        // const avatarStart = performance.now()
                         // log(usernameArr.toString())
                         // log(heightArr.toString())
                         // log(breakingArr.toString())
@@ -234,48 +291,10 @@ const concatBubble = (floatAvatar = true) => {
             error('concatBubble error')
         }
     })
-    const config = { childList: true }
+    const config = {childList: true}
     observer.observe(msgList, config)
 }
 
-// 获取设置(全部设置)
-const getSetting = async () => {
-    try {
-        return await telegram_theme.getSetting()
-    } catch (err) {
-        error(err.toString())
-        error(`getSetting error`)
-        return null
-    }
-}
-
-// 更新设置(仅一条)
-const setSetting = async (k, v) => {
-    try {
-        await telegram_theme.setSetting(k.toString(), v.toString())
-    } catch (err) {
-        error(err.toString())
-        error(`setSetting error`)
-    }
-}
-
-// 更新html body中全部自定义CSS变量
-const updateAllCSS = async () => {
-    const setting = await getSetting()
-
-}
-// 更新html body中单一的自定义CSS变量
-const updateSingleCSS = async () => {
-    const setting = await getSetting()
-    for (const k in setting) {
-        const v = setting[k]
-        const value = v['value']
-        const description = v['description']
-        const component = v['component']
-        const group = v['group']
-        log(k, value, description, component, group)
-    }
-}
 const main = async () => {
     log('main start')
     // 插入主题CSS
@@ -289,25 +308,278 @@ const main = async () => {
         log('insert telegram css, OK')
     }
 
+    // 更新自定义CSS
+    await updateAllCSS()
+
     // 调节宽度
     waitForEle('.two-col-layout__aside .resize-handler', adjustContactWidth)
     // 拼接气泡
     waitForEle('#ml-root .ml-list', concatBubble)
 
-    // await updateSingleCSS()
-
     // await setSetting('6666', '8888')
 }
+
+const channel = new BroadcastChannel('telegram_renderer')
 
 try {
     main()
     log('main, OK')
+
+    // renderer不同页面间通信，聊天页接收，setting发送
+    // https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
+    channel.onmessage = (event) => {
+        if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
+            try {
+                const k = event.data['k']
+                const v = event.data['v']
+                document.body.style.setProperty(k, v)
+                // log('set body style', k, v)
+            } catch (err) {
+                error(err)
+                error('channel.onmessage error')
+            }
+        }
+    }
+    log('channel, OK')
 } catch (err) {
     error(err.toString())
     error('main, ERROR')
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ColorPickerItem {
+    nodeHTML = `
+    <setting-item data-direction="row" class="telegram-color-picker">
+        <div class="col-info">
+            <div class="info-title">主标题</div>
+            <div class="info-description">功能描述</div>
+        </div>
+        <div class="col-color">
+            <input type="color" value="#FFFFFF" class="color-picker">
+        </div>
+        <div class="col-opacity">
+            <input type="range" value="100" min="0" max="100" step="1" class="opacity-picker">
+        </div>
+    </setting-item>
+    `
+
+    constructor(itemKey, itemValue, title, description) {
+        this.itemKey = itemKey
+        // value为hex color, 6位or8位, 必须以#开头
+        this.itemValue = itemValue
+        this.title = title
+        this.description = description
+    }
+
+    getItem() {
+        let nodeEle = document.createElement('div')
+        nodeEle.innerHTML = this.nodeHTML.trim()
+        nodeEle = nodeEle.querySelector('setting-item')
+
+        const title = nodeEle.querySelector('.info-title')
+        const description = nodeEle.querySelector('.info-description')
+        const opacityPicker = nodeEle.querySelector('input.opacity-picker')
+        const colorPicker = nodeEle.querySelector('input.color-picker')
+
+        if (!(opacityPicker && colorPicker && title && description)) {
+            error('ColorPickerItem getItem querySelector error')
+            return undefined
+        }
+        // 设定文字
+        title.innerHTML = this.title
+        description.innerHTML = this.description
+        // 设定colorPicker初始值
+        const hexColor = this.itemValue.slice(0, 7)
+        colorPicker.setAttribute('value', hexColor)
+        // 设定opacityPicker初始值
+        let opacity = this.itemValue.slice(7, 9)
+        if (!opacity) {
+            opacity = 'ff'
+        }
+        opacityPicker.setAttribute('value', `${parseInt(opacity, 16) / 255 * 100}`)
+        opacityPicker.style.setProperty('--opacity-0', `${hexColor}00`)
+        opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
+        // log(`set style, --opacity-0 ${hexColor}00`)
+        // log(`set style, --opacity-100 ${hexColor}ff`)
+
+        // 监听颜色修改
+        colorPicker.addEventListener('input', (event) => {
+            const hexColor = event.target.value.toLowerCase()
+            // log(`colorPicker change, now ${hexColor}`)
+            const numOpacity = opacityPicker.value
+            const hexOpacity = Math.round(numOpacity / 100 * 255).toString(16).padStart(2, '0').toLowerCase()
+
+            // 设定透明度bar的透明色和不透明色
+            opacityPicker.style.setProperty('--opacity-0', `${hexColor}00`)
+            opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
+            // 修改message页面的body style
+            const colorWithOpacity = hexColor + hexOpacity
+            channel.postMessage({'k': this.itemKey, 'v': colorWithOpacity})
+            // 保存设置
+            IPC.debounceSetSetting(this.itemKey, colorWithOpacity)
+            // log(`colorPicker set body style, ${this.itemKey} : ${colorWithOpacity}`)
+        })
+
+        // 监听透明度修改
+        opacityPicker.addEventListener('input', (event) => {
+            const numOpacity = event.target.value
+            // log(`opacityPicker change, now ${numOpacity}`)
+            const hexOpacity = Math.round(numOpacity / 100 * 255).toString(16).padStart(2, '0').toLowerCase()
+
+            // 设定透明度bar的透明色和不透明色
+            const hexColor = colorPicker.value.toLowerCase()
+            opacityPicker.style.setProperty('--opacity-0', `${hexColor}00`)
+            opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
+            // 修改message页面的body style
+            const colorWithOpacity = hexColor + hexOpacity
+            channel.postMessage({'k': this.itemKey, 'v': colorWithOpacity})
+            // 保存设置
+            IPC.debounceSetSetting(this.itemKey, colorWithOpacity)
+            // log(`colorPicker set body style, ${this.itemKey} : ${colorWithOpacity}`)
+        })
+
+        return nodeEle
+    }
+}
+
+class TextItem {
+    nodeHTML = `
+    <setting-item data-direction="row" class="telegram-text-input">
+        <div class="col-info">
+            <div class="info-title">主标题</div>
+            <div class="info-description">功能描述</div>
+        </div>
+        <div class="col-text">
+            <input type="text" value="" class="text-input">
+        </div>
+    </setting-item>
+    `
+
+    constructor(itemKey, itemValue, title, description) {
+        this.itemKey = itemKey
+        this.itemValue = itemValue
+        this.title = title
+        this.description = description
+    }
+
+    getItem() {
+        let nodeEle = document.createElement('div')
+        nodeEle.innerHTML = this.nodeHTML.trim()
+        nodeEle = nodeEle.querySelector('setting-item')
+
+        const title = nodeEle.querySelector('.info-title')
+        const description = nodeEle.querySelector('.info-description')
+        const textInput = nodeEle.querySelector('input.text-input')
+
+        if (!(textInput && title && description)) {
+            error('TextItem getItem querySelector error')
+            return undefined
+        }
+        title.innerHTML = this.title
+        description.innerHTML = this.description
+        textInput.setAttribute('value', this.itemValue)
+
+        textInput.addEventListener('input', (event) => {
+            const newValue = event.target.value
+            // 修改message页面的body style
+            channel.postMessage({'k': this.itemKey, 'v': newValue})
+            // 保存设置
+            IPC.debounceSetSetting(this.itemKey, newValue)
+            // log(`textInput set body style, ${this.itemKey} : ${newValue}`)
+        })
+        return nodeEle
+    }
+}
+
+class SettingList {
+    nodeHTML = `
+    <setting-list data-direction="column" is-collapsible="" data-title="">
+    </setting-list>
+    `
+
+    constructor(listTitle, settingItems = []) {
+        this.listTitle = listTitle
+        this.settingItems = settingItems
+    }
+
+    createNode(view) {
+        let nodeEle = document.createElement('div')
+        nodeEle.innerHTML = this.nodeHTML
+        nodeEle = nodeEle.querySelector('setting-list')
+        nodeEle.setAttribute('data-title', this.listTitle)
+
+        this.settingItems.forEach((item) => {
+            nodeEle.appendChild(item)
+        })
+        view.appendChild(nodeEle)
+    }
+}
+
+// 创建设置页流程
+const onSettingCreate = async (view) => {
+    try {
+        log('onSettingCreate, start')
+        // 插入设置页CSS
+        if (!view.querySelector('.telegram-setting-css')) {
+            const link = document.createElement('link')
+            link.type = 'text/css'
+            link.rel = 'stylesheet'
+            link.classList.add('telegram-setting-css')
+            link.href = `local:///${pluginPath.replaceAll('\\', '/')}/src/style/telegram-setting.css`
+            view.appendChild(link)
+        }
+
+        // 获取设置，创建item列表
+        const setting = await IPC.getSetting()
+        if (!setting || setting.length === 0) {
+            throw Error('getSetting error')
+        }
+        const settingItemLists = {
+            '壁纸设定': [],
+            '自己的消息': [],
+            '他人的消息': [],
+            '会话列表': [],
+            '左边栏': [],
+            '其他设定': [],
+        }
+        for (const key in setting) {
+            const v = setting[key]
+            const value = v['value']
+            const title = v['title']
+            // const defaultValue = v['defaultValue']
+            const description = v['description']
+            const type = v['type']
+            const group = v['group']
+
+            if (type === 'color') {
+                const colorPickerItem = new ColorPickerItem(key, value, title, description).getItem()
+                if (colorPickerItem) {
+                    settingItemLists[group]?.push(colorPickerItem)
+                }
+            } else if (type === 'text') {
+                const textInputItem = new TextItem(key, value, title, description).getItem()
+                if (textInputItem) {
+                    settingItemLists[group]?.push(textInputItem)
+                }
+            } else if (type === 'button') {
+
+            }
+        }
+
+        for (const listTitle in settingItemLists) {
+            new SettingList(listTitle, settingItemLists[listTitle]).createNode(view)
+            log(`create list ${listTitle}, ${settingItemLists[listTitle].length} items`)
+        }
+
+        log('onSettingCreate, OK')
+    } catch (err) {
+        error(err)
+        error('onSettingCreate, error')
+    }
+}
+
 // 打开设置界面时触发
 export const onSettingWindowCreated = view => {
-    // view 为 Element 对象，修改将同步到插件设置界面
+    onSettingCreate(view)
 }

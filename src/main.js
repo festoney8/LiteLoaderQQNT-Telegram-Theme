@@ -69,7 +69,6 @@ const getSetting = async () => {
 
 // 保存设置, 每次只存一个KV值
 const setSetting = (k, v) => {
-    log('setSetting message', k, v)
     try {
         if (!k || v === undefined) {
             throw Error('setSetting k-v invalid')
@@ -80,7 +79,6 @@ const setSetting = (k, v) => {
             }
             let setting = JSON.parse(data)
             setting[getCurrTheme()][k]['value'] = v.toString()
-            log(setting)
             const updatedData = JSON.stringify(setting, null, 4)
             fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
                 if (err) {
@@ -88,7 +86,7 @@ const setSetting = (k, v) => {
                 }
             })
         })
-        log('setSetting OK')
+        log('setSetting', k, v, 'OK')
     } catch (err) {
         error(err.toString())
         error('setSetting error')
