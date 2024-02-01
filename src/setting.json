@@ -1,0 +1,743 @@
+{
+    "light": {
+        "--tg-container-image": {
+            "value": "url(\"local://\")",
+            "defaultValue": "url(\"local://\")",
+            "title": "选择壁纸（日间模式）",
+            "description": "日间模式/夜间模式 壁纸互不干扰",
+            "type": "button",
+            "group": "壁纸设定"
+        },
+        "--tg-container-backdrop-filter": {
+            "value": "blur(0px)",
+            "defaultValue": "blur(0px)",
+            "title": "壁纸滤镜（模糊、亮度等）",
+            "description": "遵循 backdrop-filter 语法（blur/brightness等）",
+            "type": "text",
+            "group": "壁纸设定"
+        },
+        "--tg-container-bg-color": {
+            "value": "#eeeeee",
+            "defaultValue": "#eeeeee",
+            "title": "背景色",
+            "description": "在没有壁纸时作为替代项",
+            "type": "color",
+            "group": "壁纸设定"
+        },
+        "--tg-message-others-username-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "他人的 昵称颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-username-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "他人的 昵称字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "他人的 气泡颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-font-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "他人的 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-font-size": {
+            "value": "16px",
+            "defaultValue": "16px",
+            "title": "他人的 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-highlight-color": {
+            "value": "#5fbe67",
+            "defaultValue": "#5fbe67",
+            "title": "他人的 高亮色",
+            "description": "在@用户/回复/语音消息时使用",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-url-color": {
+            "value": "#168ad0",
+            "defaultValue": "#168ad0",
+            "title": "他人的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-reply-content-font-color": {
+            "value": "#808080",
+            "defaultValue": "#808080",
+            "title": "回复消息文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-reply-content-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "回复消息文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-forward-msg-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "他人的 转发消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-self-bg-color": {
+            "value": "#effdde",
+            "defaultValue": "#effdde",
+            "title": "自己的 气泡颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-font-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "自己的 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-font-size": {
+            "value": "16px",
+            "defaultValue": "16px",
+            "title": "自己的 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-highlight-color": {
+            "value": "#5fbe67",
+            "defaultValue": "#5fbe67",
+            "title": "自己的 高亮色",
+            "description": "在@用户/回复/语音消息时使用",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-url-color": {
+            "value": "#168ad0",
+            "defaultValue": "#168ad0",
+            "title": "自己的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-content-font-color": {
+            "value": "#808080",
+            "defaultValue": "#808080",
+            "title": "回复消息文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-content-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "回复消息文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-forward-msg-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "自己的 转发消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-chat-input-area-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "输入框 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-chat-input-area-font-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "输入框 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "聊天栏顶部 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-title-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "聊天栏顶部 群名用户名 文字色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-contact-top-bar-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "顶部背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-search-bg-color": {
+            "value": "#f1f1f1",
+            "defaultValue": "#f1f1f1",
+            "title": "搜索框颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "普通会话项背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-top-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "置顶会话项背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-hover-bg-color": {
+            "value": "#f1f1f1",
+            "defaultValue": "#f1f1f1",
+            "title": "鼠标经过会话项时背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-bg-color": {
+            "value": "#419fd9",
+            "defaultValue": "#419fd9",
+            "title": "会话项 选中时 背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-title-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "会话项 选中时 标题文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-summary-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "会话项 选中时 摘要文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-unselected-title-font-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "会话项 未选中时 标题文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-unselected-summary-font-color": {
+            "value": "#999999",
+            "defaultValue": "#999999",
+            "title": "会话项 未选中时 摘要文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-summary-bubble-color": {
+            "value": "#bbbbbb",
+            "defaultValue": "#bbbbbb",
+            "title": "会话项 普通消息提示颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-avatar-sys-bg-color": {
+            "value": "#5fbe67",
+            "defaultValue": "#5fbe67",
+            "title": "我的手机和群助手 头像颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-sidebar-width": {
+            "value": "65px",
+            "defaultValue": "65px",
+            "title": "左边栏 宽度",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-bg-color": {
+            "value": "#293a4c",
+            "defaultValue": "#293a4c",
+            "title": "左边栏 背景色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-avatar-zoom": {
+            "value": "1.25",
+            "defaultValue": "1.25",
+            "title": "左边栏 头像放大倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-zoom": {
+            "value": "1.25",
+            "defaultValue": "1.25",
+            "title": "左边栏 按钮放大倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-selected-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "左边栏 按钮选中时 背景色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-selected-icon-color": {
+            "value": "#5eb5f7",
+            "defaultValue": "#5eb5f7",
+            "title": "左边栏 按钮选中时 图标色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-unselected-icon-color": {
+            "value": "#8393a3",
+            "defaultValue": "#8393a3",
+            "title": "左边栏 按钮未选中时 图标色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-group-box-bg-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "群公告、群成员 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-vip-name-color": {
+            "value": "#000000",
+            "defaultValue": "#000000",
+            "title": "VIP用户名 颜色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        }
+    },
+    "dark": {
+        "--tg-container-image": {
+            "value": "url(\"local://\")",
+            "defaultValue": "url(\"local://\")",
+            "title": "选择壁纸（夜间模式）",
+            "description": "夜间模式/日间模式 壁纸互不干扰",
+            "type": "button",
+            "group": "壁纸设定"
+        },
+        "--tg-container-backdrop-filter": {
+            "value": "blur(0px)",
+            "defaultValue": "blur(0px)",
+            "title": "壁纸滤镜（模糊、亮度等）",
+            "description": "遵循 backdrop-filter 语法（blur/brightness等）",
+            "type": "text",
+            "group": "壁纸设定"
+        },
+        "--tg-container-bg-color": {
+            "value": "#0e1621",
+            "defaultValue": "#0e1621",
+            "title": "背景色",
+            "description": "在没有壁纸时作为替代项",
+            "type": "color",
+            "group": "壁纸设定"
+        },
+        "--tg-message-others-username-font-color": {
+            "value": "#faa357",
+            "defaultValue": "#faa357",
+            "title": "他人的 昵称颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-username-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "他人的 昵称字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-bg-color": {
+            "value": "#182533",
+            "defaultValue": "#182533",
+            "title": "他人的 气泡颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-font-color": {
+            "value": "#f5f5f5",
+            "defaultValue": "#f5f5f5",
+            "title": "他人的 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-font-size": {
+            "value": "16px",
+            "defaultValue": "16px",
+            "title": "他人的 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-highlight-color": {
+            "value": "#faa357",
+            "defaultValue": "#faa357",
+            "title": "他人的 高亮色",
+            "description": "在@用户/回复/语音消息时使用",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-url-color": {
+            "value": "#70baf5",
+            "defaultValue": "#70baf5",
+            "title": "他人的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-reply-content-font-color": {
+            "value": "#f5f5f5",
+            "defaultValue": "#f5f5f5",
+            "title": "回复消息文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-reply-content-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "回复消息文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
+        "--tg-message-others-forward-msg-bg-color": {
+            "value": "#182533",
+            "defaultValue": "#182533",
+            "title": "他人的 转发消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "他人的消息"
+        },
+        "--tg-message-self-bg-color": {
+            "value": "#2b5278",
+            "defaultValue": "#2b5278",
+            "title": "自己的 气泡颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-font-color": {
+            "value": "#e4ecf2",
+            "defaultValue": "#e4ecf2",
+            "title": "自己的 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-font-size": {
+            "value": "16px",
+            "defaultValue": "16px",
+            "title": "自己的 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-highlight-color": {
+            "value": "#e39653",
+            "defaultValue": "#e39653",
+            "title": "自己的 高亮色",
+            "description": "在@用户/回复/语音消息时使用",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-url-color": {
+            "value": "#70baf5",
+            "defaultValue": "#70baf5",
+            "title": "自己的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-content-font-color": {
+            "value": "#e4ecf2",
+            "defaultValue": "#e4ecf2",
+            "title": "回复消息文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-content-font-size": {
+            "value": "14px",
+            "defaultValue": "14px",
+            "title": "回复消息文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-forward-msg-bg-color": {
+            "value": "#182533",
+            "defaultValue": "#182533",
+            "title": "自己的 转发消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-chat-input-area-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "输入框 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-chat-input-area-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "输入框 文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "聊天栏顶部 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-title-color": {
+            "value": "#f5f5f5",
+            "defaultValue": "#f5f5f5",
+            "title": "聊天栏顶部 群名用户名 文字色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-contact-top-bar-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "顶部背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-search-bg-color": {
+            "value": "#242f3d",
+            "defaultValue": "#242f3d",
+            "title": "搜索框颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "普通会话项背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-top-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "置顶会话项背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-hover-bg-color": {
+            "value": "#202b36",
+            "defaultValue": "#202b36",
+            "title": "鼠标经过会话项时背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-bg-color": {
+            "value": "#2b5278",
+            "defaultValue": "#2b5278",
+            "title": "会话项 选中时 背景色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-title-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "会话项 选中时 标题文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-selected-summary-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "会话项 选中时 摘要文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-unselected-title-font-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "会话项 未选中时 标题文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-unselected-summary-font-color": {
+            "value": "#999999",
+            "defaultValue": "#999999",
+            "title": "会话项 未选中时 摘要文字颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-summary-bubble-color": {
+            "value": "#3e546a",
+            "defaultValue": "#3e546a",
+            "title": "会话项 普通消息提示颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-avatar-sys-bg-color": {
+            "value": "#5eb5f7",
+            "defaultValue": "#5eb5f7",
+            "title": "我的手机和群助手 头像颜色",
+            "description": "",
+            "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-sidebar-width": {
+            "value": "65px",
+            "defaultValue": "65px",
+            "title": "左边栏 宽度",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-bg-color": {
+            "value": "#0e1621",
+            "defaultValue": "#0e1621",
+            "title": "左边栏 背景色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-avatar-zoom": {
+            "value": "1.25",
+            "defaultValue": "1.25",
+            "title": "左边栏 头像放大倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-zoom": {
+            "value": "1.25",
+            "defaultValue": "1.25",
+            "title": "左边栏 按钮放大倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-selected-bg-color": {
+            "value": "#25303e",
+            "defaultValue": "#25303e",
+            "title": "左边栏 按钮选中时 背景色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-selected-icon-color": {
+            "value": "#5eb5f7",
+            "defaultValue": "#5eb5f7",
+            "title": "左边栏 按钮选中时 图标色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-sidebar-nav-item-unselected-icon-color": {
+            "value": "#768c9e",
+            "defaultValue": "#768c9e",
+            "title": "左边栏 按钮未选中时 图标色",
+            "description": "",
+            "type": "color",
+            "group": "左边栏"
+        },
+        "--tg-group-box-bg-color": {
+            "value": "#17212b",
+            "defaultValue": "#17212b",
+            "title": "群公告、群成员 背景色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-vip-name-color": {
+            "value": "#ffffff",
+            "defaultValue": "#ffffff",
+            "title": "VIP用户名 颜色",
+            "description": "",
+            "type": "color",
+            "group": "其他设定"
+        }
+    },
+    "version": "4.0.0"
+}
