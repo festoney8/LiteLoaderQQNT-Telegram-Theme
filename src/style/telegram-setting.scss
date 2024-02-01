@@ -1,0 +1,127 @@
+@media (prefers-color-scheme: light) {
+    .tab-view.telegram_theme {
+        color: black;
+    }
+    setting-list {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+        margin-bottom: 20px;
+    }
+    setting-item {
+        background-color: white;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .tab-view.telegram_theme {
+        color: white;
+    }
+    setting-list {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #262626;
+        margin-bottom: 20px;
+    }
+    setting-item {
+        background-color: #262626;
+    }
+}
+
+.tab-view.telegram_theme {
+    // 颜色选择器
+    & .telegram-color-picker {
+        & .col-info {
+            width: 55%;
+            & .info-title {
+                font-size: 1.1em;
+                margin-bottom: 3px;
+            }
+            & .info-description {
+                font-size: 0.95em;
+                color: gray;
+            }
+        }
+        & .col-color {
+            width: 20%;
+            overflow: hidden;
+            & input[type="color"] {
+                width: 100%;
+                height: 26px;
+                padding: 0;
+                border: 1px #bbb solid;
+                border-radius: 3px;
+                overflow: hidden;
+                cursor: pointer;
+                appearance: none;
+                // https://stackoverflow.com/questions/11167281
+                -webkit-appearance: none;
+                &::-webkit-color-swatch {
+                    border: none;
+                }
+                &::-webkit-color-swatch-wrapper {
+                    padding: 0;
+                }
+            }
+        }
+        & .col-opacity {
+            --opacity-0: #00000000;
+            --opacity-100: #000000ff;
+            width: 20%;
+            input[type="range"] {
+                width: 100%;
+                overflow: hidden;
+                cursor: pointer;
+                border-radius: 3px;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                border: 1px #bbb solid;
+                // https://stackoverflow.com/questions/34850327
+                &::-webkit-slider-runnable-track {
+                    height: 16px;
+                    background: linear-gradient(90deg, var(--opacity-0), var(--opacity-100));
+                    -webkit-appearance: none;
+                }
+                &::-webkit-slider-thumb {
+                    position: relative;
+                    height: 16px;
+                    width: 3px;
+                    background: transparent;
+                    border: 1px gray solid;
+                    -webkit-appearance: none;
+                }
+            }
+        }
+    }
+
+    // 数值输入
+    & .telegram-text-input {
+        & .col-info {
+            width: 55%;
+            & .info-title {
+                font-size: 1.1em;
+                margin-bottom: 3px;
+            }
+            & .info-description {
+                font-size: 0.95em;
+                color: gray;
+            }
+        }
+        & .col-text {
+            width: 20%;
+            input[type="text"] {
+                width: 100%;
+                height: 28px;
+                font-size: 1.1em;
+                overflow: hidden;
+                cursor: pointer;
+                border-radius: 3px;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                border: 1px gray solid;
+                padding-left: 6px;
+            }
+        }
+    }
+}
