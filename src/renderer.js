@@ -1,7 +1,7 @@
 const pluginPath = LiteLoader.plugins["telegram_theme"].path.plugin
 
 
-const enableLog = true
+const enableLog = false
 const enableError = true
 const log = (...args) => {
     if (enableLog) {
@@ -40,6 +40,10 @@ const waitForEle = (selector, callback, interval = 1000) => {
 }
 
 class IPC {
+    static rendererReady() {
+        telegram_theme.rendererReady()
+    }
+
     // 获取设置(全部设置)
     static async getSetting() {
         try {
@@ -61,9 +65,31 @@ class IPC {
         }
     }
 
+    // 选择图片
+    static chooseImage() {
+        telegram_theme.chooseImage()
+    }
+
     static debounceSetSetting = debounce((k, v) => {
         this.setSetting(k, v)
     }, 100)
+
+    // 监听设置更新
+    static updateSetting() {
+        telegram_theme.updateSetting((event, k, v) => {
+            // channel.postMessage({ 'k': k, 'v': v })
+            document.body.style.setProperty(k, v)
+            // log('updateSetting', k, v)
+        })
+    }
+
+    // 监听全部设置更新（切换主题）
+    static updateAllSetting() {
+        telegram_theme.updateAllSetting((event, theme) => {
+            log('theme change', theme, 'updateAllCSS start')
+            updateAllCSS()
+        })
+    }
 }
 
 // 更新html body中全部自定义CSS变量
@@ -143,7 +169,7 @@ const adjustContactWidth = () => {
                 if (count > 20) {
                     clearInterval(timer)
                 }
-            }, 500)
+            }, 1000)
         }
     } catch (err) {
         error(err.toString())
@@ -297,8 +323,13 @@ const concatBubble = (floatAvatar = true) => {
     observer.observe(msgList, config)
 }
 
-const main = async () => {
-    log('main start')
+
+// BroadcastChannel，renderer不同页面间通信，用于实时同步设置
+const channel = new BroadcastChannel('telegram_renderer')
+
+// 聊天窗口创建
+const onMessageCreate = async () => {
+    log('onMessageCreate start')
     // 插入主题CSS
     if (!document.head?.querySelector('.telegram-css')) {
         const link = document.createElement("link")
@@ -317,36 +348,44 @@ const main = async () => {
     // 拼接气泡
     waitForEle('#ml-root .ml-list', concatBubble)
 
-    // await setSetting('6666', '8888')
-}
+    IPC.rendererReady()
+    // 监听设置更新
+    IPC.updateSetting()
+    IPC.updateAllSetting()
 
-const channel = new BroadcastChannel('telegram_renderer')
+    log('onMessageCreate, OK')
 
-try {
-    // if (location.pathname === "/renderer/index.html") {
-    log(location.hash)
-    log(location.pathname)
-    log(location.href)
-    main()
-    log('main, OK')
-
-    // renderer不同页面间通信，聊天页接收，setting发送
-    // https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
     channel.onmessage = (event) => {
-        // if (['#/blank', '#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
-        try {
-            const k = event.data['k']
-            const v = event.data['v']
-            document.body.style.setProperty(k, v)
-            // log('set body style', k, v)
-        } catch (err) {
-            error(err)
-            error('channel.onmessage error')
+        if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
+            try {
+                const k = event.data['k']
+                const v = event.data['v']
+                document.body.style.setProperty(k, v)
+                // log('set body style', k, v)
+            } catch (err) {
+                error(err)
+                error('channel.onmessage error')
+            }
         }
-        // }
     }
     log('channel, OK')
-    // }
+}
+
+try {
+    if (location.pathname === '/renderer/index.html') {
+        if (location.hash === "#/blank") {
+            navigation.addEventListener("navigatesuccess", () => {
+                if (!location.hash.includes('#/setting')) {
+                    log('hashchange location.hash', location.hash)
+                    onMessageCreate()
+                }
+            }, { once: true })
+        } else if (!location.hash.includes('#/setting')) {
+            log('location.hash', location.hash)
+            onMessageCreate()
+        }
+    }
+
 } catch (err) {
     error(err.toString())
     error('main, ERROR')
@@ -503,9 +542,47 @@ class TextItem {
 }
 
 // 设置组件：按钮（用于选择壁纸）
-class ButtonItem {
-    constructor() { }
-    getItem() { }
+class ImageBtnItem {
+    nodeHTML = `
+    <setting-item data-direction="row" class="telegram-button">
+        <div class="col-info">
+            <div class="info-title">主标题</div>
+            <div class="info-description">功能描述</div>
+        </div>
+        <div class="col-button">
+            <button class="image-btn" type="button">选择图片</button>
+        </div>
+    </setting-item>
+    `
+
+    constructor(itemKey, title, description, callback) {
+        this.itemKey = itemKey
+        this.title = title
+        this.description = description
+        this.callback = callback
+    }
+
+    getItem() {
+        let nodeEle = document.createElement('div')
+        nodeEle.innerHTML = this.nodeHTML.trim()
+        nodeEle = nodeEle.querySelector('setting-item')
+
+        const title = nodeEle.querySelector('.info-title')
+        const description = nodeEle.querySelector('.info-description')
+        const button = nodeEle.querySelector('button.image-btn')
+
+        if (!(button && title && description)) {
+            error('ImageBtnItem getItem querySelector error')
+            return undefined
+        }
+        title.innerHTML = this.title
+        description.innerHTML = this.description
+        button.onclick = () => {
+            this.callback()
+        }
+
+        return nodeEle
+    }
 }
 
 // 设置组件：一组item
@@ -557,7 +634,7 @@ const onSettingCreate = async (view) => {
             '自己的消息': [],
             '他人的消息': [],
             '会话列表': [],
-            '左边栏': [],
+            '侧边栏': [],
             '其他设定': [],
         }
         for (const key in setting) {
@@ -580,7 +657,10 @@ const onSettingCreate = async (view) => {
                     settingItemLists[group]?.push(textInputItem)
                 }
             } else if (type === 'button') {
-
+                const imageBtnItem = new ImageBtnItem(key, title, description, () => { IPC.chooseImage() }).getItem()
+                if (imageBtnItem) {
+                    settingItemLists[group]?.push(imageBtnItem)
+                }
             }
         }
 

@@ -6,7 +6,7 @@ const pluginPath = LiteLoader.plugins['telegram_theme'].path.plugin.replaceAll('
 const dataPath = LiteLoader.plugins['telegram_theme'].path.data.replaceAll('\\', '/')
 const settingPath = path.join(dataPath, 'setting.json').replaceAll('\\', '/')
 
-const enableLog = true
+const enableLog = false
 const enableError = true
 const log = (...args) => {
     if (enableLog) {
@@ -28,6 +28,9 @@ const debounce = (fn, time = 100) => {
     }
 }
 
+// 主窗口对象
+let mainWindow
+
 // 获取主题
 const getCurrTheme = () => {
     return nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
@@ -39,16 +42,12 @@ const initSetting = () => {
         if (!fs.existsSync(settingPath)) {
             // 复制文件
             fs.mkdirSync(dataPath, { recursive: true })
-            fs.copyFile(`${pluginPath}/src/setting.json`, settingPath, (err) => {
-                if (err) {
-                    throw err
-                }
-                // 设定默认壁纸路径
-                // setSetting('--tg-container-image', `url("local:///${pluginPath}/image/light.jpg")`, 'light')
-                setSetting('--tg-container-image', `url("local:///${pluginPath}/image/dark.jpg")`, 'dark')
-                log('initSetting set default wallpaper OK')
-                log('initSetting OK')
-            })
+            fs.copyFileSync(`${pluginPath}/src/setting.json`, settingPath)
+            // 设定默认壁纸路径
+            setSetting('--tg-container-image', `url("local:///${pluginPath}/image/light.jpg")`, 'light')
+            setSetting('--tg-container-image', `url("local:///${pluginPath}/image/dark.jpg")`, 'dark')
+            log('initSetting set default wallpaper OK')
+            log('initSetting OK')
         } else {
             log('initSetting skip, OK')
         }
@@ -81,19 +80,11 @@ const setSetting = (k, v, theme = null) => {
         if (!theme) {
             theme = getCurrTheme()
         }
-        fs.readFile(settingPath, 'utf8', (err, data) => {
-            if (err) {
-                throw err
-            }
-            let setting = JSON.parse(data)
-            setting[theme][k]['value'] = v.toString()
-            const updatedData = JSON.stringify(setting, null, 4)
-            fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
-                if (err) {
-                    throw err
-                }
-            })
-        })
+        let data = fs.readFileSync(settingPath, 'utf8')
+        let setting = JSON.parse(data)
+        setting[theme][k]['value'] = v.toString()
+        const updatedData = JSON.stringify(setting, null, 4)
+        fs.writeFileSync(settingPath, updatedData, 'utf8')
         log('setSetting', k, v, 'OK')
     } catch (err) {
         error(err.toString())
@@ -101,12 +92,67 @@ const setSetting = (k, v, theme = null) => {
     }
 }
 
+// 选取壁纸图片
+const chooseImage = () => {
+    dialog.showOpenDialog({
+        properties: ['openFile'],
+        filters: [
+            { name: 'Images', extensions: ['jpg', 'png', 'gif', 'webp'] },
+            { name: 'All Files', extensions: ['*'] }
+        ]
+    }).then(result => {
+        try {
+            let imagePath = result.filePaths[0]
+            if (!imagePath) {
+                return
+            }
+            imagePath = imagePath.replaceAll('\\', '/')
+            setSetting("--tg-container-image", `url("local:///${imagePath}")`)
+            log("chooseImage setsetting, OK")
 
+            // 通知renderer刷新设置
+            if (!mainWindow.webContents.isDestroyed()) {
+                mainWindow.webContents.send("LiteLoader.telegram_theme.updateSetting", "--tg-container-image", `url("local:///${imagePath}")`);
+                log("chooseImage, OK")
+            } else {
+                log('chooseImage webContents isDestroyed')
+            }
+        } catch (err) {
+            error(err)
+            error('chooseImage error')
+        }
+    }).catch(err => {
+        error(err)
+        error("chooseImage, error")
+    })
+}
+
+ipcMain.on("LiteLoader.telegram_theme.rendererReady", (event) => {
+    // 捕捉主窗口对象
+    mainWindow = BrowserWindow.fromWebContents(event.sender)
+    log('main rendererReady set mainWindow')
+
+    // 监听主题切换
+    nativeTheme.on('updated', () => {
+        try {
+            if (!mainWindow.webContents.isDestroyed()) {
+                mainWindow.webContents.send("LiteLoader.telegram_theme.updateAllSetting", getCurrTheme())
+            }
+            log('theme change detected')
+        } catch (err) {
+            error(err)
+            error('nativeTheme.on error')
+        }
+    })
+})
 ipcMain.handle('LiteLoader.telegram_theme.getSetting', async () => {
     return getSetting()
 })
 ipcMain.on('LiteLoader.telegram_theme.setSetting', (event, k, v) => {
     setSetting(k, v)
+})
+ipcMain.on('LiteLoader.telegram_theme.chooseImage', (event, k, v) => {
+    chooseImage()
 })
 ipcMain.on("LiteLoader.telegram_theme.logToMain", (event, ...args) => {
     log('[renderer]', ...args)
@@ -117,9 +163,5 @@ ipcMain.on("LiteLoader.telegram_theme.errorToMain", (event, ...args) => {
 
 
 module.exports.onBrowserWindowCreated = window => {
-    log('pluginPath', pluginPath)
-    log('settingPath', settingPath)
-    log('dataPath', dataPath)
-
     initSetting()
 }

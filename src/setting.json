@@ -4,7 +4,7 @@
             "value": "url(\"local:///\")",
             "defaultValue": "url(\"local:///\")",
             "title": "选择壁纸（日间模式）",
-            "description": "日间模式/夜间模式 壁纸互不干扰",
+            "description": "日间/夜间 壁纸不同，切换模式后请重新打开设置页",
             "type": "button",
             "group": "壁纸设定"
         },
@@ -299,58 +299,58 @@
         "--tg-sidebar-width": {
             "value": "65px",
             "defaultValue": "65px",
-            "title": "左边栏 宽度",
+            "title": "侧边栏 宽度",
             "description": "不要忘记输入单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-bg-color": {
             "value": "#293a4c",
             "defaultValue": "#293a4c",
-            "title": "左边栏 背景色",
+            "title": "侧边栏 背景色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-avatar-zoom": {
             "value": "1.25",
             "defaultValue": "1.25",
-            "title": "左边栏 头像放大倍率",
+            "title": "侧边栏 头像放大倍率",
             "description": "无单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-zoom": {
             "value": "1.25",
             "defaultValue": "1.25",
-            "title": "左边栏 按钮放大倍率",
+            "title": "侧边栏 按钮放大倍率",
             "description": "无单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-selected-bg-color": {
             "value": "#17212b",
             "defaultValue": "#17212b",
-            "title": "左边栏 按钮选中时 背景色",
+            "title": "侧边栏 按钮选中时 背景色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-selected-icon-color": {
             "value": "#5eb5f7",
             "defaultValue": "#5eb5f7",
-            "title": "左边栏 按钮选中时 图标色",
+            "title": "侧边栏 按钮选中时 图标色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-unselected-icon-color": {
             "value": "#8393a3",
             "defaultValue": "#8393a3",
-            "title": "左边栏 按钮未选中时 图标色",
+            "title": "侧边栏 按钮未选中时 图标色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-group-box-bg-color": {
             "value": "#ffffff",
@@ -374,7 +374,7 @@
             "value": "url(\"local:///\")",
             "defaultValue": "url(\"local:///\")",
             "title": "选择壁纸（夜间模式）",
-            "description": "夜间模式/日间模式 壁纸互不干扰",
+            "description": "日间/夜间 壁纸不同，切换模式后请重新打开设置页",
             "type": "button",
             "group": "壁纸设定"
         },
@@ -669,58 +669,58 @@
         "--tg-sidebar-width": {
             "value": "65px",
             "defaultValue": "65px",
-            "title": "左边栏 宽度",
+            "title": "侧边栏 宽度",
             "description": "不要忘记输入单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-bg-color": {
             "value": "#0e1621",
             "defaultValue": "#0e1621",
-            "title": "左边栏 背景色",
+            "title": "侧边栏 背景色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-avatar-zoom": {
             "value": "1.25",
             "defaultValue": "1.25",
-            "title": "左边栏 头像放大倍率",
+            "title": "侧边栏 头像放大倍率",
             "description": "无单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-zoom": {
             "value": "1.25",
             "defaultValue": "1.25",
-            "title": "左边栏 按钮放大倍率",
+            "title": "侧边栏 按钮放大倍率",
             "description": "无单位",
             "type": "text",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-selected-bg-color": {
             "value": "#25303e",
             "defaultValue": "#25303e",
-            "title": "左边栏 按钮选中时 背景色",
+            "title": "侧边栏 按钮选中时 背景色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-selected-icon-color": {
             "value": "#5eb5f7",
             "defaultValue": "#5eb5f7",
-            "title": "左边栏 按钮选中时 图标色",
+            "title": "侧边栏 按钮选中时 图标色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-sidebar-nav-item-unselected-icon-color": {
             "value": "#768c9e",
             "defaultValue": "#768c9e",
-            "title": "左边栏 按钮未选中时 图标色",
+            "title": "侧边栏 按钮未选中时 图标色",
             "description": "",
             "type": "color",
-            "group": "左边栏"
+            "group": "侧边栏"
         },
         "--tg-group-box-bg-color": {
             "value": "#17212b",
