@@ -1,8 +1,8 @@
 {
     "light": {
         "--tg-container-image": {
-            "value": "url(\"local://\")",
-            "defaultValue": "url(\"local://\")",
+            "value": "url(\"local:///\")",
+            "defaultValue": "url(\"local:///\")",
             "title": "选择壁纸（日间模式）",
             "description": "日间模式/夜间模式 壁纸互不干扰",
             "type": "button",
@@ -371,8 +371,8 @@
     },
     "dark": {
         "--tg-container-image": {
-            "value": "url(\"local://\")",
-            "defaultValue": "url(\"local://\")",
+            "value": "url(\"local:///\")",
+            "defaultValue": "url(\"local:///\")",
             "title": "选择壁纸（夜间模式）",
             "description": "夜间模式/日间模式 壁纸互不干扰",
             "type": "button",

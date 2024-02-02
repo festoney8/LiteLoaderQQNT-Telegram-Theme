@@ -72,9 +72,11 @@ const updateAllCSS = async () => {
     for (const k in setting) {
         const v = setting[k]['value']
         if (v) {
+            // log(`updateAllCSS: ${k}----${v}`)
             document.body.style.setProperty(k, v)
         }
     }
+    log('updateAllCSS OK')
 }
 
 // 调节会话列表宽度
@@ -291,7 +293,7 @@ const concatBubble = (floatAvatar = true) => {
             error('concatBubble error')
         }
     })
-    const config = {childList: true}
+    const config = { childList: true }
     observer.observe(msgList, config)
 }
 
@@ -308,9 +310,8 @@ const main = async () => {
         log('insert telegram css, OK')
     }
 
-    // 更新自定义CSS
-    await updateAllCSS()
-
+    // 更新CSS
+    waitForEle('main', updateAllCSS)
     // 调节宽度
     waitForEle('.two-col-layout__aside .resize-handler', adjustContactWidth)
     // 拼接气泡
@@ -322,25 +323,30 @@ const main = async () => {
 const channel = new BroadcastChannel('telegram_renderer')
 
 try {
+    // if (location.pathname === "/renderer/index.html") {
+    log(location.hash)
+    log(location.pathname)
+    log(location.href)
     main()
     log('main, OK')
 
     // renderer不同页面间通信，聊天页接收，setting发送
     // https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
     channel.onmessage = (event) => {
-        if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
-            try {
-                const k = event.data['k']
-                const v = event.data['v']
-                document.body.style.setProperty(k, v)
-                // log('set body style', k, v)
-            } catch (err) {
-                error(err)
-                error('channel.onmessage error')
-            }
+        // if (['#/blank', '#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
+        try {
+            const k = event.data['k']
+            const v = event.data['v']
+            document.body.style.setProperty(k, v)
+            // log('set body style', k, v)
+        } catch (err) {
+            error(err)
+            error('channel.onmessage error')
         }
+        // }
     }
     log('channel, OK')
+    // }
 } catch (err) {
     error(err.toString())
     error('main, ERROR')
@@ -348,6 +354,7 @@ try {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// 设置组件：颜色选择
 class ColorPickerItem {
     nodeHTML = `
     <setting-item data-direction="row" class="telegram-color-picker">
@@ -364,10 +371,11 @@ class ColorPickerItem {
     </setting-item>
     `
 
-    constructor(itemKey, itemValue, title, description) {
+    constructor(itemKey, itemValue, defaultValue, title, description) {
         this.itemKey = itemKey
         // value为hex color, 6位or8位, 必须以#开头
         this.itemValue = itemValue
+        this.defaultValue = defaultValue
         this.title = title
         this.description = description
     }
@@ -415,7 +423,7 @@ class ColorPickerItem {
             opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
             // 修改message页面的body style
             const colorWithOpacity = hexColor + hexOpacity
-            channel.postMessage({'k': this.itemKey, 'v': colorWithOpacity})
+            channel.postMessage({ 'k': this.itemKey, 'v': colorWithOpacity })
             // 保存设置
             IPC.debounceSetSetting(this.itemKey, colorWithOpacity)
             // log(`colorPicker set body style, ${this.itemKey} : ${colorWithOpacity}`)
@@ -433,7 +441,7 @@ class ColorPickerItem {
             opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
             // 修改message页面的body style
             const colorWithOpacity = hexColor + hexOpacity
-            channel.postMessage({'k': this.itemKey, 'v': colorWithOpacity})
+            channel.postMessage({ 'k': this.itemKey, 'v': colorWithOpacity })
             // 保存设置
             IPC.debounceSetSetting(this.itemKey, colorWithOpacity)
             // log(`colorPicker set body style, ${this.itemKey} : ${colorWithOpacity}`)
@@ -443,6 +451,7 @@ class ColorPickerItem {
     }
 }
 
+// 设置组件：文字输入框
 class TextItem {
     nodeHTML = `
     <setting-item data-direction="row" class="telegram-text-input">
@@ -456,9 +465,10 @@ class TextItem {
     </setting-item>
     `
 
-    constructor(itemKey, itemValue, title, description) {
+    constructor(itemKey, itemValue, defaultValue, title, description) {
         this.itemKey = itemKey
         this.itemValue = itemValue
+        this.defaultValue = defaultValue
         this.title = title
         this.description = description
     }
@@ -483,7 +493,7 @@ class TextItem {
         textInput.addEventListener('input', (event) => {
             const newValue = event.target.value
             // 修改message页面的body style
-            channel.postMessage({'k': this.itemKey, 'v': newValue})
+            channel.postMessage({ 'k': this.itemKey, 'v': newValue })
             // 保存设置
             IPC.debounceSetSetting(this.itemKey, newValue)
             // log(`textInput set body style, ${this.itemKey} : ${newValue}`)
@@ -492,6 +502,13 @@ class TextItem {
     }
 }
 
+// 设置组件：按钮（用于选择壁纸）
+class ButtonItem {
+    constructor() { }
+    getItem() { }
+}
+
+// 设置组件：一组item
 class SettingList {
     nodeHTML = `
     <setting-list data-direction="column" is-collapsible="" data-title="">
@@ -547,18 +564,18 @@ const onSettingCreate = async (view) => {
             const v = setting[key]
             const value = v['value']
             const title = v['title']
-            // const defaultValue = v['defaultValue']
+            const defaultValue = v['defaultValue']
             const description = v['description']
             const type = v['type']
             const group = v['group']
 
             if (type === 'color') {
-                const colorPickerItem = new ColorPickerItem(key, value, title, description).getItem()
+                const colorPickerItem = new ColorPickerItem(key, value, defaultValue, title, description).getItem()
                 if (colorPickerItem) {
                     settingItemLists[group]?.push(colorPickerItem)
                 }
             } else if (type === 'text') {
-                const textInputItem = new TextItem(key, value, title, description).getItem()
+                const textInputItem = new TextItem(key, value, defaultValue, title, description).getItem()
                 if (textInputItem) {
                     settingItemLists[group]?.push(textInputItem)
                 }

@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld("telegram_theme", {
     getSetting: () => ipcRenderer.invoke(
         "LiteLoader.telegram_theme.getSetting"
     ),
+    
     logToMain: (...args) => ipcRenderer.send(
         "LiteLoader.telegram_theme.logToMain",
         ...args

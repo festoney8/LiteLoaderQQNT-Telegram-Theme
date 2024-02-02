@@ -37,11 +37,16 @@ const getCurrTheme = () => {
 const initSetting = () => {
     try {
         if (!fs.existsSync(settingPath)) {
+            // 复制文件
             fs.mkdirSync(dataPath, { recursive: true })
             fs.copyFile(`${pluginPath}/src/setting.json`, settingPath, (err) => {
                 if (err) {
                     throw err
                 }
+                // 设定默认壁纸路径
+                // setSetting('--tg-container-image', `url("local:///${pluginPath}/image/light.jpg")`, 'light')
+                setSetting('--tg-container-image', `url("local:///${pluginPath}/image/dark.jpg")`, 'dark')
+                log('initSetting set default wallpaper OK')
                 log('initSetting OK')
             })
         } else {
@@ -68,17 +73,20 @@ const getSetting = async () => {
 }
 
 // 保存设置, 每次只存一个KV值
-const setSetting = (k, v) => {
+const setSetting = (k, v, theme = null) => {
     try {
         if (!k || v === undefined) {
             throw Error('setSetting k-v invalid')
+        }
+        if (!theme) {
+            theme = getCurrTheme()
         }
         fs.readFile(settingPath, 'utf8', (err, data) => {
             if (err) {
                 throw err
             }
             let setting = JSON.parse(data)
-            setting[getCurrTheme()][k]['value'] = v.toString()
+            setting[theme][k]['value'] = v.toString()
             const updatedData = JSON.stringify(setting, null, 4)
             fs.writeFile(settingPath, updatedData, 'utf8', (err) => {
                 if (err) {
