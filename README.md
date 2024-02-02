@@ -2,17 +2,18 @@
 
 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 插件，高仿 Telegram 风格的 QQNT 主题
 
+![dark](screenshot/screenshot-dark.png)
+
 ## 介绍
 
--   功能：
-    -   全方位高仿 Telegram
-    -   支持自定义壁纸
-    -   支持日间模式、夜间模式
-    -   Telegram 风格气泡
-    -   Telegram 风格输入框
-    -   支持连续消息合并
-    -   支持头像浮动
-    -   支持自定义主题样式，提供大量设置项
+-   全方位高仿 Telegram
+-   支持自定义壁纸
+-   支持日间模式、夜间模式
+-   Telegram 风格气泡
+-   Telegram 风格输入框
+-   支持连续消息合并
+-   支持头像浮动
+-   支持自定义主题样式，提供大量设置项
 
 ## 版本适配
 
@@ -36,13 +37,13 @@
 
 ## 截图
 
-### 夜间模式
-
-![dark](screenshot/screenshot-dark.png)
-
 ### 日间模式
 
 ![light](screenshot/screenshot-light.png)
+
+### 夜间模式
+
+![dark](screenshot/screenshot-dark.png)
 
 ### 设置页
 
@@ -51,4 +52,4 @@
 ## 其他
 
 -   本项目纯娱乐用途，仅供学习交流，请勿在微信、QQ、B 站之类的平台传播
--   没学过 Election，代码菜，能跑就行，能跑的代码都是 GPT 写的，bug 都是我写的（
+-   没学过 Electron，代码菜，能跑就行，能跑的代码都是 GPT 写的，bug 都是我写的（
