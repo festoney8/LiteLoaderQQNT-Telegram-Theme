@@ -4,9 +4,8 @@
 
 ## 介绍
 
--   这是一个高仿 Telegram 风格的 QQNT 主题
-
 -   功能：
+    -   全方位高仿 Telegram
     -   支持自定义壁纸
     -   支持日间模式、夜间模式
     -   Telegram 风格气泡
@@ -29,8 +28,27 @@
 
 ## 兼容性
 
--   请不要与其他 LiteLoader 主题同时使用
+-   **请不要与其他 LiteLoader 主题同时使用**
 
 -   本主题自带「头像置底、头像浮动、连续消息合并」，若同时使用 [轻量工具箱](https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools)，请关闭工具箱的这三项功能
 
--   本主题自带「自定义壁纸」功能，不要与其他插件的自定义壁纸同时启用
+-   本主题自带「自定义壁纸」功能，不必与其他插件的自定义壁纸同时启用
+
+## 截图
+
+### 夜间模式
+
+![dark](screenshot/screenshot-dark.png)
+
+### 日间模式
+
+![light](screenshot/screenshot-light.png)
+
+### 设置页
+
+![setting](screenshot/screenshot-setting.png)
+
+## 其他
+
+-   本项目纯娱乐用途，仅供学习交流，请勿在微信、QQ、B 站之类的平台传播
+-   没学过 Election，代码菜，能跑就行，能跑的代码都是 GPT 写的，bug 都是我写的（
