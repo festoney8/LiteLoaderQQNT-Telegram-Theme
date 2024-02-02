@@ -789,12 +789,12 @@
             }
         }
 
-        // 发图片时，隐藏用户名
-        &:has(.message-content__wrapper .pic-element) {
-            & .user-name {
-                display: none;
-            }
-        }
+        // // 发图片时，隐藏用户名
+        // &:has(.message-content__wrapper .pic-element) {
+        //     & .user-name {
+        //         display: none;
+        //     }
+        // }
     }
 }
 
