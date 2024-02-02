@@ -17,5 +17,13 @@
         "renderer": "./src/renderer.js",
         "main": "./src/main.js",
         "preload": "./src/preload.js"
+    },
+    "repository": {
+        "repo": "festoney8/LiteLoaderQQNT-Telegram-Theme",
+        "branch": "v4",
+        "release": {
+            "tag": "latest",
+            "file": "LiteLoaderQQNT-Telegram-Theme.zip"
+        }
     }
 }
