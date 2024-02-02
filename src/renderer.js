@@ -353,8 +353,6 @@ const onMessageCreate = async () => {
     IPC.updateSetting()
     IPC.updateAllSetting()
 
-    log('onMessageCreate, OK')
-
     channel.onmessage = (event) => {
         if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
             try {
@@ -368,7 +366,7 @@ const onMessageCreate = async () => {
             }
         }
     }
-    log('channel, OK')
+    log('onMessageCreate, OK')
 }
 
 try {
@@ -376,12 +374,10 @@ try {
         if (location.hash === "#/blank") {
             navigation.addEventListener("navigatesuccess", () => {
                 if (!location.hash.includes('#/setting')) {
-                    log('hashchange location.hash', location.hash)
                     onMessageCreate()
                 }
             }, { once: true })
         } else if (!location.hash.includes('#/setting')) {
-            log('location.hash', location.hash)
             onMessageCreate()
         }
     }
@@ -447,13 +443,10 @@ class ColorPickerItem {
         opacityPicker.setAttribute('value', `${parseInt(opacity, 16) / 255 * 100}`)
         opacityPicker.style.setProperty('--opacity-0', `${hexColor}00`)
         opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
-        // log(`set style, --opacity-0 ${hexColor}00`)
-        // log(`set style, --opacity-100 ${hexColor}ff`)
 
         // 监听颜色修改
         colorPicker.addEventListener('input', (event) => {
             const hexColor = event.target.value.toLowerCase()
-            // log(`colorPicker change, now ${hexColor}`)
             const numOpacity = opacityPicker.value
             const hexOpacity = Math.round(numOpacity / 100 * 255).toString(16).padStart(2, '0').toLowerCase()
 
@@ -471,7 +464,6 @@ class ColorPickerItem {
         // 监听透明度修改
         opacityPicker.addEventListener('input', (event) => {
             const numOpacity = event.target.value
-            // log(`opacityPicker change, now ${numOpacity}`)
             const hexOpacity = Math.round(numOpacity / 100 * 255).toString(16).padStart(2, '0').toLowerCase()
 
             // 设定透明度bar的透明色和不透明色
@@ -613,7 +605,6 @@ class SettingList {
 // 创建设置页流程
 const onSettingCreate = async (view) => {
     try {
-        log('onSettingCreate, start')
         // 插入设置页CSS
         if (!view.querySelector('.telegram-setting-css')) {
             const link = document.createElement('link')
@@ -657,7 +648,9 @@ const onSettingCreate = async (view) => {
                     settingItemLists[group]?.push(textInputItem)
                 }
             } else if (type === 'button') {
-                const imageBtnItem = new ImageBtnItem(key, title, description, () => { IPC.chooseImage() }).getItem()
+                const imageBtnItem = new ImageBtnItem(key, title, description, () => {
+                    IPC.chooseImage()
+                }).getItem()
                 if (imageBtnItem) {
                     settingItemLists[group]?.push(imageBtnItem)
                 }
@@ -668,8 +661,6 @@ const onSettingCreate = async (view) => {
             new SettingList(listTitle, settingItemLists[listTitle]).createNode(view)
             log(`create list ${listTitle}, ${settingItemLists[listTitle].length} items`)
         }
-
-        log('onSettingCreate, OK')
     } catch (err) {
         error(err)
         error('onSettingCreate, error')

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
+const {BrowserWindow, ipcMain, nativeTheme, dialog} = require('electron')
 
 const pluginPath = LiteLoader.plugins['telegram_theme'].path.plugin.replaceAll('\\', '/')
 const dataPath = LiteLoader.plugins['telegram_theme'].path.data.replaceAll('\\', '/')
@@ -41,7 +41,7 @@ const initSetting = () => {
     try {
         if (!fs.existsSync(settingPath)) {
             // 复制文件
-            fs.mkdirSync(dataPath, { recursive: true })
+            fs.mkdirSync(dataPath, {recursive: true})
             fs.copyFileSync(`${pluginPath}/src/setting.json`, settingPath)
             // 设定默认壁纸路径
             setSetting('--tg-container-image', `url("local:///${pluginPath}/image/light.jpg")`, 'light')
@@ -97,8 +97,8 @@ const chooseImage = () => {
     dialog.showOpenDialog({
         properties: ['openFile'],
         filters: [
-            { name: 'Images', extensions: ['jpg', 'png', 'gif', 'webp'] },
-            { name: 'All Files', extensions: ['*'] }
+            {name: 'Images', extensions: ['jpg', 'png', 'gif', 'webp']},
+            {name: 'All Files', extensions: ['*']}
         ]
     }).then(result => {
         try {
@@ -111,7 +111,7 @@ const chooseImage = () => {
             log("chooseImage setsetting, OK")
 
             // 通知renderer刷新设置
-            if (!mainWindow.webContents.isDestroyed()) {
+            if (!mainWindow.webContents?.isDestroyed()) {
                 mainWindow.webContents.send("LiteLoader.telegram_theme.updateSetting", "--tg-container-image", `url("local:///${imagePath}")`);
                 log("chooseImage, OK")
             } else {
@@ -135,7 +135,7 @@ ipcMain.on("LiteLoader.telegram_theme.rendererReady", (event) => {
     // 监听主题切换
     nativeTheme.on('updated', () => {
         try {
-            if (!mainWindow.webContents.isDestroyed()) {
+            if (!mainWindow.webContents?.isDestroyed()) {
                 mainWindow.webContents.send("LiteLoader.telegram_theme.updateAllSetting", getCurrTheme())
             }
             log('theme change detected')
@@ -146,7 +146,7 @@ ipcMain.on("LiteLoader.telegram_theme.rendererReady", (event) => {
     })
 })
 ipcMain.handle('LiteLoader.telegram_theme.getSetting', async () => {
-    return getSetting()
+    return await getSetting()
 })
 ipcMain.on('LiteLoader.telegram_theme.setSetting', (event, k, v) => {
     setSetting(k, v)
