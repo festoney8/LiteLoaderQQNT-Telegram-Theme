@@ -85,9 +85,9 @@ class IPC {
 
     // 监听全部设置更新（切换主题）
     static updateAllSetting() {
-        telegram_theme.updateAllSetting((event, theme) => {
+        telegram_theme.updateAllSetting(async (event, theme) => {
             log('theme change', theme, 'updateAllCSS start')
-            updateAllCSS()
+            await updateAllCSS()
         })
     }
 }
