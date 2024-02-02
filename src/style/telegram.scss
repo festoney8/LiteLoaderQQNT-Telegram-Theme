@@ -133,6 +133,7 @@
 
         // 列表区域
         & .list-toggler {
+            background-color: var(--tg-contact-list-item-bg-color);
             & .recent-contact-list {
                 & .viewport-list {
                     // 会话列表
