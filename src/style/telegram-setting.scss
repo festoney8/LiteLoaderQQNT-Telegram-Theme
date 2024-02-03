@@ -14,6 +14,9 @@
     input[type="text"] {
         color: black;
     }
+    button {
+        color: black;
+    }
 }
 @media (prefers-color-scheme: dark) {
     .tab-view.telegram_theme {
@@ -29,6 +32,9 @@
         background-color: #262626;
     }
     input[type="text"] {
+        color: white;
+    }
+    button {
         color: white;
     }
 }
@@ -61,8 +67,8 @@
                 border: 1px #bbb solid;
                 border-radius: 4px;
                 overflow: hidden;
-                cursor: pointer;
                 appearance: none;
+                cursor: pointer;
                 // https://stackoverflow.com/questions/11167281
                 -webkit-appearance: none;
                 &::-webkit-color-swatch {
@@ -115,6 +121,7 @@
                 padding: 0;
                 border: 1px gray solid;
                 background: none;
+                cursor: pointer;
             }
         }
     }
@@ -142,7 +149,7 @@
                 height: 26px;
                 font-size: 1.1em;
                 overflow: hidden;
-                cursor: pointer;
+                cursor: text;
                 border-radius: 4px;
                 overflow: hidden;
                 margin: 0;
@@ -160,6 +167,7 @@
                 padding: 0;
                 border: 1px gray solid;
                 background: none;
+                cursor: pointer;
             }
         }
     }
@@ -188,6 +196,7 @@
                 padding: 0 4px;
                 border: 1px gray solid;
                 background: none;
+                cursor: pointer;
             }
         }
     }

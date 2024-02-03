@@ -396,6 +396,9 @@ class ColorPickerItem {
         <div class="col-opacity">
             <input type="range" value="100" min="0" max="100" step="1" class="opacity-picker">
         </div>
+        <div class="col-reset">
+            <button class="reset-btn" type="button">重置</button>
+        </div>
     </setting-item>
     `
 
@@ -417,8 +420,9 @@ class ColorPickerItem {
         const description = nodeEle.querySelector('.info-description')
         const opacityPicker = nodeEle.querySelector('input.opacity-picker')
         const colorPicker = nodeEle.querySelector('input.color-picker')
+        const resetBtn = nodeEle.querySelector('button.reset-btn')
 
-        if (!(opacityPicker && colorPicker && title && description)) {
+        if (!(opacityPicker && colorPicker && title && description && resetBtn)) {
             error('ColorPickerItem getItem querySelector error')
             return undefined
         }
@@ -427,13 +431,20 @@ class ColorPickerItem {
         description.innerHTML = this.description
         // 设定colorPicker初始值
         const hexColor = this.itemValue.slice(0, 7)
+        const hexColorDefault = this.defaultValue.slice(0, 7)
         colorPicker.setAttribute('value', hexColor)
+        colorPicker.setAttribute('defaultValue', hexColorDefault)
         // 设定opacityPicker初始值
         let opacity = this.itemValue.slice(7, 9)
         if (!opacity) {
             opacity = 'ff'
         }
+        let opacityDefault = this.defaultValue.slice(7, 9)
+        if (!opacityDefault) {
+            opacityDefault = 'ff'
+        }
         opacityPicker.setAttribute('value', `${parseInt(opacity, 16) / 255 * 100}`)
+        opacityPicker.setAttribute('defaultValue', `${parseInt(opacityDefault, 16) / 255 * 100}`)
         opacityPicker.style.setProperty('--opacity-0', `${hexColor}00`)
         opacityPicker.style.setProperty('--opacity-100', `${hexColor}ff`)
 
@@ -471,6 +482,15 @@ class ColorPickerItem {
             // log(`colorPicker set body style, ${this.itemKey} : ${colorWithOpacity}`)
         })
 
+        // 监听重置
+        resetBtn.onclick = () => {
+            opacityPicker.value = opacityPicker.getAttribute('defaultValue')
+            colorPicker.value = colorPicker.getAttribute('defaultValue')
+            const event = new Event('input', { bubbles: true });
+            opacityPicker.dispatchEvent(event);
+            colorPicker.dispatchEvent(event);
+        }
+
         return nodeEle
     }
 }
@@ -485,6 +505,9 @@ class TextItem {
         </div>
         <div class="col-text">
             <input type="text" value="" class="text-input">
+        </div>
+        <div class="col-reset">
+            <button class="reset-btn" type="button">重置</button>
         </div>
     </setting-item>
     `
@@ -505,15 +528,18 @@ class TextItem {
         const title = nodeEle.querySelector('.info-title')
         const description = nodeEle.querySelector('.info-description')
         const textInput = nodeEle.querySelector('input.text-input')
+        const resetBtn = nodeEle.querySelector('button.reset-btn')
 
-        if (!(textInput && title && description)) {
+        if (!(textInput && title && description && resetBtn)) {
             error('TextItem getItem querySelector error')
             return undefined
         }
         title.innerHTML = this.title
         description.innerHTML = this.description
         textInput.setAttribute('value', this.itemValue)
+        textInput.setAttribute('defaultValue', this.defaultValue)
 
+        // 监听输入
         textInput.addEventListener('input', (event) => {
             const newValue = event.target.value
             // 修改message页面的body style
@@ -522,11 +548,18 @@ class TextItem {
             IPC.debounceSetSetting(this.itemKey, newValue)
             // log(`textInput set body style, ${this.itemKey} : ${newValue}`)
         })
+
+        // 监听重置
+        resetBtn.onclick = () => {
+            textInput.value = textInput.getAttribute('defaultValue')
+            const event = new Event('input', { bubbles: true });
+            textInput.dispatchEvent(event);
+        }
         return nodeEle
     }
 }
 
-// 设置组件：按钮（用于选择壁纸）
+// 设置组件：图片选择按钮
 class ImageBtnItem {
     nodeHTML = `
     <setting-item data-direction="row" class="telegram-button">
