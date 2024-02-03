@@ -111,11 +111,11 @@ const chooseImage = () => {
             log("chooseImage setsetting, OK")
 
             // 通知renderer刷新设置
-            if (!mainWindow.webContents?.isDestroyed()) {
+            if (!mainWindow.isDestroyed()) {
                 mainWindow.webContents.send("LiteLoader.telegram_theme.updateSetting", "--tg-container-image", `url("local:///${imagePath}")`);
                 log("chooseImage, OK")
             } else {
-                log('chooseImage webContents isDestroyed')
+                error('chooseImage mainWindow isDestroyed')
             }
         } catch (err) {
             error(err)
@@ -127,24 +127,6 @@ const chooseImage = () => {
     })
 }
 
-ipcMain.on("LiteLoader.telegram_theme.rendererReady", (event) => {
-    // 捕捉主窗口对象
-    mainWindow = BrowserWindow.fromWebContents(event.sender)
-    log('main rendererReady set mainWindow')
-
-    // 监听主题切换
-    nativeTheme.on('updated', () => {
-        try {
-            if (!mainWindow.webContents?.isDestroyed()) {
-                mainWindow.webContents.send("LiteLoader.telegram_theme.updateAllSetting", getCurrTheme())
-            }
-            log('theme change detected')
-        } catch (err) {
-            error(err)
-            error('nativeTheme.on error')
-        }
-    })
-})
 ipcMain.handle('LiteLoader.telegram_theme.getSetting', async () => {
     return await getSetting()
 })
@@ -164,4 +146,28 @@ ipcMain.on("LiteLoader.telegram_theme.errorToMain", (event, ...args) => {
 
 module.exports.onBrowserWindowCreated = window => {
     initSetting()
+
+    // 监听页面加载完成，捕获mainWindow
+    window.webContents.on("did-stop-loading", () => {
+        log(window.webContents.getURL())
+        if (window.webContents.getURL().includes("#/main/message")) {
+            mainWindow = window
+            log('mainWindow catched')
+        }
+    })
+
+    // 监听主题切换
+    nativeTheme.on('updated', () => {
+        try {
+            if (!mainWindow.isDestroyed()) {
+                mainWindow.webContents.send("LiteLoader.telegram_theme.updateAllSetting", getCurrTheme())
+                log('theme change detected')
+            } else {
+                error('theme change, mainWindow isDestroyed')
+            }
+        } catch (err) {
+            error(err)
+            error('nativeTheme.on error')
+        }
+    })
 }

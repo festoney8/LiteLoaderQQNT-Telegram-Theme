@@ -2,7 +2,7 @@
 
 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 插件，高仿 Telegram 风格的 QQNT 主题
 
-![dark](screenshot/screenshot-dark.png)
+![light](screenshot/screenshot-light.png)
 
 ## 介绍
 
@@ -35,7 +35,7 @@
 
 -   **请不要与其他 LiteLoader 主题同时使用**
 
--   本主题自带「头像置底、头像浮动、连续消息合并」，若同时使用 [轻量工具箱](https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools)，请关闭工具箱的这三项功能
+-   **本主题自带「头像置底、头像浮动、连续消息合并」，若同时使用 [轻量工具箱](https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools)，请关闭工具箱的这三项功能**
 
 -   本主题自带「自定义壁纸」功能，不必与其他插件的自定义壁纸同时启用
 

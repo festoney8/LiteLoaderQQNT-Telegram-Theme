@@ -1,9 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("telegram_theme", {
-    rendererReady: () => ipcRenderer.send(
-        'LiteLoader.telegram_theme.rendererReady'
-    ),
     setSetting: (k, v) => ipcRenderer.send(
         "LiteLoader.telegram_theme.setSetting",
         k, v

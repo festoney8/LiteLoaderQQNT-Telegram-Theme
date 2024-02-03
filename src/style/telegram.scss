@@ -551,7 +551,7 @@
                             // 文字输入框 placeholder
                             & .ck-placeholder:before {
                                 --qq-editor-placeholder: "Write a message...";
-                                color: #cccccc8f;
+                                color: #cccccc6f;
                             }
 
                             // 编辑器内at用户
@@ -733,8 +733,8 @@
         // 消息向上跳转，含文字，暂不修改样式
         & .chat-msg-area__tip--top-btn {
             & .content {
-                margin-left: 0;
-                color: #808080 !important;
+                margin-left: 0.5em;
+                color: #00aaff !important;
             }
         }
         // 向下跳转按钮
@@ -749,7 +749,7 @@
 
             & .content {
                 margin-left: 0;
-                color: #808080 !important;
+                color: #00aaff !important;
             }
         }
     }

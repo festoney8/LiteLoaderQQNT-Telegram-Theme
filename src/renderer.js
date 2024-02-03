@@ -1,6 +1,5 @@
 const pluginPath = LiteLoader.plugins["telegram_theme"].path.plugin
 
-
 const enableLog = false
 const enableError = true
 const log = (...args) => {
@@ -40,11 +39,7 @@ const waitForEle = (selector, callback, interval = 1000) => {
 }
 
 class IPC {
-    static rendererReady() {
-        telegram_theme.rendererReady()
-    }
-
-    // 获取设置(全部设置)
+    // 获取全部设置
     static async getSetting() {
         try {
             return await telegram_theme.getSetting()
@@ -323,7 +318,6 @@ const concatBubble = (floatAvatar = true) => {
     observer.observe(msgList, config)
 }
 
-
 // BroadcastChannel，renderer不同页面间通信，用于实时同步设置
 const channel = new BroadcastChannel('telegram_renderer')
 
@@ -348,7 +342,6 @@ const onMessageCreate = async () => {
     // 拼接气泡
     waitForEle('#ml-root .ml-list', concatBubble)
 
-    IPC.rendererReady()
     // 监听设置更新
     IPC.updateSetting()
     IPC.updateAllSetting()
