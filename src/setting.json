@@ -203,7 +203,7 @@
         "--tg-contact-top-bar-bg-color": {
             "value": "#ffffff",
             "defaultValue": "#ffffff",
-            "title": "顶部背景色",
+            "title": "搜索功能背景色",
             "description": "",
             "type": "color",
             "group": "会话列表"

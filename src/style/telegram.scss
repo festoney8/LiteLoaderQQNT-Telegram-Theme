@@ -122,6 +122,9 @@
                         }
                     }
                 }
+                & .search-result {
+                    --side-list-bg: var(--tg-contact-top-bar-bg-color);
+                }
             }
 
             & .contact-adder-btn {
@@ -711,6 +714,10 @@
 
                                 font-size: 15px !important;
                                 letter-spacing: 1px;
+
+                                & .gray-tip-action {
+                                    color: var(--tg-message-others-highlight-color);
+                                }
                             }
 
                             // 布局：右侧消息、左侧消息
@@ -971,6 +978,30 @@
                         color: var(--tg-message-others-highlight-color);
                     }
                 }
+
+                // 语音转文字
+                & .ptt-element__bottom-area {
+                    & .ptt-element__bottom-area-text {
+                        color: var(--tg-message-others-font-color);
+                    }
+                    & .ptt-element__bottom-area-icon {
+                        & i.q-icon {
+                            color: var(--tg-message-others-highlight-color);
+                        }
+                    }
+                }
+
+                // 语音通话、视频通话
+                &.av-message__container {
+                    & .av-msg {
+                        & i.q-icon {
+                            color: var(--tg-message-others-highlight-color);
+                        }
+                        & span {
+                            color: var(--tg-message-others-font-color);
+                        }
+                    }
+                }
             }
 
             // 转发聊天记录
@@ -1110,6 +1141,29 @@
                         font-size: 12px;
                         font-weight: bold;
                         color: var(--tg-message-self-highlight-color);
+                    }
+                }
+                // 语音转文字
+                & .ptt-element__bottom-area {
+                    & .ptt-element__bottom-area-text {
+                        color: var(--tg-message-self-font-color);
+                    }
+                    & .ptt-element__bottom-area-icon {
+                        & i.q-icon {
+                            color: var(--tg-message-self-highlight-color);
+                        }
+                    }
+                }
+
+                // 语音通话、视频通话
+                &.av-message__container {
+                    & .av-msg {
+                        & i.q-icon {
+                            color: var(--tg-message-self-highlight-color);
+                        }
+                        & span {
+                            color: var(--tg-message-self-font-color);
+                        }
                     }
                 }
             }
