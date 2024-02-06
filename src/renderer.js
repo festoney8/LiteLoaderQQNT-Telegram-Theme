@@ -1,7 +1,7 @@
 const pluginPath = LiteLoader.plugins["telegram_theme"].path.plugin
 
 const enableLog = false
-const enableError = true
+const enableError = false
 const log = (...args) => {
     if (enableLog) {
         console.log('[telegram-theme]', ...args)

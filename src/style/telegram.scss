@@ -1246,48 +1246,48 @@
         & .message-panel::after {
             opacity: 1 !important;
         }
-        // 工具箱消息发送时间
-        & .message-container:not(.message-container--self) {
-            & .lite-tools-slot {
-                &.embed-slot {
-                    & .lite-tools-time {
-                        opacity: 0.8;
-                        color: var(--tg-message-others-font-color) !important;
-                    }
+    }
+    // 工具箱消息发送时间
+    & .message-container:not(.message-container--self) {
+        & .lite-tools-slot {
+            &.embed-slot {
+                & .lite-tools-time {
+                    opacity: 0.8;
+                    color: var(--tg-message-others-font-color) !important;
                 }
-                &.inside-slot {
-                    & .lite-tools-time {
-                        opacity: 1;
-                        color: var(--tg-message-others-font-color) !important;
-                    }
+            }
+            &.inside-slot {
+                & .lite-tools-time {
+                    opacity: 1;
+                    color: white !important;
                 }
-                &.outside-slot {
-                    & .lite-tools-time {
-                        opacity: 0.8;
-                        color: var(--tg-message-others-font-color) !important;
-                    }
+            }
+            &.outside-slot {
+                & .lite-tools-time {
+                    opacity: 0.8;
+                    color: var(--tg-message-others-font-color) !important;
                 }
             }
         }
-        & .message-container.message-container--self {
-            & .lite-tools-slot {
-                &.embed-slot {
-                    & .lite-tools-time {
-                        opacity: 0.8;
-                        color: var(--tg-message-self-font-color) !important;
-                    }
+    }
+    & .message-container.message-container--self {
+        & .lite-tools-slot {
+            &.embed-slot {
+                & .lite-tools-time {
+                    opacity: 0.8;
+                    color: var(--tg-message-self-font-color) !important;
                 }
-                &.inside-slot {
-                    & .lite-tools-time {
-                        opacity: 1;
-                        color: var(--tg-message-self-font-color) !important;
-                    }
+            }
+            &.inside-slot {
+                & .lite-tools-time {
+                    opacity: 1;
+                    color: white !important;
                 }
-                &.outside-slot {
-                    & .lite-tools-time {
-                        opacity: 0.8;
-                        color: var(--tg-message-self-font-color) !important;
-                    }
+            }
+            &.outside-slot {
+                & .lite-tools-time {
+                    opacity: 0.8;
+                    color: var(--tg-message-self-font-color) !important;
                 }
             }
         }

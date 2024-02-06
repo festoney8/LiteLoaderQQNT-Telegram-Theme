@@ -7,7 +7,7 @@ const dataPath = LiteLoader.plugins['telegram_theme'].path.data.replaceAll('\\',
 const settingPath = path.join(dataPath, 'setting.json').replaceAll('\\', '/')
 
 const enableLog = false
-const enableError = true
+const enableError = false
 const log = (...args) => {
     if (enableLog) {
         console.log('\x1b[34m[telegram-theme]\x1b[0m', ...args)
@@ -159,11 +159,11 @@ module.exports.onBrowserWindowCreated = window => {
     // 监听主题切换
     nativeTheme.on('updated', () => {
         try {
-            if (!mainWindow.isDestroyed()) {
+            if (mainWindow && !mainWindow.isDestroyed()) {
                 mainWindow.webContents.send("LiteLoader.telegram_theme.updateAllSetting", getCurrTheme())
                 log('theme change detected')
             } else {
-                error('theme change, mainWindow isDestroyed')
+                error('theme change, mainWindow not exist')
             }
         } catch (err) {
             error(err)
