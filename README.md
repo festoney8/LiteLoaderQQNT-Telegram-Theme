@@ -39,6 +39,9 @@
 
 -   本主题自带「自定义壁纸」功能，不必与其他插件的自定义壁纸同时启用
 
+-   本主题与 [背景插件](https://github.com/xh321/LiteLoaderQQNT-Background-Plugin) 存在样式冲突，会产生意料之外的融合效果
+    -   正常情况下，本主题自带壁纸会覆盖掉背景插件的壁纸。若需同时启用，将 [这张全透明图片](https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png) 下载下来，设置成 Telegram 主题壁纸即可
+
 ## 截图
 
 ### 日间模式

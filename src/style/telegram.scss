@@ -7,7 +7,7 @@
         z-index: 1;
 
         & .sidebar-nav {
-            background-color: var(--tg-sidebar-bg-color);
+            background-color: var(--tg-sidebar-bg-color) !important;
 
             & .sidebar-wrapper {
                 & .sidebar__upper {
