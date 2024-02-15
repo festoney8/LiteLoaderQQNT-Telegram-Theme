@@ -685,6 +685,17 @@
         // background-color: #eee;
         // background: url();
 
+        // 视频通话、语音通话
+        & .chat-msg-area__tip--top {
+            background-color: var(--tg-panel-header-bg-color) !important;
+            // & .av-call-status {
+            // }
+            // & .av-call-btns {
+            //     & button.q-button {
+            //     }
+            // }
+        }
+
         // 聊天列表
         & .ml-area {
             & .ml-root {
