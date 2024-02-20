@@ -1259,7 +1259,7 @@
         }
     }
     // 工具箱消息发送时间
-    & .message-container:not(.message-container--self) {
+    .message-container:not(.message-container--self) {
         & .lite-tools-slot {
             &.embed-slot {
                 & .lite-tools-time {
@@ -1281,7 +1281,7 @@
             }
         }
     }
-    & .message-container.message-container--self {
+    .message-container.message-container--self {
         & .lite-tools-slot {
             &.embed-slot {
                 & .lite-tools-time {
@@ -1302,6 +1302,17 @@
                 }
             }
         }
+    }
+}
+
+// 右键菜单
+@mixin context-menu() {
+    // 回复和撤回按钮高亮
+    .q-context-menu-item:has(i.q-icon > svg > path[d^="M6.00031"]) {
+        color: var(--tg-context-menu-reply-font-color) !important;
+    }
+    .q-context-menu-item:has(i.q-icon > svg > path[d^="M2.14649"]) {
+        color: var(--tg-context-menu-withdraw-font-color) !important;
     }
 }
 
@@ -1378,6 +1389,8 @@
         --tg-panel-tip-font-color: #419fd9;
         --tg-panel-tip-primary-bg-color: #419fd9;
         --tg-panel-tip-primary-font-color: #ffffff;
+        --tg-context-menu-reply-font-color: #008000;
+        --tg-context-menu-withdraw-font-color: #ff0000;
     }
 }
 
@@ -1454,6 +1467,8 @@
         --tg-panel-tip-font-color: #ffffff;
         --tg-panel-tip-primary-bg-color: #4082bc;
         --tg-panel-tip-primary-font-color: #ffffff;
+        --tg-context-menu-reply-font-color: #00ff00;
+        --tg-context-menu-withdraw-font-color: #ffa500;
     }
 }
 
@@ -1466,6 +1481,7 @@
         @include aio();
         @include patch();
     }
+    @include context-menu();
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1477,4 +1493,5 @@
         @include aio();
         @include patch();
     }
+    @include context-menu();
 }
