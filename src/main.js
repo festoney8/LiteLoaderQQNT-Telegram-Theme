@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
+const { ipcMain, nativeTheme, dialog } = require('electron')
 
 const pluginPath = LiteLoader.plugins['telegram_theme'].path.plugin.replaceAll('\\', '/')
 const dataPath = LiteLoader.plugins['telegram_theme'].path.data.replaceAll('\\', '/')
@@ -36,7 +36,7 @@ const getCurrTheme = () => {
     return nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
 }
 
-// 初始化设置
+// 初始化设置，检测版本更新, 补全更新项
 const initSetting = () => {
     try {
         if (!fs.existsSync(settingPath)) {
@@ -49,7 +49,34 @@ const initSetting = () => {
             log('initSetting set default wallpaper OK')
             log('initSetting OK')
         } else {
-            log('initSetting skip, OK')
+            // 比对新旧配置
+            let oldSettingRaw = fs.readFileSync(settingPath)
+            let newSettingRaw = fs.readFileSync(`${pluginPath}/src/setting.json`)
+
+            let localSetting = JSON.parse(oldSettingRaw)
+            let newSetting = JSON.parse(newSettingRaw)
+            if (localSetting['version'] === newSetting['version']) {
+                log('same version, skip update setting')
+                return
+            }
+
+            // 更新配置
+            for (const key in newSetting['light']) {
+                if (!localSetting['light'].hasOwnProperty(key)) {
+                    localSetting['light'][key] = newSetting['light'][key]
+                }
+            }
+            for (const key in newSetting['dark']) {
+                if (!localSetting['dark'].hasOwnProperty(key)) {
+                    localSetting['dark'][key] = newSetting['dark'][key]
+                }
+            }
+
+            // 更新版本, 保存
+            localSetting['version'] = newSetting['version']
+            const data = JSON.stringify(localSetting, null, 4)
+            fs.writeFileSync(settingPath, data, 'utf8')
+            log('initSetting update local setting to latest version')
         }
     } catch (err) {
         error(err.toString())
