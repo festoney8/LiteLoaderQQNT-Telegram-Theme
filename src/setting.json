@@ -336,6 +336,14 @@
             "type": "color",
             "group": "会话列表"
         },
+        "--tg-contact-list-item-avatar-size": {
+            "value": "52px",
+            "defaultValue": "52px",
+            "title": "会话项 头像 图片大小",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "会话列表"
+        },
         "--tg-contact-list-item-title-font-size": {
             "value": "15px",
             "defaultValue": "15px",
@@ -762,6 +770,14 @@
             "type": "color",
             "group": "会话列表"
         },
+        "--tg-contact-list-item-avatar-size": {
+            "value": "52px",
+            "defaultValue": "52px",
+            "title": "会话项 头像 图片大小",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "会话列表"
+        },
         "--tg-contact-list-item-title-font-size": {
             "value": "15px",
             "defaultValue": "15px",
@@ -851,5 +867,5 @@
             "group": "其他设定"
         }
     },
-    "version": "4.0.0"
+    "version": "4.1.0"
 }

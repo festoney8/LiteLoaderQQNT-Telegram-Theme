@@ -168,8 +168,8 @@
                                         & .list-item__avatar {
                                             & .avatar {
                                                 // 头像图片
-                                                height: 52px !important;
-                                                width: 52px !important;
+                                                height: var(--tg-contact-list-item-avatar-size) !important;
+                                                width: var(--tg-contact-list-item-avatar-size) !important;
                                                 margin-right: 8px;
                                             }
                                         }
@@ -256,8 +256,8 @@
                                         & .list-item__avatar {
                                             & .avatar {
                                                 // 头像图片
-                                                height: 52px !important;
-                                                width: 52px !important;
+                                                height: var(--tg-contact-list-item-avatar-size) !important;
+                                                width: var(--tg-contact-list-item-avatar-size) !important;
                                                 margin-right: 8px;
                                             }
                                         }
@@ -1388,6 +1388,7 @@
         --tg-contact-list-item-unselected-summary-font-color: #999999;
         --tg-contact-list-item-summary-bubble-color: #bbbbbb;
         --tg-contact-list-item-avatar-sys-bg-color: #5fbe67;
+        --tg-contact-list-item-avatar-size: 52px;
         --tg-contact-list-item-title-font-size: 15px;
         --tg-contact-list-item-summary-font-size: 15px;
 
@@ -1474,6 +1475,7 @@
         --tg-contact-list-item-unselected-summary-font-color: #999999;
         --tg-contact-list-item-summary-bubble-color: #3e546a;
         --tg-contact-list-item-avatar-sys-bg-color: #5eb5f7;
+        --tg-contact-list-item-avatar-size: 52px;
         --tg-contact-list-item-title-font-size: 15px;
         --tg-contact-list-item-summary-font-size: 15px;
 
