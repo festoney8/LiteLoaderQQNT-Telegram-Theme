@@ -104,6 +104,14 @@
             "type": "color",
             "group": "他人的消息"
         },
+        "--tg-message-others-pic-element-zoom": {
+            "value": "1.2",
+            "defaultValue": "1.2",
+            "title": "他人的 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
         "--tg-message-self-bg-color": {
             "value": "#effdde",
             "defaultValue": "#effdde",
@@ -168,6 +176,14 @@
             "type": "color",
             "group": "自己的消息"
         },
+        "--tg-message-self-pic-element-zoom": {
+            "value": "1.2",
+            "defaultValue": "1.2",
+            "title": "自己的 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
         "--tg-chat-input-area-bg-color": {
             "value": "#ffffff",
             "defaultValue": "#ffffff",
@@ -184,6 +200,22 @@
             "type": "color",
             "group": "其他设定"
         },
+        "--tg-chat-input-area-font-size": {
+            "value": "17px",
+            "defaultValue": "17px",
+            "title": "输入框 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "其他设定"
+        },
+        "--tg-chat-input-area-image-zoom": {
+            "value": "1.5",
+            "defaultValue": "1.5",
+            "title": "输入框 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "其他设定"
+        },
         "--tg-panel-header-bg-color": {
             "value": "#ffffff",
             "defaultValue": "#ffffff",
@@ -198,6 +230,14 @@
             "title": "聊天栏顶部 群名用户名 文字色",
             "description": "",
             "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-title-font-size": {
+            "value": "17px",
+            "defaultValue": "17px",
+            "title": "聊天栏顶部 群名用户名 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
             "group": "其他设定"
         },
         "--tg-contact-top-bar-bg-color": {
@@ -294,6 +334,22 @@
             "title": "我的手机和群助手 头像颜色",
             "description": "",
             "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-title-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "会话项 标题行(第一行) 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-summary-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "会话项 摘要行(第二行) 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
             "group": "会话列表"
         },
         "--tg-sidebar-width": {
@@ -474,6 +530,14 @@
             "type": "color",
             "group": "他人的消息"
         },
+        "--tg-message-others-pic-element-zoom": {
+            "value": "1.2",
+            "defaultValue": "1.2",
+            "title": "他人的 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "他人的消息"
+        },
         "--tg-message-self-bg-color": {
             "value": "#2b5278",
             "defaultValue": "#2b5278",
@@ -538,6 +602,14 @@
             "type": "color",
             "group": "自己的消息"
         },
+        "--tg-message-self-pic-element-zoom": {
+            "value": "1.2",
+            "defaultValue": "1.2",
+            "title": "自己的 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "自己的消息"
+        },
         "--tg-chat-input-area-bg-color": {
             "value": "#17212b",
             "defaultValue": "#17212b",
@@ -554,6 +626,22 @@
             "type": "color",
             "group": "其他设定"
         },
+        "--tg-chat-input-area-font-size": {
+            "value": "17px",
+            "defaultValue": "17px",
+            "title": "输入框 文字字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "其他设定"
+        },
+        "--tg-chat-input-area-image-zoom": {
+            "value": "1.5",
+            "defaultValue": "1.5",
+            "title": "输入框 图片缩放倍率",
+            "description": "无单位",
+            "type": "text",
+            "group": "其他设定"
+        },
         "--tg-panel-header-bg-color": {
             "value": "#17212b",
             "defaultValue": "#17212b",
@@ -568,6 +656,14 @@
             "title": "聊天栏顶部 群名用户名 文字色",
             "description": "",
             "type": "color",
+            "group": "其他设定"
+        },
+        "--tg-panel-header-title-font-size": {
+            "value": "17px",
+            "defaultValue": "17px",
+            "title": "聊天栏顶部 群名用户名 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
             "group": "其他设定"
         },
         "--tg-contact-top-bar-bg-color": {
@@ -664,6 +760,22 @@
             "title": "我的手机和群助手 头像颜色",
             "description": "",
             "type": "color",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-title-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "会话项 标题行(第一行) 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "会话列表"
+        },
+        "--tg-contact-list-item-summary-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "会话项 摘要行(第二行) 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
             "group": "会话列表"
         },
         "--tg-sidebar-width": {
