@@ -181,7 +181,7 @@
 
                                             // 标题行
                                             & .list-item__title {
-                                                font-size: 0.95rem !important;
+                                                font-size: var(--tg-contact-list-item-title-font-size) !important;
                                                 font-weight: 600 !important;
 
                                                 // 用户名
@@ -195,7 +195,7 @@
                                                 // 最后活动时间
                                                 & .secondary-info {
                                                     // 时间文字
-                                                    font-size: 0.95rem !important;
+                                                    font-size: var(--tg-contact-list-item-title-font-size) !important;
                                                 }
                                             }
 
@@ -205,7 +205,7 @@
                                                 // 摘要文字
                                                 & .summary-main {
                                                     color: var(--tg-contact-list-item-unselected-summary-font-color);
-                                                    font-size: 0.95rem !important;
+                                                    font-size: var(--tg-contact-list-item-summary-font-size) !important;
                                                     margin-top: 0 !important;
                                                 }
 
@@ -269,7 +269,7 @@
 
                                             // 标题行
                                             & .list-item__title {
-                                                font-size: 0.95rem !important;
+                                                font-size: var(--tg-contact-list-item-title-font-size) !important;
                                                 font-weight: 600 !important;
 
                                                 // 用户名
@@ -283,7 +283,7 @@
                                                 // 最后活动时间
                                                 & .secondary-info {
                                                     // 时间文字
-                                                    font-size: 0.95rem !important;
+                                                    font-size: var(--tg-contact-list-item-title-font-size) !important;
                                                 }
                                             }
 
@@ -293,7 +293,7 @@
                                                 // 摘要文字
                                                 & .summary-main {
                                                     color: var(--tg-contact-list-item-selected-summary-font-color);
-                                                    font-size: 0.95rem !important;
+                                                    font-size: var(--tg-contact-list-item-summary-font-size) !important;
                                                     margin-top: 0 !important;
                                                 }
 
@@ -441,12 +441,12 @@
             & #chatHeaderContactName {
                 // 群名 or 用户名
                 color: var(--tg-panel-header-title-color);
-                font-size: 1.1rem;
+                font-size: var(--tg-panel-header-title-font-size);
             }
 
             & #chatHeaderMembersCount {
                 // 群人数
-                font-size: 1.1rem;
+                font-size: var(--tg-panel-header-title-font-size);
             }
         }
 
@@ -467,7 +467,7 @@
         overflow: visible;
         height: fit-content !important;
         max-height: 50% !important;
-        flex-basis: 56px !important;
+        flex-basis: calc(var(--tg-chat-input-area-font-size) * 3 + 5px) !important;
         background-color: var(--tg-chat-input-area-bg-color) !important;
         flex-direction: row;
 
@@ -488,15 +488,25 @@
                 margin: 0;
 
                 & .bar-icon {
-                    width: 42px;
-                    height: 58px;
+                    width: calc(var(--tg-chat-input-area-font-size) * 2.2);
+                    height: calc(var(--tg-chat-input-area-font-size) * 3 + 5px);
                     justify-content: center;
                     margin: 0;
                     padding: 0;
 
-                    & i.q-icon {
-                        zoom: 1.2;
+                    & .icon-item i.q-icon,
+                    & .icon-item i.q-icon svg {
+                        width: calc(var(--tg-chat-input-area-font-size) * 1.7) !important;
+                        height: calc(var(--tg-chat-input-area-font-size) * 1.7) !important;
                         color: #9f9f9f;
+                    }
+                    & .arrow i.q-icon {
+                        color: #9f9f9f;
+                        zoom: 1.7;
+                    }
+
+                    &:has(.arrow) {
+                        margin-right: 0.5em;
                     }
                 }
             }
@@ -542,30 +552,30 @@
                     & .ck-editor__main {
                         & .ck-content {
                             // 文字输入区域，contenteditable div
-                            padding: 18px 6px 18px 0;
+                            padding: var(--tg-chat-input-area-font-size) 6px var(--tg-chat-input-area-font-size) 0;
                             margin: 0;
                             height: fit-content;
 
                             // 文字样式
-                            font-size: 17px !important;
-                            line-height: 24px !important;
+                            font-size: var(--tg-chat-input-area-font-size) !important;
+                            line-height: calc(var(--tg-chat-input-area-font-size) + 5px) !important;
                             color: var(--tg-chat-input-area-font-color) !important;
 
                             // 文字输入框 placeholder
                             & .ck-placeholder:before {
                                 --qq-editor-placeholder: "Write a message...";
-                                color: #cccccc6f;
+                                color: var(--tg-chat-input-area-placeholder-font-color);
                             }
 
                             // 编辑器内at用户
                             & msg-at {
-                                font-size: 17px !important;
-                                line-height: 24px !important;
+                                font-size: var(--tg-chat-input-area-font-size) !important;
+                                line-height: calc(var(--tg-chat-input-area-font-size) + 5px) !important;
                             }
 
                             // 编辑器内图片
                             & msg-img {
-                                zoom: 1.5;
+                                zoom: var(--tg-chat-input-area-image-zoom);
                             }
                         }
                     }
@@ -605,10 +615,10 @@
 
                 // 固定发送按钮位置, 更换按钮图像, 仿telegram按钮
                 color: transparent !important;
-                width: 50px !important;
-                height: 50px !important;
-                margin-bottom: 6px;
-                margin-right: 6px;
+                width: calc(var(--tg-chat-input-area-font-size) * 3) !important;
+                height: calc(var(--tg-chat-input-area-font-size) * 3) !important;
+                margin-bottom: 5px;
+                margin-right: 5px;
                 cursor: pointer;
                 background: {
                     color: unset !important;
@@ -879,6 +889,7 @@
 
         // 文字泡
         & .message-content__wrapper {
+            min-height: unset;
             & .msg-content-container {
                 position: relative;
                 color: black;
@@ -891,7 +902,8 @@
                 &:has(.text-element):not(:has(.pic-element)),
                 &:has(.face-element),
                 &:is(.ptt-message) {
-                    padding: 8px 16px;
+                    padding: calc(var(--tg-message-others-font-size) * 0.5)
+                        calc(var(--tg-message-others-font-size) * 0.8);
                     border-radius: 20px 20px 20px 8px;
                 }
 
@@ -914,7 +926,7 @@
 
                 // 图片、动图
                 & .pic-element {
-                    zoom: 1.2;
+                    zoom: var(--tg-message-others-pic-element-zoom);
                 }
 
                 // 图片最大宽度（好像覆盖不掉）
@@ -945,7 +957,8 @@
 
                 // 普通消息 文字内容
                 & .message-content {
-                    font-size: 16px;
+                    font-size: var(--tg-message-others-font-size);
+                    line-height: calc(var(--tg-message-others-font-size) + 4px);
                     flex-direction: column;
 
                     // // 文本消息
@@ -1045,6 +1058,7 @@
 
         // 文字泡
         & .message-content__wrapper {
+            min-height: unset;
             & .msg-content-container {
                 position: relative;
                 color: black;
@@ -1080,7 +1094,7 @@
 
                 // 图片、动图
                 & .pic-element {
-                    zoom: 1.2;
+                    zoom: var(--tg-message-self-pic-element-zoom);
                 }
 
                 // 图片最大宽度
@@ -1111,6 +1125,7 @@
                 // 普通消息 文字内容
                 & .message-content {
                     font-size: var(--tg-message-self-font-size);
+                    line-height: calc(var(--tg-message-self-font-size) + 4px);
                     flex-direction: column;
 
                     // 文本消息
@@ -1328,6 +1343,7 @@
         // 聊天栏header
         --tg-panel-header-bg-color: #ffffff;
         --tg-panel-header-title-color: #000000;
+        --tg-panel-header-title-font-size: 17px;
 
         // 聊天栏
         --tg-message-others-username-font-color: #ffffff;
@@ -1341,6 +1357,7 @@
         --tg-message-others-reply-content-font-color: #808080;
         --tg-message-others-reply-content-font-size: 14px;
         --tg-message-others-forward-msg-bg-color: #ffffff;
+        --tg-message-others-pic-element-zoom: 1.2;
 
         --tg-message-self-bg-color: #effdde;
         --tg-message-self-font-color: #000000;
@@ -1350,10 +1367,13 @@
         --tg-message-self-reply-content-font-color: #808080;
         --tg-message-self-reply-content-font-size: 14px;
         --tg-message-self-forward-msg-bg-color: #ffffff;
+        --tg-message-self-pic-element-zoom: 1.2;
 
         // 输入框
         --tg-chat-input-area-bg-color: #ffffff;
         --tg-chat-input-area-font-color: #000000;
+        --tg-chat-input-area-font-size: 17px;
+        --tg-chat-input-area-image-zoom: 1.5;
 
         // 会话列表
         --tg-contact-top-bar-bg-color: #ffffff;
@@ -1368,6 +1388,8 @@
         --tg-contact-list-item-unselected-summary-font-color: #999999;
         --tg-contact-list-item-summary-bubble-color: #bbbbbb;
         --tg-contact-list-item-avatar-sys-bg-color: #5fbe67;
+        --tg-contact-list-item-title-font-size: 15px;
+        --tg-contact-list-item-summary-font-size: 15px;
 
         // 左边栏
         --tg-sidebar-width: 65px;
@@ -1391,6 +1413,7 @@
         --tg-panel-tip-primary-font-color: #ffffff;
         --tg-context-menu-reply-font-color: #008000;
         --tg-context-menu-withdraw-font-color: #ff0000;
+        --tg-chat-input-area-placeholder-font-color: #cccccc6f;
     }
 }
 
@@ -1402,6 +1425,11 @@
         --tg-container-image: url("local:///");
         --tg-container-bg-color: #0e1621;
         --tg-container-backdrop-filter: blur(0px);
+
+        // 聊天栏header
+        --tg-panel-header-bg-color: #17212b;
+        --tg-panel-header-title-color: #f5f5f5;
+        --tg-panel-header-title-font-size: 17px;
 
         // 聊天栏
         --tg-message-others-username-font-color: #faa357;
@@ -1415,6 +1443,7 @@
         --tg-message-others-reply-content-font-color: #f5f5f5;
         --tg-message-others-reply-content-font-size: 14px;
         --tg-message-others-forward-msg-bg-color: #182533;
+        --tg-message-others-pic-element-zoom: 1.2;
 
         --tg-message-self-bg-color: #2b5278;
         --tg-message-self-font-color: #e4ecf2;
@@ -1424,14 +1453,13 @@
         --tg-message-self-reply-content-font-color: #e4ecf2;
         --tg-message-self-reply-content-font-size: 14px;
         --tg-message-self-forward-msg-bg-color: #182533;
+        --tg-message-self-pic-element-zoom: 1.2;
 
         // 输入框
         --tg-chat-input-area-bg-color: #17212b;
         --tg-chat-input-area-font-color: #ffffff;
-
-        // 聊天栏header
-        --tg-panel-header-bg-color: #17212b;
-        --tg-panel-header-title-color: #f5f5f5;
+        --tg-chat-input-area-font-size: 17px;
+        --tg-chat-input-area-image-zoom: 1.5;
 
         // 会话列表
         --tg-contact-top-bar-bg-color: #17212b;
@@ -1446,6 +1474,8 @@
         --tg-contact-list-item-unselected-summary-font-color: #999999;
         --tg-contact-list-item-summary-bubble-color: #3e546a;
         --tg-contact-list-item-avatar-sys-bg-color: #5eb5f7;
+        --tg-contact-list-item-title-font-size: 15px;
+        --tg-contact-list-item-summary-font-size: 15px;
 
         // 左边栏
         --tg-sidebar-width: 65px;
@@ -1469,6 +1499,7 @@
         --tg-panel-tip-primary-font-color: #ffffff;
         --tg-context-menu-reply-font-color: #00ff00;
         --tg-context-menu-withdraw-font-color: #ffa500;
+        --tg-chat-input-area-placeholder-font-color: #cccccc6f;
     }
 }
 
