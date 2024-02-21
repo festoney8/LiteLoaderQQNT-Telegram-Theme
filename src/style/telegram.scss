@@ -894,7 +894,17 @@
                 position: relative;
                 color: black;
 
-                &:not(:has(.market-face-element)) {
+                // 单图、表情包 无背景色
+                & {
+                    background-color: transparent;
+                }
+                // 气泡背景色
+                &:has(.text-element),
+                &:has(.face-element),
+                &:has(.reply-element),
+                &:has(.ptt-element),
+                &:has(.av-msg),
+                &:has(.pic-element:nth-child(2)) {
                     background-color: var(--tg-message-others-bg-color) !important;
                 }
 
@@ -908,12 +918,18 @@
                 }
 
                 // 图文混合气泡, 图图混合气泡
-                &:has(.pic-element:nth-child(n + 2)),
+                &:has(.pic-element:nth-child(2)),
+                &:has(.face-element):has(.pic-element),
                 &:has(.text-element):has(.pic-element) {
                     padding: 0;
                     border-radius: 20px 20px 20px 8px;
 
                     & .text-element {
+                        display: inline-block;
+                        margin: 6px 16px;
+                    }
+
+                    & .face-element {
                         display: inline-block;
                         margin: 6px 16px;
                     }
@@ -1063,7 +1079,17 @@
                 position: relative;
                 color: black;
 
-                &:not(:has(.market-face-element)) {
+                // 单图、表情包 无背景色
+                & {
+                    background-color: transparent;
+                }
+                // 气泡背景色
+                &:has(.text-element),
+                &:has(.face-element),
+                &:has(.reply-element),
+                &:has(.ptt-element),
+                &:has(.av-msg),
+                &:has(.pic-element:nth-child(2)) {
                     background-color: var(--tg-message-self-bg-color) !important;
                 }
 
@@ -1075,13 +1101,19 @@
                     border-radius: 20px 20px 8px 20px;
                 }
 
-                // 图文混合气泡, 图图混合气泡
-                &:has(.pic-element:nth-child(n + 2)),
-                &:has(.text-element):has(.pic-element) {
+                // 图文混合气泡, 图图混合气泡, 图表情混合气泡
+                &:has(.pic-element:nth-child(2)),
+                &:has(.text-element):has(.pic-element),
+                &:has(.face-element):has(.pic-element) {
                     padding: 0;
                     border-radius: 20px 20px 8px 20px;
 
                     & .text-element {
+                        display: inline-block;
+                        margin: 6px 16px;
+                    }
+
+                    & .face-element {
                         display: inline-block;
                         margin: 6px 16px;
                     }
