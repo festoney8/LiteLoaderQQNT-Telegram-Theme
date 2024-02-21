@@ -442,11 +442,13 @@
                 // 群名 or 用户名
                 color: var(--tg-panel-header-title-color);
                 font-size: var(--tg-panel-header-title-font-size);
+                font-weight: bold;
             }
 
             & #chatHeaderMembersCount {
                 // 群人数
                 font-size: var(--tg-panel-header-title-font-size);
+                opacity: 0.5;
             }
         }
 
@@ -454,6 +456,17 @@
         & .panel-header__action {
             & .func-bar {
                 zoom: 0.9;
+                & .bar-icon {
+                    & i.q-icon {
+                        color: var(--tg-func-bar-icon-color);
+                    }
+                    &:hover {
+                        & i.q-icon {
+                            color: var(--tg-func-bar-icon-hover-color);
+                        }
+                    }
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -493,20 +506,29 @@
                     justify-content: center;
                     margin: 0;
                     padding: 0;
+                    cursor: pointer;
 
                     & .icon-item i.q-icon,
                     & .icon-item i.q-icon svg {
                         width: calc(var(--tg-chat-input-area-font-size) * 1.7) !important;
                         height: calc(var(--tg-chat-input-area-font-size) * 1.7) !important;
-                        color: #9f9f9f;
+                        color: var(--tg-func-bar-icon-color);
                     }
                     & .arrow i.q-icon {
-                        color: #9f9f9f;
+                        color: var(--tg-func-bar-icon-color);
                         zoom: 1.7;
                     }
 
                     &:has(.arrow) {
                         margin-right: 0.5em;
+                    }
+
+                    &:hover {
+                        & .icon-item i.q-icon,
+                        & .icon-item i.q-icon svg,
+                        & .arrow i.q-icon {
+                            color: var(--tg-func-bar-icon-hover-color);
+                        }
                     }
                 }
             }
@@ -1350,6 +1372,22 @@
             }
         }
     }
+
+    // 有未读气泡时，summary右边距
+    .list-item__summary:has(.summary-bubble sub.q-badge-sub) .summary-main {
+        margin-right: 24px;
+    }
+
+    // 页面控制按钮
+    .window-control-area {
+        & i.q-icon,
+        & div {
+            color: var(--tg-window-control-area-button-color);
+            &:hover {
+                color: var(--tg-window-control-area-button-hover-color);
+            }
+        }
+    }
 }
 
 // 右键菜单
@@ -1375,7 +1413,7 @@
         // 聊天栏header
         --tg-panel-header-bg-color: #ffffff;
         --tg-panel-header-title-color: #000000;
-        --tg-panel-header-title-font-size: 17px;
+        --tg-panel-header-title-font-size: 16px;
 
         // 聊天栏
         --tg-message-others-username-font-color: #ffffff;
@@ -1447,6 +1485,10 @@
         --tg-context-menu-reply-font-color: #008000;
         --tg-context-menu-withdraw-font-color: #ff0000;
         --tg-chat-input-area-placeholder-font-color: #cccccc6f;
+        --tg-func-bar-icon-color: #9a9a9a;
+        --tg-func-bar-icon-hover-color: #6a6a6a;
+        --tg-window-control-area-button-color: #ababab;
+        --tg-window-control-area-button-hover-color: #9a9a9a;
     }
 }
 
@@ -1534,6 +1576,10 @@
         --tg-context-menu-reply-font-color: #00ff00;
         --tg-context-menu-withdraw-font-color: #ffa500;
         --tg-chat-input-area-placeholder-font-color: #cccccc6f;
+        --tg-func-bar-icon-color: #6c7883;
+        --tg-func-bar-icon-hover-color: #dcdcdc;
+        --tg-window-control-area-button-color: #566572;
+        --tg-window-control-area-button-hover-color: #e0e0e0;
     }
 }
 
