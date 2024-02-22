@@ -953,7 +953,7 @@
 
                     & .face-element {
                         display: inline-block;
-                        margin: 6px 16px;
+                        margin: 6px;
                     }
 
                     & .pic-element {
@@ -1137,7 +1137,7 @@
 
                     & .face-element {
                         display: inline-block;
-                        margin: 6px 16px;
+                        margin: 6px;
                     }
 
                     & .pic-element {
@@ -1355,19 +1355,110 @@
             &.embed-slot {
                 & .lite-tools-time {
                     opacity: 0.8;
-                    color: var(--tg-message-self-font-color) !important;
+                    color: var(--tg-message-self-font-color);
                 }
             }
             &.inside-slot {
                 & .lite-tools-time {
                     opacity: 1;
-                    color: white !important;
+                    color: white;
                 }
             }
             &.outside-slot {
                 & .lite-tools-time {
                     opacity: 0.8;
-                    color: var(--tg-message-self-font-color) !important;
+                    color: var(--tg-message-self-font-color);
+                }
+            }
+        }
+    }
+    .message-container {
+        // 图文混合气泡、图图混合气泡
+        & .msg-content-container:has(.pic-element:nth-child(2)),
+        & .msg-content-container:has(.face-element):has(.pic-element),
+        & .msg-content-container:has(.text-element):has(.pic-element) {
+            & .lite-tools-slot.embed-slot {
+                position: absolute;
+                bottom: 4px;
+                right: 4px;
+                font-size: 12px;
+                width: auto;
+                background-color: rgba(0, 0, 0, 0.3);
+                text-align: center;
+                line-height: 14px;
+                border-radius: 4px;
+                visibility: hidden;
+                & .lite-tools-time {
+                    text-align: center;
+                    padding: 4px 6px;
+                    color: white;
+                    opacity: 1;
+                    margin: 0;
+                    display: unset;
+                    visibility: hidden;
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                    &::after {
+                        content: unset;
+                        visibility: unset;
+                        position: unset;
+                        display: unset;
+                        width: unset;
+                        text-align: unset;
+                        font-size: unset;
+                        line-height: unset;
+                        bottom: unset;
+                        right: unset;
+                        opacity: unset;
+                    }
+                }
+                & .lite-tools-recall {
+                    padding: 4px 6px;
+                }
+            }
+        }
+        &:hover {
+            & .msg-content-container:has(.pic-element:nth-child(2)),
+            & .msg-content-container:has(.face-element):has(.pic-element),
+            & .msg-content-container:has(.text-element):has(.pic-element) {
+                & .lite-tools-slot.embed-slot {
+                    visibility: visible;
+                    & .lite-tools-time {
+                        color: white;
+                        opacity: 1;
+                        display: block;
+                        visibility: visible;
+                        &::after {
+                            content: unset;
+                            visibility: unset;
+                            position: unset;
+                            display: unset;
+                            width: unset;
+                            text-align: unset;
+                            font-size: unset;
+                            line-height: unset;
+                            bottom: unset;
+                            right: unset;
+                            opacity: unset;
+                        }
+                    }
+                    & .lite-tools-recall:not(:last-child) {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+
+        // 他人消息时间颜色
+        &:not(.message-container--self) {
+            & .msg-content-container:has(.pic-element:nth-child(2)),
+            & .msg-content-container:has(.face-element):has(.pic-element),
+            & .msg-content-container:has(.text-element):has(.pic-element) {
+                & .lite-tools-slot.embed-slot {
+                    & .lite-tools-time {
+                        color: white !important;
+                    }
                 }
             }
         }
