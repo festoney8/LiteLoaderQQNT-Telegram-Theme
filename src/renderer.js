@@ -26,7 +26,7 @@ const debounce = (fn, time = 100) => {
     }
 }
 
-const waitForEle = (selector, callback, interval = 1000) => {
+const waitForEle = (selector, callback, interval = 100) => {
     const timer = setInterval(() => {
         if (document.querySelector(selector)) {
             log(`waitForEle ${selector} EXIST`)
@@ -335,16 +335,17 @@ const onMessageCreate = async () => {
         log('insert telegram css, OK')
     }
 
-    // 更新CSS
-    waitForEle('main', updateAllCSS)
-    // 调节宽度
-    waitForEle('.two-col-layout__aside .resize-handler', adjustContactWidth)
-    // 拼接气泡
-    waitForEle('#ml-root .ml-list', concatBubble)
-
     // 监听设置更新
     IPC.updateSetting()
     IPC.updateAllSetting()
+
+    // 更新CSS
+    waitForEle('body', updateAllCSS)
+    // 调节宽度
+    waitForEle('.two-col-layout__aside .resize-handler', adjustContactWidth, 1000)
+    // 拼接气泡
+    waitForEle('#ml-root .ml-list', concatBubble, 500)
+
 
     channel.onmessage = (event) => {
         if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {

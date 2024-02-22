@@ -969,7 +969,7 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    max-width: 40vw !important;
+                    max-width: min(30vw, 400px) !important;
                     & .image.pic-element {
                         width: unset !important;
                         height: unset !important;
@@ -1156,7 +1156,7 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    max-width: 40vw !important;
+                    max-width: min(30vw, 400px) !important;
                     & .image.pic-element {
                         width: unset !important;
                         height: unset !important;
