@@ -969,11 +969,12 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    max-width: min(30vw, 400px) !important;
-                    & .image.pic-element {
-                        width: unset !important;
-                        height: unset !important;
-                    }
+                    max-width: min(40vw, 500px) !important;
+                    // 会导致表情包宽度失控，图片载入卡顿
+                    // & .image.pic-element {
+                    //     width: unset !important;
+                    //     height: unset !important;
+                    // }
                 }
 
                 // 回复引用
@@ -1156,11 +1157,12 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    max-width: min(30vw, 400px) !important;
-                    & .image.pic-element {
-                        width: unset !important;
-                        height: unset !important;
-                    }
+                    max-width: min(40vw, 500px) !important;
+                    // 会导致表情包宽度失控，图片载入卡顿
+                    // & .image.pic-element {
+                    //     width: unset !important;
+                    //     height: unset !important;
+                    // }
                 }
 
                 // 回复引用
