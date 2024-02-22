@@ -967,10 +967,13 @@
                     zoom: var(--tg-message-others-pic-element-zoom);
                 }
 
-                // 图片最大宽度（好像覆盖不掉）
+                // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    --img-max-width: 600px;
-                    max-width: 600px !important;
+                    max-width: 40vw !important;
+                    & .image.pic-element {
+                        width: unset !important;
+                        height: unset !important;
+                    }
                 }
 
                 // 回复引用
@@ -1153,8 +1156,11 @@
 
                 // 图片最大宽度
                 &.mix-message__container.mix-message__container--pic {
-                    --img-max-width: 600px;
-                    max-width: 600px !important;
+                    max-width: 40vw !important;
+                    & .image.pic-element {
+                        width: unset !important;
+                        height: unset !important;
+                    }
                 }
 
                 // 回复引用
