@@ -1502,6 +1502,13 @@
             }
         }
     }
+
+    // 演示模式按钮
+    #demoModeBtn {
+        & i {
+            color: var(--tg-sidebar-nav-item-unselected-icon-color) !important;
+        }
+    }
 }
 
 // 右键菜单
