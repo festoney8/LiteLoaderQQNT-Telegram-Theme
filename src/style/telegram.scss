@@ -989,7 +989,12 @@
                         color: var(--tg-message-others-reply-highlight-color);
                         opacity: unset;
                         font-weight: bold;
-                        zoom: 1.1;
+                        & .reply-info {
+                            font-size: var(--tg-message-others-reply-content-font-size);
+                        }
+                        & i.q-icon {
+                            display: none;
+                        }
                     }
 
                     & .reply-content {
@@ -1179,7 +1184,12 @@
                         color: var(--tg-message-self-reply-highlight-color);
                         opacity: unset;
                         font-weight: bold;
-                        zoom: 1.1;
+                        & .reply-info {
+                            font-size: var(--tg-message-self-reply-content-font-size);
+                        }
+                        & i.q-icon {
+                            display: none;
+                        }
                     }
 
                     & .reply-content {
@@ -1526,9 +1536,10 @@
         --tg-message-others-font-color: #000000;
         --tg-message-others-font-size: 16px;
         // highlight用于显示@用户、回复消息、语音消息
-        --tg-message-others-highlight-color: #5fbe67;
+        --tg-message-others-highlight-color: #3fa1b5;
         --tg-message-others-url-color: #168ad0;
         --tg-message-others-reply-content-font-size: 14px;
+        --tg-message-others-reply-content-font-color: #000000;
         --tg-message-others-reply-highlight-color: #3fa1b5;
         --tg-message-others-reply-bg-color: #e6f3f5;
         --tg-message-others-forward-msg-bg-color: #ffffff;
@@ -1537,9 +1548,9 @@
         --tg-message-self-bg-color: #effdde;
         --tg-message-self-font-color: #000000;
         --tg-message-self-font-size: 16px;
-        --tg-message-self-highlight-color: #5fbe67;
+        --tg-message-self-highlight-color: #61b542;
         --tg-message-self-url-color: #168ad0;
-        --tg-message-self-reply-content-font-color: #808080;
+        --tg-message-self-reply-content-font-color: #000000;
         --tg-message-self-reply-content-font-size: 14px;
         --tg-message-self-reply-highlight-color: #61b542;
         --tg-message-self-reply-bg-color: #def5ce;
@@ -1620,9 +1631,9 @@
         --tg-message-others-font-color: #f5f5f5;
         --tg-message-others-font-size: 16px;
         // highlight用于显示@用户、回复消息、语音消息
-        --tg-message-others-highlight-color: #faa357;
+        --tg-message-others-highlight-color: #e39653;
         --tg-message-others-url-color: #70baf5;
-        --tg-message-others-reply-content-font-color: #f5f5f5;
+        --tg-message-others-reply-content-font-color: #ffffff;
         --tg-message-others-reply-content-font-size: 14px;
         --tg-message-others-reply-highlight-color: #e39653;
         --tg-message-others-reply-bg-color: #323437;
@@ -1632,12 +1643,12 @@
         --tg-message-self-bg-color: #2b5278;
         --tg-message-self-font-color: #e4ecf2;
         --tg-message-self-font-size: 16px;
-        --tg-message-self-highlight-color: #e39653;
+        --tg-message-self-highlight-color: #5ac2d1;
         --tg-message-self-url-color: #70baf5;
-        --tg-message-self-reply-content-font-color: #e4ecf2;
+        --tg-message-self-reply-content-font-color: #ffffff;
         --tg-message-self-reply-content-font-size: 14px;
-        --tg-message-self-reply-highlight-color: #5faee7;
-        --tg-message-self-reply-bg-color: #325e87;
+        --tg-message-self-reply-highlight-color: #5ac2d1;
+        --tg-message-self-reply-bg-color: #213a48;
         --tg-message-self-forward-msg-bg-color: #182533;
         --tg-message-self-pic-element-zoom: 1.2;
 
