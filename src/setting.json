@@ -619,8 +619,8 @@
             "group": "自己的消息"
         },
         "--tg-message-self-highlight-color": {
-            "value": "#5ac2d1",
-            "defaultValue": "#5ac2d1",
+            "value": "#5faee7",
+            "defaultValue": "#5faee7",
             "title": "自己的 高亮色",
             "description": "在@用户/语音消息时使用",
             "type": "color",
@@ -635,16 +635,16 @@
             "group": "自己的消息"
         },
         "--tg-message-self-reply-highlight-color": {
-            "value": "#5ac2d1",
-            "defaultValue": "#5ac2d1",
+            "value": "#5faee7",
+            "defaultValue": "#5faee7",
             "title": "回复消息高亮色",
             "description": "",
             "type": "color",
             "group": "自己的消息"
         },
         "--tg-message-self-reply-bg-color": {
-            "value": "#213a48",
-            "defaultValue": "#213a48",
+            "value": "#325e87",
+            "defaultValue": "#325e87",
             "title": "回复消息背景色",
             "description": "",
             "type": "color",
