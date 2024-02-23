@@ -534,7 +534,7 @@
             "value": "#e39653",
             "defaultValue": "#e39653",
             "title": "他人的 高亮色",
-            "description": "在@用户/回复/语音消息时使用",
+            "description": "在@用户/语音消息时使用",
             "type": "color",
             "group": "他人的消息"
         },
@@ -622,7 +622,7 @@
             "value": "#5ac2d1",
             "defaultValue": "#5ac2d1",
             "title": "自己的 高亮色",
-            "description": "在@用户/回复/语音消息时使用",
+            "description": "在@用户/语音消息时使用",
             "type": "color",
             "group": "自己的消息"
         },

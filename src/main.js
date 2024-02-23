@@ -64,11 +64,21 @@ const initSetting = () => {
             for (const key in newSetting['light']) {
                 if (!localSetting['light'].hasOwnProperty(key)) {
                     localSetting['light'][key] = newSetting['light'][key]
+                } else {
+                    // 更新默认值和文字介绍
+                    localSetting['light'][key]['defaultValue'] = newSetting['light'][key]['defaultValue']
+                    localSetting['light'][key]['title'] = newSetting['light'][key]['title']
+                    localSetting['light'][key]['description'] = newSetting['light'][key]['description']
                 }
             }
             for (const key in newSetting['dark']) {
                 if (!localSetting['dark'].hasOwnProperty(key)) {
                     localSetting['dark'][key] = newSetting['dark'][key]
+                } else {
+                    // 更新默认值和文字介绍
+                    localSetting['dark'][key]['defaultValue'] = newSetting['dark'][key]['defaultValue']
+                    localSetting['dark'][key]['title'] = newSetting['dark'][key]['title']
+                    localSetting['dark'][key]['description'] = newSetting['dark'][key]['description']
                 }
             }
 
