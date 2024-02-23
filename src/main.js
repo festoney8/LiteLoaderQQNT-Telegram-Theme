@@ -69,6 +69,8 @@ const initSetting = () => {
                     localSetting['light'][key]['defaultValue'] = newSetting['light'][key]['defaultValue']
                     localSetting['light'][key]['title'] = newSetting['light'][key]['title']
                     localSetting['light'][key]['description'] = newSetting['light'][key]['description']
+                    localSetting['light'][key]['type'] = newSetting['light'][key]['type']
+                    localSetting['light'][key]['group'] = newSetting['light'][key]['group']
                 }
             }
             for (const key in newSetting['dark']) {
@@ -79,6 +81,8 @@ const initSetting = () => {
                     localSetting['dark'][key]['defaultValue'] = newSetting['dark'][key]['defaultValue']
                     localSetting['dark'][key]['title'] = newSetting['dark'][key]['title']
                     localSetting['dark'][key]['description'] = newSetting['dark'][key]['description']
+                    localSetting['dark'][key]['type'] = newSetting['dark'][key]['type']
+                    localSetting['dark'][key]['group'] = newSetting['dark'][key]['group']
                 }
             }
 

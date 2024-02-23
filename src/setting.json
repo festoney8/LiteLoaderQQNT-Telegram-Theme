@@ -86,7 +86,7 @@
             "title": "回复消息高亮色",
             "description": "",
             "type": "color",
-            "group": "自己的消息"
+            "group": "他人的消息"
         },
         "--tg-message-others-reply-bg-color": {
             "value": "#e6f3f5",
@@ -94,7 +94,7 @@
             "title": "回复消息背景色",
             "description": "",
             "type": "color",
-            "group": "自己的消息"
+            "group": "他人的消息"
         },
         "--tg-message-others-reply-content-font-color": {
             "value": "#000000",
@@ -552,7 +552,7 @@
             "title": "回复消息高亮色",
             "description": "",
             "type": "color",
-            "group": "自己的消息"
+            "group": "他人的消息"
         },
         "--tg-message-others-reply-bg-color": {
             "value": "#323437",
@@ -560,7 +560,7 @@
             "title": "回复消息背景色",
             "description": "",
             "type": "color",
-            "group": "自己的消息"
+            "group": "他人的消息"
         },
         "--tg-message-others-reply-content-font-color": {
             "value": "#ffffff",
@@ -931,5 +931,5 @@
             "group": "其他设定"
         }
     },
-    "version": "4.1.2"
+    "version": "4.1.4"
 }
