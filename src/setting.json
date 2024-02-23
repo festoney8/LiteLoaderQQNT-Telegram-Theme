@@ -80,6 +80,22 @@
             "type": "color",
             "group": "他人的消息"
         },
+        "--tg-message-others-reply-highlight-color": {
+            "value": "#3fa1b5",
+            "defaultValue": "#3fa1b5",
+            "title": "回复消息高亮色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-others-reply-bg-color": {
+            "value": "#e6f3f5",
+            "defaultValue": "#e6f3f5",
+            "title": "回复消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
         "--tg-message-others-reply-content-font-color": {
             "value": "#808080",
             "defaultValue": "#808080",
@@ -148,6 +164,22 @@
             "value": "#168ad0",
             "defaultValue": "#168ad0",
             "title": "自己的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-highlight-color": {
+            "value": "#61b542",
+            "defaultValue": "#61b542",
+            "title": "回复消息高亮色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-bg-color": {
+            "value": "#def5ce",
+            "defaultValue": "#def5ce",
+            "title": "回复消息背景色",
             "description": "",
             "type": "color",
             "group": "自己的消息"
@@ -514,6 +546,22 @@
             "type": "color",
             "group": "他人的消息"
         },
+        "--tg-message-others-reply-highlight-color": {
+            "value": "#e39653",
+            "defaultValue": "#e39653",
+            "title": "回复消息高亮色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-others-reply-bg-color": {
+            "value": "#323437",
+            "defaultValue": "#323437",
+            "title": "回复消息背景色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
         "--tg-message-others-reply-content-font-color": {
             "value": "#f5f5f5",
             "defaultValue": "#f5f5f5",
@@ -582,6 +630,22 @@
             "value": "#70baf5",
             "defaultValue": "#70baf5",
             "title": "自己的 消息中的网址颜色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-highlight-color": {
+            "value": "#5faee7",
+            "defaultValue": "#5faee7",
+            "title": "回复消息高亮色",
+            "description": "",
+            "type": "color",
+            "group": "自己的消息"
+        },
+        "--tg-message-self-reply-bg-color": {
+            "value": "#325e87",
+            "defaultValue": "#325e87",
+            "title": "回复消息背景色",
             "description": "",
             "type": "color",
             "group": "自己的消息"
@@ -867,5 +931,5 @@
             "group": "其他设定"
         }
     },
-    "version": "4.1.0"
+    "version": "4.1.2"
 }
