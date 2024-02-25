@@ -102,6 +102,10 @@ const updateAllCSS = async () => {
 
 // 调节会话列表宽度
 const adjustContactWidth = () => {
+    if (!location.hash.includes('#/main')) {
+        return
+    }
+
     log('run adjustContactWidth')
 
     try {
