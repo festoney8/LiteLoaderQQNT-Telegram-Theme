@@ -508,6 +508,11 @@
                     padding: 0;
                     cursor: pointer;
 
+                    // 隐藏hover时提示
+                    & .q-tooltips__bottom {
+                        display: none;
+                    }
+
                     & .icon-item i.q-icon,
                     & .icon-item i.q-icon svg {
                         width: calc(var(--tg-chat-input-area-font-size) * 1.7) !important;
@@ -1001,6 +1006,11 @@
                         color: var(--tg-message-others-reply-content-font-color);
                         font-size: var(--tg-message-others-reply-content-font-size);
                         font-weight: 500;
+
+                        // 回复内图片
+                        & .pic {
+                            zoom: 1.5;
+                        }
                     }
                 }
 
@@ -1196,6 +1206,11 @@
                         color: var(--tg-message-self-reply-content-font-color);
                         font-size: var(--tg-message-self-reply-content-font-size);
                         font-weight: 500;
+
+                        // 回复内图片
+                        & .pic {
+                            zoom: 1.5;
+                        }
                     }
                 }
 
