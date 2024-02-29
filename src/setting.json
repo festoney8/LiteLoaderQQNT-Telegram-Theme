@@ -272,6 +272,14 @@
             "type": "text",
             "group": "其他设定"
         },
+        "--tg-panel-message-timestamp-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "聊天栏内 消息时间和撤回提示 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "其他设定"
+        },
         "--tg-contact-top-bar-bg-color": {
             "value": "#ffffff",
             "defaultValue": "#ffffff",
@@ -738,6 +746,14 @@
             "type": "text",
             "group": "其他设定"
         },
+        "--tg-panel-message-timestamp-font-size": {
+            "value": "15px",
+            "defaultValue": "15px",
+            "title": "聊天栏内 消息时间和撤回提示 字号",
+            "description": "不要忘记输入单位",
+            "type": "text",
+            "group": "其他设定"
+        },
         "--tg-contact-top-bar-bg-color": {
             "value": "#17212b",
             "defaultValue": "#17212b",
@@ -931,5 +947,5 @@
             "group": "其他设定"
         }
     },
-    "version": "4.1.4"
+    "version": "4.1.6"
 }

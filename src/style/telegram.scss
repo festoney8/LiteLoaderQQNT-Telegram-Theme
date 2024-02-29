@@ -757,10 +757,10 @@
                                 color: white !important;
 
                                 background-color: #00000033 !important;
-                                padding: 5px 12px 5px 12px;
                                 border-radius: 100px !important;
 
-                                font-size: 15px !important;
+                                font-size: var(--tg-panel-message-timestamp-font-size) !important;
+                                padding: 0.4em 0.8em !important;
                                 letter-spacing: 1px;
 
                                 & .gray-tip-action {
@@ -1551,6 +1551,9 @@
         --tg-panel-header-title-color: #000000;
         --tg-panel-header-title-font-size: 16px;
 
+        // 消息时间
+        --tg-panel-message-timestamp-font-size: 15px;
+
         // 聊天栏
         --tg-message-others-username-font-color: #ffffff;
         --tg-message-others-username-font-size: 14px;
@@ -1645,6 +1648,9 @@
         --tg-panel-header-bg-color: #17212b;
         --tg-panel-header-title-color: #f5f5f5;
         --tg-panel-header-title-font-size: 17px;
+
+        // 消息时间
+        --tg-panel-message-timestamp-font-size: 15px;
 
         // 聊天栏
         --tg-message-others-username-font-color: #faa357;
