@@ -260,6 +260,11 @@ const concatBubble = (floatAvatar = true) => {
 
     const observer = new MutationObserver(async () => {
         try {
+            // 不处理私聊
+            if (!msgList.querySelector('.ml-item .message-container .user-name')) {
+                return
+            }
+
             // 合并消息
             // let concatStart = performance.now()
             let currMsgNodeList = Array.from(msgList.querySelectorAll("div.message"))

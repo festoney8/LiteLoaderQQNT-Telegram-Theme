@@ -743,9 +743,10 @@
                     // 每行聊天项（虚拟滚动列表，消息排列顺序与dom结构不同）
                     & .ml-item {
                         & .message {
-                            padding-bottom: 0;
-                            margin-top: 0;
-                            margin-bottom: 20px;
+                            // padding-bottom: 0;
+                            // margin-top: 0;
+                            // margin-bottom: 20px;
+
                             //// 合并信息动画
                             //transition: margin-bottom 0.2s ease;
 
@@ -1309,6 +1310,65 @@
     }
 }
 
+// 消息合并
+@mixin message-concat() {
+    // 私聊
+    .ml-list:not(:has(.message-container .user-name)) {
+        // 去除消息距离
+        & .ml-item .message,
+        .ml-item .message:last-child {
+            padding-bottom: 0;
+            margin-top: 3px;
+        }
+        // 分隔他人消息和自己消息间隔
+        &
+            .ml-item:has(> .message > .message-container--self)
+            + .ml-item:not(:has(> .message > .message-container--self)),
+        &
+            .ml-item:not(:has(> .message > .message-container--self))
+            + .ml-item:has(> .message > .message-container--self) {
+            & .message {
+                margin-bottom: 20px;
+            }
+        }
+        // 匹配自己的连串消息，调节气泡（第一条除外）
+        .ml-item:has(> .message > .message-container--self):has(+ .ml-item > .message > .message-container--self) {
+            & .message:not(:has(.message__timestamp)) {
+                & .msg-content-container {
+                    border-top-right-radius: 8px !important;
+                }
+            }
+        }
+        // 匹配他人的连串消息，调节气泡（第一条除外）
+        .ml-item:not(:has(> .message > .message-container--self)):not(
+                :has(+ .ml-item > .message > .message-container--self)
+            ) {
+            & .message:not(:has(.message__timestamp)) {
+                & .msg-content-container {
+                    border-top-left-radius: 8px !important;
+                }
+            }
+        }
+    }
+    // 群聊
+    .ml-list:has(.message-container .user-name) {
+        // 缩短消息距离
+        & .ml-item .message,
+        .ml-item .message:last-child {
+            margin-top: 3px;
+            padding-bottom: 0;
+        }
+        // 匹配自己的连串消息，调节气泡（第一条除外）
+        .ml-item:has(> .message > .message-container--self):has(+ .ml-item > .message > .message-container--self) {
+            & .message:not(:has(.message__timestamp)) {
+                & .msg-content-container {
+                    border-top-right-radius: 8px !important;
+                }
+            }
+        }
+    }
+}
+
 // 壁纸
 @mixin wallpaper() {
     .tab-container {
@@ -1740,6 +1800,7 @@
         @include sidebar();
         @include contact();
         @include aio();
+        @include message-concat();
         @include patch();
     }
     @include context-menu();
@@ -1752,6 +1813,7 @@
         @include sidebar();
         @include contact();
         @include aio();
+        @include message-concat();
         @include patch();
     }
     @include context-menu();
