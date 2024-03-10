@@ -383,6 +383,17 @@
     .group-box__container {
         background-color: var(--tg-group-box-bg-color);
 
+        // 展开群成员按钮
+        & .group-box__toggle {
+            zoom: 1.35;
+            & .group-box__toggle-bg {
+                color: var(--brand_standard);
+            }
+            & .group-box__toggle-button {
+                color: white;
+            }
+        }
+
         //& .group-box__wrapper {
         //    background-color: white;
         //    // 群公告、群成员
