@@ -176,157 +176,6 @@ const adjustContactWidth = () => {
     }
 }
 
-// // 仿telegram, 同一个人的消息连起来
-// const concatBubble = (floatAvatar = true) => {
-//     const msgList = document.querySelector('#ml-root .ml-list')
-
-//     // 记录消息数据（用户名、高度、是否断开等）
-//     let usernameArr
-//     let heightArr
-//     let breakingArr
-
-//     if (!msgList) {
-//         return
-//     }
-//     // 在比对过程中记录username和offsetHeight
-//     const compareTwoMsg = (lower, lowerIndex, upper, upperIndex) => {
-//         return new Promise((resolve) => {
-//             try {
-//                 // 检查lower是否包含timeStamp, gray-message
-//                 let isLowerTimestamp = false
-//                 if (lower.querySelector('.gray-tip-message,.message__timestamp')) {
-//                     resolve()
-//                     breakingArr[lowerIndex] = true
-//                     isLowerTimestamp = true
-//                 }
-//                 // 检查upper和lower是否包含撤回, 检测message-container
-//                 if (!lower.querySelector('.message-container')) {
-//                     resolve()
-//                     breakingArr[lowerIndex] = true
-//                     return
-//                 }
-//                 if (!upper.querySelector('.message-container')) {
-//                     resolve()
-//                     breakingArr[upperIndex] = true
-//                     return
-//                 }
-
-//                 const avatarLower = lower.querySelector('span.avatar-span')
-//                 const avatarUpper = upper.querySelector('span.avatar-span')
-//                 const usernameNodeLower = lower.querySelector('div.user-name')
-//                 const usernameLower = avatarLower.getAttribute('aria-label')
-//                 const usernameUpper = avatarUpper.getAttribute('aria-label')
-//                 const contentLower = lower.querySelector('div.msg-content-container')
-//                 if (!isLowerTimestamp && usernameLower === usernameUpper) {
-//                     const bubbleLower = lower.querySelector('div.msg-content-container')
-//                     // 强制覆盖upper message的margin-bottom
-//                     upper.style.setProperty('margin-bottom', '3px', 'important')
-//                     // 隐藏upper头像
-//                     avatarUpper.style.display = 'none'
-//                     // lower的username 不显示
-//                     if (usernameNodeLower) {
-//                         usernameNodeLower.style.marginBottom = '0'
-//                         usernameNodeLower.style.display = 'none'
-//                     }
-//                     // 更新lower的border-radius
-//                     if (contentLower && contentLower.classList) {
-//                         if (contentLower.classList.contains('container--others')) {
-//                             bubbleLower.style.borderTopLeftRadius = '8px'
-//                         } else {
-//                             bubbleLower.style.borderTopRightRadius = '8px'
-//                         }
-//                     }
-//                 }
-
-//                 if (floatAvatar) {
-//                     // 记录用户名和高度数据
-//                     usernameArr[lowerIndex] = usernameLower ? usernameLower : null
-//                     usernameArr[upperIndex] = usernameUpper ? usernameUpper : null
-//                     if (!heightArr[lowerIndex]) {
-//                         const lowerContainer = lower.querySelector('.message-container')
-//                         heightArr[lowerIndex] = lowerContainer ? lowerContainer.offsetHeight : 0
-//                     }
-//                     if (!heightArr[upperIndex]) {
-//                         const upperContainer = upper.querySelector('.message-container')
-//                         heightArr[upperIndex] = upperContainer ? upperContainer.offsetHeight : 0
-//                     }
-//                 }
-//                 resolve()
-//             } catch (error) {
-//                 resolve()
-//             }
-//         })
-//     }
-
-//     const observer = new MutationObserver(async () => {
-//         try {
-//             // 不处理私聊
-//             if (!msgList.querySelector('.ml-item .message-container .user-name')) {
-//                 return
-//             }
-
-//             // 合并消息
-//             // let concatStart = performance.now()
-//             let currMsgNodeList = Array.from(msgList.querySelectorAll("div.message"))
-//             let tasks = []
-
-//             usernameArr = new Array(currMsgNodeList.length)
-//             heightArr = new Array(currMsgNodeList.length).fill(0)
-//             breakingArr = new Array(currMsgNodeList.length).fill(false)
-
-//             for (let i = 0; i < currMsgNodeList.length - 1; i++) {
-//                 tasks.push(compareTwoMsg(currMsgNodeList[i], i, currMsgNodeList[i + 1], i + 1))
-//             }
-//             await Promise.allSettled(tasks).then(() => {
-//                 // log(`concatBubble time ${performance.now() - concatStart} ms`)
-
-//                 if (floatAvatar) {
-//                     try {
-//                         // 跨消息头像浮动
-//                         // const avatarStart = performance.now()
-//                         // log(usernameArr.toString())
-//                         // log(heightArr.toString())
-//                         // log(breakingArr.toString())
-//                         let start = 0
-//                         let end = 0
-//                         for (let i = 1; i < currMsgNodeList.length; i++) {
-//                             if (usernameArr[i - 1] && usernameArr[i - 1] === usernameArr[i] && !breakingArr[i - 1]) {
-//                                 end = i
-//                             } else {
-//                                 // 计算start~end区块总高度
-//                                 let totalHeight = 0
-//                                 for (let j = start; j <= end; j++) {
-//                                     totalHeight += heightArr[j]
-//                                 }
-//                                 // log(usernameArr.slice(start, end + 1).toString())
-//                                 // log(heightArr.slice(start, end + 1).toString())
-//                                 // log(breakingArr.slice(start, end + 1).toString())
-//                                 // log(start, end, totalHeight)
-//                                 // 扩增start的avatar-span高度
-//                                 const avatar = currMsgNodeList[start].querySelector('span.avatar-span')
-//                                 if (totalHeight > 0 && avatar) {
-//                                     if (!currMsgNodeList[start].querySelector('.message-container--self')) {
-//                                         avatar.style.height = totalHeight + (end - start) * 3 + 'px'
-//                                     }
-//                                 }
-//                                 start = i
-//                                 end = i
-//                             }
-//                         }
-//                         // log(`floatAvatar time ${performance.now() - avatarStart} ms`)
-//                     } catch (errs) {
-//                     }
-//                 }
-//             }).catch()
-//         } catch (err) {
-//             error(err.toString())
-//             error('concatBubble error')
-//         }
-//     })
-//     const config = { childList: true }
-//     observer.observe(msgList, config)
-// }
-
 // 仿Telegram，拼接消息，头像浮动
 const concatMsg = () => {
     try {
@@ -335,17 +184,27 @@ const concatMsg = () => {
             return
         }
 
+        // 记录用户名和断点
+        let nameArr, stopArr
+
         // 比较消息，只处理对方消息，自己消息由纯CSS解决
-        const cmp = (lower, upper) => {
+        const cmp = (lower, upper, lowerIndex, upperIndex) => {
             try {
-                // lower或upper是自己的消息
-                if (lower.querySelector('.message-container--self') || upper.querySelector('.message-container--self')) {
+                // 自己的消息, 或已撤回
+                if (lower.querySelector('.message-container--self, .gray-tip-message') ||
+                    upper.querySelector('.message-container--self, .gray-tip-message')) {
                     return
                 }
-                // lower含时间戳或已撤回，或upper已撤回
-                if (lower.querySelector('.message__timestamp, .gray-tip-message') ||
-                    upper.querySelector('.gray-tip-message')) {
+                // lower含时间戳
+                if (lower.querySelector('.message__timestamp')) {
+                    stopArr[lowerIndex + 1] = true
+                    nameArr[lowerIndex] = lower.querySelector('.avatar-span')?.getAttribute('aria-label')
                     return
+                }
+                // upper含时间戳
+                if (upper.querySelector('.message__timestamp')) {
+                    stopArr[upperIndex + 1] = true
+                    // nameArr[upperIndex] = upper.querySelector('.avatar-span')?.getAttribute('aria-label')
                 }
                 const msgLower = lower.querySelector('.message')
                 const bubbleLower = lower.querySelector('.msg-content-container')
@@ -353,8 +212,7 @@ const concatMsg = () => {
                 const avatarUpper = upper.querySelector('.avatar-span')
                 const usernameUpper = avatarUpper.getAttribute('aria-label')
                 const usernameLower = lower.querySelector('.avatar-span').getAttribute('aria-label')
-                if (usernameLower === usernameUpper) {
-                    // 相同用户，隐藏ID和头像，调整消息间距
+                if (usernameUpper && usernameLower === usernameUpper) {
                     if (msgLower) {
                         msgLower.style.marginTop = '3px'
                     }
@@ -368,44 +226,62 @@ const concatMsg = () => {
                         usernameNodeLower.style.display = 'none'
                     }
                 }
+
+                if (usernameLower) {
+                    nameArr[lowerIndex] = usernameLower
+                }
+                if (usernameUpper) {
+                    nameArr[upperIndex] = usernameUpper
+                }
             } catch (err) {
-                console.error(err)
-                console.error(lower.id)
-                console.error(upper.id)
-                console.error(lower.innerHTML)
-                console.error(upper.innerHTML)
+                // error(err)
             }
         }
 
-        // 全局set，用于判断记录消息变动后哪些消息要对比
-        let oldSet = new Set()
-        let newSet = new Set()
-
-        // 监听消息列表变化
         const observer = new MutationObserver(() => {
-            const start = performance.now()
-            try {
-                // 不处理私聊，由纯CSS解决
-                if (!msgList.querySelector('.user-name')) {
-                    return
-                }
-
-                const msgs = msgList.querySelectorAll('.ml-item')
-                for (let i = 1; i < msgs.length - 1; i++) {
-                    // 比较两消息
-                    if (!oldSet.has(msgs[i].id) || !oldSet.has(msgs[i - 1].id)) {
-                        cmp(msgs[i - 1], msgs[i])
-                    }
-                    newSet.add(msgs[i].id)
-                }
-                oldSet = newSet
-                newSet = new Set()
-
-                console.log('time', performance.now() - start)
-
-            } catch (err) {
-                console.error(err)
+            // 不处理私聊，纯CSS解决
+            if (!msgList.querySelector('.user-name')) {
+                return
             }
+            requestAnimationFrame(() => {
+                // const timerStart = performance.now()
+                try {
+                    const msgs = msgList.querySelectorAll('.ml-item')
+                    nameArr = new Array(msgs.length + 1)
+                    stopArr = new Array(msgs.length + 1)
+
+                    // 消息拼接
+                    for (let i = msgs.length - 1; i >= 1; i--) {
+                        cmp(msgs[i - 1], msgs[i], i - 1, i)
+                    }
+                    // const timerConcat = performance.now()
+
+                    // 头像浮动，双指针找连续区间
+                    let start = 0;
+                    for (let end = 1; end <= msgs.length; end++) {
+                        if (end === nameArr.length || nameArr[end] !== nameArr[start] || stopArr[end] === true) {
+                            if (nameArr[start] !== undefined && end - start > 1) {
+                                // log(start, end, nameArr.slice(start, end))
+                                // 合并区间 [start, end)
+                                const avatar = msgs[start].querySelector('.avatar-span')
+                                if (avatar) {
+                                    let sumHeight = 0
+                                    for (let i = start; i < end; i++) {
+                                        sumHeight += msgs[i].querySelector('.message-container')?.offsetHeight + 3
+                                    }
+                                    if (sumHeight > 0) {
+                                        avatar.style.height = sumHeight + 'px'
+                                    }
+                                }
+                            }
+                            start = end;
+                        }
+                    }
+                    // log('concat', timerConcat - timerStart, 'avatar', performance.now() - timerConcat)
+                } catch (err) {
+                    // error(err)
+                }
+            })
         })
         observer.observe(msgList, { childList: true })
     } catch (err) {

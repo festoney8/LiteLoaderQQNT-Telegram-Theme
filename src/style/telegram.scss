@@ -754,13 +754,6 @@
                     // 每行聊天项（虚拟滚动列表，消息排列顺序与dom结构不同）
                     & .ml-item {
                         & .message {
-                            // padding-bottom: 0;
-                            // margin-top: 0;
-                            // margin-bottom: 20px;
-
-                            // 合并信息动画
-                            // transition: margin-top 0.25s linear;
-
                             // 聊天时间，聊天提示（撤回消息、禁言等）
                             & .message__timestamp,
                             & .gray-tip-message {
@@ -1364,6 +1357,13 @@
         & .ml-item .message:last-child {
             padding-bottom: 0;
         }
+        // 分隔他人消息和自己消息间隔
+        & .ml-item:has(.message-container--self) + .ml-item:not(:has(.message-container--self)),
+        & .ml-item:not(:has(.message-container--self)) + .ml-item:has(.message-container--self) {
+            & .message {
+                margin-bottom: 20px;
+            }
+        }
         // 匹配自己的连串消息，调节气泡（第一条除外）
         & .ml-item:has(.message-container--self):has(+ .ml-item .message-container--self) {
             & .message:not(:has(.message__timestamp)) {
@@ -1375,7 +1375,7 @@
         }
         & .ml-item:not(:has(.message-container--self)):not(:has(+ .ml-item .message-container--self)) {
             & .message:not(:has(.message__timestamp)) {
-                margin-top: 15px;
+                margin-top: 20px;
             }
         }
     }
