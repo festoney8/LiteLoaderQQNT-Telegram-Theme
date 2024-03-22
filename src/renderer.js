@@ -109,67 +109,79 @@ const adjustContactWidth = () => {
     log('run adjustContactWidth')
 
     try {
-        const layoutAside = document.querySelector('.two-col-layout__aside')
-        const layoutMain = document.querySelector('.two-col-layout__main')
-        const oldResizeHandler = document.querySelector('.two-col-layout__aside .resize-handler')
+        const overrideWidth = (resetWidth) => {
+            const layoutAside = document.querySelector('.two-col-layout__aside')
+            const layoutMain = document.querySelector('.two-col-layout__main')
+            const oldResizeHandler = document.querySelector('.two-col-layout__aside .resize-handler')
 
-        const overrideWidth = () => {
-            // 移除默认事件
-            const resizeHandler = oldResizeHandler.cloneNode(true)
-            oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler)
+            if (oldResizeHandler && layoutAside && layoutMain) {
+                // 等待QQ赋予aside属性
+                let count = 0
+                const timer = setInterval(() => {
+                    const computedStyle = window.getComputedStyle(layoutAside)
+                    if (computedStyle.getPropertyValue('--min-width-aside') || computedStyle.getPropertyValue('--max-width-aside') || computedStyle.getPropertyValue('--drag-width-aside') || computedStyle.getPropertyValue('--default-width-aside')) {
+                        // QQ已完成自定义宽度赋值，覆盖掉
+                        const resizeHandler = oldResizeHandler.cloneNode(true)
+                        if (!resizeHandler || !oldResizeHandler.parentNode) {
+                            return
+                        }
+                        oldResizeHandler.parentNode.replaceChild(resizeHandler, oldResizeHandler)
 
-            // 调大默认长度, 重写事件
-            layoutAside.style.setProperty('--min-width-aside', '80px')
-            layoutAside.style.setProperty('--max-width-aside', '50vw')
-            layoutAside.style.setProperty('--drag-width-aside', '300px')
-            layoutAside.style.setProperty('--default-width-aside', '300px')
-            layoutAside.style.width = '300px'
-            layoutAside.style.flexBasis = '300px'
+                        // 调大默认长度, 重写事件
+                        layoutAside.style.setProperty('--min-width-aside', '78px')
+                        layoutAside.style.setProperty('--max-width-aside', '50vw')
+                        layoutAside.style.setProperty('--default-width-aside', '300px')
+                        if (resetWidth) {
+                            layoutAside.style.setProperty('--drag-width-aside', '300px')
+                            layoutAside.style.width = '300px'
+                            layoutAside.style.flexBasis = '300px'
+                        }
+                        let isResizing = false
+                        let startX = 0
+                        let startWidth = 0
 
-            let isResizing = false
-            let startX = 0
-            let startWidth = 0
-
-            resizeHandler.addEventListener('mousedown', (event) => {
-                isResizing = true
-                startX = event.clientX
-                startWidth = parseFloat(getComputedStyle(layoutAside).width)
-            })
-
-            document.addEventListener('mousemove', (event) => {
-                if (!isResizing) {
-                    return
-                }
-                const width = startWidth + event.clientX - startX
-                layoutAside.style.flexBasis = width + 'px'
-                layoutAside.style.width = width + 'px'
-                layoutAside.style.setProperty('--drag-width-aside', `${width}px`)
-            })
-
-            document.addEventListener('mouseup', () => {
-                if (!isResizing) {
-                    return
-                }
-                isResizing = false
-            })
+                        resizeHandler.addEventListener('mousedown', (event) => {
+                            isResizing = true
+                            startX = event.clientX
+                            startWidth = parseFloat(getComputedStyle(layoutAside).width)
+                        })
+                        document.addEventListener('mousemove', (event) => {
+                            if (!isResizing) {
+                                return
+                            }
+                            const width = startWidth + event.clientX - startX
+                            layoutAside.style.flexBasis = width + 'px'
+                            layoutAside.style.width = width + 'px'
+                            layoutAside.style.setProperty('--drag-width-aside', `${width}px`)
+                        })
+                        document.addEventListener('mouseup', () => {
+                            if (!isResizing) {
+                                return
+                            }
+                            isResizing = false
+                        })
+                        clearInterval(timer)
+                    }
+                    count++
+                    if (count > 50) {
+                        clearInterval(timer)
+                    }
+                }, 100)
+            }
         }
 
-        if (oldResizeHandler && layoutAside && layoutMain) {
-            // 等待QQ赋予aside属性
-            let count = 0
-            const timer = setInterval(() => {
-                const computedStyle = window.getComputedStyle(layoutAside)
-                if (computedStyle.getPropertyValue('--min-width-aside') || computedStyle.getPropertyValue('--max-width-aside') || computedStyle.getPropertyValue('--drag-width-aside') || computedStyle.getPropertyValue('--default-width-aside')) {
-                    // QQ已完成自定义宽度赋值，覆盖掉
-                    overrideWidth()
-                    clearInterval(timer)
+        overrideWidth(true)
+
+        // 监听窗口调节
+        window.addEventListener('resize', () => {
+            const task = setInterval(() => {
+                const mainLayout = document.querySelector('.two-col-layout__main')
+                if (getComputedStyle(mainLayout).display !== 'none') {
+                    overrideWidth(false)
                 }
-                count++
-                if (count > 20) {
-                    clearInterval(timer)
-                }
-            }, 1000)
-        }
+                clearInterval(task)
+            }, 50)
+        })
     } catch (err) {
         error(err.toString())
         error('adjustContactWidth error')
@@ -243,7 +255,6 @@ const concatMsg = () => {
             if (!msgList.querySelector('.user-name')) {
                 return
             }
-            // const timerStart = performance.now()
             try {
                 const msgs = msgList.querySelectorAll('.ml-item')
                 nameArr = new Array(msgs.length + 1)
@@ -253,10 +264,9 @@ const concatMsg = () => {
                 for (let i = msgs.length - 1; i >= 1; i--) {
                     cmp(msgs[i - 1], msgs[i], i - 1, i)
                 }
-                // const timerConcat = performance.now()
 
                 // 头像浮动，双指针找连续区间
-                let start = 0;
+                let start = 0
                 for (let end = 1; end <= msgs.length; end++) {
                     if (end === nameArr.length || nameArr[end] !== nameArr[start] || stopArr[end] === true) {
                         if (nameArr[start] !== undefined && end - start > 1) {
@@ -273,17 +283,16 @@ const concatMsg = () => {
                                 }
                             }
                         }
-                        start = end;
+                        start = end
                     }
                 }
-                // log('concat', timerConcat - timerStart, 'avatar', performance.now() - timerConcat)
             } catch (err) {
                 // error(err)
             }
         })
         observer.observe(msgList, { childList: true })
     } catch (err) {
-        console.error(err)
+        error(err)
     }
 }
 
@@ -455,9 +464,9 @@ class ColorPickerItem {
         resetBtn.onclick = () => {
             opacityPicker.value = opacityPicker.getAttribute('defaultValue')
             colorPicker.value = colorPicker.getAttribute('defaultValue')
-            const event = new Event('input', { bubbles: true });
-            opacityPicker.dispatchEvent(event);
-            colorPicker.dispatchEvent(event);
+            const event = new Event('input', { bubbles: true })
+            opacityPicker.dispatchEvent(event)
+            colorPicker.dispatchEvent(event)
         }
 
         return nodeEle
@@ -521,8 +530,8 @@ class TextItem {
         // 监听重置
         resetBtn.onclick = () => {
             textInput.value = textInput.getAttribute('defaultValue')
-            const event = new Event('input', { bubbles: true });
-            textInput.dispatchEvent(event);
+            const event = new Event('input', { bubbles: true })
+            textInput.dispatchEvent(event)
         }
         return nodeEle
     }
