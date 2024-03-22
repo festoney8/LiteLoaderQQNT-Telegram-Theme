@@ -243,45 +243,43 @@ const concatMsg = () => {
             if (!msgList.querySelector('.user-name')) {
                 return
             }
-            requestAnimationFrame(() => {
-                // const timerStart = performance.now()
-                try {
-                    const msgs = msgList.querySelectorAll('.ml-item')
-                    nameArr = new Array(msgs.length + 1)
-                    stopArr = new Array(msgs.length + 1)
+            // const timerStart = performance.now()
+            try {
+                const msgs = msgList.querySelectorAll('.ml-item')
+                nameArr = new Array(msgs.length + 1)
+                stopArr = new Array(msgs.length + 1)
 
-                    // 消息拼接
-                    for (let i = msgs.length - 1; i >= 1; i--) {
-                        cmp(msgs[i - 1], msgs[i], i - 1, i)
-                    }
-                    // const timerConcat = performance.now()
+                // 消息拼接
+                for (let i = msgs.length - 1; i >= 1; i--) {
+                    cmp(msgs[i - 1], msgs[i], i - 1, i)
+                }
+                // const timerConcat = performance.now()
 
-                    // 头像浮动，双指针找连续区间
-                    let start = 0;
-                    for (let end = 1; end <= msgs.length; end++) {
-                        if (end === nameArr.length || nameArr[end] !== nameArr[start] || stopArr[end] === true) {
-                            if (nameArr[start] !== undefined && end - start > 1) {
-                                // log(start, end, nameArr.slice(start, end))
-                                // 合并区间 [start, end)
-                                const avatar = msgs[start].querySelector('.avatar-span')
-                                if (avatar) {
-                                    let sumHeight = 0
-                                    for (let i = start; i < end; i++) {
-                                        sumHeight += msgs[i].querySelector('.message-container')?.offsetHeight + 3
-                                    }
-                                    if (sumHeight > 0) {
-                                        avatar.style.height = sumHeight + 'px'
-                                    }
+                // 头像浮动，双指针找连续区间
+                let start = 0;
+                for (let end = 1; end <= msgs.length; end++) {
+                    if (end === nameArr.length || nameArr[end] !== nameArr[start] || stopArr[end] === true) {
+                        if (nameArr[start] !== undefined && end - start > 1) {
+                            // log(start, end, nameArr.slice(start, end))
+                            // 合并区间 [start, end)
+                            const avatar = msgs[start].querySelector('.avatar-span')
+                            if (avatar) {
+                                let sumHeight = 0
+                                for (let i = start; i < end; i++) {
+                                    sumHeight += msgs[i].querySelector('.message-container')?.offsetHeight + 3
+                                }
+                                if (sumHeight > 0) {
+                                    avatar.style.height = sumHeight + 'px'
                                 }
                             }
-                            start = end;
                         }
+                        start = end;
                     }
-                    // log('concat', timerConcat - timerStart, 'avatar', performance.now() - timerConcat)
-                } catch (err) {
-                    // error(err)
                 }
-            })
+                // log('concat', timerConcat - timerStart, 'avatar', performance.now() - timerConcat)
+            } catch (err) {
+                // error(err)
+            }
         })
         observer.observe(msgList, { childList: true })
     } catch (err) {
