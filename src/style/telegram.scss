@@ -1560,6 +1560,22 @@
             color: var(--tg-sidebar-nav-item-unselected-icon-color) !important;
         }
     }
+
+    // 本地表情弹出窗
+    .lite-tools-local-emoticons-main,
+    .commonly-emoticons-panel {
+        right: unset !important;
+        left: 0 !important;
+    }
+
+    // 本地表情按钮
+    .lite-tools-q-icon {
+        cursor: pointer;
+        color: var(--tg-func-bar-icon-color);
+        &:hover {
+            color: var(--tg-func-bar-icon-hover-color);
+        }
+    }
 }
 
 // 右键菜单
