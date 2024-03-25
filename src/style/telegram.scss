@@ -1581,10 +1581,10 @@
 // 右键菜单
 @mixin context-menu() {
     // 回复和撤回按钮高亮
-    .q-context-menu-item:has(i.q-icon > svg > path[d^="M6.00031"]) {
+    .q-context-menu-item:has(i.q-icon path[d^="M6.00031"], i.q-icon use[*|href$="quote_24"]) {
         color: var(--tg-context-menu-reply-font-color) !important;
     }
-    .q-context-menu-item:has(i.q-icon > svg > path[d^="M2.14649"]) {
+    .q-context-menu-item:has(i.q-icon path[d^="M2.14649"], i.q-icon use[*|href$="recall_24"]) {
         color: var(--tg-context-menu-withdraw-font-color) !important;
     }
 }
