@@ -169,7 +169,7 @@ const adjustContactWidth = async () => {
 
 // 仿Telegram，拼接消息，头像浮动
 const concatMsg = async () => {
-    const msgList = document.querySelector('#ml-root .ml-list')
+    const msgList = document.querySelector('.ml-list')
     if (!msgList) {
         return
     }
@@ -305,6 +305,7 @@ const concatMsg = async () => {
         }
     }
 
+    handle()
     const observer = new MutationObserver(async (mutationList) => {
         for (let i = 0; i < mutationList.length; i++) {
             if (mutationList[i].addedNodes.length) {
@@ -351,7 +352,7 @@ const onMessageCreate = async () => {
         },
     )
     // 拼接消息，头像浮动
-    waitForEle('#ml-root .ml-list', () => {
+    waitForEle('.ml-list', () => {
         concatMsg().catch((err) => {
             error('concatMsg err', err.toString())
         })
