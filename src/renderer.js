@@ -167,37 +167,6 @@ const adjustContactWidth = async () => {
     })
 }
 
-// key为num str的Cache
-class LimitedMap {
-    maxSize = 0
-    m = new Map()
-    constructor(maxSize) {
-        this.maxSize = maxSize
-    }
-    get(k) {
-        return this.m.get(k)
-    }
-    set(k, v) {
-        this.m.set(k, v)
-        if (this.m.size > this.maxSize) {
-            this.free()
-        }
-    }
-    has(k) {
-        return this.m.has(k)
-    }
-    async free() {
-        try {
-            const keys = Array.from(this.m.keys())
-                .sort((a, b) => parseInt(a) - parseInt(b))
-                .slice(0, Math.floor(this.maxSize / 4))
-            keys.forEach((k) => this.m.delete(k))
-        } catch {
-            // err
-        }
-    }
-}
-
 // 仿Telegram，拼接消息，头像浮动
 const concatMsg = async () => {
     const msgList = document.querySelector('#ml-root .ml-list')
@@ -367,43 +336,26 @@ const onMessageCreate = async () => {
     IPC.updateAllSetting()
 
     // 更新CSS
-    try {
-        waitForEle('body', () => {
-            updateAllCSS().catch((err) => {
-                throw err
-            })
+    waitForEle('body', () => {
+        updateAllCSS().catch((err) => {
+            error('updateAllCSS err', err.toString())
         })
-    } catch (err) {
-        error('updateAllCSS failed', err)
-    }
+    })
     // 调节宽度
-    try {
-        waitForEle(
-            `.two-col-layout__aside[style*='width-aside']:has(.resize-handler) + .two-col-layout__main[style*='width-main']`,
-            () => {
-                adjustContactWidth().catch((err) => {
-                    throw err
-                })
-            },
-            500,
-        )
-    } catch (err) {
-        error('adjustContactWidth failed', err)
-    }
+    waitForEle(
+        `.two-col-layout__aside[style*='width-aside']:has(.resize-handler) + .two-col-layout__main[style*='width-main']`,
+        () => {
+            adjustContactWidth().catch((err) => {
+                error('adjustContactWidth err', err.toString())
+            })
+        },
+    )
     // 拼接消息，头像浮动
-    try {
-        waitForEle(
-            '#ml-root .ml-list',
-            () => {
-                concatMsg().catch((err) => {
-                    throw err
-                })
-            },
-            500,
-        )
-    } catch (err) {
-        error('concatMsg failed', err)
-    }
+    waitForEle('#ml-root .ml-list', () => {
+        concatMsg().catch((err) => {
+            error('concatMsg err', err.toString())
+        })
+    })
 
     channel.onmessage = (event) => {
         if (['#/main/message', '#/main/contact/profile', '#/chat'].includes(location.hash)) {
