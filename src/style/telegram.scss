@@ -1334,6 +1334,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
     // 消息container
     .container--others {
         position: relative;
+        overflow: hidden;
 
         // 气泡背景色
         background-color: var(--tg-message-others-bg-color);
@@ -1568,6 +1569,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
     // 消息container
     .container--self {
         position: relative;
+        overflow: hidden;
 
         // 气泡背景色
         background-color: var(--tg-message-self-bg-color);
