@@ -724,7 +724,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
         overflow: hidden;
 
         // 防挡本地表情菜单
-        &:has(.lite-tools-local-emoticons-main.show) {
+        &:has(.lite-tools-local-emoticons-main.show, .q-tooltips__top) {
             overflow: visible;
         }
 
@@ -1177,7 +1177,9 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
 @mixin message-left-layout() {
     .message-container:not(.message-container--align-right) {
         // 增大消息泡与头像间隔
-        grid-template-columns: auto var(--avatar_size_2) 20px auto calc(var(--avatar_size_2) + 8px) minmax(20%, 1fr);
+        grid-template-columns:
+            auto var(--tg-message-others-avatar-size) 12px auto calc(var(--tg-message-others-avatar-size) + 8px)
+            minmax(20%, 1fr);
 
         // 私聊模式时，隐藏对方头像，默认无用户名
         &:not(:has(.user-name)) {
@@ -1185,7 +1187,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
                 'checkbox . nickname nickname nickname'
                 'checkbox . content status .'
                 'checkbox . tips tips tips';
-            grid-template-columns: auto auto auto calc(var(--avatar_size_2) + 8px) minmax(20%, 1fr);
+            grid-template-columns: auto auto auto calc(var(--tg-message-others-avatar-size) + 8px) minmax(20%, 1fr);
 
             .avatar,
             .only-time {
@@ -1269,8 +1271,8 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
         .avatar-span {
             // 强制覆盖大小
             .message-container__avatar {
-                width: 40px !important;
-                height: 40px !important;
+                width: var(--tg-message-others-avatar-size) !important;
+                height: var(--tg-message-others-avatar-size) !important;
             }
 
             // 性能问题，改为JS操作头像style属性
@@ -2139,6 +2141,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
         --tg-message-others-reply-bg-color: #e6f3f5;
         --tg-message-others-forward-msg-bg-color: #ffffff;
         --tg-message-others-pic-element-zoom: 1.2;
+        --tg-message-others-avatar-size: 40px;
 
         --tg-message-self-bg-color: #effdde;
         --tg-message-self-font-color: #000000;
@@ -2243,6 +2246,7 @@ $func-bar-icon-size: calc(var(--tg-chat-input-area-font-size) * 1.7);
         --tg-message-others-reply-bg-color: #323437;
         --tg-message-others-forward-msg-bg-color: #182533;
         --tg-message-others-pic-element-zoom: 1.2;
+        --tg-message-others-avatar-size: 40px;
 
         --tg-message-self-bg-color: #2b5278;
         --tg-message-self-font-color: #e4ecf2;
